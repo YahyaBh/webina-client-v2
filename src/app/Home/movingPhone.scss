@@ -1,0 +1,360 @@
+// Import necessary mixins or libraries
+@import "~compass-mixins/lib/compass/css3";
+
+$box-w: 200px;
+$box-h: 400px;
+$box-d: 30px;
+$box-r: 20px;
+$piece-num: 16;
+
+// Define additional variables for phone appearance
+$phone-color: #333333; // Phone body color (adjusted to match image)
+$screen-color: #000; // Screen background color
+$button-color: #222222; // Side button color
+$notch-color: #000000; // Notch color
+$notch-height: 20px; // Height of the notch area
+$button-width: 5px; // Width of the button (adjust as needed)
+
+// Mixin for creating the 3D box structure
+@mixin box($width, $height, $depth) {
+    width: $width;
+    height: $height;
+    position: relative;
+    transform-style: preserve-3d; // Preserve 3D context for the box
+
+    [class$="face"] {
+        position: absolute;
+    }
+
+    .front-face,
+    .back-face {
+        width: $width;
+        height: $height;
+    }
+
+    .front-face {
+        transform: translateZ($depth / 2);
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+        overflow: hidden;
+        border: 6px solid #1e1e1e;
+        box-sizing: border-box;
+
+        .content {
+            img {
+                border-radius: 20px;
+                -webkit-border-radius: 20px;
+                -moz-border-radius: 20px;
+                -ms-border-radius: 20px;
+                -o-border-radius: 20px;
+                width: 100%;
+                height: 400px;
+                object-fit: cover;
+                z-index: 5;
+                position: relative;
+            }
+        }
+    }
+
+    .back-face {
+        transform: rotateY(180deg) translateZ($depth / 2);
+        background-color: $phone-color;
+
+        .back-camera {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+            gap: 5px;
+            width: 90px;
+            height: 90px;
+            background-color: #555555;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            top: 5px;
+            left: 5px;
+        }
+
+        .lens {
+            width: 40px;
+            height: 40px;
+            background-color: #000;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3);
+
+            &:nth-child(2) {
+                top: 20px;
+                position: relative;
+            }
+        }
+
+        .lens::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background-color: #1e1e1e;
+            border-radius: 50%;
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        .flash {
+            grid-column: span 2;
+            justify-self: center;
+            width: 15px;
+            height: 15px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            right: 25px;
+            top: 8px;
+        }
+
+        .mic {
+            grid-column: span 2;
+            justify-self: center;
+            width: 8px;
+            height: 8px;
+            background-color: #000;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            bottom: 15px;
+            right: 30px;
+        }
+    }
+
+    .top-face,
+    .bottom-face {
+        width: $width;
+        height: $depth;
+        background-color: $phone-color;
+    }
+
+    .top-face {
+        top: 0;
+        transform: rotateX(90deg) translateZ($depth / 2);
+    }
+
+    .bottom-face {
+        bottom: 0;
+        transform: rotateX(-90deg) translateZ($depth / 2);
+    }
+
+    .left-face,
+    .right-face {
+        width: $depth;
+        height: $height;
+        background-color: $phone-color;
+    }
+
+    .left-face {
+        left: 0;
+        transform: rotateY(-90deg) translateZ($depth / 2);
+    }
+
+    .right-face {
+        right: 0;
+        transform: rotateY(90deg) translateZ($depth / 2);
+    }
+}
+
+// Mixin to clip corners for rounded edges
+@mixin clip-corner($width, $height, $radius) {
+    .front-face,
+    .back-face {
+        border-radius: $radius;
+        background-color: $phone-color;
+    }
+
+    .top-face,
+    .bottom-face {
+        width: $width - 2 * $radius;
+        margin-left: $radius;
+        background-color: $phone-color;
+    }
+
+    .left-face,
+    .right-face {
+        height: $height - 2 * $radius;
+        margin-top: $radius;
+        background-color: $phone-color;
+    }
+}
+
+// Mixin for creating circular shapes
+@mixin roll($angle, $radius, $piece-num, $height) {
+    transform-style: preserve-3d; // Preserve 3D context for circle positioning
+
+    $a: $angle / $piece-num;
+    $k: $radius * cos($a / 2);
+    $width: round(2 * $radius * sin($a / 2));
+
+    @for $i from 1 through $piece-num {
+        $b: $a * ($i - 1) + $a / 2;
+        $x: round($k * cos($b));
+        $y: round($k * sin($b));
+        $rotate: 90deg - $b;
+
+        .piece-#{$i} {
+            width: $width + 1;
+            height: $height + 1;
+            position: absolute;
+            transform: translateX($x) translateZ($y) rotateY($rotate);
+            background-color: $phone-color;
+            border: none;
+        }
+    }
+}
+
+// Mixin for positioning rounded corners
+@mixin round-corner($radius, $piece-num, $depth) {
+    $a: 360deg / $piece-num;
+    $k: $radius * cos($a / 2);
+    $w: round(2 * $radius * sin($a / 2));
+
+    .tr-corner,
+    .tl-corner,
+    .bl-corner,
+    .br-corner {
+        position: absolute;
+        transform-style: preserve-3d; // Preserve 3D context for corners
+        transform: rotateX(90deg) translateY(-$depth / 2);
+        background-color: $phone-color;
+        border: none;
+    }
+
+    .tr-corner {
+        top: $radius;
+        right: $radius + $w / 2;
+    }
+
+    .tl-corner {
+        top: $radius;
+        left: $radius - $w / 2;
+    }
+
+    .bl-corner {
+        bottom: $radius;
+        left: $radius - $w / 2;
+    }
+
+    .br-corner {
+        bottom: $radius;
+        right: $radius + $w / 2;
+    }
+}
+
+// Mixin to define phone-specific features (notch, screen, buttons)
+@mixin phone-features($width, $height, $depth, $radius) {
+    .front-face {
+        &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $screen-color; // Screen color
+            border-top-left-radius: $radius;
+            border-top-right-radius: $radius;
+            z-index: 2;
+        }
+
+        .notch {
+            width: 70px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: $notch-height;
+            background-color: $screen-color;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            z-index: 5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+
+            .camera {
+                width: 10px; // Adjust width to match image
+                height: 10px; // Adjust height to match image
+                background-color: #242424; // Camera color
+                border-radius: 50%; // Circular shape
+            }
+
+            .speaker {
+                width: 40px; // Adjust width to match image
+                height: 5px; // Adjust height to match image
+                background-color: #0d0d0d; // Speaker color
+                border-radius: 5px; // Rounded edges
+            }
+        }
+    }
+
+    .side-button {
+        position: absolute;
+        width: $button-width;
+        height: 30px; // Adjust height to match image
+        background-color: $button-color;
+        z-index: 4;
+
+        &.side-button-left {
+            top: 50%;
+            left: -$button-width;
+            transform: translateY(-50%);
+            border-radius: 0 5px 5px 0; // Rounded edges
+        }
+
+        &.side-button-right {
+            top: 50%;
+            right: -$button-width;
+            transform: translateY(-50%);
+            border-radius: 5px 0 0 5px; // Rounded edges
+        }
+    }
+}
+
+// Mixin to generate the complete phone model
+@mixin phone-generator($width, $height, $depth, $radius, $piece-num) {
+    @include box($width, $height, $depth);
+    @include clip-corner($width, $height, $radius);
+    @include roll(360deg, $radius, $piece-num, $depth);
+    @include round-corner($radius, $piece-num, $depth);
+    @include phone-features($width, $height, $depth, $radius);
+}
+
+// Define camera perspective for 3D rendering
+.camera {
+    perspective: 1500px;
+    overflow: hidden;
+    width: 100%;
+
+    &:hover {
+        .object {
+            transform: rotate3d(0, 0, 0, 325deg) scale(1.08);
+        }
+    }
+}
+
+// Define styling for the phone model container
+.object {
+    margin: 100px auto; // Margin and center alignment
+    @include phone-generator($box-w, $box-h, $box-d, $box-r, $piece-num); // Generate phone model
+    transform: rotate3d(-45, -90, 25, 325deg);
+    transition: transform 1s ease;
+}
+
+// Define border for debug purposes (remove in production)
+[class^="piece"],
+[class$="face"] {
+    border: none; // Remove border
+}
