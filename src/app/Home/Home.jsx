@@ -84,7 +84,7 @@ import LineContact from '../../../public/assets/Home/Contact Section/line.svg';
 
 const Home = () => {
 
-    const { isDarkMode  } = useContext(ThemeContext);
+    const { isDarkMode } = useContext(ThemeContext);
 
 
     const [loading, setLoading] = useState(true);
@@ -95,8 +95,10 @@ const Home = () => {
     const [videoId, setVideoId] = useState('dQw4w9WgXcQ');
 
     const [homeTitle, setHomeTitle] = useState('ENHANCE YOUR');
-    const [homeWords, setHomeWords] = useState(['REACH', 'GROWTH', 'EMBLEM']);
+    const [highlitedTitles, setHighlitedTitles] = useState(['REACH', 'GROWTH', 'EMBLEM']);
     const [homeDescription, setHomeDescription] = useState('We are gonna create a well developed and designed website from your own choice and it will exactly as you desire and want The website you want will be created with high quality,our team which is formed with experienced programmers and designers will take of every corner.');
+
+    const [services, setServices] = useState([]);
 
     const [sectionTexts, setSectionTexts] = useState(['High Quality', 'Fast Performace', 'Good SEO', 'Modern Designs']);
 
@@ -135,19 +137,18 @@ const Home = () => {
     }, []);
 
     const fetchData = async () => {
-        const homeData = await client.fetch('*[_type == "home"][0] { _id, promoDate, "featuredPosts": featuredPosts[]->{_id, title, mainImage} ,"projects": projects[]->{_id, title, mainImage , tags } , videoId ,homeTitle, homeWords }');
-        const feedbackData = await client.fetch('*[_type == "feedback"] { _id, name, message, email, image, createdAt, rating }');
+        const homeData = await client.fetch('*[_type == "homePage"][0] { _id, promoDate, "featuredPosts": featuredPosts[]->{_id, title, mainImage} ,"projects": projects[]->{_id, title, mainImage , tags } , videoId ,homeTitle, homeWords }');
+        const servicesData = await client.fetch('*[_type == "services"][0] { _id, "services": services[]->{_id, title, description, image , mainService} }');
 
-        setTestimonials(feedbackData);
-        setBlogs(homeData.featuredPosts);
+        setHomeTitle(homeData.mainTitle ? homeData.homeTitle : homeTitle);
+        setHighlitedTitles(homeData.highlightedTitles ? homeData.highlitedTitles : highlitedTitles);
+        setHomeDescription(homeData.homeDescription ? homeData.homeDescription : homeDescription);
+        setServices(servicesData)
         setTargetDate(homeData.promoDate);
         setVideoId(homeData.videoId ? homeData.videoId : videoId);
-        setHomeTitle(homeData.homeTitle ? homeData.homeTitle : homeTitle);
-        setHomeWords(homeData.homeWords ? homeData.homeWords : homeWords);
-        setHomeDescription(homeData.homeDescription ? homeData.homeDescription : homeDescription);
-        setSectionTexts(homeData.sectionTexts ? homeData.sectionTexts : sectionTexts)
-        setProjects(homeData.projects ? homeData.projects : projects);
-
+        setBlogs(homeData.featuredPosts);
+        setProjects(homeData.projects);
+        setTestimonials(homeData.testimonials ? homeData.testimonials : testimonials);
 
         setLoading(false)
 
@@ -344,9 +345,9 @@ const Home = () => {
                                         <div className="flip-container">
                                             <h1>{homeTitle}
                                                 <div className="flip">
-                                                    <div className='special-flipper'><div>{homeWords[0]}</div></div>
-                                                    <div><div>{homeWords[1]}</div></div>
-                                                    <div><div>{homeWords[2]}</div></div>
+                                                    <div className='special-flipper'><div>{highlitedTitles[0]}</div></div>
+                                                    <div><div>{highlitedTitles[1]}</div></div>
+                                                    <div><div>{highlitedTitles[2]}</div></div>
                                                 </div>
                                             </h1>
                                         </div>
@@ -499,33 +500,14 @@ const Home = () => {
                                     </div>
 
                                     <div className="cards_container">
-                                        <div className="card">
-                                            <video loop={true} autoPlay={true} muted={true} src={MobileDevImage} alt='website_dev' />
-                                            <h4>Social Media Marketing</h4>
-                                            <p>Marketing especially on social media to make your website and business grow and you can accomplish that with Webina</p>
-                                            <button>GET STARTED</button>
-                                        </div>
-
-                                        <div className="card">
-                                            <video loop={true} autoPlay={true} muted={true} src={DesktopDevImage} alt='website_dev' />
-                                            <h4>Social Media Marketing</h4>
-                                            <p>Marketing especially on social media to make your website and business grow and you can accomplish that with Webina</p>
-                                            <button>GET STARTED</button>
-                                        </div>
-
-                                        <div className="card">
-                                            <video loop={true} autoPlay={true} muted={true} src={SocialMediaDevImage} alt='website_dev' />
-                                            <h4>Social Media Marketing</h4>
-                                            <p>Marketing especially on social media to make your website and business grow and you can accomplish that with Webina</p>
-                                            <button>GET STARTED</button>
-                                        </div>
-
-                                        <div className="card">
-                                            <video loop={true} autoPlay={true} muted={true} src={DesignDevImage} alt='website_dev' />
-                                            <h4>Social Media Marketing</h4>
-                                            <p>Marketing especially on social media to make your website and business grow and you can accomplish that with Webina</p>
-                                            <button>GET STARTED</button>
-                                        </div>
+                                        {services?.map((service, index) =>
+                                            <div className="card" key={index}>
+                                                <img src={imageUrlFor(service.image)} alt={service.name} />
+                                                <h4>{service.name}</h4>
+                                                <p>{service.description}</p>
+                                                <button>GET STARTED</button>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 

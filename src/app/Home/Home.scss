@@ -1,4 +1,7 @@
 #Home {
+    width: 100%;
+    overflow-y: hidden;
+
     header {
         background: linear-gradient(to bottom right, var(--light-color) 40%, var(--primary-color) 230%);
         z-index: 5;
@@ -358,7 +361,7 @@
 
         @media screen and (max-width: 900px) {
             height: 100dvh;
-            width: 100dvw;
+
 
             .container-main {
                 flex-direction: column;
@@ -398,6 +401,7 @@
 
                             p {
                                 font-size: 4vw;
+                                line-height: 1.4em;
                             }
 
                             button {
@@ -772,12 +776,13 @@
 
                             h3 {
                                 text-align: center !important;
-                                font-size: 2.5em !important;
+                                font-size: 2em !important;
                             }
 
                             p {
                                 text-align: center !important;
-                                font-size: 1.2em !important;
+                                font-size: .8em !important;
+                                line-height: 2em;
                             }
                         }
                     }
