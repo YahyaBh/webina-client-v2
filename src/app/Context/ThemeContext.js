@@ -1,6 +1,6 @@
 "use client";
 import Cookies from "js-cookie";
-import React, { createContext, useEffect, useState, useCallback, useLayoutEffect } from "react";
+import React, { createContext, useEffect, useState, useCallback } from "react";
 
 export const ThemeContext = createContext();
 
@@ -18,79 +18,33 @@ export const ThemeProvider = ({ children }) => {
 
 
     useEffect(() => {
-        const setTheme = (darkMode) => {
-
-            document.documentElement.style.setProperty(
-                "--settings-color",
-                darkMode ? "#131313" : "#FFFFFF"
-            );
-            document.documentElement.style.setProperty(
-                "--light-color-primary",
-                darkMode ? "#FFE662" : "#FFF"
-            );
-            document.documentElement.style.setProperty(
-                "--primary-color-dark",
-                darkMode ? "#1E1E1E" : "#FFE662"
-            );
-            document.documentElement.style.setProperty(
-                "--primary-color-grey",
-                darkMode ? "#3C3C3C" : "#FFFFFF"
-            );
-            document.documentElement.style.setProperty(
-                "--dark-color-primary",
-                darkMode ? "#FFE662" : "#1E1E1E"
-            );
-            document.documentElement.style.setProperty(
-                "--blog-card",
-                darkMode ? "#3C3C3C" : "#F1E7B1"
-            );
-            document.documentElement.style.setProperty(
-                "--light-color",
-                darkMode ? "#1e1e1e" : "#fff"
-            );
-            document.documentElement.style.setProperty(
-                "--black-color",
-                darkMode ? "#fff" : "#1e1e1e"
-            );
-            document.documentElement.style.setProperty(
-                "--secondary-color",
-                darkMode ? "#1e1e1e" : "#fff"
-            );
-            document.documentElement.style.setProperty(
-                "--cards-color",
-                darkMode ? "#F9EA9B" : "#131313"
-            );
-            document.documentElement.style.setProperty(
-                "--ecd-to-black",
-                darkMode ? "#fff" : "#F9EA9B"
-            )
-
-            document.documentElement.style.setProperty(
-                "--ecd-to-grey",
-                darkMode ? "#3d3d3d" : "#ECD777"
-            )
-            document.documentElement.style.setProperty(
-                "--primary-to-grey",
-                darkMode ? "#3d3d3d" : "#FFE662"
-            )
-            document.documentElement.style.setProperty(
-                "--golry-to-black",
-                darkMode ? "#1e1e1e" : "#3A3832"
-            )
-            Cookies.set("__THEME_MODE", darkMode, { sameSite: 'Lax', expires: 365 }); // Expires in 1 year
-
+        const themeVariables = {
+            "--settings-color": isDarkMode ? "#131313" : "#FFFFFF",
+            "--light-color-primary": isDarkMode ? "#FFE662" : "#FFF",
+            "--primary-color-dark": isDarkMode ? "#1E1E1E" : "#FFE662",
+            "--primary-color-grey": isDarkMode ? "#3C3C3C" : "#FFFFFF",
+            "--dark-color-primary": isDarkMode ? "#FFE662" : "#1E1E1E",
+            "--blog-card": isDarkMode ? "#3C3C3C" : "#F1E7B1",
+            "--light-color": isDarkMode ? "#1e1e1e" : "#fff",
+            "--black-color": isDarkMode ? "#fff" : "#1e1e1e",
+            "--secondary-color": isDarkMode ? "#1e1e1e" : "#fff",
+            "--cards-color": isDarkMode ? "#F9EA9B" : "#131313",
+            "--ecd-to-black": isDarkMode ? "#fff" : "#F9EA9B",
+            "--ecd-to-grey": isDarkMode ? "#3d3d3d" : "#ECD777",
+            "--primary-to-grey": isDarkMode ? "#3d3d3d" : "#FFE662",
+            "--golry-to-black": isDarkMode ? "#1e1e1e" : "#3A3832",
         };
-
-        setTheme(isDarkMode);
-
-        document.documentElement.style.setProperty("transition", "all 8s ease");
-
-        const transitionTimeout = setTimeout(() => {
-            document.documentElement.style.setProperty("transition", "");
-        }, 8000);
-
-        return () => clearTimeout(transitionTimeout);
+    
+        for (const [key, value] of Object.entries(themeVariables)) {
+            document.documentElement.style.setProperty(key, value);
+        }
+    
+        Cookies.set("__THEME_MODE", isDarkMode, { sameSite: 'Lax', expires: 365 }); // Expires in 1 year
+    
+        // Add transition on theme change
+        document.documentElement.style.setProperty("transition", "all 0.3s ease");
     }, [isDarkMode]);
+    
 
     return (
         <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>

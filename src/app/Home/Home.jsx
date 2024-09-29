@@ -66,8 +66,7 @@ import SocialMediaDevImage from '../../../public/assets/Home/Section 2/socialMed
 import DesignDevImage from '../../../public/assets/Home/Section 2/design.webm'
 
 
-import FigmaTestPic from '../../../public/assets/Home/Section Blog/maxresdefault-test.png'
-import VideoIntro from '../../../public/assets/Home/Perf-Section/intro.mp4'
+import VideoIntro from '../../../public/assets/Home/Perf-Section/NEWVIDEOFORPROMO.mp4'
 import ArrowLeftBottom from '../../../public/assets/Home/Perf-Section/Arrow-Left-Bottom.png'
 import ArrowRightBottom from '../../../public/assets/Home/Perf-Section/Arrow-Right-Bottom.png'
 import ArrowLeftTop from '../../../public/assets/Home/Perf-Section/Arrow-Left-Top.png'
@@ -96,11 +95,11 @@ const Home = () => {
 
     const [homeTitle, setHomeTitle] = useState('ENHANCE YOUR');
     const [highlitedTitles, setHighlitedTitles] = useState(['REACH', 'GROWTH', 'EMBLEM']);
+    const [servicesHighlits, setServicesHighlits] = useState([]);
     const [homeDescription, setHomeDescription] = useState('We are gonna create a well developed and designed website from your own choice and it will exactly as you desire and want The website you want will be created with high quality,our team which is formed with experienced programmers and designers will take of every corner.');
 
     const [services, setServices] = useState([]);
 
-    const [sectionTexts, setSectionTexts] = useState(['High Quality', 'Fast Performace', 'Good SEO', 'Modern Designs']);
 
     const [blogs, setBlogs] = useState([]);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -134,10 +133,21 @@ const Home = () => {
         window.addEventListener('scroll', handleScroll);
 
         fetchData();
+
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/66f9b42f4cbc4814f7e0b463/1i8vmfm7f';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+
+
     }, []);
 
     const fetchData = async () => {
-        const homeData = await client.fetch('*[_type == "homePage"][0] { _id, promoDate, "featuredPosts": featuredPosts[]->{_id, title, mainImage} ,"projects": projects[]->{_id, title, mainImage , tags } , videoId ,homeTitle, homeWords }');
+        const homeData = await client.fetch('*[_type == "homePage"][0] { _id, promoDate, "featuredPosts": featuredPosts[]->{_id, title, mainImage} ,"projects": projects[]->{_id, title, mainImage , tag , description } , videoId ,homeTitle, homeWords , servicesHighlits }');
         const servicesData = await client.fetch('*[_type == "services"][0] { _id, "services": services[]->{_id, title, description, image , mainService} }');
 
         setHomeTitle(homeData.mainTitle ? homeData.homeTitle : homeTitle);
@@ -148,7 +158,11 @@ const Home = () => {
         setVideoId(homeData.videoId ? homeData.videoId : videoId);
         setBlogs(homeData.featuredPosts);
         setProjects(homeData.projects);
-        setTestimonials(homeData.testimonials ? homeData.testimonials : testimonials);        
+        setTestimonials(homeData.testimonials ? homeData.testimonials : testimonials);
+        setServicesHighlits(homeData.servicesHighlits ? homeData.servicesHighlits : servicesHighlits);
+
+        console.log(homeData);
+
 
         setLoading(false)
 
@@ -164,38 +178,40 @@ const Home = () => {
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
 
-        try {
-            const response = await fetch('/api/sendMessage', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+    //     try {
+    //         const response = await fetch('/api/sendMessage', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(formData),
+    //         });
 
-            if (!response.ok) {
-                throw new Error('Failed to send message');
-            }
+    //         if (!response.ok) {
+    //             throw new Error('Failed to send message');
+    //         }
 
-            Swal.fire({
-                title: "The Internet?",
-                text: "That thing is still around?",
-                icon: "question"
-            });
+    //         Swal.fire({
+    //             title: "The Internet?",
+    //             text: "That thing is still around?",
+    //             icon: "question"
+    //         });
 
-            alert('Message sent successfully!');
-            setFormData({ name: '', email: '', message: '' });
-        } catch (error) {
-            console.error('Error sending message:', error);
-            alert('Failed to send message. Please try again later.');
-        }
-    };
+    //         alert('Message sent successfully!');
+    //         setFormData({ name: '', email: '', message: '' });
+    //     } catch (error) {
+    //         console.error('Error sending message:', error);
+    //         alert('Failed to send message. Please try again later.');
+    //     }
+    // };
 
 
     //Start Related to the image hover effects 
+
+
     const handleMouseMove = (e) => {
         const el = tiltRef.current;
         const elSec = imageRef.current;
@@ -614,7 +630,7 @@ const Home = () => {
                                         <div className="left">
                                             <div className="topper_text">
                                                 <div className="left">
-                                                    <h4>High Quality Design</h4>
+                                                    <h4>{servicesHighlits[0]}</h4>
                                                     <hr />
                                                 </div>
 
@@ -635,7 +651,7 @@ const Home = () => {
                                                 </div>
 
                                                 <div className="left">
-                                                    <h4>High Quality Design</h4>
+                                                    <h4>{servicesHighlits[1]}</h4>
                                                     <hr />
                                                 </div>
 
@@ -649,13 +665,13 @@ const Home = () => {
                                         <div className="play_button" onClick={toggleVideo}>
                                             <FaPlay />
                                         </div>
-                                        <video ref={videoRef} autoPlay={true} muted src={VideoIntro} onEnded={handleVideoEnded} alt="performance video" />
+                                        <video ref={videoRef} autoPlay={true} muted type="video/mp4" src={VideoIntro} onEnded={handleVideoEnded} alt="performance video" />
                                     </div>
                                     <div className="bottom">
                                         <div className="left">
                                             <div className="bottom_text">
                                                 <div className="left">
-                                                    <h4>High Quality Design</h4>
+                                                    <h4>{servicesHighlits[2]}</h4>
                                                     <hr />
                                                 </div>
 
@@ -675,7 +691,7 @@ const Home = () => {
                                                 </div>
 
                                                 <div className="left">
-                                                    <h4>High Quality Design</h4>
+                                                    <h4>{servicesHighlits[3]}</h4>
                                                     <hr />
                                                 </div>
 
@@ -728,92 +744,32 @@ const Home = () => {
 
                                     <div className="projects_container">
 
-                                        <div className="card">
-                                            <Image src={FigmaTestPic} alt="project_example" />
+                                        {projects?.map((item, index) => (
+                                            <div className="card" key={index + item.title}>
+                                                <img src={imageUrlFor(item.mainImage)} alt={item.title} />
 
 
-                                            <div className="bottom_container">
-                                                <h4>Project Example Text</h4>
+                                                <div className="bottom_container">
+                                                    <h4>{item.title}</h4>
 
-                                                <div className="tags_container">
-                                                    <div className="tag">
-                                                        UI/UX Design
+                                                    <div className="tags_container">
+                                                        {item?.tag?.map((tag, index) => (
+                                                            <div className="tag" key={index + tag}>
+                                                                {tag}
+                                                            </div>
+
+                                                        ))}
                                                     </div>
 
-                                                    <div className="tag">
-                                                        NextJs
-                                                    </div>
-
-                                                    <div className="tag">
-                                                        Tailwind Css
-                                                    </div>
+                                                    <p>{item?.description?.length >= 80 ? item?.description?.split('').slice(0, 80).join('') + '...' : item?.description}</p>
                                                 </div>
 
-                                                <p>{('Lorem ipsum dolor sit amet consectetur adipisicing elit.').length >= 56 ? ('Lorem ipsum dolor sit amet consectetur adipisicing elit.').split('').slice(0, 56).join('') + '...' : ('Lorem ipsum dolor sit amet consectetur adipisicing elit.')}</p>
+                                                <button>
+                                                    GO TO DETAILS
+                                                </button>
                                             </div>
-
-                                            <button>
-                                                GO TO DETAILS
-                                            </button>
-                                        </div>
-
-                                        <div className="card">
-                                            <Image src={FigmaTestPic} alt="project_example" />
-
-
-                                            <div className="bottom_container">
-                                                <h4>Project Example Text</h4>
-
-                                                <div className="tags_container">
-                                                    <div className="tag">
-                                                        UI/UX Design
-                                                    </div>
-
-                                                    <div className="tag">
-                                                        NextJs
-                                                    </div>
-
-                                                    <div className="tag">
-                                                        Tailwind Css
-                                                    </div>
-                                                </div>
-
-                                                <p>{('Lorem ipsum dolor sit amet consectetur adipisicing elit.').length >= 56 ? ('Lorem ipsum dolor sit amet consectetur adipisicing elit.').split('').slice(0, 56).join('') + '...' : ('Lorem ipsum dolor sit amet consectetur adipisicing elit.')}</p>
-                                            </div>
-
-                                            <button>
-                                                GO TO DETAILS
-                                            </button>
-                                        </div>
-
-                                        <div className="card">
-                                            <Image src={FigmaTestPic} alt="project_example" />
-
-
-                                            <div className="bottom_container">
-                                                <h4>Project Example Text</h4>
-
-                                                <div className="tags_container">
-                                                    <div className="tag">
-                                                        UI/UX Design
-                                                    </div>
-
-                                                    <div className="tag">
-                                                        NextJs
-                                                    </div>
-
-                                                    <div className="tag">
-                                                        Tailwind Css
-                                                    </div>
-                                                </div>
-
-                                                <p>{('Lorem ipsum dolor sit amet consectetur adipisicing elit.').length >= 56 ? ('Lorem ipsum dolor sit amet consectetur adipisicing elit.').split('').slice(0, 56).join('') + '...' : ('Lorem ipsum dolor sit amet consectetur adipisicing elit.')}</p>
-                                            </div>
-
-                                            <button>
-                                                GO TO DETAILS
-                                            </button>
-                                        </div>
+                                        ))
+                                        }
 
                                     </div>
 
@@ -926,9 +882,9 @@ const Home = () => {
                                                 <label htmlFor="message">Message</label>
                                                 <textarea name="message" id="message" value={formData.name} onChange={handleChange} required placeholder='Enter your message' ></textarea>
 
-                                                <button onClick={handleSubmit}>
+                                                {/* <button onClick={handleSubmit}>
                                                     SEND MESSAGE
-                                                </button>
+                                                </button> */}
                                             </div>
 
                                         </div>
