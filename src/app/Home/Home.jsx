@@ -148,7 +148,7 @@ const Home = () => {
         setVideoId(homeData.videoId ? homeData.videoId : videoId);
         setBlogs(homeData.featuredPosts);
         setProjects(homeData.projects);
-        setTestimonials(homeData.testimonials ? homeData.testimonials : testimonials);
+        setTestimonials(homeData.testimonials ? homeData.testimonials : testimonials);        
 
         setLoading(false)
 
@@ -296,7 +296,7 @@ const Home = () => {
             playerInstance.current = YouTubePlayer(playerRef.current, {
                 videoId: videoId,
                 playerVars: {
-                    autoplay: 1, // Autoplay when visible
+                    autoplay: 1,
                 },
             });
 

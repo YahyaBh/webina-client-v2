@@ -6,7 +6,7 @@ const client = createClient({
     projectId: 'oq3x0aj3',
     dataset: 'production',
     useCdn: false,
-    token: "skiux9c90MWxXJvCQEmdpJKQLOoHk35F6FhgQaPNNIfLil2ixbm0UVj6p5sEokPTl5Umi1yXgSKvQZWjiGv8s7PYHp4DL08qEpA0h52mb6ueQWHS8gTdgE1nJJUDJZeu9sv0evWy1xxFUVpuO2CfJKp9uKqIYdQDzEyb2luW9JRGl60PCXBv",
+    token: "sk8Xes4lQdDsmviiQa7woZmtySvBQa9sFGHdMF2aeQ4QaWl4Wf6jn4otYROwUZU0Kc4izxb0dzCke7KrWhynMOLcQoZu4VF3JNwWprErcNZujfh7WJxFjwDAle43TkORzSVCnKcw2Y3tcykQoU80bW9IiEm1aDSNnuiFapWXarW1z7yDpMSY",
     apiVersion: "2023-10-01"
 });
 

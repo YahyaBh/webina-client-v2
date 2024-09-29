@@ -10,7 +10,7 @@ import './Navbar.scss'
 import { MdLanguage, MdKeyboardArrowDown } from 'react-icons/md'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { BiLogOut, BiUser } from 'react-icons/bi'
-import { FiUserPlus } from 'react-icons/fi'
+import { FiArrowLeft, FiArrowRight, FiUserPlus } from 'react-icons/fi'
 import { BsListNested } from 'react-icons/bs';
 import { CiUser, CiHeart, CiShoppingCart } from "react-icons/ci";
 import { MdHistory } from 'react-icons/md';
@@ -162,15 +162,9 @@ const Navbar = ({ isOpen, transparent }) => {
                             ) : (
                                 <div className='sign-buttons'>
                                     <button>
-                                        <a href='/login'>
-                                            <BiUser />
-                                            <h3>SIGNIN</h3>
-                                        </a>
-                                    </button>
-                                    <button>
                                         <a href='/register'>
-                                            <FiUserPlus />
-                                            <h3>SIGNUP</h3>
+                                            <h3>GET STARTED</h3>
+                                            <FiArrowRight />
                                         </a>
                                     </button>
                                 </div>
@@ -231,16 +225,9 @@ const Navbar = ({ isOpen, transparent }) => {
 
                             <div className='sign-buttons'>
                                 <button>
-                                    <a href='/login'>
-                                        <BiUser />
-                                        <h3>SIGNIN</h3>
-                                    </a>
-                                </button>
-
-                                <button>
                                     <a href='/register'>
-                                        <FiUserPlus />
-                                        <h3>SIGNUP</h3>
+                                        <FiArrowRight />
+                                        <h3>GET STARTED</h3>
                                     </a>
                                 </button>
                             </div>
