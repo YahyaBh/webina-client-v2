@@ -5,7 +5,6 @@ import React, {
     useEffect,
     useRef,
     useState,
-    useCallback
 } from 'react';
 
 import Swal from 'sweetalert2';
@@ -42,7 +41,6 @@ import Footer from '../Layouts/Footer/Footer';
 
 
 import { useCountdown } from '../Layouts/Timer/Timer';
-import { ThemeContext } from '../Context/ThemeContext';
 
 import './Home.scss';
 import './movingPhone.scss'
@@ -78,6 +76,7 @@ import SEOPic from '../../../public/assets/Home/SEO Section/seo.webp'
 import StarLeft from '../../../public/assets/Home/Contact Section/star-l.svg';
 import StarRight from '../../../public/assets/Home/Contact Section/star-r.svg';
 import LineContact from '../../../public/assets/Home/Contact Section/line.svg';
+import { FiArrowRight } from 'react-icons/fi';
 
 
 
@@ -133,21 +132,10 @@ const Home = () => {
         window.addEventListener('scroll', handleScroll);
 
         fetchData();
-
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/66f9b42f4cbc4814f7e0b463/1i8vmfm7f';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-
-
     }, []);
 
     const fetchData = async () => {
-        const homeData = await client.fetch('*[_type == "homePage"][0] { _id, promoDate, "featuredPosts": featuredPosts[]->{_id, title, mainImage} ,"projects": projects[]->{_id, title, mainImage , tag , description } , videoId ,homeTitle, homeWords , servicesHighlits }');
+        const homeData = await client.fetch('*[_type == "homePage"][0] { _id, promoDate, "featuredFeedbacks": featuredFeedbacks[]->{_id, name, message , date , image , rating , slug} , "featuredPosts": featuredPosts[]->{_id, title, mainImage} ,"projects": projects[]->{_id, title, mainImage , tag , description } , videoId ,homeTitle, homeWords , servicesHighlits}');
         const servicesData = await client.fetch('*[_type == "services"][0] { _id, "services": services[]->{_id, title, description, image , mainService} }');
 
         setHomeTitle(homeData.mainTitle ? homeData.homeTitle : homeTitle);
@@ -158,10 +146,8 @@ const Home = () => {
         setVideoId(homeData.videoId ? homeData.videoId : videoId);
         setBlogs(homeData.featuredPosts);
         setProjects(homeData.projects);
-        setTestimonials(homeData.testimonials ? homeData.testimonials : testimonials);
+        setTestimonials(homeData.featuredFeedbacks ? homeData.featuredFeedbacks : testimonials);
         setServicesHighlits(homeData.servicesHighlits ? homeData.servicesHighlits : servicesHighlits);
-
-        console.log(homeData);
 
 
         setLoading(false)
@@ -178,35 +164,35 @@ const Home = () => {
         }));
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    //     try {
-    //         const response = await fetch('/api/sendMessage', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(formData),
-    //         });
+        try {
+            const response = await fetch('/api/sendMessage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
 
-    //         if (!response.ok) {
-    //             throw new Error('Failed to send message');
-    //         }
+            if (!response.ok) {
+                throw new Error('Failed to send message');
+            }
 
-    //         Swal.fire({
-    //             title: "The Internet?",
-    //             text: "That thing is still around?",
-    //             icon: "question"
-    //         });
+            Swal.fire({
+                title: "The Internet?",
+                text: "That thing is still around?",
+                icon: "question"
+            });
 
-    //         alert('Message sent successfully!');
-    //         setFormData({ name: '', email: '', message: '' });
-    //     } catch (error) {
-    //         console.error('Error sending message:', error);
-    //         alert('Failed to send message. Please try again later.');
-    //     }
-    // };
+            alert('Message sent successfully!');
+            setFormData({ name: '', email: '', message: '' });
+        } catch (error) {
+            console.error('Error sending message:', error);
+            alert('Failed to send message. Please try again later.');
+        }
+    };
 
 
     //Start Related to the image hover effects 
@@ -346,13 +332,13 @@ const Home = () => {
 
     return (
         loading ? <Loading /> :
-            <>
+            <div className='root_main'>
                 {loading ? <Loading /> : ''}
 
+                <Navbar target={'home'} />
 
                 <div id='Home'>
                     <header>
-                        <Navbar target={'home'} />
 
                         <div className="container-main">
                             <div className="header-container">
@@ -370,7 +356,7 @@ const Home = () => {
 
                                         <p>{homeDescription}</p>
 
-                                        <button>GET STARTED</button>
+                                        <button>GET STARTED <FiArrowRight/></button>
 
                                         <div className='undertext'>
                                             <BsArrowRight />
@@ -882,9 +868,9 @@ const Home = () => {
                                                 <label htmlFor="message">Message</label>
                                                 <textarea name="message" id="message" value={formData.name} onChange={handleChange} required placeholder='Enter your message' ></textarea>
 
-                                                {/* <button onClick={handleSubmit}>
+                                                <button onClick={handleSubmit}>
                                                     SEND MESSAGE
-                                                </button> */}
+                                                </button>
                                             </div>
 
                                         </div>
@@ -892,6 +878,11 @@ const Home = () => {
                                     </div>
                                 </div>
 
+                                <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+
+                                <div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="655de45628b0a3566959a161" data-style-height="52px" data-style-width="100%">
+                                    <a href="https://www.trustpilot.com/review/webinadigital.com" target="_blank" rel="noopener">Trustpilot</a>
+                                </div>
 
                                 <Footer />
 
@@ -899,7 +890,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div >
-            </>
+            </div>
     )
 }
 
@@ -937,7 +928,6 @@ const feedback = (testimonials) => {
             </div>
         );
     };
-
 
     return (
         <>

@@ -1,12 +1,34 @@
+.root_main {
+    background: linear-gradient(to bottom right, var(--light-color) 40%, var(--primary-color) 230%);
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &::before {
+        background: radial-gradient(farthest-side at bottom left, var(--secondary-color) -1000px, #0000 40%),
+            radial-gradient(farthest-corner at bottom right, var(--primary-color), #0000 50%);
+        content: "";
+        height: 100%;
+        left: 0;
+        opacity: 1;
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        z-index: 0;
+        opacity: 0.3;
+    }
+}
+
 #Home {
     width: 100%;
     overflow-y: hidden;
 
     header {
-        background: linear-gradient(to bottom right, var(--light-color) 40%, var(--primary-color) 230%);
         z-index: 5;
         position: fixed;
-        top: 0;
         width: 100%;
 
         display: flex;
@@ -362,11 +384,11 @@
         @media screen and (max-width: 900px) {
             height: 100dvh;
 
-
             .container-main {
                 flex-direction: column;
-                top: 10px;
+                top: 90px;
                 position: relative;
+                justify-content: flex-start;
 
                 .header-container {
                     .container {
@@ -406,11 +428,19 @@
 
                             button {
                                 width: max-content;
-                                height: 35px;
                                 margin: auto;
                                 font-size: 6vw;
-                                padding: 6px 8px;
+                                padding: 6px 25px;
                                 border-radius: 40px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                gap: 10px;
+
+                                svg {
+                                    font-size: 6vw;
+                                    color: var(--light-color);
+                                }
                             }
                         }
 
@@ -781,7 +811,7 @@
 
                             p {
                                 text-align: center !important;
-                                font-size: .8em !important;
+                                font-size: 0.8em !important;
                                 line-height: 2em;
                             }
                         }
@@ -1042,7 +1072,6 @@
                                 button {
                                     font-size: 14px;
                                     position: relative;
-
                                 }
                             }
                         }
@@ -1168,6 +1197,7 @@
                     .left {
                         flex-basis: 50%;
                         width: 50%;
+
                         h2 {
                             font-size: 2.5em;
 
@@ -1252,12 +1282,14 @@
                     @media screen and (max-width: 900px) {
                         flex-direction: column;
                         padding: 50px 10px;
+                        box-sizing: border-box;
                         width: 100%;
 
                         .left {
                             flex-basis: 100%;
                             width: 100%;
                             padding: 50px 20px;
+                            box-sizing: border-box;
 
                             h2 {
                                 text-align: center;

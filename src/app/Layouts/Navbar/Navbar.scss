@@ -516,7 +516,7 @@
     height: 70px;
     padding: 20px 50px;
     box-sizing: border-box;
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 20;
@@ -605,7 +605,7 @@
 
 .div-active {
     background-color: #00000071;
-    width: 100%;
+    width: 100% !important;
 }
 
 .aside-container {
@@ -615,10 +615,11 @@
     position: fixed;
     transition: all 0.3s ease;
     overflow: hidden;
-    top: 80px;
-
+    top: 70px;
+    left: 0;
+    
     .aside-active {
-        width: 100dwh;
+        width: 100%;
 
         .under-container {
             opacity: 1 !important;
@@ -637,6 +638,7 @@
         position: fixed;
         transition: all 0.3s ease;
         z-index: 89;
+        padding: 20px 0px;
 
         .list {
             list-style: none;
@@ -646,7 +648,6 @@
             gap: 20px;
             flex-direction: column;
             width: 80%;
-            padding: 35px 10px;
             box-sizing: border-box;
 
             .dropdown-trigger {

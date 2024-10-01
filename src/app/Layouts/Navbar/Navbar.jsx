@@ -9,12 +9,8 @@ import './Navbar.scss'
 
 import { MdLanguage, MdKeyboardArrowDown } from 'react-icons/md'
 import { FaMoon, FaSun } from 'react-icons/fa'
-import { BiLogOut, BiUser } from 'react-icons/bi'
-import { FiArrowLeft, FiArrowRight, FiUserPlus } from 'react-icons/fi'
+import { FiArrowRight } from 'react-icons/fi'
 import { BsListNested } from 'react-icons/bs';
-import { CiUser, CiHeart, CiShoppingCart } from "react-icons/ci";
-import { MdHistory } from 'react-icons/md';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 
 
@@ -22,10 +18,8 @@ import Morocco from '../../../../public/assets/Home/Navbar/Languages/Flag_of_Mor
 import English from '../../../../public/assets/Home/Navbar/Languages/Flag_of_the_United_Kingdom.svg.png'
 import French from '../../../../public/assets/Home/Navbar/Languages/Flag_of_France.svg.png'
 import { ThemeContext } from "../../Context/ThemeContext";
-import AuthContext from '../../Context/AuthContext';
-import i18next from 'i18next';
 
-const Navbar = ({ isOpen, transparent }) => {
+const Navbar = ({ isOpen, transparent, target }) => {
 
 
     const [scrolled, setScrolled] = useState(false);
@@ -36,7 +30,6 @@ const Navbar = ({ isOpen, transparent }) => {
 
     const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
-    const { isAuthenticated, user, logout, cartCounter } = AuthContext();
 
 
     useEffect(() => {
@@ -53,7 +46,7 @@ const Navbar = ({ isOpen, transparent }) => {
     useEffect(() => {
         isDarkMode ? setDarkMode(true) : setDarkMode(false)
     }, [isDarkMode])
-    
+
 
 
 
@@ -90,7 +83,7 @@ const Navbar = ({ isOpen, transparent }) => {
                 <div className='navbar'>
                     <div className='container'>
                         <a href='/' className='logo'>
-                            <Image src={!darkMode ? LogoL : Logo } alt="logo" />
+                            <Image src={!darkMode ? LogoL : Logo} alt="logo" />
                         </a>
 
                         <ul>
@@ -136,39 +129,18 @@ const Navbar = ({ isOpen, transparent }) => {
                                     )}
                                 </div>
 
-                                {!darkMode ?  <FaMoon onClick={toggleTheme} /> : <FaSun onClick={toggleTheme} /> }
-
-                                {isAuthenticated && (
-                                    <a href="/cart">
-                                        <AiOutlineShoppingCart />
-                                        {cartCounter > 0 ? <span>{cartCounter}</span> : null}
-                                    </a>
-                                )}
+                                {!darkMode ? <FaMoon onClick={toggleTheme} /> : <FaSun onClick={toggleTheme} />}
                             </div>
 
-                            {isAuthenticated ? (
-                                <li className='drop-down-user'>
-                                    <img src={user?.avatar} alt={`${user?.name} profile`} />
-                                    {user?.name} <MdKeyboardArrowDown />
-                                    <ul className="dropdown-menu">
-                                        <li><a href="/profile"><CiUser /> Profile</a></li>
-                                        <li><a href="/recent"><MdHistory /> My Recent</a></li>
-                                        <li><a href="/favourite"><CiHeart /> My Favorite</a></li>
-                                        <li><a href="/purchases"><CiShoppingCart /> My Orders</a></li>
-                                        <hr />
-                                        <li onClick={() => logout()}><BiLogOut /> Logout</li>
-                                    </ul>
-                                </li>
-                            ) : (
-                                <div className='sign-buttons'>
-                                    <button>
-                                        <a href='/register'>
-                                            <h3>GET STARTED</h3>
-                                            <FiArrowRight />
-                                        </a>
-                                    </button>
-                                </div>
-                            )}
+
+                            {target == 'home' ? <div className='sign-buttons'>
+                                <button>
+                                    <a href='/register'>
+                                        <h3>GET STARTED</h3>
+                                        <FiArrowRight />
+                                    </a>
+                                </button>
+                            </div> : ''}
                         </div>
                     </div>
                 </div>
@@ -177,29 +149,15 @@ const Navbar = ({ isOpen, transparent }) => {
             <nav id='responsive-navbar-s'>
 
                 <a href='/' className='logo'>
-                    <Image src={!darkMode ?  LogoL : Logo} alt="logo" />
+                    <Image src={!darkMode ? LogoL : Logo} alt="logo" />
                 </a>
 
                 <div className='mode-res'>
                     <div className="aside-swit">
                         <BsListNested onClick={handleAsideShow} />
                     </div>
-                    {isAuthenticated ? <a href="/cart"><AiOutlineShoppingCart />{cartCounter > 0 ? <span>{cartCounter}</span> : null}</a> : ''}
-                    {!darkMode ?   <FaMoon onClick={toggleTheme} /> : <FaSun onClick={toggleTheme} />}
-                    {isAuthenticated ?
-                        <li className='drop-down-user' >
-                            <Image src={user.avatar} alt={user.name + ' profile'} />
-                            <ul className="dropdown-menu">
-                                <li ><a href="/profile">Profile</a></li>
-                                <li><a href="/recent">My Recent</a></li>
-                                <li><a href="/favourite">My Favorite</a></li>
-                                <li><a href="/purchases">My Orders</a></li>
-                                <hr />
-                                <li onClick={e => logout()}>LOGOUT</li>
-                            </ul>
-                        </li>
-                        :
-                        ''}
+                    {!darkMode ? <FaMoon onClick={toggleTheme} /> : <FaSun onClick={toggleTheme} />}
+
                 </div>
 
                 <div className={asideShow ? 'aside-container div-active' : 'aside-container'}>
@@ -258,6 +216,8 @@ const Navbar = ({ isOpen, transparent }) => {
                 </div>
 
             </nav>
+
+
 
         </>
     )

@@ -3,17 +3,17 @@ import imageUrlBuilder from '@sanity/image-url';
 
 
 const client = createClient({
-    projectId: 'oq3x0aj3',
+    projectId: '89in6ek1',
     dataset: 'production',
     useCdn: false,
-    token: "sk8Xes4lQdDsmviiQa7woZmtySvBQa9sFGHdMF2aeQ4QaWl4Wf6jn4otYROwUZU0Kc4izxb0dzCke7KrWhynMOLcQoZu4VF3JNwWprErcNZujfh7WJxFjwDAle43TkORzSVCnKcw2Y3tcykQoU80bW9IiEm1aDSNnuiFapWXarW1z7yDpMSY",
-    apiVersion: "2023-10-01"
+    token: "skjGTUZ8xyiSL0Br23O7sdYKJi57oFjJW6fOnqiCobbuZmcn5HY62MQdZqQjgqdA7ekpEt7DMXy8EYVdknHlw4liG1fWLOsaA6S4qp1JIM3ooLLbE1ncfgICvjaXr70jlrAcUg1jYPwUoq1Uqy8wN6AFtvvsBHnsZE8sll2To6OqVbsjZHFF",
+    apiVersion: "2024-10-01"
 });
 
 const builder = imageUrlBuilder(client)
 
 export function imageUrlFor(source) {
-    return builder.image(source).url()
+    return builder?.image(source)?.url()
 }
 
 export default client;
