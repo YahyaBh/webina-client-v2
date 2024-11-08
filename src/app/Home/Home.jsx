@@ -85,7 +85,7 @@ const Home = () => {
     const { isDarkMode } = useContext(ThemeContext);
 
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [targetDate, setTargetDate] = useState('');
     const [testimonials, setTestimonials] = useState([]);
