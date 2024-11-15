@@ -78,6 +78,7 @@ import StarRight from '../../../public/assets/Home/Contact Section/star-r.svg';
 import LineContact from '../../../public/assets/Home/Contact Section/line.svg';
 import { FiArrowRight } from 'react-icons/fi';
 
+import { ThemeContext } from '../Context/ThemeContext'
 
 
 const Home = () => {
