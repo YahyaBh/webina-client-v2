@@ -79,7 +79,7 @@ const Navbar = ({ isOpen, transparent, target }) => {
         <>
 
 
-            <nav id='navbar' className={`${scrolled ? 'scrolled' : ''} ${darkMode ? 'dark-mode' : ''}`}>
+            <nav id='navbar' className={`${transparent ? `transparent` : ''} ${scrolled ? 'scrolled' : ''} ${darkMode ? 'dark-mode' : ''}`}>
                 <div className='navbar'>
                     <div className='container'>
                         <a href='/' className='logo'>
