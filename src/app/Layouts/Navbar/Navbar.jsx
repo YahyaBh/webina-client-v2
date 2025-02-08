@@ -100,10 +100,12 @@ const Navbar = ({ isOpen, transparent, target }) => {
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href='/custom'>Custom</a></li>
-                            <li><a href='/about'>About</a></li>
+                            <li><a href='/custom'>Pricing</a></li>
+                            <li><a href='/about'>About Us</a></li>
+                            <li><a href='/blogs'>Blogs</a></li>
                             <li><a href='/faqs'>FAQs</a></li>
-                            <li><a href='/contact'>Contact</a></li>
+                            <li><a href='/contact'>Contact Us</a></li>
+                            <li><a href='/hireme'>Hire Me</a></li>
                         </ul>
 
                         <div className='right-container'>

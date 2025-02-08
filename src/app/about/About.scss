@@ -1,0 +1,22 @@
+header {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    min-height: 40dvh;
+    gap: 20px;
+
+    h2 {
+        font-size: 3em;
+        font-weight: 500;
+        text-shadow: 0 0 1em var(--primary-color) ;
+    }
+
+    p {
+        width: 60%;
+        font-size: 1.2em;
+    }
+}
