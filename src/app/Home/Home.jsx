@@ -58,10 +58,6 @@ import DarkFloatingOrna from '../../../public/assets/Home/Section 2/OrnamentUpDa
 import DarkFloatingHat from '../../../public/assets/Home/Section 2/FloatingRightHatDark.png'
 
 import WebsiteDevImage from '../../../public/assets/Home/Section 2/website.webm'
-import MobileDevImage from '../../../public/assets/Home/Section 2/mobile.webm'
-import DesktopDevImage from '../../../public/assets/Home/Section 2/desktop.webm'
-import SocialMediaDevImage from '../../../public/assets/Home/Section 2/socialMedia.webm'
-import DesignDevImage from '../../../public/assets/Home/Section 2/design.webm'
 
 
 import VideoIntro from '../../../public/assets/Home/Perf-Section/NEWVIDEOFORPROMO.mp4'
