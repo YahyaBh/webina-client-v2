@@ -1,0 +1,40 @@
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    min-height: 100%;
+    gap: 20px;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 10dvh 0;
+        width: 50%;
+
+        h2 {
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+            .right-img {
+                transform: scaleX(-1);
+            }
+        }
+    }
+}
