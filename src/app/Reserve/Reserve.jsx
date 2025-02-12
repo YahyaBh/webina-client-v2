@@ -8,6 +8,14 @@ const Reserve = () => {
 
             <Navbar/>
 
+
+
+            <div className='reserve-container'>
+                <div className='reserve'>
+                    
+                </div>
+            </div>
+
         </>
     )
 }
