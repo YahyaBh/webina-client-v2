@@ -12,7 +12,7 @@ const Reserve = () => {
                 <div className='container'>
 
                     <div className='glow-box'></div>
-                    <h2>Request everything you want to create and leave ️webina digital  it on the application</h2>
+                    <h2>Request everything you want to create and leave <span>️webina digital</span>  it on the application</h2>
 
                     <div className='bottom'>
                         <img className='left-img' src='/Images/Reserve/HeaderHand.svg' />
