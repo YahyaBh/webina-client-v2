@@ -27,6 +27,34 @@ const Reserve = () => {
             </header>
 
 
+            <section className='whoare'>
+                <div className='container'>
+                    <div className='left'>
+                        <img src='/Images/Reserve/LogoContainer.svg' />
+
+                        <div className='card'>
+                            <span>1</span>
+                            <p>Search Engine Optimization (SEO), experts optimize  and improve its visibility in search engine results</p>
+                        </div>
+
+                        <div className='bottom'>
+                            <h3><span>WEBSITE</span> UI / UX </h3>
+                            <img src='/Images/Reserve/ArrowCont.svg' />
+                        </div>
+                    </div>
+                    <div className='right'>
+                        <img src='/Images/Reserve/PhoneCont.svg' />
+
+                        <div className='card'>
+                            <span>2</span>
+                            <p>Targeted Advertising,  data-driven insights and advanced targeting techniques to reach your ideal audience.</p>
+                        </div>
+
+                        <h3>APPS  UI / UX </h3>
+                    </div>
+                </div>'
+            </section>
+
         </>
     )
 }
