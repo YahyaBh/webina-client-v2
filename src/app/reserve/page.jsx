@@ -30,6 +30,7 @@ const Reserve = () => {
             <section className='whoare'>
                 <div className='container'>
                     <div className='left'>
+                        <div className='glow-box'></div>
                         <img src='/Images/Reserve/LogoContainer.svg' />
 
                         <div className='card'>
@@ -50,7 +51,12 @@ const Reserve = () => {
                             <p>Targeted Advertising,  data-driven insights and advanced targeting techniques to reach your ideal audience.</p>
                         </div>
 
-                        <h3>APPS  UI / UX </h3>
+
+                        <div className='bottom'>
+                            <h3> <span>APPS</span> UI / UX </h3>
+
+                            <img src='/Images/About/ArrowAb.svg' />
+                        </div>
                     </div>
                 </div>'
             </section>
