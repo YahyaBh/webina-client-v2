@@ -165,8 +165,8 @@ const About = () => {
             </section>
 
             <section className='faq'>
-                <div class="accordion">
-                    <div class="accordion-item">
+                <div className="accordion">
+                    <div className="accordion-item">
                         <div className="left">
                             <h2>01</h2>
                         </div>
@@ -182,7 +182,7 @@ const About = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
+                    <div className="accordion-item">
                         <div className="left">
                             <h2>01</h2>
                         </div>
@@ -198,7 +198,7 @@ const About = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
+                    <div className="accordion-item">
                         <div className="left">
                             <h2>01</h2>
                         </div>
@@ -214,7 +214,7 @@ const About = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
+                    <div className="accordion-item">
                         <div className="left">
                             <h2>01</h2>
                         </div>

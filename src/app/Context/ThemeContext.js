@@ -39,9 +39,8 @@ export const ThemeProvider = ({ children }) => {
             document.documentElement.style.setProperty(key, value);
         }
     
-        Cookies.set("__THEME_MODE", isDarkMode, { sameSite: 'Lax', expires: 365 }); // Expires in 1 year
+        Cookies.set("__THEME_MODE", isDarkMode, { sameSite: 'Lax', expires: 365 });
     
-        // Add transition on theme change
         document.documentElement.style.setProperty("transition", "all 0.3s ease");
     }, [isDarkMode]);
     

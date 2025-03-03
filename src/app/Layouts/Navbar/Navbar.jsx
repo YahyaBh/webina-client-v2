@@ -33,10 +33,8 @@ const Navbar = ({ isOpen, transparent, target }) => {
 
 
     useEffect(() => {
-        // Add event listener when the component mounts
         window.addEventListener('scroll', handleScroll);
 
-        // Cleanup the event listener when the component unmounts
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
@@ -51,7 +49,6 @@ const Navbar = ({ isOpen, transparent, target }) => {
 
 
     const handleScroll = () => {
-        // Update the state based on scroll position
         if (window.scrollY > 0) {
             setScrolled(true);
         } else {
@@ -83,7 +80,7 @@ const Navbar = ({ isOpen, transparent, target }) => {
                 <div className='navbar'>
                     <div className='container'>
                         <a href='/' className='logo'>
-                            <Image src={!darkMode ? LogoL : Logo} alt="logo" />
+                            <Image src={Logo} className={darkMode ? '' : 'Dark-Logo'} alt="logo" />
                         </a>
 
                         <ul>
@@ -149,7 +146,6 @@ const Navbar = ({ isOpen, transparent, target }) => {
             </nav>
 
             <nav id='responsive-navbar-s'>
-
                 <a href='/' className='logo'>
                     <Image src={!darkMode ? LogoL : Logo} alt="logo" />
                 </a>
@@ -193,27 +189,6 @@ const Navbar = ({ isOpen, transparent, target }) => {
                             </div>
 
                         </ul>
-
-
-
-                        <div className="dropdown-container">
-                            <MdLanguage className='svg-dropdown' onClick={e => setLanguage(true)} />
-
-                            <div className="options">
-                                <div className="option" onClick={e => changeLang('en')}>
-                                    <Image src={English} alt="English" />
-                                    <h3>English</h3>
-                                </div>
-                                <div className="option" onClick={e => changeLang('fr')}>
-                                    <Image src={French} alt="French" />
-                                    <h3>Francais</h3>
-                                </div>
-                                <div className="option" onClick={e => changeLang('ar')}>
-                                    <Image src={Morocco} alt="Arabic" />
-                                    <h3>العربية</h3>
-                                </div>
-                            </div>
-                        </div>
                     </aside>
                 </div>
 

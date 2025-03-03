@@ -290,7 +290,6 @@ const Home = () => {
 
 
     useEffect(() => {
-        // Initialize player only if the ref is set
         if (playerRef.current && isPlaying && !playerInstance.current) {
             playerInstance.current = YouTubePlayer(playerRef.current, {
                 videoId: videoId,
@@ -326,6 +325,9 @@ const Home = () => {
     };
 
 
+    useEffect(() => {
+        console.log(services)
+    }), [services]
 
     return (
         loading ? <Loading /> :
@@ -353,7 +355,7 @@ const Home = () => {
 
                                         <p>{homeDescription}</p>
 
-                                        <button>GET STARTED <FiArrowRight/></button>
+                                        <button>GET STARTED <FiArrowRight /></button>
 
                                         <div className='undertext'>
                                             <BsArrowRight />
@@ -499,14 +501,14 @@ const Home = () => {
                                     </div>
 
                                     <div className="cards_container">
-                                        {services?.map((service, index) =>
+                                        {services.length > 0 ? services?.map((service, index) =>
                                             <div className="card" key={index}>
                                                 <img src={imageUrlFor(service.image)} alt={service.name} />
                                                 <h4>{service.name}</h4>
                                                 <p>{service.description}</p>
                                                 <button>GET STARTED</button>
                                             </div>
-                                        )}
+                                        ) : ''}
                                     </div>
                                 </div>
 
@@ -877,7 +879,7 @@ const Home = () => {
 
                                 <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
 
-                                <div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="655de45628b0a3566959a161" data-style-height="52px" data-style-width="100%">
+                                <div className="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="655de45628b0a3566959a161" data-style-height="52px" data-style-width="100%">
                                     <a href="https://www.trustpilot.com/review/webinadigital.com" target="_blank" rel="noopener">Trustpilot</a>
                                 </div>
 
