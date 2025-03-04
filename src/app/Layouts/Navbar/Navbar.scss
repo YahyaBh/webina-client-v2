@@ -1,7 +1,6 @@
 .Dark-Logo {
-    filter: grayscale(100%) brightness(0%) ;
+    filter: grayscale(100%) brightness(0%);
 }
-
 
 .scrolled {
     background-color: #ffffff89;
@@ -510,7 +509,6 @@
                         gap: 10px;
                     }
                 }
-
             }
         }
     }
@@ -595,17 +593,12 @@
         }
     }
 
-
-
     .logo {
         img {
             width: 45px;
         }
     }
 
-    svg {
-        font-size: 24px;
-    }
 }
 
 .div-active {
@@ -622,7 +615,7 @@
     overflow: hidden;
     top: 70px;
     left: 0;
-    
+
     .aside-active {
         width: 100%;
 
@@ -655,9 +648,20 @@
             width: 80%;
             box-sizing: border-box;
 
+            li {
+                font-size: 1.6em;
+            }
+
+
+            svg {
+                font-size: 2em;
+            }
+
             .dropdown-trigger {
                 position: relative;
-
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 .dropdown-menu {
                     height: 0px;
                     overflow: hidden;
@@ -668,6 +672,7 @@
 
                     li {
                         color: var(--black-color);
+
                     }
                 }
 
@@ -682,10 +687,12 @@
 
             .sign-buttons {
                 display: flex;
-                justify-content: center;
-                align-items: center;
+                justify-content: flex-end;
+                align-items:center;
                 flex-direction: row;
                 gap: 10px;
+                width: 100%;
+                margin-top: 10dvh;
 
                 button {
                     background-color: transparent;
@@ -693,6 +700,7 @@
                     outline: none;
                     padding: 6px 25px;
                     border-radius: 6px;
+                    width: 100%;
 
                     gap: 5px;
                     font-size: 16px;

@@ -14,9 +14,6 @@ import { BsListNested } from 'react-icons/bs';
 
 
 
-import Morocco from '../../../../public/assets/Home/Navbar/Languages/Flag_of_Morocco.svg.png'
-import English from '../../../../public/assets/Home/Navbar/Languages/Flag_of_the_United_Kingdom.svg.png'
-import French from '../../../../public/assets/Home/Navbar/Languages/Flag_of_France.svg.png'
 import { ThemeContext } from "../../Context/ThemeContext";
 
 const Navbar = ({ isOpen, transparent, target }) => {

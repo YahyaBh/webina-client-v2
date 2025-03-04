@@ -132,19 +132,17 @@ const Home = () => {
     }, []);
 
     const fetchData = async () => {
-        const homeData = await client.fetch('*[_type == "homePage"][0] { _id, promoDate, "featuredFeedbacks": featuredFeedbacks[]->{_id, name, message , date , image , rating , slug} , "featuredPosts": featuredPosts[]->{_id, title, mainImage} ,"projects": projects[]->{_id, title, mainImage , tag , description } , videoId ,homeTitle, homeWords , servicesHighlits}');
-        const servicesData = await client.fetch('*[_type == "services"][0] { _id, "services": services[]->{_id, title, description, image , mainService} }');
+        const data = await client.fetch('*[_type == "homePage"][0] { _id, promoDate, "featuredFeedbacks": featuredFeedbacks[]->{_id, name, message , date , image , rating , slug} , "featuredPosts": featuredPosts[]->{_id, title, mainImage} ,"projects": projects[]->{_id, title, mainImage , tag , description } , videoId ,homeTitle, homeWords , servicesHighlits},*[_type == "services"][0] { _id, "services": services[]->{_id, title, description, image , mainService} }');
 
-        setHomeTitle(homeData.mainTitle ? homeData.homeTitle : homeTitle);
-        setHighlitedTitles(homeData.highlightedTitles ? homeData.highlitedTitles : highlitedTitles);
-        setHomeDescription(homeData.homeDescription ? homeData.homeDescription : homeDescription);
-        setServices(servicesData)
-        setTargetDate(homeData.promoDate);
-        setVideoId(homeData.videoId ? homeData.videoId : videoId);
-        setBlogs(homeData.featuredPosts);
-        setProjects(homeData.projects);
-        setTestimonials(homeData.featuredFeedbacks ? homeData.featuredFeedbacks : testimonials);
-        setServicesHighlits(homeData.servicesHighlits ? homeData.servicesHighlits : servicesHighlits);
+        setHomeTitle(data.homePage.mainTitle ? data.homePage.homeTitle : homeTitle);
+        setHighlitedTitles(data.homePage.highlightedTitles ? data.homePage.highlitedTitles : highlitedTitles);
+        setHomeDescription(data.homePage.homeDescription ? data.homePage.homeDescription : homeDescription);
+        setTargetDate(data.homePage.promoDate);
+        setVideoId(data.homePage.videoId ? data.homePage.videoId : videoId);
+        setBlogs(data.homePage.featuredPosts);
+        setProjects(data.homePage.projects);
+        setTestimonials(data.homePage.featuredFeedbacks ? data.homePage.featuredFeedbacks : testimonials);
+        setServicesHighlits(data.homePage.servicesHighlits ? data.homePage.servicesHighlits : servicesHighlits);
 
 
         setLoading(false)

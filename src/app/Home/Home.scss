@@ -676,6 +676,11 @@
                         flex-basis: 50%;
                         width: 800px;
                         position: relative;
+
+
+                        @media screen and (max-width: 900px) {
+                            display: none;
+                        }
                     }
 
                     @keyframes iphoneAnimate {
@@ -1005,7 +1010,7 @@
 
                     @media screen and (max-width: 900px) {
                         flex-direction: column;
-                        padding: 50px 10px;
+                        padding: 50px 20px;
 
                         .top_side {
                             flex-direction: column;
