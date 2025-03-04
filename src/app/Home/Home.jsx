@@ -324,11 +324,6 @@ const Home = () => {
         setIsPlaying((prev) => !prev);
     };
 
-
-    useEffect(() => {
-        console.log(services)
-    }), [services]
-
     return (
         loading ? <Loading /> :
             <div className='root_main'>
@@ -946,6 +941,8 @@ const feedback = (testimonials) => {
             <Swiper
                 slidesPerView={3}
                 spaceBetween={30}
+                loop={true}
+                grabCursor={true}
                 breakpoints={{
                     320: {
                         slidesPerView: 1,

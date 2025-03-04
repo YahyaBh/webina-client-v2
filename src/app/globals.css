@@ -28,7 +28,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
-
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dark-color-primary) var(--primary-color-dark);
 }
 
 .swiper-pagination-bullet {
@@ -89,12 +91,6 @@ h1, h2, h3, h4, h5, h6, p, svg, li, a {
 html,
 body {
   overflow-x: visible !important;
-}
-
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--dark-color-primary) var(--primary-color-dark);
 }
 
 /* Chrome, Edge and Safari */

@@ -6,12 +6,18 @@ export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
 
-    const [isDarkMode, setIsDarkMode] = useState(() => {
+    const [isDarkMode, setIsDarkMode] = useState(true);
+
+    useEffect(() => {
         const savedThemeMode = Cookies.get("__THEME_MODE");
-        return savedThemeMode === "true";
-    });
+
+        if (savedThemeMode) {
+            setIsDarkMode(JSON.parse(savedThemeMode));
+        }
+    }, [])
 
     const toggleTheme = useCallback(() => {
+        Cookies.set("__THEME_MODE", !isDarkMode, { sameSite: 'Lax', expires: 365 });
         setIsDarkMode((prevMode) => !prevMode);
     }, []);
 
@@ -34,16 +40,14 @@ export const ThemeProvider = ({ children }) => {
             "--primary-to-grey": isDarkMode ? "#3d3d3d" : "#FFE662",
             "--golry-to-black": isDarkMode ? "#1e1e1e" : "#3A3832",
         };
-    
+
         for (const [key, value] of Object.entries(themeVariables)) {
             document.documentElement.style.setProperty(key, value);
         }
-    
-        Cookies.set("__THEME_MODE", isDarkMode, { sameSite: 'Lax', expires: 365 });
-    
+
         document.documentElement.style.setProperty("transition", "all 0.3s ease");
     }, [isDarkMode]);
-    
+
 
     return (
         <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
