@@ -118,7 +118,7 @@ const Home = () => {
 
 
     const videoRef = useRef(null);
-    const loopStartTime = 9.5; // Adjust this value as needed
+    const loopStartTime = 9.5;
 
 
     useEffect(() => {
@@ -132,25 +132,32 @@ const Home = () => {
     }, []);
 
     const fetchData = async () => {
-        const data = await client.fetch('*[_type == "homePage"][0] { _id, promoDate, "featuredFeedbacks": featuredFeedbacks[]->{_id, name, message , date , image , rating , slug} , "featuredPosts": featuredPosts[]->{_id, title, mainImage} ,"projects": projects[]->{_id, title, mainImage , tag , description } , videoId ,homeTitle, homeWords , servicesHighlits},*[_type == "services"][0] { _id, "services": services[]->{_id, title, description, image , mainService} }');
-
-        setHomeTitle(data.homePage.mainTitle ? data.homePage.homeTitle : homeTitle);
-        setHighlitedTitles(data.homePage.highlightedTitles ? data.homePage.highlitedTitles : highlitedTitles);
-        setHomeDescription(data.homePage.homeDescription ? data.homePage.homeDescription : homeDescription);
-        setTargetDate(data.homePage.promoDate);
-        setVideoId(data.homePage.videoId ? data.homePage.videoId : videoId);
-        setBlogs(data.homePage.featuredPosts);
-        setProjects(data.homePage.projects);
-        setTestimonials(data.homePage.featuredFeedbacks ? data.homePage.featuredFeedbacks : testimonials);
-        setServicesHighlits(data.homePage.servicesHighlits ? data.homePage.servicesHighlits : servicesHighlits);
+        try {
+            const data = await client.fetch('*[_type == "homePage"][0] { _id, videoId ,homeTitle, homeWords, promoDate,"servicesHighlits": servicesHighlits ,"featuredFeedbacks": featuredFeedbacks[]->{_id, name, message , date , image , rating , slug} ,"services": services[]->{_id, title, description, image , mainService} ,"featuredPosts": featuredPosts[]->{_id, title, mainImage} ,"projects": projects[]->{_id, title, mainImage , tag , description}}');
+            console.log(data);
 
 
-        setLoading(false)
+            setHomeTitle(data.mainTitle ? data.homeTitle : homeTitle);
+            setHighlitedTitles(data.highlightedTitles ? data.highlitedTitles : highlitedTitles);
+            setHomeDescription(data.homeDescription ? data.homeDescription : homeDescription);
+            setTargetDate(data.promoDate);
+            setServices(data.services ? data.services : services);
+            setVideoId(data.videoId ? data.videoId : videoId);
+            setBlogs(data.featuredPosts);
+            setProjects(data.projects);
+            setTestimonials(data.featuredFeedbacks ? data.featuredFeedbacks : testimonials);
+            setServicesHighlits(data.servicesHighlits ? data.servicesHighlits : servicesHighlits);
 
+
+            setLoading(false)
+        }
+        catch (err) {
+            console.log(err);
+            setLoading(false);
+        }
     };
 
 
-    //Contact handlers
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -188,10 +195,6 @@ const Home = () => {
             alert('Failed to send message. Please try again later.');
         }
     };
-
-
-    //Start Related to the image hover effects 
-
 
     const handleMouseMove = (e) => {
         const el = tiltRef.current;
@@ -496,10 +499,17 @@ const Home = () => {
                                     <div className="cards_container">
                                         {services.length > 0 ? services?.map((service, index) =>
                                             <div className="card" key={index}>
-                                                <img src={imageUrlFor(service.image)} alt={service.name} />
-                                                <h4>{service.name}</h4>
-                                                <p>{service.description}</p>
-                                                <button>GET STARTED</button>
+                                                <div className="left">
+                                                    <img src={imageUrlFor(service.image)} alt={service.name} />
+                                                </div>
+
+                                                <div className="right">
+                                                    <div>
+                                                        <h4>{service.title}</h4>
+                                                        <p>{service.description}</p>
+                                                    </div>
+                                                    <button>GET STARTED</button>
+                                                </div>
                                             </div>
                                         ) : ''}
                                     </div>
@@ -536,9 +546,6 @@ const Home = () => {
                                         <Tooltip id="wordpress-tooltip" />
                                         <BsWordpress data-tooltip-id="wordpress-tooltip" data-tooltip-content="WordPress" />
 
-                                    </div>
-
-                                    <div className="langs_container">
                                         <Tooltip id="figma-tooltip" />
                                         <FaFigma data-tooltip-id="figma-tooltip" data-tooltip-content="Figma" />
                                         <Tooltip id="flutter-tooltip" />
@@ -555,8 +562,6 @@ const Home = () => {
                                         <FaPython data-tooltip-id="python-tooltip" data-tooltip-content="Python" />
                                         <Tooltip id="swift-tooltip" />
                                         <FaSwift data-tooltip-id="swift-tooltip" data-tooltip-content="Swift" />
-                                        <Tooltip id="unity-tooltip" />
-                                        <BsUnity data-tooltip-id="unity-tooltip" data-tooltip-content="Unity" />
                                         <Tooltip id="sketch-tooltip" />
                                         <FaSketch data-tooltip-id="sketch-tooltip" data-tooltip-content="Sketch" />
                                         <Tooltip id="react-tooltip" />
@@ -680,7 +685,7 @@ const Home = () => {
                                 </div>
 
 
-                                <div className="timer_section">
+                                {days > 0 ? <div className="timer_section">
                                     <div className="left">
 
                                         <h3>UP TO <span>30%</span></h3>
@@ -712,7 +717,7 @@ const Home = () => {
                                     <div className="right">
                                         <h3>Limited Time Offer! <br />Act Fast for <br /><span>Up To 60% Discounts</span></h3>
                                     </div>
-                                </div>
+                                </div> : ''}
 
 
                                 <div className="recent_projects">

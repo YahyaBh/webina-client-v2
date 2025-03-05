@@ -428,9 +428,10 @@
 
                             button {
                                 width: max-content;
+                                height: 50px;
                                 margin: auto;
                                 font-size: 6vw;
-                                padding: 6px 25px;
+                                padding: 20px 25px;
                                 border-radius: 40px;
                                 display: flex;
                                 justify-content: center;
@@ -677,7 +678,6 @@
                         width: 800px;
                         position: relative;
 
-
                         @media screen and (max-width: 900px) {
                             display: none;
                         }
@@ -831,10 +831,7 @@
                     padding: 50px 95px;
                     box-sizing: border-box;
                     width: 100%;
-
-                    @media screen and (min-width: 1200px) {
-                        max-width: 1400px !important ;
-                    }
+                    max-width: 1400px;
 
                     .top_side {
                         display: flex;
@@ -947,62 +944,77 @@
                         align-items: center;
                         flex-direction: row;
                         flex-wrap: wrap;
-                        margin-top: 20px;
                         gap: 20px;
+                        margin-top: 20px;
 
                         .card {
-                            flex-basis: calc(25% - 20px); /* For four cards in one line with 20px gap */
                             background-color: var(--cards-color);
+                            padding: 20px;
                             border-radius: 20px;
+                            -webkit-border-radius: 20px;
+                            -moz-border-radius: 20px;
+                            -ms-border-radius: 20px;
+                            -o-border-radius: 20px;
                             box-sizing: border-box;
                             display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            flex-direction: column;
-                            gap: 15px;
-                            text-align: center;
-                            height: 22em;
-                            padding: 10px 0;
+                            justify-content: flex-start;
+                            align-items: flex-start;
 
-                            video {
-                                height: 150px;
-                                width: 150px;
-                                object-fit: scale-down;
+                            .left {
+                                flex-basis: 30%;
+
+                                img {
+                                    height: 150px;
+                                    width: 150px;
+                                    object-fit: scale-down;
+                                    // filter: brightness(0%);
+                                    // -webkit-filter: brightness(0%);
+                                }
                             }
 
-                            h4 {
-                                font-size: 16px;
-                                color: var(--light-color);
-                            }
+                            .right {
+                                flex-basis: 70%;
+                                padding: 10px 15px;
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: flex-start;
+                                flex-direction: column;
+                                gap: 15px;
 
-                            p {
-                                font-size: 14px;
-                                color: var(--light-color);
-                                line-height: 1.3em;
-                            }
+                                h4 {
+                                    font-size: 18px;
+                                    color: var(--light-color);
+                                }
 
-                            button {
-                                background-color: var(--light-color);
-                                color: var(--cards-color);
-                                font-size: 18px;
-                                border-radius: 16px;
-                                -webkit-border-radius: 16px;
-                                -moz-border-radius: 16px;
-                                -ms-border-radius: 16px;
-                                -o-border-radius: 16px;
-                                padding: 10px 25px;
-                                outline: none;
-                                border: none;
+                                p {
+                                    font-size: 14px;
+                                    color: var(--light-color);
+                                    line-height: 1.3rem;
+                                }
 
-                                cursor: pointer;
-                                transition: all 0.3s ease;
-                                &:hover {
-                                    opacity: 0.8;
-                                    transform: scale(1.06);
-                                    -webkit-transform: scale(1.06);
-                                    -moz-transform: scale(1.06);
-                                    -ms-transform: scale(1.06);
-                                    -o-transform: scale(1.06);
+                                button {
+                                    background-color: var(--light-color);
+                                    color: var(--cards-color);
+                                    font-size: 18px;
+                                    border-radius: 16px;
+                                    -webkit-border-radius: 16px;
+                                    -moz-border-radius: 16px;
+                                    -ms-border-radius: 16px;
+                                    -o-border-radius: 16px;
+                                    padding: 10px 25px;
+                                    outline: none;
+                                    border: none;
+
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;
+                                    &:hover {
+                                        opacity: 0.8;
+                                        transform: scale(1.06);
+                                        -webkit-transform: scale(1.06);
+                                        -moz-transform: scale(1.06);
+                                        -ms-transform: scale(1.06);
+                                        -o-transform: scale(1.06);
+                                    }
                                 }
                             }
                         }
@@ -1039,6 +1051,7 @@
                                     .right {
                                         flex-basis: 80%;
                                         gap: 10px;
+                                        padding: 0;
 
                                         h3 {
                                             font-size: 1.2em;
@@ -1049,7 +1062,10 @@
                                         }
 
                                         button {
-                                            font-size: 1.2em;
+                                            width: 100%;
+                                            height: 3em;
+                                            font-size: 1em;
+                                            padding: 0;
                                         }
                                     }
                                 }
@@ -1058,25 +1074,40 @@
 
                         .cards_container {
                             .card {
-                                flex-basis: calc(50% - 20px); /* For two cards in one line with 20px gap */
+                                flex-basis: 100%;
+                                gap: 10px;
+                                padding: 10px;
+                                align-items: flex-start;
+                                min-height: 22dvh;
 
-                                video {
-                                    flex-basis: 20%;
-                                    height: 120px;
-                                    width: 120px;
+                                .left {
+                                    img {
+                                        object-fit: cover;
+                                        height: 100px;
+                                    }
                                 }
 
-                                h4 {
-                                    font-size: 1.2em;
-                                }
+                                .right {
+                                    padding: 0;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    min-height: 20dvh;
 
-                                p {
-                                    font-size: 0.8em;
-                                }
+                                    div {
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: flex-start;
+                                        flex-direction: column;
+                                        gap: 10px;
+                                    }
 
-                                button {
-                                    font-size: 14px;
-                                    position: relative;
+                                    button {
+                                        width: 100%;
+                                        height: 3em;
+                                        font-size: 1em;
+                                        padding: 0;
+                                    }
                                 }
                             }
                         }
@@ -1150,14 +1181,15 @@
                         padding-top: 20px;
 
                         svg {
+                            flex-basis: 7%;
                             color: var(--black-color);
-                            font-size: 60px;
+                            font-size: 3em;
                             transition: all 0.3s ease-in;
                             cursor: pointer;
                             outline: none;
 
                             @media screen and (max-width: 900px) {
-                                font-size: 40px;
+                                flex-basis: 20%;
                             }
 
                             &:hover {
@@ -2083,11 +2115,11 @@
 
                         .projects_container {
                             .card {
-                                flex-basis: 20%;
+                                flex-basis: 80%;
                                 height: auto;
 
                                 img {
-                                    height: 140px;
+                                    max-height: 30dvh;
                                 }
                                 button {
                                     margin-top: 20px;
@@ -2212,10 +2244,7 @@
                     justify-content: center;
                     align-items: center;
                     gap: 90px;
-
-                    @media screen and (min-width: 1600px) {
-                        max-width: 1400px !important;
-                    }
+                    max-width: 1400px;
 
                     .here_for_you {
                         display: flex;
