@@ -1,22 +1,19 @@
 "use client";
 import Image from 'next/image';
-import React, { useContext, useEffect, useState } from 'react'
-import Logo from '/public/assets/Home/Navbar/WEBINA-Logo.png';
-import LogoL from '/public/assets/Home/Navbar/WEBINA2.png';
+import React, {  useEffect, useState } from 'react'
+import Logo from '/public/WEBINA-OG.png';
 
 import './Navbar.scss'
 
 
-import { MdLanguage, MdKeyboardArrowDown } from 'react-icons/md'
-import { FaMoon, FaSun } from 'react-icons/fa'
 import { FiArrowRight } from 'react-icons/fi'
 import { BsListNested } from 'react-icons/bs';
 
 
 
-import { ThemeContext } from "../../Context/ThemeContext";
+// import { ThemeContext } from "../../Context/ThemeContext";
 
-const Navbar = ({ isOpen, transparent, target }) => {
+const Navbar = ({ transparent, target }) => {
 
 
     const [scrolled, setScrolled] = useState(false);
@@ -25,7 +22,7 @@ const Navbar = ({ isOpen, transparent, target }) => {
     const [darkMode, setDarkMode] = useState(false);
 
 
-    const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+    // const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
 
 
@@ -38,9 +35,9 @@ const Navbar = ({ isOpen, transparent, target }) => {
     }, [])
 
 
-    useEffect(() => {
-        isDarkMode ? setDarkMode(true) : setDarkMode(false)
-    }, [isDarkMode])
+    // useEffect(() => {
+    //     isDarkMode ? setDarkMode(true) : setDarkMode(false)
+    // }, [isDarkMode])
 
 
 
@@ -73,11 +70,11 @@ const Navbar = ({ isOpen, transparent, target }) => {
         <>
 
 
-            <nav id='navbar' className={`${transparent ? `transparent` : ''} ${scrolled ? 'scrolled' : ''} ${darkMode ? 'dark-mode' : ''}`}>
+            <nav id='navbar' className={`${transparent ? `transparent` : ''} ${scrolled ? 'scrolled' : ''} dark-mode`}>
                 <div className='navbar'>
                     <div className='container'>
                         <a href='/' className='logo'>
-                            <Image src={Logo} className={darkMode ? '' : 'Dark-Logo'} alt="logo" />
+                            <Image src={Logo}  alt="logo" />
                         </a>
 
                         <ul>
@@ -129,14 +126,13 @@ const Navbar = ({ isOpen, transparent, target }) => {
 
             <nav id='responsive-navbar-s'>
                 <a href='/' className='logo'>
-                    <Image src={!darkMode ? LogoL : Logo} alt="logo" />
+                    <Image src={Logo} alt="logo" />
                 </a>
 
                 <div className='mode-res'>
                     <div className="aside-swit">
                         <BsListNested onClick={handleAsideShow} />
                     </div>
-                    {!darkMode ? <FaMoon onClick={toggleTheme} /> : <FaSun onClick={toggleTheme} />}
 
                 </div>
 

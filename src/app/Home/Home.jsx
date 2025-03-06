@@ -61,10 +61,7 @@ import WebsiteDevImage from '../../../public/assets/Home/Section 2/website.webm'
 
 
 import VideoIntro from '../../../public/assets/Home/Perf-Section/NEWVIDEOFORPROMO.mp4'
-import ArrowLeftBottom from '../../../public/assets/Home/Perf-Section/Arrow-Left-Bottom.png'
-import ArrowRightBottom from '../../../public/assets/Home/Perf-Section/Arrow-Right-Bottom.png'
-import ArrowLeftTop from '../../../public/assets/Home/Perf-Section/Arrow-Left-Top.png'
-import ArrowRightTop from '../../../public/assets/Home/Perf-Section/Arrow-Right-Top.png'
+
 
 import SEOPic from '../../../public/assets/Home/SEO Section/seo.webp'
 
@@ -74,12 +71,12 @@ import StarRight from '../../../public/assets/Home/Contact Section/star-r.svg';
 import LineContact from '../../../public/assets/Home/Contact Section/line.svg';
 import { FiArrowRight } from 'react-icons/fi';
 
-import { ThemeContext } from '../Context/ThemeContext'
+// import { ThemeContext } from '../Context/ThemeContext'
 
 
 const Home = () => {
 
-    const { isDarkMode } = useContext(ThemeContext);
+    // const { isDarkMode } = useContext(ThemeContext);
 
 
     const [loading, setLoading] = useState(false);
@@ -396,9 +393,9 @@ const Home = () => {
                         <div className="section-home">
                             <div className="container" id='section-home'>
                                 <div className="why_web">
-                                    <Image className='wave' src={isDarkMode ? DarkFloatingWave : FloatingWave} alt='floatingwave' />
-                                    <Image className='orna' src={isDarkMode ? DarkFloatingOrna : FloatingOrna} alt='floatingorna' />
-                                    <Image className='hat' src={isDarkMode ? DarkFloatingHat : FloatingHat} alt='floatinghat' />
+                                    <Image className='wave' src={FloatingWave} alt='floatingwave' />
+                                    <Image className='orna' src={FloatingOrna} alt='floatingorna' />
+                                    <Image className='hat' src={FloatingHat} alt='floatinghat' />
 
 
                                     <div className="left">
@@ -499,11 +496,11 @@ const Home = () => {
                                     <div className="cards_container">
                                         {services.length > 0 ? services?.map((service, index) =>
                                             <div className="card" key={index}>
-                                                <div className="left">
+                                                <div className="top">
                                                     <img src={imageUrlFor(service.image)} alt={service.name} />
                                                 </div>
 
-                                                <div className="right">
+                                                <div className="bottom">
                                                     <div>
                                                         <h4>{service.title}</h4>
                                                         <p>{service.description}</p>
@@ -609,78 +606,14 @@ const Home = () => {
 
 
                                 <div className="perf_section">
-                                    <div className="top">
-                                        <div className="left">
-                                            <div className="topper_text">
-                                                <div className="left">
-                                                    <h4>{servicesHighlits[0]}</h4>
-                                                    <hr />
-                                                </div>
-
-                                                <div className="right">
-                                                    <h3>01</h3>
-                                                </div>
-                                            </div>
-                                            <Image src={ArrowLeftTop} alt="arrow left top" />
-                                        </div>
-
-                                        <div className="right">
-
-                                            <Image src={ArrowRightTop} alt="arrow right top" />
-
-                                            <div className="topper_text">
-                                                <div className="right">
-                                                    <h3>01</h3>
-                                                </div>
-
-                                                <div className="left">
-                                                    <h4>{servicesHighlits[1]}</h4>
-                                                    <hr />
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
+                                    <div id="stars"></div>
+                                    <div id="stars2"></div>
+                                    <div id="stars3"></div>
                                     <div className="center">
                                         <div className="play_button" onClick={toggleVideo}>
                                             <FaPlay />
                                         </div>
                                         <video ref={videoRef} autoPlay={true} muted type="video/mp4" src={VideoIntro} onEnded={handleVideoEnded} alt="performance video" />
-                                    </div>
-                                    <div className="bottom">
-                                        <div className="left">
-                                            <div className="bottom_text">
-                                                <div className="left">
-                                                    <h4>{servicesHighlits[2]}</h4>
-                                                    <hr />
-                                                </div>
-
-                                                <div className="right">
-                                                    <h3>01</h3>
-                                                </div>
-                                            </div>
-                                            <Image src={ArrowLeftBottom} alt="arrow left bottom" />
-                                        </div>
-
-                                        <div className="right">
-                                            <Image src={ArrowRightBottom} alt="arrow right bottom" />
-
-                                            <div className="bottom_text">
-                                                <div className="right">
-                                                    <h3>01</h3>
-                                                </div>
-
-                                                <div className="left">
-                                                    <h4>{servicesHighlits[3]}</h4>
-                                                    <hr />
-                                                </div>
-
-
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -745,11 +678,13 @@ const Home = () => {
                                                     </div>
 
                                                     <p>{item?.description?.length >= 80 ? item?.description?.split('').slice(0, 80).join('') + '...' : item?.description}</p>
+
+                                                    <button>
+                                                        GO TO DETAILS
+                                                    </button>
                                                 </div>
 
-                                                <button>
-                                                    GO TO DETAILS
-                                                </button>
+
                                             </div>
                                         ))
                                         }

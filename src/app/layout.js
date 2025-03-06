@@ -1,6 +1,4 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./Context/ThemeContext";
 
 
 export const metadata = {
@@ -16,10 +14,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ThemeProvider>
-      <html lang="en">
-        <body>{children}</body>
-      </html>
-    </ThemeProvider>
+    <html lang="en">
+      <body>{children}</body>
+    </html>
   );
 }
