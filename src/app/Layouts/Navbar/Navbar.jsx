@@ -81,7 +81,7 @@ const Navbar = ({ transparent, target }) => {
                             <li><a href='/custom'>Pricing</a></li>
                             <li><a href='/about'>About Us</a></li>
                             <li><a href='/blogs'>Blogs</a></li>
-
+                            <li><a href='/contact'>Contact</a></li>
                         </ul>
 
                         <div className='right-container'>
@@ -113,7 +113,7 @@ const Navbar = ({ transparent, target }) => {
 
                             {target == 'home' ? <div className='sign-buttons'>
                                 <button>
-                                    <a href='/register'>
+                                    <a href='/reserve'>
                                         <h3>GET STARTED</h3>
                                         <FiArrowRight />
                                     </a>

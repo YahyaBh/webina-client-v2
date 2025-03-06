@@ -7,19 +7,18 @@
     box-sizing: border-box;
     width: 100%;
 
-    
-
     .container_footer {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
         justify-content: space-evenly;
         width: 100%;
-        padding-bottom: 20px;
+        padding: 50px 0;
         box-sizing: border-box;
         max-width: 1400px;
 
         ul {
+            flex-basis: 25%;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -50,6 +49,8 @@
                 font-size: 15px;
                 font-weight: 300;
                 color: #fff;
+
+                text-align: center;
             }
 
             li {
@@ -143,7 +144,6 @@
             }
         }
     }
-
 
     @media screen and (max-width: 900px) {
         flex-direction: column;

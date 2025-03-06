@@ -10,23 +10,21 @@ const Footer = () => {
 
             <div className='container_footer'>
                 <ul>
-                    <h3>PRODUCTS</h3>
+                    <h3>Get To Know Us</h3>
 
-                    <li>Costumed websites</li>
-                    <li>Website Templates</li>
-                    <li>E-commerce websites</li>
-                    <li>Portfolios</li>
-                    <li>Blogs</li>
+                    <li>Cosnultation</li>
+                    <li>News & Blogs</li>
+                    <li>About Webina</li>
+                    <li>Contact</li>
                 </ul>
 
                 <ul>
-                    <h3>PRODUCTS</h3>
+                    <h3>Worth Visitng</h3>
 
-                    <li>Costumed websites</li>
-                    <li>Website Templates</li>
-                    <li>E-commerce websites</li>
-                    <li>Portfolios</li>
-                    <li>Blogs</li>
+                    <li>What is webina ?</li>
+                    <li>Latest AI News</li>
+                    <li>Our services</li>
+                    <li>Maintanence</li>
                 </ul>
 
                 <ul>
@@ -42,16 +40,15 @@ const Footer = () => {
                 <ul>
                     <Image src={Logo} alt="logo" />
 
-                    <p>FOOTER_DESCRIPTION</p>
-                    <a href='/privacy-policy'>PRIVACY_POLICY</a>
-                    <a href='/contact'>CONTACT_US</a>
+                    <p>WEBINA DIGITAL , Get your business digitalized </p>
+                    <a href='/privacy-policy'>Privacy & Policy</a>
+                    <a href='/contact'>Contact Us</a>
                 </ul>
             </div>
 
             <div className='under-footer'>
                 <div className='data'>
                     <h2>WEBINA DIGITAL LTD © 2023 All Rights Reserved</h2>
-                    <p>Company Registration N. 14915092</p>
                 </div>
 
                 <div>

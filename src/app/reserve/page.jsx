@@ -1,5 +1,7 @@
 import './page.scss'
 import Navbar from '../Layouts/Navbar/Navbar'
+import { MdDone, MdDoneOutline } from 'react-icons/md'
+import Link from 'next/link'
 
 const Reserve = () => {
     return (
@@ -58,8 +60,86 @@ const Reserve = () => {
                             <img src='/Images/About/ArrowAb.svg' />
                         </div>
                     </div>
-                </div>'
+                </div>
+                <img src='/Images/Reserve/LineWave.svg' alt='line-wave' />
             </section>
+
+
+            <section className='packs'>
+
+                <h2>Our Offers <span>Web</span> / <span>Mobile</span> Apps</h2>
+
+                <section className='container'>
+                    <div className="pack">
+                        <div className="top">
+                            <h5>Minimeme Prices</h5>
+                            <h3>3000 DH</h3>
+                            <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
+                        </div>
+
+                        <div className="bottom">
+                            <ul>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                <li><span><MdDone /></span> <h3>Assist with the optimzation of the website</h3></li>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                            </ul>
+
+                            <Link href='/reserve'>GET STARTED</Link>
+                        </div>
+                    </div>
+                    <div className="pack">
+                        <div className="top">
+                            <h5>Minimeme Prices</h5>
+                            <h3>3000 DH</h3>
+                            <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
+                        </div>
+
+                        <div className="bottom">
+                            <ul>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                            </ul>
+
+                            <Link href='/reserve'>GET STARTED</Link>
+                        </div>
+                    </div>
+                    <div className="pack">
+                        <div className="top">
+                            <h5>Minimeme Prices</h5>
+                            <h3>3000 DH</h3>
+                            <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
+                        </div>
+
+                        <div className="bottom">
+                            <ul>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                            </ul>
+
+                            <Link href='/reserve'>GET STARTED</Link>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+
+            <div className='taper_line'>
+                <h3>WEBINA DIGITAL</h3>
+                <h3>WEBINA DIGITAL</h3>
+                <h3>WEBINA DIGITAL</h3>
+                <h3>WEBINA DIGITAL</h3>
+                <h3>WEBINA DIGITAL</h3>
+                <h3>WEBINA DIGITAL</h3>
+                <h3>WEBINA DIGITAL</h3>
+            </div>
 
         </>
     )
