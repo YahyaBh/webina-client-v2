@@ -27,7 +27,7 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { SiRubyonrails, SiAdobepremierepro, SiAdobeaftereffects, SiVisualstudio, SiAndroidstudio, SiMysql, SiCplusplus, SiFlutter, SiBlender, SiNuxtdotjs } from 'react-icons/si';
 import { DiRuby } from 'react-icons/di';
 import { FaPhp, FaBootstrap, FaSwift, FaFigma, FaDocker, FaPython, FaSketch, FaReact, FaPlay } from 'react-icons/fa'
-import { BsArrowRight, BsWordpress, BsUnity } from 'react-icons/bs'
+import { BsArrowRight, BsWordpress } from 'react-icons/bs'
 import { IoIosArrowForward, IoIosArrowBack, IoLogoJavascript, IoLogoCss3, IoMdStar, IoMdStarOutline, IoMdStarHalf } from 'react-icons/io'
 
 
@@ -87,7 +87,7 @@ const Home = () => {
     const [targetDate, setTargetDate] = useState('');
     const [testimonials, setTestimonials] = useState([]);
     const [projects, setProjects] = useState([]);
-    const [videoId, setVideoId] = useState('dQw4w9WgXcQ');
+    const [videoId, setVideoId] = useState();
 
     const [homeTitle, setHomeTitle] = useState('ENHANCE YOUR');
     const [highlitedTitles, setHighlitedTitles] = useState(['REACH', 'GROWTH', 'EMBLEM']);
@@ -685,7 +685,7 @@ const Home = () => {
                                 </div>
 
 
-                                {days > 0 ? <div className="timer_section">
+                                {days > 0 && hours && minutes > 0 && seconds > 0 ? <div className="timer_section">
                                     <div className="left">
 
                                         <h3>UP TO <span>30%</span></h3>

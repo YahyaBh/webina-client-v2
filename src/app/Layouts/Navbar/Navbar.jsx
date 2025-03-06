@@ -81,29 +81,14 @@ const Navbar = ({ isOpen, transparent, target }) => {
                         </a>
 
                         <ul>
-                            <li>
-                                <div className='dropdown'>
-                                    <label htmlFor="touch"><span>Services <MdKeyboardArrowDown /></span></label>
-                                    <input type="checkbox" id="touch" />
-
-                                    <ul className="slide">
-                                        <li><a href="#">Lorem Ipsum</a></li>
-                                        <li><a href="#">Lorem Ipsum</a></li>
-                                        <li><a href="#">Lorem Ipsum</a></li>
-                                        <li><a href="#">Lorem Ipsum</a></li>
-                                    </ul>
-                                </div>
-                            </li>
                             <li><a href='/custom'>Pricing</a></li>
                             <li><a href='/about'>About Us</a></li>
                             <li><a href='/blogs'>Blogs</a></li>
-                            <li><a href='/faqs'>FAQs</a></li>
-                            <li><a href='/contact'>Contact Us</a></li>
-                            <li><a href='/hireme'>Hire Me</a></li>
+
                         </ul>
 
                         <div className='right-container'>
-                            <div className='lang-mode'>
+                            {/* <div className='lang-mode'>
                                 <div className="dropdown-container">
                                     <MdLanguage className='svg-dropdown' onClick={() => setLanguageMenuOpen(!languageMenuOpen)} />
 
@@ -126,7 +111,7 @@ const Navbar = ({ isOpen, transparent, target }) => {
                                 </div>
 
                                 {!darkMode ? <FaMoon onClick={toggleTheme} /> : <FaSun onClick={toggleTheme} />}
-                            </div>
+                            </div> */}
 
 
                             {target == 'home' ? <div className='sign-buttons'>
@@ -159,22 +144,8 @@ const Navbar = ({ isOpen, transparent, target }) => {
                     <aside className={asideShow ? 'aside-active' : ''}>
 
                         <ul className='list'>
-                            <li className='dropdown-trigger'>
-                                Services <MdKeyboardArrowDown />
-                                <ul className="dropdown-menu">
-                                    <li >Website</li>
-                                    <li >UI/UX Design</li>
-                                    <li >Mobile Application</li>
-                                    <li  >Desktop Application</li>
-                                    <li >Games</li>
-                                    <li >Social Media Designing</li>
-                                    <li >NFTs Designing</li>
-                                </ul>
-                            </li>
                             <li><a href='/custom'>Custom</a></li>
                             <li><a href='/about'>About</a></li>
-                            <li><a href='/faqs'>FAQs</a></li>
-                            <li><a href='/contact'>Contact</a></li>
 
                             <div className='sign-buttons'>
                                 <button>
