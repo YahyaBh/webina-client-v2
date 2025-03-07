@@ -1,9 +1,7 @@
 'use client';
 
 import React, {
-    useContext,
     useEffect,
-    useRef,
     useState,
 } from 'react';
 
@@ -19,10 +17,14 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
+import BlurText from "../lib/BlurText";
+import client, { imageUrlFor } from '../lib/sanityClient';
+
 
 const About = () => {
 
     const [testimonials, setTestimonials] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchData();
@@ -53,13 +55,21 @@ const About = () => {
                             <div ></div>
                             <div ></div>
                             <div></div>
-                        </div>ABOUT US
+                        </div>
+                        <BlurText
+                            text="ABOUT US"
+                            delay={150}
+                            animateBy="words"
+                            direction="top"
+                        />
                         <div className='right-li'>
                             <div ></div>
                             <div ></div>
                             <div></div>
                         </div></h2>
-                    <p>WEBINA DIGITAL is a dynamic company that was officially established in the year 2021 and is duly registered in the United Kingdom.</p>
+                    <h3 className='main-text'>WEBINA DIGITAL will help you with new digital solutions to make it easier for you and your customers</h3>
+
+
 
                 </div>
 
@@ -70,8 +80,8 @@ const About = () => {
                     <div className='left'>
                         <h2>Who Are We ?</h2>
 
-                        <p>WEBINA DIGITAL is a dynamic company that was officially established in the year 2021 and is duly registered in the United Kingdom. The core mission of WEBINA DIGITAL is to empower its clients, enabling them to propel their businesses and careers to new heights. This is achieved through a commitment to helping individuals and organizations find the equilibrium necessary to harmonize their objectives with the demands of
-                            the modern age and the aspirations of newer generations.</p>
+                        <p>WEBINA DIGITAL is a forward-thinking company dedicated to empowering clients to elevate their businesses and careers. At its core, WEBINA DIGITAL focuses on helping individuals and organizations achieve balance by aligning their goals with the evolving demands of the modern era and the aspirations of future generations. Through innovative solutions and a client-centric approach, WEBINA DIGITAL strives to bridge the gap between traditional objectives and
+                            contemporary needs, fostering growth and success in an ever-changing landscape.</p>
 
                         <img src='/Images/About/ArrowAb.svg' alt='arrow about' />
                     </div>
@@ -100,8 +110,8 @@ const About = () => {
                         <div className='glow-box'></div>
                         <h2>Mission and Vision</h2>
 
-                        <p>Our primary and unwavering mission is to guide you through the transformative journey of digitizing your organization. In today's fast-paced and tech-driven world, embracing digitalization is not merely a choice but a necessity for staying competitive and relevant. At the core of our mission lies the firm belief that
-                            digitalization holds the key to unlocking your organization's full potential.</p>
+                        <p>Our mission is to guide organizations through the transformative journey of digitization, empowering them to unlock their full potential in a fast-paced, technology-driven world where digital transformation is essential for staying competitive and relevant. Our vision is to create a future where every organization seamlessly integrates digital solutions, fostering innovation, efficiency, and growth, as we strive to be the trusted partner that bridges traditional practices with cutting-edge technology,
+                            enabling businesses to not only adapt to change but also lead it in shaping a more connected and dynamic world.</p>
 
                         <img src='/Images/About/Waves.svg' alt='waves about' />
 
@@ -115,10 +125,9 @@ const About = () => {
 
                     <div className='left'>
                         <div className='glow-box'></div>
-                        <h2>Mission and Vision</h2>
+                        <h2>Our History</h2>
 
-                        <p>Our primary and unwavering mission is to guide you through the transformative journey of digitizing your organization. In today's fast-paced and tech-driven world, embracing digitalization is not merely a choice but a necessity for staying competitive and relevant. At the core of our mission lies the firm belief that
-                            digitalization holds the key to unlocking your organization's full potential.</p>
+                        <p>WEBINA DIGITAL was born out of a passion for helping businesses thrive in the digital age. Recognizing the challenges organizations face in adapting to rapid technological changes, we set out to create solutions that bridge the gap between traditional practices and modern innovation.</p>
 
                         <button>Learn More <BiArrowFromLeft /></button>
 
@@ -151,10 +160,9 @@ const About = () => {
 
                     <div className='right'>
                         <div className='glow-box'></div>
-                        <h2>Mission and Vision</h2>
+                        <h2>What Sets Us Apart</h2>
 
-                        <p>Our primary and unwavering mission is to guide you through the transformative journey of digitizing your organization. In today's fast-paced and tech-driven world, embracing digitalization is not merely a choice but a necessity for staying competitive and relevant. At the core of our mission lies the firm belief that
-                            digitalization holds the key to unlocking your organization's full potential.</p>
+                        <p>Our tailored approach to digital transformation. We don’t believe in one-size-fits-all solutions; instead, we work closely with our clients to design strategies that align with their unique goals and challenges. Our team comprises seasoned professionals with years of experience in digital transformation, technology, and business strategy. We bring a wealth of knowledge and a proven track record of success to every project.</p>
 
 
                         <div className='planet-container'>

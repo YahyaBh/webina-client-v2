@@ -1,6 +1,6 @@
 "use client";
 import Image from 'next/image';
-import React, {  useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '/public/WEBINA-OG.png';
 
 import './Navbar.scss'
@@ -74,7 +74,7 @@ const Navbar = ({ transparent, target }) => {
                 <div className='navbar'>
                     <div className='container'>
                         <a href='/' className='logo'>
-                            <Image src={Logo}  alt="logo" />
+                            <Image src={Logo} alt="logo" />
                         </a>
 
                         <ul>
@@ -111,14 +111,14 @@ const Navbar = ({ transparent, target }) => {
                             </div> */}
 
 
-                            {target == 'home' ? <div className='sign-buttons'>
+                            <div className='sign-buttons'>
                                 <button>
                                     <a href='/reserve'>
                                         <h3>GET STARTED</h3>
                                         <FiArrowRight />
                                     </a>
                                 </button>
-                            </div> : ''}
+                            </div>
                         </div>
                     </div>
                 </div>

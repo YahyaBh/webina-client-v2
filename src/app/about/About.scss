@@ -84,7 +84,7 @@ header {
             }
         }
 
-        p {
+        .main-text {
             width: 50%;
             font-size: 1.2em;
         }
@@ -153,6 +153,7 @@ header {
 
             p {
                 font-size: 1.2em;
+                line-height: 1.6em;
             }
 
             img {
@@ -248,10 +249,11 @@ header {
 
             p {
                 font-size: 1.2em;
+                line-height: 1.6em;
             }
 
             img {
-                bottom: -40%;
+                bottom: 0;
                 right: 10%;
                 position: absolute;
                 width: 10em;
@@ -324,6 +326,7 @@ header {
 
             p {
                 font-size: 1.2em;
+                line-height: 1.6em;
             }
 
             button {
@@ -430,6 +433,7 @@ header {
 
             p {
                 font-size: 1.2em;
+                line-height: 1.6em;
             }
 
             .planet-container {
@@ -567,12 +571,10 @@ header {
 
             iframe {
                 border-radius: 70px;
-                
             }
         }
     }
 }
-
 
 .feedback_container {
     display: flex;
@@ -809,7 +811,6 @@ header {
     object-fit: fill;
     position: absolute;
     margin-top: 10dvh;
-
 
     @media screen and (max-width: 900px) {
         transform: translateY(175px);

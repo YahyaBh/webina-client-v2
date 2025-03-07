@@ -1,7 +1,11 @@
+"use client"
 import './page.scss'
 import Navbar from '../Layouts/Navbar/Navbar'
-import { MdDone, MdDoneOutline } from 'react-icons/md'
-import Link from 'next/link'
+import { MdArrowDownward, MdDone } from 'react-icons/md'
+import BlurText from '../lib/BlurText'
+import { motion } from 'framer-motion'
+import { Link, Element } from 'react-scroll';
+import Footer from '../Layouts/Footer/Footer'
 
 const Reserve = () => {
     return (
@@ -14,19 +18,34 @@ const Reserve = () => {
                 <div className='container'>
 
                     <div className='glow-box'></div>
-                    <h2>Request everything you want to create and leave <span>️webina digital</span>  it on the application</h2>
+                    <h2>
+                        <BlurText
+                            text="Request everything you want to create and leave webina digital it on the application"
+                            delay={50}
+                            animateBy="words"
+                            direction="top"
+                        />
+                    </h2>
 
                     <div className='bottom'>
                         <img className='left-img' src='/Images/Reserve/HeaderHand.svg' />
 
-                        <button>CONSULTE FOR FREE!</button>
 
+                        <Link to="reserve" smooth={true} duration={200}>
+                            <motion.button
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 20 }}
+                                transition={{ duration: 0.3 }} className='btn-cons'>
+                                CONSULTE FOR FREE! <MdArrowDownward />
+                            </motion.button>
+                        </Link>
                         <img className='right-img' src='/Images/Reserve/HeaderHand.svg' />
                     </div>
 
                 </div>
 
-            </header>
+            </header >
 
 
             <section className='whoare'>
@@ -141,6 +160,14 @@ const Reserve = () => {
                 <h3>WEBINA DIGITAL</h3>
             </div>
 
+
+
+            <Element name='reserve'>
+
+            </Element>
+
+
+            <Footer/>
         </>
     )
 }
