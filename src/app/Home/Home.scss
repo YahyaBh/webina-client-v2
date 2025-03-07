@@ -238,7 +238,6 @@ $shadows-big: multiple-box-shadow(100);
                                 -o-transform: scale(1.06);
 
                                 svg {
-
                                 }
                             }
                         }
@@ -865,7 +864,7 @@ $shadows-big: multiple-box-shadow(100);
 
                     .top_side {
                         display: flex;
-                        justify-content: center;
+                        justify-content: space-between;
                         align-items: center;
                         flex-direction: row;
                         gap: 30px;
@@ -906,6 +905,14 @@ $shadows-big: multiple-box-shadow(100);
                                 display: flex;
                                 justify-content: flex-start;
                                 align-items: flex-start;
+                                transition:
+                                    transform 0.3s ease,
+                                    box-shadow 0.3s ease; /* Smooth hover effect */
+
+                                &:hover {
+                                    transform: translateY(-5px); /* Slight lift on hover */
+                                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+                                }
 
                                 .left {
                                     flex-basis: 30%;
@@ -969,28 +976,45 @@ $shadows-big: multiple-box-shadow(100);
                     }
 
                     .cards_container {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        flex-wrap: wrap;
-                        gap: 20px;
+                        display: grid;
+                        grid-template-columns: repeat(4, 1fr); /* Always 4 cards in a row */
+                        gap: 20px; /* Spacing between cards */
                         margin-top: 20px;
                         width: 100%;
 
+                        @media (max-width: 1200px) {
+                            grid-template-columns: repeat(4, 1fr); /* Still 4 cards in a row */
+                            gap: 15px; /* Reduce gap for medium screens */
+                        }
+
+                        @media (max-width: 992px) {
+                            grid-template-columns: repeat(2, 1fr); /* 2 cards in a row for tablets */
+                            gap: 15px;
+                        }
+
+                        @media (max-width: 768px) {
+                            grid-template-columns: repeat(1, 1fr); /* 1 card in a row for mobile devices */
+                            gap: 10px;
+                        }
+
                         .card {
-                            flex-basis: 25%;
                             background-color: var(--cards-color);
                             padding: 20px;
-                            border-radius: 20px;
-                            -webkit-border-radius: 20px;
-                            -moz-border-radius: 20px;
-                            -ms-border-radius: 20px;
-                            -o-border-radius: 20px;
                             box-sizing: border-box;
+                            border-radius: 20px;
                             display: flex;
                             justify-content: center;
                             align-items: center;
                             flex-direction: column;
+                            text-align: center; /* Center text content */
+                            transition:
+                                transform 0.3s ease,
+                                box-shadow 0.3s ease; /* Smooth hover effect */
+
+                            &:hover {
+                                transform: translateY(-5px); /* Slight lift on hover */
+                                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+                            }
 
                             .top {
                                 display: flex;
@@ -1902,11 +1926,8 @@ $shadows-big: multiple-box-shadow(100);
                     justify-content: center;
                     align-items: center;
                     flex-direction: column;
-                    padding: 30px 0;
-
-                    @media screen and (min-width: 1600px) {
-                        max-width: 1400px !important;
-                    }
+                    padding: 30px 100px;
+                    max-width: 1400px !important;
 
                     h2 {
                         font-size: 2.5em;
@@ -1918,17 +1939,30 @@ $shadows-big: multiple-box-shadow(100);
                     }
 
                     .projects_container {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        flex-wrap: wrap;
+                        width: 100%;
+                        display: grid;
+                        grid-template-columns: repeat(4, 1fr); /* Always 4 cards in a row */
+                        gap: 10px; /* Spacing between cards */
+
+                        @media (max-width: 1200px) {
+                            grid-template-columns: repeat(4, 1fr); /* Still 4 cards in a row */
+                            gap: 15px; /* Reduce gap for medium screens */
+                        }
+
+                        @media (max-width: 992px) {
+                            grid-template-columns: repeat(2, 1fr); /* 2 cards in a row for tablets */
+                            gap: 15px;
+                        }
+
+                        @media (max-width: 768px) {
+                            grid-template-columns: repeat(1, 1fr); /* 1 card in a row for mobile devices */
+                            gap: 10px;
+                        }
 
                         .card {
-                            flex-basis: 25%;
-                            max-width: none;
-                            flex-grow: 1;
                             margin: 10px;
-                            padding: 20px;
+                            padding: 10px;
+                            box-sizing: border-box;
                             border: 2px solid var(--dark-color-primary);
                             border-radius: 10px;
                             -webkit-border-radius: 10px;
@@ -1937,6 +1971,15 @@ $shadows-big: multiple-box-shadow(100);
                             -o-border-radius: 10px;
                             position: relative;
                             height: auto;
+                            text-align: center; /* Center text content */
+                            transition:
+                                transform 0.3s ease,
+                                box-shadow 0.3s ease; /* Smooth hover effect */
+
+                            &:hover {
+                                transform: translateY(-5px); /* Slight lift on hover */
+                                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+                            }
 
                             img {
                                 width: 100%;
@@ -1957,18 +2000,18 @@ $shadows-big: multiple-box-shadow(100);
                                 flex-direction: column;
                                 gap: 10px;
                                 width: 100%;
-                                margin-top: 10px;
+                                margin: 10px 0;
 
                                 h4 {
-                                    font-size: 24px;
+                                    font-size: 1.6em;
                                     color: var(--black-color);
                                 }
 
                                 .tags_container {
                                     display: flex;
-                                    justify-content: center;
+                                    justify-content: flex-start;
                                     align-items: flex-start;
-                                    gap: 14px;
+                                    gap: 5px;
 
                                     .tag {
                                         background-color: var(--ecd-to-black);
@@ -1996,7 +2039,7 @@ $shadows-big: multiple-box-shadow(100);
 
                             button {
                                 background-color: var(--dark-color-primary);
-                                width: 200px;
+                                width: 60%;
                                 height: 44px;
                                 border: none;
                                 color: var(--light-color);
@@ -2006,7 +2049,7 @@ $shadows-big: multiple-box-shadow(100);
                                 -ms-border-radius: 12px;
                                 -o-border-radius: 12px;
                                 outline: none;
-                                font-size: 18px;
+                                font-size: 1em;
                                 font-weight: bold;
                                 bottom: 20px;
                                 margin: auto;

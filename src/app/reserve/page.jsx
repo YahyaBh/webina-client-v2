@@ -6,7 +6,9 @@ import BlurText from '../lib/BlurText'
 import { motion } from 'framer-motion'
 import { Link, Element } from 'react-scroll';
 import Footer from '../Layouts/Footer/Footer'
-
+import StarLeft from '../../../public/assets/Home/Contact Section/star-l.svg';
+import StarRight from '../../../public/assets/Home/Contact Section/star-r.svg';
+import Image from 'next/image'
 const Reserve = () => {
     return (
         <>
@@ -47,127 +49,158 @@ const Reserve = () => {
 
             </header >
 
+            <div className='res-cont'>
+                <section className='whoare'>
+                    <div className='container'>
+                        <div className='left'>
+                            <div className='glow-box'></div>
+                            <img src='/Images/Reserve/LogoContainer.svg' />
 
-            <section className='whoare'>
-                <div className='container'>
-                    <div className='left'>
-                        <div className='glow-box'></div>
-                        <img src='/Images/Reserve/LogoContainer.svg' />
+                            <div className='card'>
+                                <span>1</span>
+                                <p>Search Engine Optimization (SEO), experts optimize  and improve its visibility in search engine results</p>
+                            </div>
 
-                        <div className='card'>
-                            <span>1</span>
-                            <p>Search Engine Optimization (SEO), experts optimize  and improve its visibility in search engine results</p>
+                            <div className='bottom'>
+                                <h3><span>WEBSITE</span> UI / UX </h3>
+                                <img src='/Images/Reserve/ArrowCont.svg' />
+                            </div>
                         </div>
+                        <div className='right'>
+                            <img src='/Images/Reserve/PhoneCont.svg' />
 
-                        <div className='bottom'>
-                            <h3><span>WEBSITE</span> UI / UX </h3>
-                            <img src='/Images/Reserve/ArrowCont.svg' />
-                        </div>
-                    </div>
-                    <div className='right'>
-                        <img src='/Images/Reserve/PhoneCont.svg' />
-
-                        <div className='card'>
-                            <span>2</span>
-                            <p>Targeted Advertising,  data-driven insights and advanced targeting techniques to reach your ideal audience.</p>
-                        </div>
+                            <div className='card'>
+                                <span>2</span>
+                                <p>Targeted Advertising,  data-driven insights and advanced targeting techniques to reach your ideal audience.</p>
+                            </div>
 
 
-                        <div className='bottom'>
-                            <h3> <span>APPS</span> UI / UX </h3>
+                            <div className='bottom'>
+                                <h3> <span>APPS</span> UI / UX </h3>
 
-                            <img src='/Images/About/ArrowAb.svg' />
-                        </div>
-                    </div>
-                </div>
-                <img src='/Images/Reserve/LineWave.svg' alt='line-wave' />
-            </section>
-
-
-            <section className='packs'>
-
-                <h2>Our Offers <span>Web</span> / <span>Mobile</span> Apps</h2>
-
-                <section className='container'>
-                    <div className="pack">
-                        <div className="top">
-                            <h5>Minimeme Prices</h5>
-                            <h3>3000 DH</h3>
-                            <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
-                        </div>
-
-                        <div className="bottom">
-                            <ul>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                <li><span><MdDone /></span> <h3>Assist with the optimzation of the website</h3></li>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                            </ul>
-
-                            <Link href='/reserve'>GET STARTED</Link>
+                                <img src='/Images/About/ArrowAb.svg' />
+                            </div>
                         </div>
                     </div>
-                    <div className="pack">
-                        <div className="top">
-                            <h5>Minimeme Prices</h5>
-                            <h3>3000 DH</h3>
-                            <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
-                        </div>
-
-                        <div className="bottom">
-                            <ul>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                            </ul>
-
-                            <Link href='/reserve'>GET STARTED</Link>
-                        </div>
-                    </div>
-                    <div className="pack">
-                        <div className="top">
-                            <h5>Minimeme Prices</h5>
-                            <h3>3000 DH</h3>
-                            <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
-                        </div>
-
-                        <div className="bottom">
-                            <ul>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                            </ul>
-
-                            <Link href='/reserve'>GET STARTED</Link>
-                        </div>
-                    </div>
+                    <img src='/Images/Reserve/LineWave.svg' alt='line-wave' />
                 </section>
-            </section>
+                <section className='packs'>
+
+                    <h2>Our Offers <span>Web</span> / <span>Mobile</span> Apps</h2>
+
+                    <section className='container'>
+                        <div className="pack">
+                            <div className="top">
+                                <h5>Minimeme Prices</h5>
+                                <h3>3000 DH</h3>
+                                <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
+                            </div>
+
+                            <div className="bottom">
+                                <ul>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                    <li><span><MdDone /></span> <h3>Assist with the optimzation of the website</h3></li>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                </ul>
+
+                                <Link href='/reserve'>GET STARTED</Link>
+                            </div>
+                        </div>
+                        <div className="pack">
+                            <div className="top">
+                                <h5>Minimeme Prices</h5>
+                                <h3>3000 DH</h3>
+                                <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
+                            </div>
+
+                            <div className="bottom">
+                                <ul>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                </ul>
+
+                                <Link href='/reserve'>GET STARTED</Link>
+                            </div>
+                        </div>
+                        <div className="pack">
+                            <div className="top">
+                                <h5>Minimeme Prices</h5>
+                                <h3>3000 DH</h3>
+                                <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
+                            </div>
+
+                            <div className="bottom">
+                                <ul>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
+                                </ul>
+
+                                <Link href='/reserve'>GET STARTED</Link>
+                            </div>
+                        </div>
+                    </section>
+                </section>
 
 
-            <div className='taper_line'>
-                <h3>WEBINA DIGITAL</h3>
-                <h3>WEBINA DIGITAL</h3>
-                <h3>WEBINA DIGITAL</h3>
-                <h3>WEBINA DIGITAL</h3>
-                <h3>WEBINA DIGITAL</h3>
-                <h3>WEBINA DIGITAL</h3>
-                <h3>WEBINA DIGITAL</h3>
-            </div>
+                <div className='taper_line'>
+                    <h3>WEBINA DIGITAL</h3>
+                    <h3>WEBINA DIGITAL</h3>
+                    <h3>WEBINA DIGITAL</h3>
+                    <h3>WEBINA DIGITAL</h3>
+                    <h3>WEBINA DIGITAL</h3>
+                    <h3>WEBINA DIGITAL</h3>
+                    <h3>WEBINA DIGITAL</h3>
+                </div>
 
 
 
-            <Element name='reserve'>
+                <Element name='reserve' className='reserve'>
+                    <div className="contact_us">
 
-            </Element>
+                        <Image className='star_left' src={StarLeft} alt='star left' />
+                        <Image className='star_right' src={StarRight} alt='star right' />
+
+                        <h2><span>CONTACT</span> US</h2>
 
 
-            <Footer/>
+                        <div className="form_container">
+                            <div className="top">
+                                <div className="input_cont">
+                                    <label htmlFor="full_name" >Full Name</label>
+                                    <input type="text" maxLength={30} name='full_name' required placeholder='Full Name' />
+                                </div>
+
+                                <div className="input_cont">
+                                    <label htmlFor="full_name">Email Address</label>
+                                    <input type="email" maxLength={35} name='email_address' required placeholder='Email Address' />
+                                </div>
+                            </div>
+
+                            <div className="bottom">
+                                <label htmlFor="message">Message</label>
+                                <textarea name="message" id="message" required placeholder='Enter your message' ></textarea>
+
+                                <button>
+                                    SEND MESSAGE
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </Element>
+
+            </div >
+
+            <Footer />
         </>
     )
 }

@@ -730,12 +730,12 @@ const Home = () => {
                                         <div className="card">
                                             <hr />
 
-                                            <h3>Get answers</h3>
+                                            <h3>24/7 Available</h3>
 
                                             <p>Watch tutorials and read detailed articles in the Webina Help Center.</p>
 
                                             <div className="link">
-                                                <a href="/">Go to Help Center</a>
+                                                <a href="/contact">Contact Us Now</a>
                                                 <BsArrowRight />
                                             </div>
                                         </div>
@@ -748,7 +748,7 @@ const Home = () => {
                                             <p>Watch tutorials and read detailed articles in the Webina Help Center.</p>
 
                                             <div className="link">
-                                                <a href="/">Go to Help Center</a>
+                                                <a href="/about">Go to FAQs</a>
                                                 <BsArrowRight />
                                             </div>
                                         </div>
@@ -756,12 +756,12 @@ const Home = () => {
                                         <div className="card">
                                             <hr />
 
-                                            <h3>Get answers</h3>
+                                            <h3>Get To Know Us</h3>
 
                                             <p>Watch tutorials and read detailed articles in the Webina Help Center.</p>
 
                                             <div className="link">
-                                                <a href="/">Go to Help Center</a>
+                                                <a href="/about">Learn more now</a>
                                                 <BsArrowRight />
                                             </div>
                                         </div>
@@ -880,7 +880,6 @@ const feedback = (testimonials) => {
 
             <Swiper
                 slidesPerView={3}
-                spaceBetween={30}
                 loop={true}
                 grabCursor={true}
                 breakpoints={{
