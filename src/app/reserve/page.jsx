@@ -12,12 +12,24 @@ import Image from 'next/image'
 
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+
+
 import { useState } from 'react'
+
+
 
 
 const Reserve = () => {
 
     const [phoneNumber, setPhoneNumber] = useState();
+
+    const [date , setDate] = useState(new Date());
+    const [timeZ , setTimeZ] = useState(new Date().toLocaleTimeString());
+    const [time , setTime] = useState(new Date().toLocaleTimeString());
+    const [type , setType] = useState("");
 
     return (
         <>
@@ -219,8 +231,10 @@ const Reserve = () => {
                         </div>
 
                         <div className="bottom">
-                            
-                            
+
+
+                            <DatePage/>
+
                         </div>
 
                     </div>
@@ -235,3 +249,80 @@ const Reserve = () => {
 }
 
 export default Reserve
+
+
+
+const DatePage = ({ setDate, date, setCurrentPage, user, setUser }) => {
+
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+
+    const maxDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+
+
+    const disableWeekends = ({ date }) => {
+        const day = date.getDay();
+        return day === 0 || day === 6;
+    };
+
+
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+        >
+            <h2>Choose the most suitable date for you so we get in touch</h2>
+
+            <div className="calendar-container">
+
+                <div className="calendar">
+                    <Calendar
+                        onChange={setDate}
+                        value={date}
+                        prevLabel={'<'}
+                        nextLabel={'>'}
+                        minDate={tomorrow}
+                        maxDate={maxDate}
+                        tileDisabled={disableWeekends}
+                        className="minimal-calendar"
+                    />
+                </div>
+
+                <div className="time-container">
+
+
+                    <label htmlFor="meeting_type">Meeting :</label>
+                    <select name='meeting_type'>
+                        <option value="phone">Call</option>
+                    </select>
+
+                    <label htmlFor="time">Time :</label>
+                    <select name="time" id="time">
+                        <option value="morning">Morning</option>
+                        <option value="afternoon">Afternoon</option>
+                        <option value="evening">Evening</option>
+                    </select>
+                </div>
+
+                {
+                    date && user.time && (
+                        <motion.button
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            onClick={() => setCurrentPage('payment')} className="next-but">
+                            Next <MdArrowRight />
+                        </motion.button>
+                    )
+                }
+            </div>
+
+
+        </motion.div >
+    )
+}
