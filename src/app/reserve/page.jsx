@@ -9,7 +9,16 @@ import Footer from '../Layouts/Footer/Footer'
 import StarLeft from '../../../public/assets/Home/Contact Section/star-l.svg';
 import StarRight from '../../../public/assets/Home/Contact Section/star-r.svg';
 import Image from 'next/image'
+
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+import { useState } from 'react'
+
+
 const Reserve = () => {
+
+    const [phoneNumber, setPhoneNumber] = useState();
+
     return (
         <>
 
@@ -163,39 +172,59 @@ const Reserve = () => {
 
 
                 <Element name='reserve' className='reserve'>
-                    <div className="contact_us">
 
-                        <Image className='star_left' src={StarLeft} alt='star left' />
-                        <Image className='star_right' src={StarRight} alt='star right' />
+                    <Image className='star_left' src={StarLeft} alt='star left' />
+                    <Image className='star_right' src={StarRight} alt='star right' />
 
-                        <h2><span>CONTACT</span> US</h2>
+                    <h2><span>CONTACT</span> US</h2>
 
 
-                        <div className="form_container">
-                            <div className="top">
-                                <div className="input_cont">
-                                    <label htmlFor="full_name" >Full Name</label>
-                                    <input type="text" maxLength={30} name='full_name' required placeholder='Full Name' />
-                                </div>
-
-                                <div className="input_cont">
-                                    <label htmlFor="full_name">Email Address</label>
-                                    <input type="email" maxLength={35} name='email_address' required placeholder='Email Address' />
-                                </div>
+                    <div className="form_container">
+                        <div className="top">
+                            <div className="input_cont">
+                                <label htmlFor="first_name" >First Name</label>
+                                <input type="text" maxLength={30} name='first_name' required placeholder='First Name' />
                             </div>
 
-                            <div className="bottom">
-                                <label htmlFor="message">Message</label>
-                                <textarea name="message" id="message" required placeholder='Enter your message' ></textarea>
-
-                                <button>
-                                    SEND MESSAGE
-                                </button>
+                            <div className="input_cont">
+                                <label htmlFor="last_name">Last Name</label>
+                                <input type="text" maxLength={30} name='last_name' required placeholder='Last Name' />
                             </div>
 
+                            <div className="input_cont">
+                                <label htmlFor="service" >Service Category</label>
+
+                                <select name="service" id="service" className=''>
+                                    <option value="service">Service</option>
+                                    <option value="service">Service</option>
+                                    <option value="service">Service</option>
+                                </select>
+                            </div>
+
+
+                            <div className='input_cont'>
+                                <label htmlFor="phone_number">Phone Number</label>
+                                <PhoneInput
+                                    country={'ma'}
+                                    value={phoneNumber}
+                                    onChange={(e) => setPhoneNumber()}
+                                />
+                            </div>
+
+
+                            <div className="input_cont db">
+                                <label htmlFor="email">Email Address</label>
+                                <input type="email" maxLength={40} name='email' placeholder='Email Address' />
+                            </div>
+                        </div>
+
+                        <div className="bottom">
+                            
+                            
                         </div>
 
                     </div>
+
                 </Element>
 
             </div >
