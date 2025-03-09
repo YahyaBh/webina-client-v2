@@ -3,7 +3,7 @@ import './page.scss'
 import Navbar from '../Layouts/Navbar/Navbar'
 import { MdArrowDownward, MdDone } from 'react-icons/md'
 import BlurText from '../lib/BlurText'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Link, Element } from 'react-scroll';
 import Footer from '../Layouts/Footer/Footer'
 import StarLeft from '../../../public/assets/Home/Contact Section/star-l.svg';
@@ -18,9 +18,11 @@ import 'react-calendar/dist/Calendar.css';
 
 
 import { useEffect, useState } from 'react'
-import { BiPhone } from 'react-icons/bi'
+import { BiCopy, BiCopyAlt, BiPhone } from 'react-icons/bi'
 import { FiSun, FiSunrise, FiSunset } from 'react-icons/fi'
 import { BsCalendar2Date, BsCameraVideo, BsClock } from 'react-icons/bs'
+import { toast } from 'react-hot-toast';
+
 
 
 
@@ -142,6 +144,8 @@ const Reserve = () => {
                                 <Link href='/reserve'>GET STARTED</Link>
                             </div>
                         </div>
+                        <div className='glow-box'></div>
+
                         <div className="pack">
                             <div className="top">
                                 <h5>Minimeme Prices</h5>
@@ -245,8 +249,28 @@ const Reserve = () => {
 
                         <div className="bottom">
 
+                            <Image className='star_left' src={StarLeft} alt='star left' />
+                            <Image className='star_right' src={StarRight} alt='star right' />
 
                             <DatePage user={user} setUser={setUser} />
+
+                            <AnimatePresence>
+                                {user.name !== '' && user.email !== '' && user.phone !== '' && user.date !== '' && user.time !== '' && user.meeting ?
+
+
+                                    <motion.button
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.9 }}
+                                        className='btn'
+
+                                    >
+
+                                    </motion.button>
+                                    : ''}
+                            </AnimatePresence>
 
                         </div>
 
@@ -259,16 +283,39 @@ const Reserve = () => {
 
             </div >
 
+            <div className='glow-box'></div>
 
             <div className='contact_info'>
 
 
                 <h2>YOU NEED A CUSTOM SOFTWARE FOR <span>YOUR ENTERPRISE ?</span></h2>
 
+                <div className='back_info_bg'></div>
+                <div className='back_info_bg'></div>
 
                 <div className='contact_info_cards'>
-                    <div>
-                        {/* <Image src={'https://'} alt='phone' /> */}
+                    <div className='card'>
+                        <img src={'/Images/Reserve/email.png'} alt='email' />
+                        <div className='body'>
+                            <h3>contact@webinadigital.com</h3>
+                            <BiCopy onClick={() => { navigator.clipboard.writeText('contact@webinadigital.com'); toast.success('Email copied to clipboard') }} />
+                        </div>
+                    </div>
+
+                    <div className='card'>
+                        <img src={'/Images/Reserve/what.png'} alt='whatsapp' />
+                        <div className='body'>
+                            <h3>+212 620792331</h3>
+                            <BiCopy onClick={() => { navigator.clipboard.writeText('+212 620792331'); toast.success('Whatsapp number copied to clipboard') }} />
+                        </div>
+                    </div>
+
+                    <div className='card'>
+                        <img src={'/Images/Reserve/phone.png'} alt='phone' />
+                        <div className='body'>
+                            <h3>+212 620792331</h3>
+                            <BiCopy onClick={() => { navigator.clipboard.writeText('+212 620792331'); toast.success('Phone number copied to clipboard') }} />
+                        </div>
                     </div>
                 </div>
 
@@ -320,6 +367,7 @@ const DatePage = ({ user, setUser }) => {
             <h2>Choose the most suitable date for you so we get in touch</h2>
 
             <div className="calendar-container">
+                <div className='glow-box'></div>
 
                 <div className="calendar">
                     <motion.div
