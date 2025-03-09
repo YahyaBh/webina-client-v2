@@ -17,7 +17,10 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { BiPhone } from 'react-icons/bi'
+import { FiSun, FiSunrise, FiSunset } from 'react-icons/fi'
+import { BsCalendar2Date, BsCameraVideo, BsClock } from 'react-icons/bs'
 
 
 
@@ -26,10 +29,20 @@ const Reserve = () => {
 
     const [phoneNumber, setPhoneNumber] = useState();
 
-    const [date , setDate] = useState(new Date());
-    const [timeZ , setTimeZ] = useState(new Date().toLocaleTimeString());
-    const [time , setTime] = useState(new Date().toLocaleTimeString());
-    const [type , setType] = useState("");
+    const [date, setDate] = useState(new Date());
+    const [timeZ, setTimeZ] = useState(new Date().toLocaleTimeString());
+    const [time, setTime] = useState(new Date().toLocaleTimeString());
+    const [type, setType] = useState("");
+
+
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        date: "",
+        time: "",
+        meeting: ""
+    })
 
     return (
         <>
@@ -233,7 +246,7 @@ const Reserve = () => {
                         <div className="bottom">
 
 
-                            <DatePage/>
+                            <DatePage user={user} setUser={setUser} />
 
                         </div>
 
@@ -241,7 +254,25 @@ const Reserve = () => {
 
                 </Element>
 
+
+
+
             </div >
+
+
+            <div className='contact_info'>
+
+
+                <h2>YOU NEED A CUSTOM SOFTWARE FOR <span>YOUR ENTERPRISE ?</span></h2>
+
+
+                <div className='contact_info_cards'>
+                    <div>
+                        <Image src={'https://'} alt='phone' />
+                    </div>
+                </div>
+
+            </div>
 
             <Footer />
         </>
@@ -252,7 +283,7 @@ export default Reserve
 
 
 
-const DatePage = ({ setDate, date, setCurrentPage, user, setUser }) => {
+const DatePage = ({ user, setUser }) => {
 
     const today = new Date()
     const tomorrow = new Date(today)
@@ -267,6 +298,17 @@ const DatePage = ({ setDate, date, setCurrentPage, user, setUser }) => {
     };
 
 
+    const [isOpenDrop, setIsOpenDrop] = useState(false);
+    const [isOpenDrop2, setIsOpenDrop2] = useState(false);
+
+
+    useEffect(() => {
+        setIsOpenDrop(false);
+        setIsOpenDrop2(false);
+
+        console.log(user);
+
+    }, [user])
 
     return (
         <motion.div
@@ -280,46 +322,154 @@ const DatePage = ({ setDate, date, setCurrentPage, user, setUser }) => {
             <div className="calendar-container">
 
                 <div className="calendar">
-                    <Calendar
-                        onChange={setDate}
-                        value={date}
-                        prevLabel={'<'}
-                        nextLabel={'>'}
-                        minDate={tomorrow}
-                        maxDate={maxDate}
-                        tileDisabled={disableWeekends}
-                        className="minimal-calendar"
-                    />
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}>
+                        <Calendar
+                            // onChange={setUser()}
+                            value={user.date}
+                            prevLabel={'<'}
+                            nextLabel={'>'}
+                            minDate={tomorrow}
+                            maxDate={maxDate}
+                            tileDisabled={disableWeekends}
+                            className="minimal-calendar"
+                        />
+                    </motion.div>
                 </div>
 
-                <div className="time-container">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="info-container">
 
 
-                    <label htmlFor="meeting_type">Meeting :</label>
-                    <select name='meeting_type'>
-                        <option value="phone">Call</option>
-                    </select>
+                    <div className='info-slot'>
+                        <label htmlFor="meeting_type">Meeting :</label>
+                        <div className="select">
+                            <button
+                                id="dropdown-button"
+                                className="select-button"
+                                role="combobox"
+                                aria-label="select button"
+                                aria-haspopup="listbox"
+                                aria-expanded="false"
+                                aria-controls="select-dropdown"
+                                onClick={() => setIsOpenDrop(!isOpenDrop)}
+                            >
+                                <span className="selected-value">{user.meeting === 'call' ? 'Call' : user.meeting === 'offline' ? 'In Person' : user.meeting === 'online' ? 'Online Meeting' : 'Choose a meeting type'}</span>
+                                <span className="arrow"></span>
+                            </button>
+                            {isOpenDrop &&
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <ul
+                                        className="select-dropdown  "
+                                        role="listbox"
+                                        id="select-dropdown"
+                                        aria-labelledby="dropdown-button"
+                                    >
+                                        <li role="option" onClick={() => setUser({ ...user, meeting: 'call' })}><BiPhone /> Call</li>
+                                        <li role="option" onClick={() => setUser({ ...user, meeting: 'offline' })}><BsCalendar2Date /> In Person</li>
+                                        <li role="option" onClick={() => setUser({ ...user, meeting: 'online' })}><BsCameraVideo /> Online Meeting</li>
 
-                    <label htmlFor="time">Time :</label>
-                    <select name="time" id="time">
-                        <option value="morning">Morning</option>
-                        <option value="afternoon">Afternoon</option>
-                        <option value="evening">Evening</option>
-                    </select>
-                </div>
+                                    </ul>
+                                </motion.div>
+                            }
+                        </div>
+                    </div>
+                    <div className='info-slot'>
 
-                {
-                    date && user.time && (
-                        <motion.button
+                        <label htmlFor="time">Time :</label>
+                        <div className="select">
+                            <button
+                                id="dropdown-button"
+                                className="select-button"
+                                role="combobox"
+                                aria-label="select button"
+                                aria-haspopup="listbox"
+                                aria-expanded="false"
+                                aria-controls="select-dropdown"
+                                onClick={() => setIsOpenDrop2(!isOpenDrop2)}
+                            >
+                                <span className="selected-value">{user.time !== ''? user.time : 'Choose a time' }</span>
+                                <span className="arrow"></span>
+                            </button>
+                            {isOpenDrop2 &&
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <ul
+                                        className="select-dropdown"
+                                        role="listbox"
+                                        id="select-dropdown"
+                                        aria-labelledby="dropdown-button"
+                                    >
+                                        <li role="option" onClick={() => setUser({ ...user, time: 'morning' })}><FiSunrise /> Morning</li>
+                                        <li role="option" onClick={() => setUser({ ...user, time: 'afternoon' })}><FiSun /> Afternoon</li>
+                                        <li role="option" onClick={() => setUser({ ...user, time: 'evening' })}><FiSunset /> Evening</li>
+                                    </ul>
+                                </motion.div>
+                            }
+                        </div>
+                    </div>
+
+
+
+                    <div className='info-slot'>
+                        <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.3 }}
-                            onClick={() => setCurrentPage('payment')} className="next-but">
-                            Next <MdArrowRight />
-                        </motion.button>
-                    )
-                }
+                            transition={{ duration: 0.3 }} className='cont-info'><BsClock /> 30 minutes</motion.div>
+                        {user.meeting === 'call' ?
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }} className='cont-info'><BiPhone /> Phone Call</motion.div>
+                            : user.meeting === 'offline' ? <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }} className='cont-info'><BsCalendar2Date /> In Person</motion.div> :
+                                user.meeting === 'online' ? <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.3 }} className='cont-info'><BsCameraVideo /> Online Meeting</motion.div> : null}
+
+
+                        {user.meeting === 'call' ?
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }} className='cont-text'><p>Schedule a phone consultation at your convenience to discuss your needs and explore tailored solutions together.</p></motion.div>
+                            : user.meeting === 'offline' ? <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }} className='cont-text'>Book an in-person consultation to discuss your needs and create a personalized plan face-to-face.</motion.div> :
+                                user.meeting === 'online' ? <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.3 }} className='cont-text'>Arrange a video call consultation to connect virtually, discuss your requirements, and collaborate on a customized solution from the comfort of your space.</motion.div> : null}
+                    </div>
+                </motion.div>
+
             </div>
 
 
