@@ -268,7 +268,7 @@ const Reserve = () => {
 
                 <div className='contact_info_cards'>
                     <div>
-                        <Image src={'https://'} alt='phone' />
+                        {/* <Image src={'https://'} alt='phone' /> */}
                     </div>
                 </div>
 
@@ -400,7 +400,7 @@ const DatePage = ({ user, setUser }) => {
                                 aria-controls="select-dropdown"
                                 onClick={() => setIsOpenDrop2(!isOpenDrop2)}
                             >
-                                <span className="selected-value">{user.time !== ''? user.time : 'Choose a time' }</span>
+                                <span className="selected-value">{user.time !== '' ? user.time : 'Choose a time'}</span>
                                 <span className="arrow"></span>
                             </button>
                             {isOpenDrop2 &&
@@ -461,12 +461,13 @@ const DatePage = ({ user, setUser }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }} className='cont-text'>Book an in-person consultation to discuss your needs and create a personalized plan face-to-face.</motion.div> :
+                                transition={{ duration: 0.3 }} className='cont-text'><p>Book an in-person consultation to discuss your needs and create a personalized plan face-to-face.</p></motion.div> :
                                 user.meeting === 'online' ? <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
-                                    transition={{ duration: 0.3 }} className='cont-text'>Arrange a video call consultation to connect virtually, discuss your requirements, and collaborate on a customized solution from the comfort of your space.</motion.div> : null}
+                                    transition={{ duration: 0.3 }} className='cont-text'><p>Arrange a video call consultation to connect virtually, discuss your requirements, and collaborate on a customized solution from the comfort of your space.</p></motion.div>
+                                    : null}
                     </div>
                 </motion.div>
 
