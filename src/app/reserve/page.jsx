@@ -31,20 +31,22 @@ const Reserve = () => {
 
     const [phoneNumber, setPhoneNumber] = useState();
 
-    const [date, setDate] = useState(new Date());
-    const [timeZ, setTimeZ] = useState(new Date().toLocaleTimeString());
-    const [time, setTime] = useState(new Date().toLocaleTimeString());
-    const [type, setType] = useState("");
-
 
     const [user, setUser] = useState({
-        name: "",
+        first_name: "",
+        last_name: "",
+        service: "",
         email: "",
         phone: "",
         date: "",
         time: "",
         meeting: ""
     })
+
+    useEffect(() => {
+        console.log(user);
+
+    }, [user])
 
     return (
         <>
@@ -212,18 +214,18 @@ const Reserve = () => {
                         <div className="top">
                             <div className="input_cont">
                                 <label htmlFor="first_name" >First Name</label>
-                                <input type="text" maxLength={30} name='first_name' required placeholder='First Name' />
+                                <input type="text" maxLength={30} name='first_name' onChange={(e) => setUser({ ...user, first_name: e.target.value })} required placeholder='First Name' />
                             </div>
 
                             <div className="input_cont">
                                 <label htmlFor="last_name">Last Name</label>
-                                <input type="text" maxLength={30} name='last_name' required placeholder='Last Name' />
+                                <input type="text" maxLength={30} name='last_name' onChange={(e) => setUser({ ...user, last_name: e.target.value })} required placeholder='Last Name' />
                             </div>
 
                             <div className="input_cont">
                                 <label htmlFor="service" >Service Category</label>
 
-                                <select name="service" id="service" className=''>
+                                <select name="service" id="service" onChange={(e) => setUser({ ...user, service: e.target.value })}>
                                     <option value="service">Service</option>
                                     <option value="service">Service</option>
                                     <option value="service">Service</option>
@@ -235,15 +237,15 @@ const Reserve = () => {
                                 <label htmlFor="phone_number">Phone Number</label>
                                 <PhoneInput
                                     country={'ma'}
-                                    value={phoneNumber}
-                                    onChange={(e) => setPhoneNumber()}
+                                    value={user.phone}
+                                    onChange={(e) => setUser({ ...user, phone: e })}
                                 />
                             </div>
 
 
                             <div className="input_cont db">
                                 <label htmlFor="email">Email Address</label>
-                                <input type="email" maxLength={40} name='email' placeholder='Email Address' />
+                                <input type="email" maxLength={40} name='email' onChange={(e) => setUser({ ...user, email: e.target.value })} required placeholder='Email Address' />
                             </div>
                         </div>
 
@@ -255,9 +257,7 @@ const Reserve = () => {
                             <DatePage user={user} setUser={setUser} />
 
                             <AnimatePresence>
-                                {user.name !== '' && user.email !== '' && user.phone !== '' && user.date !== '' && user.time !== '' && user.meeting ?
-
-
+                                {user.name !== '' && user.email !== '' && user.phone !== '' && user.date !== '' && user.time !== '' && user.meeting && user.service !== '' ?
                                     <motion.button
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
@@ -267,7 +267,7 @@ const Reserve = () => {
                                         className='btn'
 
                                     >
-
+                                        RESERVE NOW
                                     </motion.button>
                                     : ''}
                             </AnimatePresence>
@@ -375,7 +375,7 @@ const DatePage = ({ user, setUser }) => {
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}>
                         <Calendar
-                            // onChange={setUser()}
+                            onChange={(date) => setUser({ ...user, date: date })}
                             value={user.date}
                             prevLabel={'<'}
                             nextLabel={'>'}
