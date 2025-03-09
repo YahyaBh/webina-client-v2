@@ -462,6 +462,7 @@ header {
     width: 100%;
     position: relative;
     margin-top: 80px;
+    z-index: 5;
     @media screen and (min-width: 1600px) {
         max-width: 1400px !important;
     }
@@ -806,7 +807,7 @@ header {
                         }
 
                         .react-calendar__tile:disabled {
-                            background-color: transparent;
+                            background-color: transparent !important;
                             opacity: 0.3;
                         }
 

@@ -6,6 +6,8 @@
     flex-direction: column;
     box-sizing: border-box;
     width: 100%;
+    position: relative;
+    min-height: 50vh; /* Ensure the footer takes up at least the full viewport height */
 
     .container_footer {
         display: flex;
@@ -78,8 +80,6 @@
     .under-footer {
         background-color: var(--primary-color);
         height: 60px;
-        bottom: 0;
-        position: relative;
         padding: 5px;
         width: 100%;
         box-sizing: border-box;
@@ -87,6 +87,8 @@
         justify-content: space-around;
         align-items: center;
         flex-direction: row;
+        position: absolute; /* Change this to absolute */
+        bottom: 0; /* Stick to the bottom of the .footer */
 
         .data {
             display: flex;

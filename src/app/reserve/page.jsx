@@ -367,7 +367,6 @@ const DatePage = ({ user, setUser }) => {
             <h2>Choose the most suitable date for you so we get in touch</h2>
 
             <div className="calendar-container">
-                <div className='glow-box'></div>
 
                 <div className="calendar">
                     <motion.div
@@ -392,7 +391,7 @@ const DatePage = ({ user, setUser }) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.1 }}
                     className="info-container">
 
 
@@ -417,7 +416,7 @@ const DatePage = ({ user, setUser }) => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
-                                    transition={{ duration: 0.3 }}
+                                    transition={{ duration: 0.1 }}
                                 >
                                     <ul
                                         className="select-dropdown  "
@@ -456,7 +455,7 @@ const DatePage = ({ user, setUser }) => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
-                                    transition={{ duration: 0.3 }}
+                                    transition={{ duration: 0.1 }}
                                 >
                                     <ul
                                         className="select-dropdown"
