@@ -57,7 +57,7 @@ const Reserve = () => {
 
                 <div className='container'>
 
-                    <div className='glow-box'></div>
+                    {/* <div className='glow-box'></div> */}
                     <h2>
                         <BlurText
                             text="Request everything you want to create and leave webina digital it on the application"
@@ -91,7 +91,7 @@ const Reserve = () => {
                 <section className='whoare'>
                     <div className='container'>
                         <div className='left'>
-                            <div className='glow-box'></div>
+                            {/* <div className='glow-box'></div> */}
                             <img src='/Images/Reserve/LogoContainer.svg' />
 
                             <div className='card'>
@@ -146,7 +146,7 @@ const Reserve = () => {
                                 <Link href='/reserve'>GET STARTED</Link>
                             </div>
                         </div>
-                        <div className='glow-box'></div>
+                        {/* <div className='glow-box'></div> */}
 
                         <div className="pack">
                             <div className="top">
@@ -283,7 +283,7 @@ const Reserve = () => {
 
             </div >
 
-            <div className='glow-box'></div>
+            {/* <div className='glow-box'></div> */}
 
             <div className='contact_info'>
 

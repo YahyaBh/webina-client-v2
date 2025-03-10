@@ -15,11 +15,10 @@ header {
         align-items: center;
         text-align: center;
         gap: 20px;
-        width: 100%;
+        width: 50%;
         max-width: 1400px;
         margin: 0 auto;
         padding: 10dvh 0;
-        width: 50%;
 
         h2 {
             font-size: 2.5em;
@@ -76,6 +75,23 @@ header {
                 }
             }
         }
+
+        @media screen and (max-width: 900px) {
+            width: 100%;
+
+            h2 {
+                font-size: 2em;
+                padding-top: 10dvh;
+                padding: 10px;
+            }
+
+            .bottom {
+                img {
+                    bottom: -20dvh;
+                    width: 30%;
+                }
+            }
+        }
     }
 }
 
@@ -87,29 +103,28 @@ header {
     flex-direction: column;
 }
 
-.glow-box {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    background: transparent;
-    border-radius: 50%;
-    opacity: 0.04;
+// .glow-box {
+//     position: absolute;
+//     width: 300px;
+//     height: 300px;
+//     background: transparent;
+//     border-radius: 50%;
+//     opacity: 0.04;
 
-    /* Light glow effect */
-    &::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 400%;
-        height: 400%;
-        border-radius: 50%;
-        background: var(--primary-color); /* Yellow glow */
-        filter: blur(60px); /* Soft glow */
-        transform: translate(-50%, -50%);
-        z-index: -1; /* Places it behind the box */
-    }
-}
+//     &::before {
+//         content: "";
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         width: 400%;
+//         height: 400%;
+//         border-radius: 50%;
+//         background: var(--primary-color); /* Yellow glow */
+//         filter: blur(60px); /* Soft glow */
+//         transform: translate(-50%, -50%);
+//         z-index: -1; /* Places it behind the box */
+//     }
+// }
 
 .whoare {
     display: flex;
@@ -126,6 +141,15 @@ header {
 
     @media screen and (min-width: 1600px) {
         max-width: 1400px;
+    }
+
+    @media screen and (max-width: 900px) {
+        display: none;
+
+        .container {
+            flex-direction: column;
+            max-height: 100dvh;
+        }
     }
 
     .container {
@@ -224,6 +248,10 @@ header {
             background-size: contain;
             background-clip: border-box;
             padding: 2%;
+
+            img {
+                width: 100%;
+            }
 
             .card {
                 position: absolute;
@@ -430,6 +458,29 @@ header {
             }
         }
     }
+
+    @media screen and (max-width: 900px) {
+        flex-direction: column;
+        padding: 20px;
+
+        h2 {
+            font-size: 2em;
+            text-align: center;
+        }
+
+        .container {
+            flex-direction: column;
+            gap: 30px;
+
+            .pack {
+                .bottom {
+                    a {
+                        margin-top: 20px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .taper_line {
@@ -450,6 +501,8 @@ header {
         color: #ffe662;
         font-weight: 600;
         font-size: 1.4em;
+        line-height: 2em;
+        letter-spacing: 0.2em;
     }
 }
 
@@ -629,6 +682,13 @@ header {
                 background-color: #313131;
                 border: 2px solid #ffe662;
                 color: #fff;
+
+                @media screen and (max-width: 900px) {
+                    padding: 20px 10px;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
 
                 .info-container {
                     display: flex;
@@ -957,7 +1017,6 @@ header {
                 }
             }
 
-
             .btn {
                 width: 30%;
                 padding: 10px 20px;
@@ -1040,6 +1099,50 @@ header {
         text-align: center;
         span {
             color: #ffe662;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .back_info_bg {
+            width: 100%;
+            min-height: 100dvh;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-size: cover;
+            background-clip: border-box;
+            background-origin: padding-box;
+            background-position-x: 0%;
+            background-position-y: 0%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-origin: padding-box;
+            background-clip: border-box;
+            opacity: .3;
+        }
+
+        h2 {
+            width: 90%;
+            font-size: 2em;
+        }
+
+        .contact_info_cards {
+            box-sizing: border-box !important;
+            width: 90%;
+            font-size: 0.8em;
+
+            .card {
+                border-radius: 10px !important;
+                gap: 5px !important;
+
+                img {
+                    width: 30px !important;
+                    height: 30px !important;
+                    border-radius: 8px !important;
+                }
+            }
         }
     }
 
