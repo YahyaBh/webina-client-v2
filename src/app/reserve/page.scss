@@ -1,3 +1,82 @@
+
+/* Container for glowing circles */
+.glowing-circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* Ensure circles are behind content */
+}
+
+/* Glowing circle styles */
+.glowing-circles::before,
+.glowing-circles::after,
+.glowing-circles div {
+    content: "";
+    position: absolute;
+    background: radial-gradient(circle, rgba(255, 230, 98, 0.1), transparent 70%);
+    border-radius: 50%;
+    filter: blur(200px); /* Massive blur for a soft glow */
+    animation: float 20s infinite ease-in-out;
+}
+
+/* Random positions and sizes for circles */
+.glowing-circles::before {
+    top: -50%; /* Position outside the viewport */
+    left: -50%; /* Position outside the viewport */
+    width: 1500px; /* Massive size */
+    height: 1500px; /* Massive size */
+    animation-delay: 0s;
+}
+
+.glowing-circles::after {
+    top: -30%; /* Position outside the viewport */
+    left: 80%; /* Position outside the viewport */
+    width: 2000px; /* Massive size */
+    height: 2000px; /* Massive size */
+    animation-delay: 10s;
+}
+
+.glowing-circles div:nth-child(1) {
+    top: 70%; /* Position outside the viewport */
+    left: -20%; /* Position outside the viewport */
+    width: 1800px; /* Massive size */
+    height: 1800px; /* Massive size */
+    animation-delay: 5s;
+}
+
+.glowing-circles div:nth-child(2) {
+    top: -10%; /* Position outside the viewport */
+    left: 60%; /* Position outside the viewport */
+    width: 2200px; /* Massive size */
+    height: 2200px; /* Massive size */
+    animation-delay: 15s;
+}
+
+.glowing-circles div:nth-child(3) {
+    top: 90%; /* Position outside the viewport */
+    left: 90%; /* Position outside the viewport */
+    width: 2500px; /* Massive size */
+    height: 2500px; /* Massive size */
+    animation-delay: 7s;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(100px, 100px); /* Larger movement for bigger circles */
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+
+
 header {
     display: flex;
     flex-direction: column;
@@ -1120,7 +1199,7 @@ header {
             background-attachment: scroll;
             background-origin: padding-box;
             background-clip: border-box;
-            opacity: .3;
+            opacity: 0.3;
         }
 
         h2 {

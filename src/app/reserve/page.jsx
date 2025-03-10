@@ -50,10 +50,10 @@ const Reserve = () => {
 
     return (
         <>
+            <div class="glowing-circles"></div>
 
             <header>
                 <Navbar target={"reserve"} />
-
 
                 <div className='container'>
 
