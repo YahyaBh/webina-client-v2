@@ -22,6 +22,16 @@ body {
   /* Internet Explorer/Edge */
   -webkit-user-select: none;
   /* Safari */
+
+
+  background: url(/Images/Reserve/BG.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-clip: border-box;
+  background-attachment: scroll;
+  background-origin: border-box;
+  min-height: 100dvh;
 }
 
 * {
@@ -201,4 +211,3 @@ input:-webkit-autofill:active {
   box-shadow: inset 0 0 20px 20px #23232329;
   -webkit-box-shadow: none !important;
 }
-

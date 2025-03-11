@@ -29,9 +29,6 @@ import { toast } from 'react-hot-toast';
 
 const Reserve = () => {
 
-    const [phoneNumber, setPhoneNumber] = useState();
-
-
     const [user, setUser] = useState({
         first_name: "",
         last_name: "",
@@ -43,15 +40,8 @@ const Reserve = () => {
         meeting: ""
     })
 
-    useEffect(() => {
-        console.log(user);
-
-    }, [user])
-
     return (
         <>
-            <div class="glowing-circles"></div>
-
             <header>
                 <Navbar target={"reserve"} />
 
