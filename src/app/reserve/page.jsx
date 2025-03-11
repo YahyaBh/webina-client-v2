@@ -29,6 +29,7 @@ import { CiMobile1 } from 'react-icons/ci'
 import { MdOutlineWebStories } from 'react-icons/md'
 import { toast } from 'react-hot-toast';
 import axios from 'axios'
+import Loading from '../Loading/Loading'
 
 
 
@@ -38,6 +39,9 @@ const Reserve = () => {
 
 
     const [isOpenDropService, setOpenDropServie] = useState(false);
+
+    const [loading, setLoading] = useState(true);
+    const [loadingSend, setLoadingSend] = useState(false);
 
     const [user, setUser] = useState({
         first_name: "",
@@ -50,28 +54,30 @@ const Reserve = () => {
         meeting: "",
     })
 
+    useEffect(() => {
+        setLoading(false);
+    }, []);
 
-    
+
     useEffect(() => {
         setOpenDropServie(false);
     }, [user]);
 
 
-
-    const handleClick = () => {
+    async function handleClick() {
         setOpenDropServie(false)
         if (user.first_name.trim().split(/\s+/).length !== 1) {
             console.log(user.first_name.trim().split(/\s+/).length);
-            
+
             toast.error('Please enter a valid first name')
         } else if (user.last_name.trim().split(/\s+/).length !== 1) {
             toast.error('Please enter a valid last name')
         } else if (!isEmail(user.email)) {
             toast.error('Please enter a valid email')
-        } else if (!isMobilePhone('+' + user.phone , 'ar-MA')) {
+        } else if (!isMobilePhone('+' + user.phone, 'ar-MA')) {
             toast.error('Please enter a valid phone number')
             console.log(user.phone);
-            
+
         } else if (user.date === "") {
             toast.error('Please select meeting date')
         } else if (user.time === "") {
@@ -83,16 +89,24 @@ const Reserve = () => {
         }
 
 
-
-        const req = axios.post(`http://localhost:3000/api/sendEmail`, user)
+        setLoadingSend(true);
+        const req = await axios.post(`http://localhost:3000/api/sendEmail`, user)
             .then(res => {
                 console.log(res)
             })
+            .catch(err => {
+                console.log(err)
+            })
+
+        setLoadingSend(false);
     }
 
 
     return (
         <>
+            {loading ? <Loading /> : ''}
+
+
             <header>
                 <Navbar target={"reserve"} />
 
@@ -292,101 +306,101 @@ const Reserve = () => {
 
                     <h2><span>CONTACT</span> US</h2>
 
+                    {!loadingSend ?
+                        <div className="form_container">
+                            <div className="top">
+                                <div className="input_cont">
+                                    <label htmlFor="first_name" >First Name</label>
+                                    <input type="text" maxLength={30} name='first_name' onChange={(e) => setUser({ ...user, first_name: e.target.value })} required placeholder='First Name' />
+                                </div>
 
-                    <div className="form_container">
-                        <div className="top">
-                            <div className="input_cont">
-                                <label htmlFor="first_name" >First Name</label>
-                                <input type="text" maxLength={30} name='first_name' onChange={(e) => setUser({ ...user, first_name: e.target.value })} required placeholder='First Name' />
-                            </div>
+                                <div className="input_cont">
+                                    <label htmlFor="last_name">Last Name</label>
+                                    <input type="text" maxLength={30} name='last_name' onChange={(e) => setUser({ ...user, last_name: e.target.value })} required placeholder='Last Name' />
+                                </div>
 
-                            <div className="input_cont">
-                                <label htmlFor="last_name">Last Name</label>
-                                <input type="text" maxLength={30} name='last_name' onChange={(e) => setUser({ ...user, last_name: e.target.value })} required placeholder='Last Name' />
-                            </div>
-
-                            <div className="input_cont serivce_cont">
-                                <label htmlFor="service_chose">Service :</label>
-                                <div className="select">
-                                    <button
-                                        id="dropdown-button"
-                                        className="select-button"
-                                        role="combobox"
-                                        aria-label="select button"
-                                        aria-haspopup="listbox"
-                                        aria-expanded="false"
-                                        aria-controls="select-dropdown"
-                                        onClick={() => setOpenDropServie(!isOpenDropService)}
-                                    >
-                                        <span className="selected-value">{user.service === 'website' ? 'Website App' : user.service === 'mobile' ? 'Mobile App' : user.service === 'both' ? 'Cross Platform' : 'Service chosen'}</span>
-                                        <span className="arrow"></span>
-                                    </button>
-                                    {isOpenDropService &&
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -20 }}
-                                            transition={{ duration: 0.1 }}
+                                <div className="input_cont serivce_cont">
+                                    <label htmlFor="service_chose">Service :</label>
+                                    <div className="select">
+                                        <button
+                                            id="dropdown-button"
+                                            className="select-button"
+                                            role="combobox"
+                                            aria-label="select button"
+                                            aria-haspopup="listbox"
+                                            aria-expanded="false"
+                                            aria-controls="select-dropdown"
+                                            onClick={() => setOpenDropServie(!isOpenDropService)}
                                         >
-                                            <ul
-                                                className="select-dropdown  "
-                                                role="listbox"
-                                                id="select-dropdown"
-                                                aria-labelledby="dropdown-button"
+                                            <span className="selected-value">{user.service === 'website' ? 'Website App' : user.service === 'mobile' ? 'Mobile App' : user.service === 'both' ? 'Cross Platform' : 'Service chosen'}</span>
+                                            <span className="arrow"></span>
+                                        </button>
+                                        {isOpenDropService &&
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: -20 }}
+                                                transition={{ duration: 0.1 }}
                                             >
-                                                <li role="option" onClick={() => setUser({ ...user, service: 'website' })}><CgWebsite /> Website App</li>
-                                                <li role="option" onClick={() => setUser({ ...user, service: 'mobile' })}><CiMobile1 /> Mobile App</li>
-                                                <li role="option" onClick={() => setUser({ ...user, service: 'both' })}><MdOutlineWebStories /> Cross Platform</li>
+                                                <ul
+                                                    className="select-dropdown  "
+                                                    role="listbox"
+                                                    id="select-dropdown"
+                                                    aria-labelledby="dropdown-button"
+                                                >
+                                                    <li role="option" onClick={() => setUser({ ...user, service: 'website' })}><CgWebsite /> Website App</li>
+                                                    <li role="option" onClick={() => setUser({ ...user, service: 'mobile' })}><CiMobile1 /> Mobile App</li>
+                                                    <li role="option" onClick={() => setUser({ ...user, service: 'both' })}><MdOutlineWebStories /> Cross Platform</li>
 
-                                            </ul>
-                                        </motion.div>
-                                    }
+                                                </ul>
+                                            </motion.div>
+                                        }
+                                    </div>
+                                </div>
+
+
+                                <div className='input_cont'>
+                                    <label htmlFor="phone_number">Phone Number</label>
+                                    <PhoneInput
+                                        country={'ma'}
+                                        value={user.phone}
+                                        onChange={(e) => setUser({ ...user, phone: e })}
+                                    />
+                                </div>
+
+
+                                <div className="input_cont db">
+                                    <label htmlFor="email">Email Address</label>
+                                    <input type="email" maxLength={40} name='email' onChange={(e) => setUser({ ...user, email: e.target.value })} required placeholder='Email Address' />
                                 </div>
                             </div>
 
+                            <div className="bottom">
 
-                            <div className='input_cont'>
-                                <label htmlFor="phone_number">Phone Number</label>
-                                <PhoneInput
-                                    country={'ma'}
-                                    value={user.phone}
-                                    onChange={(e) => setUser({ ...user, phone: e })}
-                                />
+                                <Image className='star_left' src={StarLeft} alt='star left' />
+                                <Image className='star_right' src={StarRight} alt='star right' />
+
+                                <DatePage user={user} setUser={setUser} />
+
+                                <AnimatePresence>
+                                    {user.name !== '' && user.email !== '' && user.phone !== '' && user.date !== '' && user.time !== '' && user.meeting && user.service !== '' ?
+                                        <motion.button
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -20 }}
+                                            whileHover={{ scale: 1.1 }}
+                                            whileTap={{ scale: 0.9 }}
+                                            className='btn'
+                                            onClick={() => handleClick()}
+                                        >
+                                            RESERVE NOW
+                                        </motion.button>
+                                        : ''}
+                                </AnimatePresence>
+
                             </div>
 
-
-                            <div className="input_cont db">
-                                <label htmlFor="email">Email Address</label>
-                                <input type="email" maxLength={40} name='email' onChange={(e) => setUser({ ...user, email: e.target.value })} required placeholder='Email Address' />
-                            </div>
-                        </div>
-
-                        <div className="bottom">
-
-                            <Image className='star_left' src={StarLeft} alt='star left' />
-                            <Image className='star_right' src={StarRight} alt='star right' />
-
-                            <DatePage user={user} setUser={setUser} />
-
-                            <AnimatePresence>
-                                {user.name !== '' && user.email !== '' && user.phone !== '' && user.date !== '' && user.time !== '' && user.meeting && user.service !== '' ?
-                                    <motion.button
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -20 }}
-                                        whileHover={{ scale: 1.1 }}
-                                        whileTap={{ scale: 0.9 }}
-                                        className='btn'
-                                        onClick={() => handleClick()}
-                                    >
-                                        RESERVE NOW
-                                    </motion.button>
-                                    : ''}
-                            </AnimatePresence>
-
-                        </div>
-
-                    </div>
+                        </div> : 'Loading...'}
 
                 </Element>
 

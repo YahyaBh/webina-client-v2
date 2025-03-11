@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { client } from '@/app/lib/sanityClient';
+import client from '@/app/lib/sanityClient';
 
 
 const jwt = require('jsonwebtoken');
@@ -58,7 +58,7 @@ export async function POST(request) {
                     await transporter.sendMail({
                         from: process.env.EMAIL_USER,
                         to: user.email,
-                        subject: `BEDAYA EMAIL VERIFICATION REQUIRED`,
+                        subject: `WEBINA DIGITAL EMAIL VERIFICATION REQUIRED`,
                         html: `
                             <html>
                                 <body>
