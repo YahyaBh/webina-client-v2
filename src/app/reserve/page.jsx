@@ -10,6 +10,9 @@ import StarLeft from '../../../public/assets/Home/Contact Section/star-l.svg';
 import StarRight from '../../../public/assets/Home/Contact Section/star-r.svg';
 import Image from 'next/image'
 
+import isEmail from 'validator/lib/isEmail'
+import isMobilePhone from 'validator/lib/isMobilePhone'
+
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
@@ -23,8 +26,9 @@ import { FiSun, FiSunrise, FiSunset } from 'react-icons/fi'
 import { BsCalendar2Date, BsCameraVideo, BsClock } from 'react-icons/bs'
 import { CgWebsite } from 'react-icons/cg'
 import { CiMobile1 } from 'react-icons/ci'
-import {MdOutlineWebStories } from 'react-icons/md'
+import { MdOutlineWebStories } from 'react-icons/md'
 import { toast } from 'react-hot-toast';
+import axios from 'axios'
 
 
 
@@ -44,8 +48,48 @@ const Reserve = () => {
         date: "",
         time: "",
         meeting: "",
-        service : ""
     })
+
+
+    
+    useEffect(() => {
+        setOpenDropServie(false);
+    }, [user]);
+
+
+
+    const handleClick = () => {
+        setOpenDropServie(false)
+        if (user.first_name.trim().split(/\s+/).length !== 1) {
+            console.log(user.first_name.trim().split(/\s+/).length);
+            
+            toast.error('Please enter a valid first name')
+        } else if (user.last_name.trim().split(/\s+/).length !== 1) {
+            toast.error('Please enter a valid last name')
+        } else if (!isEmail(user.email)) {
+            toast.error('Please enter a valid email')
+        } else if (!isMobilePhone('+' + user.phone , 'ar-MA')) {
+            toast.error('Please enter a valid phone number')
+            console.log(user.phone);
+            
+        } else if (user.date === "") {
+            toast.error('Please select meeting date')
+        } else if (user.time === "") {
+            toast.error('Please select meeting time')
+        } else if (user.meeting === "") {
+            toast.error('Please select meeting meeting type')
+        } else if (user.service === "") {
+            toast.error('Please select a service')
+        }
+
+
+
+        const req = axios.post(`http://localhost:3000/api/sendEmail`, user)
+            .then(res => {
+                console.log(res)
+            })
+    }
+
 
     return (
         <>
@@ -292,7 +336,7 @@ const Reserve = () => {
                                             >
                                                 <li role="option" onClick={() => setUser({ ...user, service: 'website' })}><CgWebsite /> Website App</li>
                                                 <li role="option" onClick={() => setUser({ ...user, service: 'mobile' })}><CiMobile1 /> Mobile App</li>
-                                                <li role="option" onClick={() => setUser({ ...user, service: 'both' })}><MdOutlineWebStories  /> Cross Platform</li>
+                                                <li role="option" onClick={() => setUser({ ...user, service: 'both' })}><MdOutlineWebStories /> Cross Platform</li>
 
                                             </ul>
                                         </motion.div>
@@ -333,7 +377,7 @@ const Reserve = () => {
                                         whileHover={{ scale: 1.1 }}
                                         whileTap={{ scale: 0.9 }}
                                         className='btn'
-
+                                        onClick={() => handleClick()}
                                     >
                                         RESERVE NOW
                                     </motion.button>
@@ -419,10 +463,7 @@ const DatePage = ({ user, setUser }) => {
     useEffect(() => {
         setIsOpenDrop(false);
         setIsOpenDrop2(false);
-
-        console.log(user);
-
-    }, [user])
+    }, [user]);
 
     return (
         <motion.div
