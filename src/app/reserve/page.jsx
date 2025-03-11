@@ -18,9 +18,12 @@ import 'react-calendar/dist/Calendar.css';
 
 
 import { useEffect, useState } from 'react'
-import { BiCopy, BiCopyAlt, BiPhone } from 'react-icons/bi'
+import { BiCopy, BiPhone } from 'react-icons/bi'
 import { FiSun, FiSunrise, FiSunset } from 'react-icons/fi'
 import { BsCalendar2Date, BsCameraVideo, BsClock } from 'react-icons/bs'
+import { CgWebsite } from 'react-icons/cg'
+import { CiMobile1 } from 'react-icons/ci'
+import {MdOutlineWebStories } from 'react-icons/md'
 import { toast } from 'react-hot-toast';
 
 
@@ -28,6 +31,9 @@ import { toast } from 'react-hot-toast';
 
 
 const Reserve = () => {
+
+
+    const [isOpenDropService, setOpenDropServie] = useState(false);
 
     const [user, setUser] = useState({
         first_name: "",
@@ -37,7 +43,8 @@ const Reserve = () => {
         phone: "",
         date: "",
         time: "",
-        meeting: ""
+        meeting: "",
+        service : ""
     })
 
     return (
@@ -47,7 +54,6 @@ const Reserve = () => {
 
                 <div className='container'>
 
-                    {/* <div className='glow-box'></div> */}
                     <h2>
                         <BlurText
                             text="Request everything you want to create and leave webina digital it on the application"
@@ -80,7 +86,16 @@ const Reserve = () => {
             <div className='res-cont'>
                 <section className='whoare'>
                     <div className='container'>
-                        <div className='left'>
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.3 }}
+                            variants={{
+                                visible: { opacity: 1, scale: 1 },
+                                hidden: { opacity: 0, scale: 0.5 }
+                            }}
+                            className='left'>
                             {/* <div className='glow-box'></div> */}
                             <img src='/Images/Reserve/LogoContainer.svg' />
 
@@ -93,8 +108,17 @@ const Reserve = () => {
                                 <h3><span>WEBSITE</span> UI / UX </h3>
                                 <img src='/Images/Reserve/ArrowCont.svg' />
                             </div>
-                        </div>
-                        <div className='right'>
+                        </motion.div>
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.3 }}
+                            variants={{
+                                visible: { opacity: 1, scale: 1 },
+                                hidden: { opacity: 0, scale: 0.5 }
+                            }}
+                            className='right'>
                             <img src='/Images/Reserve/PhoneCont.svg' />
 
                             <div className='card'>
@@ -108,16 +132,25 @@ const Reserve = () => {
 
                                 <img src='/Images/About/ArrowAb.svg' />
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
                     <img src='/Images/Reserve/LineWave.svg' alt='line-wave' />
                 </section>
-                <section className='packs'>
+                <div className='packs'>
 
                     <h2>Our Offers <span>Web</span> / <span>Mobile</span> Apps</h2>
 
                     <section className='container'>
-                        <div className="pack">
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.2 }}
+                            variants={{
+                                visible: { opacity: 1, y: 0 },
+                                hidden: { opacity: 0, y: -20 }
+                            }}
+                            className="pack">
                             <div className="top">
                                 <h5>Minimeme Prices</h5>
                                 <h3>3000 DH</h3>
@@ -133,12 +166,19 @@ const Reserve = () => {
                                     <li><span><MdDone /></span> <h3>No Discount</h3></li>
                                 </ul>
 
-                                <Link href='/reserve'>GET STARTED</Link>
+                                <Link to="reserve" smooth={true} duration={200}>GET STARTED</Link>
                             </div>
-                        </div>
-                        {/* <div className='glow-box'></div> */}
-
-                        <div className="pack">
+                        </motion.div>
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.2 }}
+                            variants={{
+                                visible: { opacity: 1, y: 0 },
+                                hidden: { opacity: 0, y: -20 }
+                            }}
+                            className="pack">
                             <div className="top">
                                 <h5>Minimeme Prices</h5>
                                 <h3>3000 DH</h3>
@@ -154,10 +194,19 @@ const Reserve = () => {
                                     <li><span><MdDone /></span> <h3>No Discount</h3></li>
                                 </ul>
 
-                                <Link href='/reserve'>GET STARTED</Link>
+                                <Link to="reserve" smooth={true} duration={200}>GET STARTED</Link>
                             </div>
-                        </div>
-                        <div className="pack">
+                        </motion.div>
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.2 }}
+                            variants={{
+                                visible: { opacity: 1, y: 0 },
+                                hidden: { opacity: 0, y: -20 }
+                            }}
+                            className="pack">
                             <div className="top">
                                 <h5>Minimeme Prices</h5>
                                 <h3>3000 DH</h3>
@@ -173,11 +222,11 @@ const Reserve = () => {
                                     <li><span><MdDone /></span> <h3>No Discount</h3></li>
                                 </ul>
 
-                                <Link href='/reserve'>GET STARTED</Link>
+                                <Link to="reserve" smooth={true} duration={200}>GET STARTED</Link>
                             </div>
-                        </div>
+                        </motion.div>
                     </section>
-                </section>
+                </div>
 
 
                 <div className='taper_line'>
@@ -212,14 +261,43 @@ const Reserve = () => {
                                 <input type="text" maxLength={30} name='last_name' onChange={(e) => setUser({ ...user, last_name: e.target.value })} required placeholder='Last Name' />
                             </div>
 
-                            <div className="input_cont">
-                                <label htmlFor="service" >Service Category</label>
+                            <div className="input_cont serivce_cont">
+                                <label htmlFor="service_chose">Service :</label>
+                                <div className="select">
+                                    <button
+                                        id="dropdown-button"
+                                        className="select-button"
+                                        role="combobox"
+                                        aria-label="select button"
+                                        aria-haspopup="listbox"
+                                        aria-expanded="false"
+                                        aria-controls="select-dropdown"
+                                        onClick={() => setOpenDropServie(!isOpenDropService)}
+                                    >
+                                        <span className="selected-value">{user.service === 'website' ? 'Website App' : user.service === 'mobile' ? 'Mobile App' : user.service === 'both' ? 'Cross Platform' : 'Service chosen'}</span>
+                                        <span className="arrow"></span>
+                                    </button>
+                                    {isOpenDropService &&
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -20 }}
+                                            transition={{ duration: 0.1 }}
+                                        >
+                                            <ul
+                                                className="select-dropdown  "
+                                                role="listbox"
+                                                id="select-dropdown"
+                                                aria-labelledby="dropdown-button"
+                                            >
+                                                <li role="option" onClick={() => setUser({ ...user, service: 'website' })}><CgWebsite /> Website App</li>
+                                                <li role="option" onClick={() => setUser({ ...user, service: 'mobile' })}><CiMobile1 /> Mobile App</li>
+                                                <li role="option" onClick={() => setUser({ ...user, service: 'both' })}><MdOutlineWebStories  /> Cross Platform</li>
 
-                                <select name="service" id="service" onChange={(e) => setUser({ ...user, service: e.target.value })}>
-                                    <option value="service">Service</option>
-                                    <option value="service">Service</option>
-                                    <option value="service">Service</option>
-                                </select>
+                                            </ul>
+                                        </motion.div>
+                                    }
+                                </div>
                             </div>
 
 
@@ -273,9 +351,8 @@ const Reserve = () => {
 
             </div >
 
-            {/* <div className='glow-box'></div> */}
 
-            <div className='contact_info'>
+            <div div className='contact_info' >
 
 
                 <h2>YOU NEED A CUSTOM SOFTWARE FOR <span>YOUR ENTERPRISE ?</span></h2>
@@ -309,7 +386,7 @@ const Reserve = () => {
                     </div>
                 </div>
 
-            </div>
+            </div >
 
             <Footer />
         </>
