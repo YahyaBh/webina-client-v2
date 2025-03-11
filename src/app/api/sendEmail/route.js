@@ -8,6 +8,9 @@ const jwt = require('jsonwebtoken');
 export async function POST(request) {
     const { user } = await request.json();
 
+    console.log(user);
+    
+
     if (!user.first_name || !user.last_name || !user.email || !user.phone || !user.service || !user.meeting || !user.date || !user.time) {
         return NextResponse.json({ message: 'Please fill all the fields' }, { status: 400 });
     } else {
@@ -35,7 +38,7 @@ export async function POST(request) {
                     phone: user.phone,
                     service: {
                         _type: 'reference',
-                        _ref: user?.service?._ref || '',
+                        _ref: user?.service?._ref || 'ff346d88-5dd6-466c-9c67-7588d2de8784',
                     },
                     meetingDate: user.date,
                     meetingTime: user.time,

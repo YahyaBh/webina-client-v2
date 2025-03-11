@@ -30,6 +30,7 @@ import { MdOutlineWebStories } from 'react-icons/md'
 import { toast } from 'react-hot-toast';
 import axios from 'axios'
 import Loading from '../Loading/Loading'
+import Cookies from 'js-cookie'
 
 
 
@@ -42,6 +43,7 @@ const Reserve = () => {
 
     const [loading, setLoading] = useState(true);
     const [loadingSend, setLoadingSend] = useState(false);
+    const [formSent, setFormSent] = useState(false);
 
     const [user, setUser] = useState({
         first_name: "",
@@ -56,6 +58,11 @@ const Reserve = () => {
 
     useEffect(() => {
         setLoading(false);
+
+
+        if (Cookies.get('form-sent')) {
+            setFormSent(true);
+        }
     }, []);
 
 
@@ -90,9 +97,22 @@ const Reserve = () => {
 
 
         setLoadingSend(true);
-        const req = await axios.post(`http://localhost:3000/api/sendEmail`, user)
+        await axios.post(`http://localhost:3000/api/sendEmail`, { user: user })
             .then(res => {
-                console.log(res)
+
+                setUser({
+                    first_name: "",
+                    last_name: "",
+                    service: "",
+                    email: "",
+                    phone: "",
+                    date: "",
+                    time: "",
+                    meeting: "",
+                });
+                Cookies.set('form-sent', true);
+                setFormSent(true);
+                toast.success('Email verification has been send')
             })
             .catch(err => {
                 console.log(err)
@@ -304,9 +324,9 @@ const Reserve = () => {
                     <Image className='star_left' src={StarLeft} alt='star left' />
                     <Image className='star_right' src={StarRight} alt='star right' />
 
-                    <h2><span>CONTACT</span> US</h2>
 
-                    {!loadingSend ?
+                    {!formSent ? !loadingSend ? <>
+                        <h2><span>CONTACT</span> US</h2>
                         <div className="form_container">
                             <div className="top">
                                 <div className="input_cont">
@@ -400,7 +420,7 @@ const Reserve = () => {
 
                             </div>
 
-                        </div> : 'Loading...'}
+                        </div> </> : <div class="spinner"></div> : <h2>We'll be Contacting you Soon</h2>}
 
                 </Element>
 

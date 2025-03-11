@@ -501,6 +501,22 @@ header {
         max-width: 1400px !important;
     }
 
+    .spinner {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        border: 11.5px solid;
+        border-color: #ffffff;
+        border-right-color: #ffe662;
+        animation: spinner-d3wgkg 1.2s infinite linear;
+    }
+
+    @keyframes spinner-d3wgkg {
+        to {
+            transform: rotate(1turn);
+        }
+    }
+
     .star_right {
         position: absolute;
         top: 50%;
