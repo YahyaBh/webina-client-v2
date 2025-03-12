@@ -458,9 +458,14 @@ const DatePage = ({ user, setUser, dates }) => {
 
 
     function removeTimeFromDates(dateArray) {
-        return dateArray.map(date => date.split('T')[0]);
+        return dateArray.map(item => {
+            const dateString = item.date; // Extract the date string from the object
+            return dateString.split('T')[0]; // Remove the time part
+        });
     }
 
+console.log(removeTimeFromDates(dates));
+    
 
     const tileDisabled = ({ date, view }) => {
         if (view !== 'month') {
@@ -471,7 +476,7 @@ const DatePage = ({ user, setUser, dates }) => {
         const isWeekend = date.getDay() === 0 || date.getDay() === 6;
 
         // Disable specific dates
-        const isDisabledDate = dates.some(
+        const isDisabledDate = removeTimeFromDates(dates).some(
             (disabledDate) => date.toDateString() === disabledDate.toDateString()
         );
 
