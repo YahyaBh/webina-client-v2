@@ -20,7 +20,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 
-import {  useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BiCopy, BiPhone } from 'react-icons/bi'
 import { FiSun, FiSunrise, FiSunset } from 'react-icons/fi'
 import { BsCalendar2Date, BsCameraVideo, BsClock } from 'react-icons/bs'
@@ -302,7 +302,7 @@ const Reserve = () => {
                     <Image className='star_right' src={StarRight} alt='star right' />
 
 
-                    {!formSent ? !loadingSend ? <>
+                    {!formSent ? !loadingSend ? <div>
                         <h2><span>CONTACT</span> US</h2>
                         <div className="form_container">
                             <div className="top">
@@ -396,14 +396,13 @@ const Reserve = () => {
 
                             </div>
 
-                        </div> </> : <div class="spinner"></div> :
+                        </div> </div> : <div class="spinner"></div> :
                         <div className='form_sent_container'>
-
                             {Cookies.get('form-sent') === 'true' ?
-                                <>
+                                <div>
                                     <h2>We have sent you a verification email</h2>
                                     <p>the email will expire in 24 hours , if so please re-send a new from. Check your email spam</p>
-                                </> : <h2>{Cookies.get('form-sent')}</h2>}
+                                </div> : <h2>{Cookies.get('form-sent')?.toString()}</h2>}
                         </div>
                     }
                 </Element>
