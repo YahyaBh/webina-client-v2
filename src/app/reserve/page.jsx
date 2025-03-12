@@ -125,23 +125,25 @@ const Reserve = () => {
         setLoadingSend(true);
         await axios.post(`http://localhost:3000/api/sendEmail`, { user: user })
             .then(res => {
-                setUser({
-                    first_name: "",
-                    last_name: "",
-                    service: "",
-                    email: "",
-                    phone: "",
-                    date: "",
-                    time: "",
-                    meeting: "",
-                });
-                Cookies.set('form-sent', true, { expires: 1 });
-                setFormSent(true);
-                toast.success('Email verification has been send')
+                if (res.status === '200') {
+                    setUser({
+                        first_name: "",
+                        last_name: "",
+                        service: "",
+                        email: "",
+                        phone: "",
+                        date: "",
+                        time: "",
+                        meeting: "",
+                    });
+                    Cookies.set('form-sent', true, { expires: 1 });
+                    setFormSent(true);
+                    toast.success('Email verification has been send')
+                } else {
+                    toast.error(res.data.message);
+                }
             })
-            .catch(err => {
-                console.log(err)
-            })
+
 
         setLoadingSend(false);
     }
@@ -264,7 +266,7 @@ const Reserve = () => {
 
                                 <div className="bottom">
                                     <ul>
-                                        {pack.sepcs.map(spec => (
+                                        {pack.specs.map(spec => (
                                             <li><span><MdDone /></span> <h3>{spec}</h3></li>
                                         ))}
                                     </ul>
@@ -464,8 +466,8 @@ const DatePage = ({ user, setUser, dates }) => {
         });
     }
 
-console.log(removeTimeFromDates(dates));
-    
+    console.log(removeTimeFromDates(dates));
+
 
     const tileDisabled = ({ date, view }) => {
         if (view !== 'month') {
@@ -475,9 +477,12 @@ console.log(removeTimeFromDates(dates));
         // Disable weekends (Sunday = 0, Saturday = 6)
         const isWeekend = date.getDay() === 0 || date.getDay() === 6;
 
+        // Convert the current date to a string in the same format as disabledDates
+        const currentDateString = date.toISOString().split('T')[0];
+
         // Disable specific dates
         const isDisabledDate = removeTimeFromDates(dates).some(
-            (disabledDate) => date.toDateString() === disabledDate.toDateString()
+            (disabledDate) => currentDateString === disabledDate
         );
 
         return isWeekend || isDisabledDate;
