@@ -31,6 +31,7 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios'
 import Loading from '../Loading/Loading'
 import Cookies from 'js-cookie'
+import client, { imageUrlFor } from '../lib/sanityClient'
 
 
 
@@ -44,6 +45,12 @@ const Reserve = () => {
     const [loading, setLoading] = useState(true);
     const [loadingSend, setLoadingSend] = useState(false);
     const [formSent, setFormSent] = useState(false);
+
+
+    const [dates, setDates] = useState([]);
+    const [services, setServices] = useState([]);
+    const [packs, setPacks] = useState([]);
+
 
     const [user, setUser] = useState({
         first_name: "",
@@ -59,6 +66,7 @@ const Reserve = () => {
     useEffect(() => {
         setLoading(false);
 
+        getDates();
 
         if (Cookies.get('form-sent')) {
             setFormSent(true);
@@ -71,6 +79,24 @@ const Reserve = () => {
     }, [user]);
 
 
+    async function getDates() {
+        try {
+            const data = await client.fetch(`[
+                *[_type == "user"]{date},
+                *[_type == "service"]{_id, title, icon},
+                *[_type == "pack"]{_id, name, specs  , description , price}
+            ]`);
+
+            setDates(data[0]);
+            setServices(data[1]);
+            setPacks(data[2]);
+
+            console.log('Dates:', data[0]);
+            console.log('Services:', data[1]);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
     async function handleClick() {
         setOpenDropServie(false)
         if (user.first_name.trim().split(/\s+/).length !== 1) {
@@ -99,7 +125,6 @@ const Reserve = () => {
         setLoadingSend(true);
         await axios.post(`http://localhost:3000/api/sendEmail`, { user: user })
             .then(res => {
-
                 setUser({
                     first_name: "",
                     last_name: "",
@@ -110,7 +135,7 @@ const Reserve = () => {
                     time: "",
                     meeting: "",
                 });
-                Cookies.set('form-sent', true);
+                Cookies.set('form-sent', true, { expires: 1 });
                 setFormSent(true);
                 toast.success('Email verification has been send')
             })
@@ -219,90 +244,35 @@ const Reserve = () => {
                     <h2>Our Offers <span>Web</span> / <span>Mobile</span> Apps</h2>
 
                     <section className='container'>
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.2 }}
-                            variants={{
-                                visible: { opacity: 1, y: 0 },
-                                hidden: { opacity: 0, y: -20 }
-                            }}
-                            className="pack">
-                            <div className="top">
-                                <h5>Minimeme Prices</h5>
-                                <h3>3000 DH</h3>
-                                <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
-                            </div>
+                        {packs.map(pack => (
+                            <motion.div
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.2 }}
+                                variants={{
+                                    visible: { opacity: 1, y: 0 },
+                                    hidden: { opacity: 0, y: -20 }
+                                }}
+                                key={pack._id}
+                                className="pack">
+                                <div className="top">
+                                    <h5>{pack.name}</h5>
+                                    <h3>{pack.price} DH</h3>
+                                    <h4>{pack.description}</h4>
+                                </div>
 
-                            <div className="bottom">
-                                <ul>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                    <li><span><MdDone /></span> <h3>Assist with the optimzation of the website</h3></li>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                </ul>
+                                <div className="bottom">
+                                    <ul>
+                                        {pack.sepcs.map(spec => (
+                                            <li><span><MdDone /></span> <h3>{spec}</h3></li>
+                                        ))}
+                                    </ul>
 
-                                <Link to="reserve" smooth={true} duration={200}>GET STARTED</Link>
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.2 }}
-                            variants={{
-                                visible: { opacity: 1, y: 0 },
-                                hidden: { opacity: 0, y: -20 }
-                            }}
-                            className="pack">
-                            <div className="top">
-                                <h5>Minimeme Prices</h5>
-                                <h3>3000 DH</h3>
-                                <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
-                            </div>
-
-                            <div className="bottom">
-                                <ul>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                </ul>
-
-                                <Link to="reserve" smooth={true} duration={200}>GET STARTED</Link>
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.2 }}
-                            variants={{
-                                visible: { opacity: 1, y: 0 },
-                                hidden: { opacity: 0, y: -20 }
-                            }}
-                            className="pack">
-                            <div className="top">
-                                <h5>Minimeme Prices</h5>
-                                <h3>3000 DH</h3>
-                                <h4>Our Small Company Plan offers everything you need to take your business online and start connecting with your customers.</h4>
-                            </div>
-
-                            <div className="bottom">
-                                <ul>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                    <li><span><MdDone /></span> <h3>No Discount</h3></li>
-                                </ul>
-
-                                <Link to="reserve" smooth={true} duration={200}>GET STARTED</Link>
-                            </div>
-                        </motion.div>
+                                    <Link to="reserve" smooth={true} duration={200}>GET STARTED</Link>
+                                </div>
+                            </motion.div>
+                        ))}
                     </section>
                 </div>
 
@@ -352,7 +322,7 @@ const Reserve = () => {
                                             aria-controls="select-dropdown"
                                             onClick={() => setOpenDropServie(!isOpenDropService)}
                                         >
-                                            <span className="selected-value">{user.service === 'website' ? 'Website App' : user.service === 'mobile' ? 'Mobile App' : user.service === 'both' ? 'Cross Platform' : 'Service chosen'}</span>
+                                            <span className="selected-value">{user.service ? user.service.title : 'Choose a service'}</span>
                                             <span className="arrow"></span>
                                         </button>
                                         {isOpenDropService &&
@@ -363,15 +333,14 @@ const Reserve = () => {
                                                 transition={{ duration: 0.1 }}
                                             >
                                                 <ul
-                                                    className="select-dropdown  "
+                                                    className="select-dropdown"
                                                     role="listbox"
                                                     id="select-dropdown"
                                                     aria-labelledby="dropdown-button"
                                                 >
-                                                    <li role="option" onClick={() => setUser({ ...user, service: 'website' })}><CgWebsite /> Website App</li>
-                                                    <li role="option" onClick={() => setUser({ ...user, service: 'mobile' })}><CiMobile1 /> Mobile App</li>
-                                                    <li role="option" onClick={() => setUser({ ...user, service: 'both' })}><MdOutlineWebStories /> Cross Platform</li>
-
+                                                    {services.map(service => (
+                                                        <li role="option" onClick={() => setUser({ ...user, service: service })}><img src={imageUrlFor(service.icon)} alt={'icon_' + service.title} /> {service.title}</li>
+                                                    ))}
                                                 </ul>
                                             </motion.div>
                                         }
@@ -400,7 +369,7 @@ const Reserve = () => {
                                 <Image className='star_left' src={StarLeft} alt='star left' />
                                 <Image className='star_right' src={StarRight} alt='star right' />
 
-                                <DatePage user={user} setUser={setUser} />
+                                <DatePage user={user} setUser={setUser} dates={dates} />
 
                                 <AnimatePresence>
                                     {user.name !== '' && user.email !== '' && user.phone !== '' && user.date !== '' && user.time !== '' && user.meeting && user.service !== '' ?
@@ -420,7 +389,11 @@ const Reserve = () => {
 
                             </div>
 
-                        </div> </> : <div class="spinner"></div> : <h2>We'll be Contacting you Soon</h2>}
+                        </div> </> : <div class="spinner"></div> :
+                        <div className='form_sent_container'>
+                            <h2>We have sent you a verification email</h2>
+                            <p>the email will expire in 24 hours , if so please re-send a new from. Check your email spam</p>
+                        </div>}
 
                 </Element>
 
@@ -475,7 +448,7 @@ export default Reserve
 
 
 
-const DatePage = ({ user, setUser }) => {
+const DatePage = ({ user, setUser, dates }) => {
 
     const today = new Date()
     const tomorrow = new Date(today)
@@ -484,9 +457,22 @@ const DatePage = ({ user, setUser }) => {
     const maxDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
 
 
-    const disableWeekends = ({ date }) => {
-        const day = date.getDay();
-        return day === 0 || day === 6;
+    
+
+    const tileDisabled = ({ date, view }) => {
+        if (view !== 'month') {
+            return false;
+        }
+
+        // Disable weekends (Sunday = 0, Saturday = 6)
+        const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+
+        // Disable specific dates
+        const isDisabledDate = dates.some(
+            (disabledDate) => date.toDateString() === disabledDate.toDateString()
+        );
+
+        return isWeekend || isDisabledDate;
     };
 
 
@@ -523,7 +509,7 @@ const DatePage = ({ user, setUser }) => {
                             nextLabel={'>'}
                             minDate={tomorrow}
                             maxDate={maxDate}
-                            tileDisabled={disableWeekends}
+                            tileDisabled={tileDisabled}
                             className="minimal-calendar"
                         />
                     </motion.div>

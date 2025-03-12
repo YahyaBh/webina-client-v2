@@ -9,7 +9,7 @@ export async function POST(request) {
     const { user } = await request.json();
 
     console.log(user);
-    
+
 
     if (!user.first_name || !user.last_name || !user.email || !user.phone || !user.service || !user.meeting || !user.date || !user.time) {
         return NextResponse.json({ message: 'Please fill all the fields' }, { status: 400 });
@@ -33,16 +33,16 @@ export async function POST(request) {
 
                 const newUser = {
                     _type: 'user',
-                    name: user.name + ' ' + user.last_name,
+                    name: user.first_name + ' ' + user.last_name,
                     email: user.email,
                     phone: user.phone,
                     service: {
                         _type: 'reference',
-                        _ref: user?.service?._ref || 'ff346d88-5dd6-466c-9c67-7588d2de8784',
+                        _ref: user.service._id,
                     },
-                    meetingDate: user.date,
-                    meetingTime: user.time,
-                    meetingType: Array.isArray(user.meeting) ? user.meeting : [user.meeting],
+                    date: user.date,
+                    time: user.time,
+                    meetings: Array.isArray(user.meeting) ? user.meeting : [user.meeting],
                 };
 
                 const result = await client.create(newUser);
@@ -56,7 +56,7 @@ export async function POST(request) {
 
                 try {
 
-                    const verificationLink = `${process.env.NEXT_PUBLIC_URL}consultation/email-verification?token=${token}`;
+                    const verificationLink = `${process.env.NEXT_PUBLIC_URL}reserve/email-verification?token=${token}`;
 
                     await transporter.sendMail({
                         from: process.env.EMAIL_USER,
