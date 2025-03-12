@@ -457,7 +457,10 @@ const DatePage = ({ user, setUser, dates }) => {
     const maxDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
 
 
-    
+    function removeTimeFromDates(dateArray) {
+        return dateArray.map(date => date.split('T')[0]);
+    }
+
 
     const tileDisabled = ({ date, view }) => {
         if (view !== 'month') {
