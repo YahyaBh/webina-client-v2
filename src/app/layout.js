@@ -1,5 +1,6 @@
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
+import { Suspense } from "react";
 
 
 export const metadata = {
@@ -32,7 +33,9 @@ export default function RootLayout({ children }) {
         <meta property="og:type" content="website" />
 
       </head>
-      <body>{children}</body>
+      <Suspense fallback={<Loading />}>
+        <body>{children}</body>
+      </Suspense>
       <Toaster
         position="bottom-right"
         toastOptions={{
