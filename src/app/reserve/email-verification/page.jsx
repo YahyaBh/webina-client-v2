@@ -22,11 +22,11 @@ const page = () => {
                 if (res.status === 200) {
                     toast.success('Email is verified successfully');
                     Cookies.set('userVerificationToken');
-                    // window.location.href = `${process.env.NEXT_PUBLIC_URL}/reserve`;
+                    window.location.href = `${process.env.NEXT_PUBLIC_URL}/reserve?verification=checked`;
                 }
             })
             .catch((err) => {
-                // window.location.href = `${process.env.NEXT_PUBLIC_URL}/reserve`;
+                window.location.href = `${process.env.NEXT_PUBLIC_URL}/reserve`;
                 console.log(err);
                 toast.error('Email Is Not Verified');
             })

@@ -28,7 +28,7 @@ export async function POST(request) {
             const findEmail = await client.fetch(`*[_type == "user" && email == "${user.email}"]`);
 
             if (findEmail.length > 0 && findEmail[0].token === '') {
-                return NextResponse.json({ message: 'Email already registered and verified' }, { status: 400 });
+                return NextResponse.json({ message: 'Email already registered please check your email' }, { status: 400 });
             } else {
 
                 const newUser = {

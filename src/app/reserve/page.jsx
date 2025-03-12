@@ -4,7 +4,7 @@ import Navbar from '../Layouts/Navbar/Navbar'
 import { MdArrowDownward, MdDone } from 'react-icons/md'
 import BlurText from '../lib/BlurText'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Link, Element } from 'react-scroll';
+import { Link, Element, scroller } from 'react-scroll';
 import Footer from '../Layouts/Footer/Footer'
 import StarLeft from '../../../public/assets/Home/Contact Section/star-l.svg';
 import StarRight from '../../../public/assets/Home/Contact Section/star-r.svg';
@@ -24,14 +24,12 @@ import { useEffect, useState } from 'react'
 import { BiCopy, BiPhone } from 'react-icons/bi'
 import { FiSun, FiSunrise, FiSunset } from 'react-icons/fi'
 import { BsCalendar2Date, BsCameraVideo, BsClock } from 'react-icons/bs'
-import { CgWebsite } from 'react-icons/cg'
-import { CiMobile1 } from 'react-icons/ci'
-import { MdOutlineWebStories } from 'react-icons/md'
 import { toast } from 'react-hot-toast';
 import axios from 'axios'
 import Loading from '../Loading/Loading'
 import Cookies from 'js-cookie'
 import client, { imageUrlFor } from '../lib/sanityClient'
+import { useSearchParams } from 'next/navigation'
 
 
 
@@ -39,6 +37,9 @@ import client, { imageUrlFor } from '../lib/sanityClient'
 
 const Reserve = () => {
 
+    const searchParams = useSearchParams();
+    const verification = searchParams.get('verification');
+    const scroll = searchParams.get('scr');
 
     const [isOpenDropService, setOpenDropServie] = useState(false);
 
@@ -67,6 +68,19 @@ const Reserve = () => {
         setLoading(false);
 
         getDates();
+
+        if (scroll === "pricing") {
+            scroller.scrollTo('pricing', {
+                duration: 200,
+                delay: 100,
+                smooth: true,
+            });
+        }
+
+        if (verification === 'checked') {
+            setFormSent(true);
+            Cookies.set('form-sent', "We will contact you soon")
+        }
 
         if (Cookies.get('form-sent')) {
             setFormSent(true);
@@ -125,23 +139,14 @@ const Reserve = () => {
         setLoadingSend(true);
         await axios.post(`http://localhost:3000/api/sendEmail`, { user: user })
             .then(res => {
-                if (res.status === '200') {
-                    setUser({
-                        first_name: "",
-                        last_name: "",
-                        service: "",
-                        email: "",
-                        phone: "",
-                        date: "",
-                        time: "",
-                        meeting: "",
-                    });
-                    Cookies.set('form-sent', true, { expires: 1 });
-                    setFormSent(true);
-                    toast.success('Email verification has been send')
-                } else {
-                    toast.error(res.data.message);
-                }
+                Cookies.set('form-sent', true, { expires: 1 });
+                setFormSent(true);
+                toast.success('Email verification has been send')
+            })
+            .catch(err => {
+                console.log(err);
+
+                toast.error(err.response.data.message);
             })
 
 
@@ -241,8 +246,8 @@ const Reserve = () => {
                     </div>
                     <img src='/Images/Reserve/LineWave.svg' alt='line-wave' />
                 </section>
-                <div className='packs'>
 
+                <Element name='pricing' className='packs'>
                     <h2>Our Offers <span>Web</span> / <span>Mobile</span> Apps</h2>
 
                     <section className='container'>
@@ -276,7 +281,7 @@ const Reserve = () => {
                             </motion.div>
                         ))}
                     </section>
-                </div>
+                </Element>
 
 
                 <div className='taper_line'>
@@ -393,10 +398,14 @@ const Reserve = () => {
 
                         </div> </> : <div class="spinner"></div> :
                         <div className='form_sent_container'>
-                            <h2>We have sent you a verification email</h2>
-                            <p>the email will expire in 24 hours , if so please re-send a new from. Check your email spam</p>
-                        </div>}
 
+                            {Cookies.get('form-sent') === 'true' ?
+                                <>
+                                    <h2>We have sent you a verification email</h2>
+                                    <p>the email will expire in 24 hours , if so please re-send a new from. Check your email spam</p>
+                                </> : <h2>{Cookies.get('form-sent')}</h2>}
+                        </div>
+                    }
                 </Element>
 
 

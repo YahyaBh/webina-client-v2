@@ -78,7 +78,7 @@ const Navbar = ({ transparent, target }) => {
                         </a>
 
                         <ul>
-                            <li><a href='/custom'>Pricing</a></li>
+                            <li><a href='/reserve?scr=pricing'>Pricing</a></li>
                             <li><a href='/about'>About Us</a></li>
                             <li><a href='/blogs'>Blogs</a></li>
                             <li><a href='/contact'>Contact</a></li>
