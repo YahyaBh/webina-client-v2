@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { Suspense } from "react";
+import Loading from "./Loading/Loading";
 
 
 export const metadata = {
