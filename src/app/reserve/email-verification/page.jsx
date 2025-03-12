@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from "react"
+import React, { Suspense, useEffect } from "react"
 import './page.scss'
 import toast from 'react-hot-toast';
 import Loading from "../../Loading/Loading";
@@ -35,9 +35,9 @@ const page = () => {
 
 
     return (
-        <>
+        <Suspense fallback={<Loading/>}>
             <Loading />
-        </>
+        </Suspense>
     )
 }
 

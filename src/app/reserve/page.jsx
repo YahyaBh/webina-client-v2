@@ -20,7 +20,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { BiCopy, BiPhone } from 'react-icons/bi'
 import { FiSun, FiSunrise, FiSunset } from 'react-icons/fi'
 import { BsCalendar2Date, BsCameraVideo, BsClock } from 'react-icons/bs'
@@ -155,7 +155,7 @@ const Reserve = () => {
 
 
     return (
-        <>
+        <Suspense fallback={<Loading/>}>
             {loading ? <Loading /> : ''}
 
 
@@ -451,7 +451,7 @@ const Reserve = () => {
             </div >
 
             <Footer />
-        </>
+        </Suspense>
     )
 }
 
