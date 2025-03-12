@@ -451,21 +451,22 @@ $shadows-big: multiple-box-shadow(100);
                             }
 
                             p {
-                                font-size: 4vw;
+                                font-size: 4.2vw;
                                 line-height: 1.4em;
                             }
 
-                            button {
+                            a {
                                 width: max-content;
-                                height: 50px;
+                                height: auto;
                                 margin: auto;
                                 font-size: 6vw;
-                                padding: 20px 25px;
+                                padding: 10px 25px;
                                 border-radius: 40px;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
                                 gap: 10px;
+                                margin: auto;
 
                                 svg {
                                     font-size: 6vw;
