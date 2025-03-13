@@ -1,4 +1,3 @@
-// n is number of stars required
 @function multiple-box-shadow($n) {
     $value: "#{random(2000)}px #{random(2000)}px #FFF";
     @for $i from 2 through $n {
@@ -631,7 +630,6 @@ $shadows-big: multiple-box-shadow(100);
 
         .section-home {
             background: var(--primary-color-dark);
-            // background: linear-gradient(180deg, var(--primary-color)  0%, var(--primary-color-dark) 100%);
             width: 100%;
             height: auto;
             display: flex;
@@ -640,7 +638,7 @@ $shadows-big: multiple-box-shadow(100);
             flex-direction: column;
 
             @media screen and (min-width: 1200px) {
-                width: 100% !important ;
+                width: 100% !important;
             }
 
             .container {
@@ -658,6 +656,10 @@ $shadows-big: multiple-box-shadow(100);
                     box-sizing: border-box;
                     position: relative;
                     width: auto;
+
+                    @media screen and (max-width: 900px) {
+                        margin-top: 5dvh;
+                    }
 
                     &:hover + .zipper-pull {
                         height: 40px;

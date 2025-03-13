@@ -7,23 +7,15 @@ import './Navbar.scss'
 
 
 import { FiArrowRight } from 'react-icons/fi'
-import { BsListNested } from 'react-icons/bs';
+import { BsListNested, BsX } from 'react-icons/bs';
 
 
 
-// import { ThemeContext } from "../../Context/ThemeContext";
-
-const Navbar = ({ transparent, target }) => {
+const Navbar = ({ transparent}) => {
 
 
     const [scrolled, setScrolled] = useState(false);
     const [asideShow, setAsideShow] = useState(false)
-    const [language, setLanguage] = useState(false);
-    const [darkMode, setDarkMode] = useState(false);
-
-
-    // const { isDarkMode, toggleTheme } = useContext(ThemeContext);
-
 
 
     useEffect(() => {
@@ -33,12 +25,6 @@ const Navbar = ({ transparent, target }) => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [])
-
-
-    // useEffect(() => {
-    //     isDarkMode ? setDarkMode(true) : setDarkMode(false)
-    // }, [isDarkMode])
-
 
 
 
@@ -54,8 +40,10 @@ const Navbar = ({ transparent, target }) => {
     const handleAsideShow = () => {
         if (asideShow) {
             setAsideShow(false)
+            window.document.body.style.overflow = 'hidden !important';
         } else {
-            setAsideShow(true)
+            setAsideShow(true);
+            window.document.body.style.overflow = 'visible !important';
         }
     }
 
@@ -131,7 +119,7 @@ const Navbar = ({ transparent, target }) => {
 
                 <div className='mode-res'>
                     <div className="aside-swit">
-                        <BsListNested onClick={handleAsideShow} />
+                        {!asideShow ? <BsListNested onClick={handleAsideShow} /> : <BsX onClick={handleAsideShow} />}
                     </div>
 
                 </div>
@@ -140,8 +128,10 @@ const Navbar = ({ transparent, target }) => {
                     <aside className={asideShow ? 'aside-active' : ''}>
 
                         <ul className='list'>
-                            <li><a href='/custom'>Custom</a></li>
-                            <li><a href='/about'>About</a></li>
+                            <li><a href='/reserve?scr=pricing'>Pricing</a></li>
+                            <li><a href='/about'>About Us</a></li>
+                            <li><a href='/blogs'>Blogs</a></li>
+                            <li><a href='/contact'>Contact</a></li>
 
                             <div className='sign-buttons'>
                                 <button>

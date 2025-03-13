@@ -609,7 +609,7 @@
     height: 100dvh;
     z-index: 20;
     position: fixed;
-    transition: all 0.3s ease;
+    transition: all 0.1s ease-out;
     overflow: hidden;
     top: 70px;
     left: 0;
@@ -626,7 +626,7 @@
         width: 0px;
         height: 100dvh;
         overflow: hidden;
-        background-color: var(--primary-color-dark);
+        background-color: #121212f7;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -641,13 +641,14 @@
             display: flex;
             justify-content: flex-start;
             align-items: flex-start;
+            margin-top: 5dvh;
             gap: 20px;
             flex-direction: column;
             width: 80%;
             box-sizing: border-box;
 
             li {
-                font-size: 1.6em;
+                font-size: 1.4em;
             }
 
 
