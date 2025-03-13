@@ -810,13 +810,13 @@ const Home = () => {
                                     </div>
 
                                 </div>
+
+                                
                             </div>
 
                             <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
 
-                            <div className="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="655de45628b0a3566959a161" data-style-height="52px" data-style-width="100%">
-                                <a href="https://www.trustpilot.com/review/webinadigital.com" target="_blank" rel="noopener">Trustpilot</a>
-                            </div>
+
 
                             <Footer />
 
