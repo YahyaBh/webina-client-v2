@@ -134,6 +134,10 @@ header {
         align-items: flex-start;
         height: 100%;
 
+        @media screen and (max-width: 900px) {
+            flex-direction: column;
+        }
+
         .left {
             flex-basis: 55%;
             padding: 4em;
@@ -199,6 +203,10 @@ header {
         align-items: flex-start;
         height: 100%;
         max-width: 1400px;
+
+        @media screen and (max-width: 900px) {
+            flex-direction: column;
+        }
 
         .left {
             flex-basis: 40%;
@@ -276,6 +284,10 @@ header {
         align-items: flex-start;
         height: 100%;
         max-width: 1400px;
+
+        @media screen and (max-width: 900px) {
+            flex-direction: column;
+        }
 
         .right {
             flex-basis: 40%;
@@ -371,6 +383,10 @@ header {
         align-items: flex-start;
         height: 100%;
         max-width: 1400px;
+
+        @media screen and (max-width: 900px) {
+            flex-direction: column;
+        }
 
         .left {
             flex-basis: 50%;
