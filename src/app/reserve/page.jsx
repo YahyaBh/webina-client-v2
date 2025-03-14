@@ -77,15 +77,15 @@ const ReserveContent = () => {
 
     async function getDates() {
         try {
-            const data = await client.fetch(`
-        *[_type == "user"]{date},
-        *[_type == "service"]{_id, title, icon},
-        *[_type == "pack"]{_id, name, specs, description, price}
-      `);
+            const dataDates = await client.fetch(`*[_type == "user"]{date}`);
+            const dataServices = await client.fetch(`*[_type == "service"]{ _id, title , icon}`);
+            const dataPacks = await client.fetch(`*[_type == "pack"]{ _id, name}`);
 
-            setDates(data[0]);
-            setServices(data[1]);
-            setPacks(data[2]);
+            console.log(dataServices);
+
+            setDates(dataDates);
+            setServices(dataServices);
+            setPacks(dataPacks);
 
             console.log("Dates:", data[0]);
             console.log("Services:", data[1]);
@@ -237,7 +237,7 @@ const ReserveContent = () => {
                     </h2>
 
                     <section className="container">
-                        {packs.map((pack) => (
+                        {packs.length > 0 ?? map((pack) => (
                             <motion.div
                                 initial="hidden"
                                 whileInView="visible"
