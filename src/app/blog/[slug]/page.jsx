@@ -1,5 +1,5 @@
 "use client"
-import {useState } from 'react';
+import { useState } from 'react';
 import Image from "next/image";
 import client from "@/app/lib/sanityClient";
 import Navbar from "@/app/Layouts/Navbar/Navbar";
@@ -81,12 +81,10 @@ export default async function BlogPostPage({ params }) {
                             })}
                         </time>
 
-                        {/* Render the body content using PortableText */}
                         <div className="body">
                             <PortableText
                                 value={post.body}
                                 components={{
-                                    // Customize how block content is rendered
                                     block: {
                                         normal: ({ children }) => <p>{children}</p>,
                                         h1: ({ children }) => <h1>{children}</h1>,
@@ -96,17 +94,14 @@ export default async function BlogPostPage({ params }) {
                                             <blockquote>{children}</blockquote>
                                         ),
                                     },
-                                    // Customize how lists are rendered
                                     list: {
                                         bullet: ({ children }) => <ul>{children}</ul>,
                                         number: ({ children }) => <ol>{children}</ol>,
                                     },
-                                    // Customize how list items are rendered
                                     listItem: {
                                         bullet: ({ children }) => <li>{children}</li>,
                                         number: ({ children }) => <li>{children}</li>,
                                     },
-                                    // Customize how images are rendered
                                     types: {
                                         image: ({ value }) => (
                                             <div className="blockImage">
