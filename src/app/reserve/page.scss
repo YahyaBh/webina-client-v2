@@ -86,8 +86,9 @@ header {
             }
 
             .bottom {
-                img {
-                    bottom: -20dvh;
+                .left-img,
+                .right-img {
+                    bottom: -100px;
                     width: 30%;
                 }
             }
@@ -176,7 +177,9 @@ header {
                 span {
                     flex-basis: 10%;
                     width: 30px;
+                    max-width: 30px;
                     height: 30px;
+                    max-height: 30px;
                     border-radius: 50%;
                     border: 1px solid #fff;
                     display: flex;
@@ -533,6 +536,7 @@ header {
         font-size: 2.5em;
         padding: 50px 0;
         padding-top: 0;
+        text-align: center;
 
         span {
             color: var(--s-color-primary);
@@ -654,7 +658,7 @@ header {
                 }
             }
 
-            .serivce_cont {
+            .service_cont {
                 display: flex;
                 justify-content: space-between;
                 flex-direction: column;
@@ -676,12 +680,16 @@ header {
                         width: 100%;
                         padding: 1em;
                         border: 1px solid #ffe662;
-                        border-radius: 0.25rem;
-                        background-color: #313131;
-                        color: #fff;
+                        border-radius: 0.25em;
+                        background-color: #ffffff10;
+                        color: #ffffff61;
                         font-size: 1em;
                         cursor: pointer;
                         text-transform: capitalize;
+                    }
+
+                    .active {
+                        color: #fff;
                     }
 
                     .arrow {
@@ -697,7 +705,7 @@ header {
                         left: 0;
                         width: 100%;
                         border: 1px solid #caced1;
-                        border-radius: 0.25rem;
+                        border-radius: 0.25em;
                         background-color: #313131;
                         list-style: none;
                         box-sizing: border-box;
@@ -725,7 +733,7 @@ header {
                         padding: 15px;
                         cursor: pointer;
                         display: flex;
-                        gap: 0.5rem;
+                        gap: 0.5em;
                         align-items: center;
                         display: flex;
                         justify-content: flex-start;
@@ -789,6 +797,8 @@ header {
 
             h2 {
                 text-align: center;
+                font-size: 2em;
+                margin: 20px 0;
             }
 
             .calendar-container {
@@ -796,6 +806,7 @@ header {
                 align-items: flex-start;
                 justify-content: space-evenly;
                 width: 100%;
+                min-width: 800px;
                 position: relative;
                 background: transparent;
                 border-radius: 20px;
@@ -853,7 +864,7 @@ header {
                                 width: 100%;
                                 padding: 0.675em 1em;
                                 border: 1px solid #ffe662;
-                                border-radius: 0.25rem;
+                                border-radius: 0.25em;
                                 background-color: #ffffff1d;
                                 color: #fff;
                                 font-size: 1em;
@@ -874,7 +885,7 @@ header {
                                 left: 0;
                                 width: 100%;
                                 border: 1px solid #caced1;
-                                border-radius: 0.25rem;
+                                border-radius: 0.25em;
                                 background-color: #313131;
                                 list-style: none;
                                 box-sizing: border-box;
@@ -902,7 +913,7 @@ header {
                                 padding: 15px;
                                 cursor: pointer;
                                 display: flex;
-                                gap: 0.5rem;
+                                gap: 0.5em;
                                 align-items: center;
                             }
 
@@ -968,6 +979,9 @@ header {
                             padding-top: 15px;
                             padding-bottom: 15px;
                             border-radius: 50%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
 
                             &:hover {
                                 overflow: hidden;
@@ -1138,6 +1152,11 @@ header {
                                 }
                             }
                         }
+
+                        .react-calendar__tile--hasActive {
+                            background-color: transparent;
+                            color: #ffe662;
+                        }
                     }
                 }
             }
@@ -1175,6 +1194,7 @@ header {
         .star_left {
             z-index: 2;
             opacity: 0.1;
+            width: 40%;
         }
 
         .star_right {
@@ -1210,7 +1230,7 @@ header {
     z-index: 5;
 
     .back_info_bg {
-        background: url(/Images/Reserve/FrameInfoCont.png);
+        background: url(/Images/Reserve/FrameInfoCont.svg);
         background-position: left;
         background-repeat: no-repeat;
         background-size: cover;
@@ -1222,10 +1242,25 @@ header {
         border: 0;
         width: 30%;
 
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70%;
+            height: 70%;
+            border-radius: 53%;
+            background: var(--primary-color);
+            filter: blur(60px);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.09;
+        }
+
         &:nth-child(2) {
             right: 0;
             left: unset;
-            transform: scale(-1, -1);
+            transform: scale(-1, 1);
         }
     }
 
@@ -1235,50 +1270,6 @@ header {
         text-align: center;
         span {
             color: #ffe662;
-        }
-    }
-
-    @media screen and (max-width: 900px) {
-        .back_info_bg {
-            width: 100%;
-            min-height: 100dvh;
-            background-position: center;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: cover;
-            background-clip: border-box;
-            background-origin: padding-box;
-            background-position-x: 0%;
-            background-position-y: 0%;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-origin: padding-box;
-            background-clip: border-box;
-            opacity: 0.3;
-        }
-
-        h2 {
-            width: 90%;
-            font-size: 2em;
-        }
-
-        .contact_info_cards {
-            box-sizing: border-box !important;
-            width: 90%;
-            font-size: 0.8em;
-
-            .card {
-                border-radius: 10px !important;
-                gap: 5px !important;
-
-                img {
-                    width: 30px !important;
-                    height: 30px !important;
-                    border-radius: 8px !important;
-                }
-            }
         }
     }
 
@@ -1337,6 +1328,48 @@ header {
                     &:hover {
                         transform: scale(1.08);
                     }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .back_info_bg {
+            width: 100%;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-clip: border-box;
+            opacity: 0.3;
+            z-index: -1;
+            min-height: 60dvh;
+        }
+
+        h2 {
+            width: 90%;
+            font-size: 2em;
+        }
+
+        .contact_info_cards {
+            box-sizing: border-box;
+            width: 90%;
+            font-size: 0.8em;
+
+            .card {
+                border-radius: 10px;
+                gap: 5px;
+
+                .body {
+                    h3 {
+                        font-weight: 500;
+                    }
+                }
+
+                img {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 8px;
                 }
             }
         }

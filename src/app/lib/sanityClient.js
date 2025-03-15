@@ -3,11 +3,11 @@ import imageUrlBuilder from '@sanity/image-url';
 
 
 const client = createClient({
-    projectId: '89in6ek1',
-    dataset: 'website_client',
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
     useCdn: false,
-    token: 'skNejp46NBPRG3edLQUU588rMdrvnPDJoTkAauWTzXM4yclvIYTsMnwAsYaIYEY2v5ShAG3j5piyzQ5DBHkFYkvCDrM91DkdARgIa4td3PrDgcsAJAS6UCdyjlEgsOGESczxC17Jj5Z0vrVqnV8Mm2ZfWoGw0S3pOO5vo5QLsMIqat7DgF0x',
-    apiVersion: '2025-03-10'
+    token: process.env.NEXT_PUBLIC_SANITY_PROJECT_TOEKN,
+    apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION
 });
 
 const builder = imageUrlBuilder(client)

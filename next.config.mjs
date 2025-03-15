@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
-
-
 const nextConfig = {
+  images: {
+    domains: ["cdn.sanity.io"], // Add Sanity's CDN domain here
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(mp4|webm|ogg|swf|ogv)$/,

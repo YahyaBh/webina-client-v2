@@ -50,7 +50,6 @@ const ReserveContent = () => {
     });
 
     useEffect(() => {
-        setLoading(false);
         getDates();
 
         if (scroll === "pricing") {
@@ -87,6 +86,8 @@ const ReserveContent = () => {
         } catch (error) {
             console.error("Error fetching data:", error);
         }
+
+        setLoading(false);
     }
 
     async function handleClick() {
@@ -322,7 +323,7 @@ const ReserveContent = () => {
                                             />
                                         </div>
 
-                                        <div className="input_cont serivce_cont">
+                                        <div className="input_cont service_cont">
                                             <label htmlFor="service_chose">Service :</label>
                                             <div className="select">
                                                 <button
@@ -335,7 +336,7 @@ const ReserveContent = () => {
                                                     aria-controls="select-dropdown"
                                                     onClick={() => setOpenDropServie(!isOpenDropService)}
                                                 >
-                                                    <span className="selected-value">
+                                                    <span className={`selected-value ` + user.service ? 'active' : ''}>
                                                         {user.service ? user.service.title : "Choose a service"}
                                                     </span>
                                                     <span className="arrow"></span>
@@ -564,6 +565,7 @@ const DatePage = ({ user, setUser, dates }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
+            style={{ width : '100%'}}
         >
             <h2>Choose the most suitable date for you so we get in touch</h2>
 
