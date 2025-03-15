@@ -79,16 +79,11 @@ const ReserveContent = () => {
         try {
             const dataDates = await client.fetch(`*[_type == "user"]{date}`);
             const dataServices = await client.fetch(`*[_type == "service"]{ _id, title , icon}`);
-            const dataPacks = await client.fetch(`*[_type == "pack"]{ _id, name}`);
-
-            console.log(dataServices);
+            const dataPacks = await client.fetch(`*[_type == "pack"]{ _id, name , price , description , specs}`);
 
             setDates(dataDates);
             setServices(dataServices);
             setPacks(dataPacks);
-
-            console.log("Dates:", data[0]);
-            console.log("Services:", data[1]);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -237,7 +232,7 @@ const ReserveContent = () => {
                     </h2>
 
                     <section className="container">
-                        {packs.length > 0 ?? map((pack) => (
+                        { packs.map((pack) => (
                             <motion.div
                                 initial="hidden"
                                 whileInView="visible"
