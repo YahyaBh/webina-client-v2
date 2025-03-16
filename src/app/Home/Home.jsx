@@ -1,7 +1,6 @@
 'use client';
 
 import React, {
-    useContext,
     useEffect,
     useRef,
     useState,
@@ -123,19 +122,16 @@ const Home = () => {
         window.addEventListener('scroll', handleScroll);
 
         fetchData();
+
         if (loading) {
             window.document.body.style.overflow = 'hidden !important'
         }
-        setLoading(false);
     }, []);
 
 
     const fetchData = async () => {
         try {
-            const data = await client.fetch('*[_type == "homePage"][0] { _id, videoId ,homeTitle, homeWords, promoDate,"servicesHighlits": servicesHighlits ,"featuredFeedbacks": featuredFeedbacks[]->{_id, name, message , date , image , rating , slug} ,"services": services[]->{_id, title, description, image , mainService} ,"featuredPosts": featuredPosts[]->{_id, title, mainImage} ,"projects": projects[]->{_id, title, mainImage , tag , description}}');
-            console.log(data);
-
-
+            const data = await client.fetch('*[_type == "homePage"][0] { _id, videoId ,homeTitle, homeWords, promoDate,"servicesHighlits": servicesHighlits ,"featuredFeedbacks": featuredFeedbacks[]->{_id, name, message , date , image , rating , slug} ,"services": services[]->{_id, title, description, image , mainService} ,"featuredPosts": featuredPosts[]->{_id, title,slug, mainImage} ,"projects": projects[]->{_id, title, mainImage , tag , description}}');
             setHomeTitle(data.mainTitle ? data.homeTitle : homeTitle);
             setHighlitedTitles(data.highlightedTitles ? data.highlitedTitles : highlitedTitles);
             setHomeDescription(data.homeDescription ? data.homeDescription : homeDescription);
@@ -146,12 +142,13 @@ const Home = () => {
             setProjects(data.projects);
             setTestimonials(data.featuredFeedbacks ? data.featuredFeedbacks : testimonials);
             setServicesHighlits(data.servicesHighlits ? data.servicesHighlits : servicesHighlits);
-
-
         }
         catch (err) {
             console.log(err);
         }
+
+        setLoading(false);
+
     };
 
 
@@ -496,7 +493,7 @@ const Home = () => {
                                     {services.length > 0 ? services?.map((service, index) =>
                                         <div className="card" key={index}>
                                             <div className="top">
-                                                <img src={imageUrlFor(service.image)} alt={service.name} />
+                                                <img src={imageUrlFor(service.icon)} alt={service.name} />
                                             </div>
 
                                             <div className="bottom">
@@ -590,10 +587,10 @@ const Home = () => {
 
 
                                     {blogs?.map(((item, index) => (
-                                        <div className="card" key={index}>
+                                        <Link href={`/blog/${item.slug.current}`} className="card" key={index}>
                                             <img src={imageUrlFor(item.mainImage)} alt={'blog' + item.mainImage.alt} />
                                             <h4>{(item.title).length >= 32 ? (item.title).split('').slice(0, 32).join('') + '...' : (item.title)}</h4>
-                                        </div>
+                                        </Link>
                                     )))}
                                 </div>
                             </div>
@@ -811,7 +808,7 @@ const Home = () => {
 
                                 </div>
 
-                                
+
                             </div>
 
                             <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
@@ -903,7 +900,7 @@ const feedback = (testimonials) => {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
-                {testimonials?.map((testimonial, index) =>
+                {testimonials.lenght > 0 ?? testimonials?.map((testimonial, index) =>
                     <SwiperSlide key={index}>
                         <div className="container">
                             <div className='header'>
