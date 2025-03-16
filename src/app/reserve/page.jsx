@@ -58,6 +58,12 @@ const ReserveContent = () => {
                 delay: 100,
                 smooth: true,
             });
+        } else if (scroll === "reserve") {
+            scroller.scrollTo("reserve", {
+                duration: 200,
+                delay: 100,
+                smooth: true,
+            });
         }
 
         if (verification === "checked") {
@@ -233,7 +239,7 @@ const ReserveContent = () => {
                     </h2>
 
                     <section className="container">
-                        { packs.map((pack) => (
+                        {packs.map((pack) => (
                             <motion.div
                                 initial="hidden"
                                 whileInView="visible"
@@ -565,7 +571,7 @@ const DatePage = ({ user, setUser, dates }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            style={{ width : '100%'}}
+            style={{ width: '100%' }}
         >
             <h2>Choose the most suitable date for you so we get in touch</h2>
 

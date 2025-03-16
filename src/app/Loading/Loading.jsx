@@ -1,14 +1,8 @@
-"use client"
-import React from 'react'
 import LogoD from '../../../public/assets/Home/Navbar/WEBINA-Logo.png'
-
-
-import './Loading.scss'
 import Image from 'next/image'
+import './Loading.scss'
 
 const Loading = () => {
-
-
 
     return (
         <div className='home-load'>

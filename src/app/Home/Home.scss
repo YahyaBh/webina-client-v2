@@ -237,8 +237,6 @@ $shadows-big: multiple-box-shadow(100);
                                 -ms-transform: scale(1.06);
                                 -o-transform: scale(1.06);
                             }
-
-                            
                         }
 
                         .undertext {
@@ -949,7 +947,7 @@ $shadows-big: multiple-box-shadow(100);
                                         line-height: 1.3rem;
                                     }
 
-                                    button {
+                                    a {
                                         background-color: var(--light-color);
                                         color: var(--cards-color);
                                         font-size: 18px;
@@ -1006,7 +1004,7 @@ $shadows-big: multiple-box-shadow(100);
                             box-sizing: border-box;
                             border-radius: 20px;
                             display: flex;
-                            justify-content: center;
+                            justify-content: space-between;
                             align-items: center;
                             flex-direction: column;
                             text-align: center; /* Center text content */
@@ -1054,7 +1052,7 @@ $shadows-big: multiple-box-shadow(100);
                                     line-height: 1.3rem;
                                 }
 
-                                button {
+                                a {
                                     background-color: var(--light-color);
                                     color: var(--cards-color);
                                     font-size: 18px;
@@ -1345,7 +1343,10 @@ $shadows-big: multiple-box-shadow(100);
                         justify-content: flex-end;
                         align-items: center;
 
-                        button {
+                        a {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
                             background-color: var(--dark-color-primary);
                             width: 270px;
                             height: 65px;
@@ -1357,7 +1358,7 @@ $shadows-big: multiple-box-shadow(100);
                             -ms-border-radius: 12px;
                             -o-border-radius: 12px;
                             outline: none;
-                            font-size: 25px;
+                            font-size: 1.8em;
                             font-weight: bold;
 
                             cursor: pointer;
@@ -1444,7 +1445,8 @@ $shadows-big: multiple-box-shadow(100);
                                 color: var(--dark-color-primary);
                             }
                         }
-                        button {
+
+                        a {
                             background-color: var(--dark-color-primary);
                             width: 220px;
                             height: 50px;
@@ -1504,7 +1506,11 @@ $shadows-big: multiple-box-shadow(100);
                             flex-basis: 40%;
                             width: 300px;
                             height: 100%;
+                            transition: all 0.3s ease;
 
+                            &:hover {
+                                transform: translateY(-10px);
+                            }
 
                             img {
                                 width: 100%;
@@ -1834,7 +1840,7 @@ $shadows-big: multiple-box-shadow(100);
                             }
                         }
 
-                        button {
+                        a {
                             background-color: var(--primary-color-light);
                             width: max-content;
                             height: max-content;
@@ -1980,7 +1986,6 @@ $shadows-big: multiple-box-shadow(100);
                             -o-border-radius: 10px;
                             position: relative;
                             height: auto;
-                            text-align: center; /* Center text content */
                             transition:
                                 transform 0.3s ease,
                                 box-shadow 0.3s ease; /* Smooth hover effect */
@@ -2062,6 +2067,13 @@ $shadows-big: multiple-box-shadow(100);
                                 font-weight: bold;
                                 bottom: 20px;
                                 margin: auto;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+
+                                &:hover {
+                                    transform: translateY(-5px);
+                                    box-shadow: 5px 0 20px 10px #1e1e1e;
+                                }
                             }
                         }
                     }
@@ -2201,6 +2213,21 @@ $shadows-big: multiple-box-shadow(100);
                     justify-content: center;
                     align-items: center;
                     gap: 90px;
+
+                    .project_container {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        width: 100%;
+                        height: 100dvh;
+                        box-sizing: border-box;
+                        max-width: 1400px;
+                        backdrop-filter: blur(20px);
+                        background-color: #121212b4;
+                        position: fixed;
+                        z-index: 99;
+                    }
 
                     .here_for_you {
                         display: flex;
@@ -2539,13 +2566,13 @@ $shadows-big: multiple-box-shadow(100);
                             max-width: 1400px !important;
                         }
 
-                        @media screen and (max-width:900px) {
-
+                        @media screen and (max-width: 900px) {
                             margin-bottom: 10dvh;
 
-                            .star_right, .star_left {
+                            .star_right,
+                            .star_left {
                                 width: 40%;
-                            }    
+                            }
                         }
 
                         .star_right {

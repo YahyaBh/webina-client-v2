@@ -6,7 +6,6 @@ import React, {
     useState,
 } from 'react';
 
-import Swal from 'sweetalert2';
 import { Tooltip } from 'react-tooltip';
 
 import YouTubePlayer from 'youtube-player';
@@ -16,8 +15,6 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-
-import 'aos/dist/aos.css';
 
 
 import Image from 'next/image';
@@ -66,17 +63,18 @@ import StarRight from '../../../public/assets/Home/Contact Section/star-r.svg';
 import LineContact from '../../../public/assets/Home/Contact Section/line.svg';
 import { FiArrowRight } from 'react-icons/fi';
 import Link from 'next/link';
+import axios from 'axios';
+import CountUp from '../lib/CountUp';
 
-// import { ThemeContext } from '../Context/ThemeContext'
 
 
 const Home = () => {
 
-    // const { isDarkMode } = useContext(ThemeContext);
-
 
     const [loading, setLoading] = useState(true);
     const [scrolled, setScrolled] = useState(false);
+    const [projectShown, setProjectShown] = useState(false);
+
     const [targetDate, setTargetDate] = useState('');
     const [testimonials, setTestimonials] = useState([]);
     const [projects, setProjects] = useState([]);
@@ -84,7 +82,6 @@ const Home = () => {
 
     const [homeTitle, setHomeTitle] = useState('ENHANCE YOUR');
     const [highlitedTitles, setHighlitedTitles] = useState(['REACH', 'GROWTH', 'EMBLEM']);
-    const [servicesHighlits, setServicesHighlits] = useState([]);
     const [homeDescription, setHomeDescription] = useState('We are gonna create a well developed and designed website from your own choice and it will exactly as you desire and want The website you want will be created with high quality,our team which is formed with experienced programmers and designers will take of every corner.');
 
     const [services, setServices] = useState([]);
@@ -115,42 +112,48 @@ const Home = () => {
 
 
     useEffect(() => {
-        import('aos').then((aos) => {
-            aos.init();
-        });
-
+        fetchData(); // Fetch data on component mount
         window.addEventListener('scroll', handleScroll);
 
-        fetchData();
-
-        if (loading) {
-            window.document.body.style.overflow = 'hidden !important'
-        }
-    }, []);
+        // Cleanup event listener on unmount
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []); // Empty dependency array ensures this runs only once
 
 
     const fetchData = async () => {
+        setLoading(true); // Set loading to true before fetching data
         try {
-            const data = await client.fetch('*[_type == "homePage"][0] { _id, videoId ,homeTitle, homeWords, promoDate,"servicesHighlits": servicesHighlits ,"featuredFeedbacks": featuredFeedbacks[]->{_id, name, message , date , image , rating , slug} ,"services": services[]->{_id, title, description, image , mainService} ,"featuredPosts": featuredPosts[]->{_id, title,slug, mainImage} ,"projects": projects[]->{_id, title, mainImage , tag , description}}');
-            setHomeTitle(data.mainTitle ? data.homeTitle : homeTitle);
-            setHighlitedTitles(data.highlightedTitles ? data.highlitedTitles : highlitedTitles);
-            setHomeDescription(data.homeDescription ? data.homeDescription : homeDescription);
+            const data = await client.fetch(`*[_type == "homePage"][0] { 
+            _id,
+                videoId,
+                homeTitle,
+                homeWords,
+                promoDate,
+                "servicesHighlits": servicesHighlits,
+                "featuredFeedbacks": featuredFeedbacks[] -> { _id, name, message, date, image, rating, slug },
+                "services": services[] -> { _id, title, description, icon, mainService },
+                "featuredPosts": featuredPosts[] -> { _id, title, slug, mainImage },
+                "projects": projects[] -> { _id, title, mainImage, tag, description } 
+            }`);
+
+            // Update state with fetched data
+            setHomeTitle(data.homeTitle || homeTitle);
+            setHighlitedTitles(data.homeWords || highlitedTitles);
+            setHomeDescription(data.homeDescription || homeDescription);
             setTargetDate(data.promoDate);
-            setServices(data.services ? data.services : services);
-            setVideoId(data.videoId ? data.videoId : videoId);
-            setBlogs(data.featuredPosts);
-            setProjects(data.projects);
-            setTestimonials(data.featuredFeedbacks ? data.featuredFeedbacks : testimonials);
-            setServicesHighlits(data.servicesHighlits ? data.servicesHighlits : servicesHighlits);
+            setServices(data.services || services);
+            setVideoId(data.videoId || videoId);
+            setBlogs(data.featuredPosts || []);
+            setProjects(data.projects || []);
+            setTestimonials(data.featuredFeedbacks || []);
+        } catch (err) {
+            console.error("Error fetching data:", err);
+        } finally {
+            setLoading(false); // Set loading to false after fetching (success or error)
         }
-        catch (err) {
-            console.log(err);
-        }
-
-        setLoading(false);
-
     };
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -163,27 +166,23 @@ const Home = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!formData.fullName || !formData.email || !formData.message) {
+            toast.error('Please fill all the fields');
+            return;
+        }
+
         try {
-            const response = await fetch('/api/sendMessage', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+            await axios.post('/api/sendMessage', formData)
+                .then((res => {
+                    if (!res.ok) {
+                        throw new Error('Failed to send message');
+                    }
 
-            if (!response.ok) {
-                throw new Error('Failed to send message');
-            }
+                    toast.success('Message sent successfully!');
+                    setFormData({ name: '', email: '', message: '' });
 
-            Swal.fire({
-                title: "The Internet?",
-                text: "That thing is still around?",
-                icon: "question"
-            });
+                }))
 
-            alert('Message sent successfully!');
-            setFormData({ name: '', email: '', message: '' });
         } catch (error) {
             console.error('Error sending message:', error);
             alert('Failed to send message. Please try again later.');
@@ -232,10 +231,6 @@ const Home = () => {
         elSec.style.transform = 'perspective(500px) scale(1.01) rotateX(0) rotateY(0)';
     };
 
-    //End Of the image hover effects
-
-
-
     const handleScroll = () => {
         if (window.pageYOffset > 200) {
             setScrolled(true);
@@ -264,6 +259,17 @@ const Home = () => {
             video.play(); // Ensure the video plays again after resetting
         }
     };
+
+    async function showProjectDeilas(id) {
+        const data = await client.fetch(`*[_type == "project" && _id == $id][0]`, {
+            id: id,
+        });
+
+
+        setProjectShown(true);
+
+    }
+
 
     useEffect(() => {
         const video = videoRef.current;
@@ -319,9 +325,14 @@ const Home = () => {
         setIsPlaying((prev) => !prev);
     };
 
+
+    if (loading) {
+        return <Loading />;
+    }
+
     return (
+
         <div className='root_main'>
-            {loading ? <Loading /> : ''}
 
             <Navbar target={'home'} />
 
@@ -461,7 +472,7 @@ const Home = () => {
                                         finish it as soon as possible to make your work go easier on you.</p>
 
 
-                                    <button>GET STARTED</button>
+                                    <Link href={'reserve'}>GET STARTED</Link>
                                 </div>
                             </div>
 
@@ -483,7 +494,7 @@ const Home = () => {
                                             <div className="right">
                                                 <h4>Website design & Development</h4>
                                                 <p>Our team with professional designers and web developers will present the best 100% costumed website for your business</p>
-                                                <button>GET STARTED</button>
+                                                <Link Link href={'reserve'}>GET STARTED</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -493,7 +504,7 @@ const Home = () => {
                                     {services.length > 0 ? services?.map((service, index) =>
                                         <div className="card" key={index}>
                                             <div className="top">
-                                                <img src={imageUrlFor(service.icon)} alt={service.name} />
+                                                <img src={service.icon ? imageUrlFor(service?.icon) : ''} alt={service.name} />
                                             </div>
 
                                             <div className="bottom">
@@ -501,7 +512,7 @@ const Home = () => {
                                                     <h4>{service.title}</h4>
                                                     <p>{service.description}</p>
                                                 </div>
-                                                <button>GET STARTED</button>
+                                                <Link href={'reserve'}>GET STARTED</Link>
                                             </div>
                                         </div>
                                     ) : ''}
@@ -572,7 +583,7 @@ const Home = () => {
                                 </div>
 
                                 <div className="right">
-                                    <button>Order Now</button>
+                                    <Link href={'/reserve?scr=resereve'}>Order Now</Link>
                                 </div>
                             </div>
 
@@ -580,7 +591,7 @@ const Home = () => {
                             <div className="blogs_section">
                                 <div className="left">
                                     <h2>Get inspired,<br />Gain new skills <br />And see what's <br /><span>Trending</span></h2>
-                                    <button>Explore Blogs</button>
+                                    <Link href={'/blogs'}>Explore Blogs</Link>
                                 </div>
 
                                 <div className="right">
@@ -616,10 +627,18 @@ const Home = () => {
                             </div>
 
 
-                            {days > 0 && hours && minutes > 0 && seconds > 0 ? <div className="timer_section">
+                            {days !== 0 && hours !== 0 && minutes !== 0 && seconds !== 0 ? <div className="timer_section">
                                 <div className="left">
 
-                                    <h3>UP TO <span>30%</span></h3>
+                                    <h3>UP TO <span>
+                                        <CountUp
+                                            from={0}
+                                            to={50}
+                                            separator=","
+                                            direction="up"
+                                            duration={1}
+                                            className="count-up-text"
+                                        />%</span></h3>
 
                                     <div className="timer_container">
                                         <h4>
@@ -641,21 +660,32 @@ const Home = () => {
                                         </h4>
                                     </div>
 
-                                    <button>GET DISCOUNT</button>
+                                    <Link href={'/reserve?scr=pricing'}>GET DISCOUNT</Link>
 
                                 </div>
 
                                 <div className="right">
-                                    <h3>Limited Time Offer! <br />Act Fast for <br /><span>Up To 60% Discounts</span></h3>
+                                    <h3>Limited Time Offer! <br />Act Fast for <br /><span>UP To 50% Discounts</span></h3>
                                 </div>
                             </div> : ''}
 
                             <div className="background_container_under_sections">
 
+
+                                {projectShown ? <div className='project_container'>
+                                    <div className='project'>
+                                        <div className='top'>
+                                            <img src="https://placehold.co/400x300" alt="porject image" />
+                                        </div>
+
+                                        <div className='bottom'>
+
+                                        </div>
+                                    </div>
+                                </div> : ''}
+
                                 <div className="recent_projects">
-
                                     <h2>RECENT <span>PROJECTS</span></h2>
-
 
                                     <div className="projects_container">
 
@@ -678,7 +708,7 @@ const Home = () => {
 
                                                     <p>{item?.description?.length >= 80 ? item?.description?.split('').slice(0, 80).join('') + '...' : item?.description}</p>
 
-                                                    <button>
+                                                    <button onClick={() => showProjectDeilas(item._id)}>
                                                         GO TO DETAILS
                                                     </button>
                                                 </div>
@@ -705,7 +735,7 @@ const Home = () => {
                                             We Will Help Your Client To Reach Your Website , Easily In The First Link In Google
                                         </p>
 
-                                        <button>GET STARTED</button>
+                                        <Link href={'reserve'}>GET STARTED</Link>
                                     </div>
 
                                     <div className="right">
@@ -900,7 +930,7 @@ const feedback = (testimonials) => {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
-                {testimonials.lenght > 0 ?? testimonials?.map((testimonial, index) =>
+                {testimonials.lenght > 0 && testimonials?.map((testimonial, index) =>
                     <SwiperSlide key={index}>
                         <div className="container">
                             <div className='header'>
