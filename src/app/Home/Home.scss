@@ -2215,18 +2215,17 @@ $shadows-big: multiple-box-shadow(100);
                     gap: 90px;
 
                     .project_container {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.7);
+                        backdrop-filter: blur(10px);
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        flex-direction: column;
-                        width: 100%;
-                        height: 100dvh;
-                        box-sizing: border-box;
-                        max-width: 1400px;
-                        backdrop-filter: blur(20px);
-                        background-color: #121212b4;
-                        position: fixed;
-                        z-index: 99;
+                        z-index: 1000;
                     }
 
                     .here_for_you {
