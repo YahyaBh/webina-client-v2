@@ -3,10 +3,10 @@ import client from "@/app/lib/sanityClient";
 export async function POST(request) {
     try {
         // Parse the request body
-        const { name, email, message } = await request.json();
+        const { fullName, email, message } = await request.json();
 
         // Validate the input
-        if (!name || !email || !message) {
+        if (!fullName || !email || !message) {
             return new Response(
                 JSON.stringify({ success: false, message: "All fields are required" }),
                 {
@@ -16,10 +16,9 @@ export async function POST(request) {
             );
         }
 
-        // Save the contact form data to Sanity
         const result = await client.create({
-            _type: "contact", // The Sanity schema type you want to save to
-            name,
+            _type: "contact", 
+            name : fullName,
             email,
             message,
         });

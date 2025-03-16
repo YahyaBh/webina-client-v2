@@ -2131,7 +2131,7 @@ $shadows-big: multiple-box-shadow(100);
                             width: 80%;
                         }
 
-                        button {
+                        a {
                             background-color: var(--dark-color-primary);
                             width: max-content;
                             height: auto;
@@ -2226,6 +2226,81 @@ $shadows-big: multiple-box-shadow(100);
                         justify-content: center;
                         align-items: center;
                         z-index: 1000;
+
+                        .project {
+                            width: 80%;
+                            height: 80%;
+                            background: #fff;
+                            border-radius: 10px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-start;
+                            align-items: center;
+                            gap: 20px;
+                            padding: 0 20px;
+                            padding-bottom: 20px;
+                            box-sizing: border-box;
+                            position: relative;
+                            overflow-x: auto;
+
+                            .exit {
+                                display: flex;
+                                justify-content: flex-end;
+                                align-items: flex-end;
+                                width: 100%;
+                                position: sticky;
+                                top: 0;
+
+                                svg {
+                                    margin-top: 20px;
+                                    font-size: 1.2em;
+                                    color: #121212;
+                                    cursor: pointer;
+                                    background-color: #9b9b9b69;
+                                    border-radius: 50%;
+                                    width: 30px;
+                                    height: 30px;
+
+                                    &:hover {
+                                        transform: scale(0.96);
+                                    }
+                                }
+                            }
+
+                            .top {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
+                                img {
+                                    width: 100vw;
+                                    max-width: 100%;
+                                    min-height: 60dvh;
+                                    object-fit: cover;
+                                    border-radius: 10px;
+                                }
+                            }
+
+                            .bottom {
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: flex-start;
+                                flex-direction: column;
+                                gap: 20px;
+                                width: 100%;
+
+                                h3 {
+                                    color: #121212;
+                                    font-size: 1.8em;
+                                }
+
+                                p {
+                                    color: #1e1e1e;
+                                    font-size: 1em;
+                                    line-height: 1.6em;
+                                }
+                            }
+                        }
                     }
 
                     .here_for_you {
@@ -2354,7 +2429,7 @@ $shadows-big: multiple-box-shadow(100);
 
                         .swiper-slide {
                             text-align: center;
-                            background: #ffffff3c;
+                            background: #ffffff28;
                             border: 1px solid var(--black-color);
                             border-radius: 10px;
                             -webkit-border-radius: 10px;
@@ -2388,13 +2463,16 @@ $shadows-big: multiple-box-shadow(100);
                                     gap: 20px;
 
                                     img {
-                                        width: 70px;
-                                        height: 70px;
-                                        border-radius: 12px;
-                                        -webkit-border-radius: 12px;
-                                        -moz-border-radius: 12px;
-                                        -ms-border-radius: 12px;
-                                        -o-border-radius: 12px;
+                                        width: 40px;
+                                        height: 40px;
+                                        border-radius: 50%;
+                                        -webkit-border-radius: 50%;
+                                        -moz-border-radius: 50%;
+                                        -ms-border-radius: 50%;
+                                        -o-border-radius: 50%;
+                                        background-color: #fff;
+                                        object-fit: cover;
+                                        padding: 5px;
                                     }
 
                                     .stars-feed {
@@ -2424,8 +2502,8 @@ $shadows-big: multiple-box-shadow(100);
                                     p {
                                         color: var(--black-color);
                                         opacity: 0.8;
-                                        font-size: 16px;
-                                        font-weight: 400;
+                                        font-size: 1em;
+                                        font-weight: 500;
                                     }
                                 }
                             }
@@ -2697,9 +2775,25 @@ $shadows-big: multiple-box-shadow(100);
                                     font-weight: bold;
                                     margin: auto;
                                     margin-top: 40px;
-
                                     cursor: pointer;
                                     transition: all 0.3s ease;
+
+                                    svg {
+                                        color: #121212;
+
+                                        animation: Spinning 2s linear infinite;
+                                    }
+
+                                    @keyframes Spinning {
+                                        0% {
+                                            transform: rotate(0deg);
+                                        }
+
+                                        100% {
+                                            transform: rotate(360deg);
+                                        }
+                                    }
+
                                     &:hover {
                                         opacity: 0.8;
                                         transform: scale(1.06);

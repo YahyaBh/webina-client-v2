@@ -11,6 +11,7 @@ import { Tooltip } from 'react-tooltip';
 import YouTubePlayer from 'youtube-player';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -22,7 +23,7 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 import { SiRubyonrails, SiAdobepremierepro, SiAdobeaftereffects, SiVisualstudio, SiAndroidstudio, SiMysql, SiCplusplus, SiFlutter, SiBlender, SiNuxtdotjs } from 'react-icons/si';
 import { DiRuby } from 'react-icons/di';
-import { FaPhp, FaBootstrap, FaSwift, FaFigma, FaDocker, FaPython, FaSketch, FaReact, FaPlay } from 'react-icons/fa'
+import { FaPhp, FaBootstrap, FaSwift, FaFigma, FaDocker, FaPython, FaSketch, FaReact, FaPlay, FaSpinner } from 'react-icons/fa'
 import { BsArrowRight, BsWordpress } from 'react-icons/bs'
 import { IoIosArrowForward, IoIosArrowBack, IoLogoJavascript, IoLogoCss3, IoMdStar, IoMdStarOutline, IoMdStarHalf } from 'react-icons/io'
 
@@ -65,6 +66,9 @@ import { FiArrowRight } from 'react-icons/fi';
 import Link from 'next/link';
 import axios from 'axios';
 import CountUp from '../lib/CountUp';
+import { BiX } from 'react-icons/bi';
+import toast from 'react-hot-toast';
+import Cookies from 'js-cookie';
 
 
 
@@ -72,13 +76,14 @@ const Home = () => {
 
 
     const [loading, setLoading] = useState(true);
+    const [contactLoading, setContactLoading] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [projectShown, setProjectShown] = useState(false);
 
     const [targetDate, setTargetDate] = useState('');
     const [testimonials, setTestimonials] = useState([]);
     const [projects, setProjects] = useState([]);
     const [videoId, setVideoId] = useState();
+    const [currentProject, setCurrentProject] = useState(null);
 
     const [homeTitle, setHomeTitle] = useState('ENHANCE YOUR');
     const [highlitedTitles, setHighlitedTitles] = useState(['REACH', 'GROWTH', 'EMBLEM']);
@@ -112,14 +117,13 @@ const Home = () => {
 
 
     useEffect(() => {
-        fetchData(); // Fetch data on component mount
+        fetchData(); 
         window.addEventListener('scroll', handleScroll);
 
-        // Cleanup event listener on unmount
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []); // Empty dependency array ensures this runs only once
+    }, []); 
 
 
     const fetchData = async () => {
@@ -155,13 +159,6 @@ const Home = () => {
         }
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -171,22 +168,26 @@ const Home = () => {
             return;
         }
 
+        if(Cookies.get('contactFormSubmitted')) {
+            toast.error('Please wait 24 hours before submitting again');
+            return;
+        }
+
+        setContactLoading(true);
+
         try {
             await axios.post('/api/sendMessage', formData)
                 .then((res => {
-                    if (!res.ok) {
-                        throw new Error('Failed to send message');
-                    }
-
                     toast.success('Message sent successfully!');
-                    setFormData({ name: '', email: '', message: '' });
-
+                    setFormData({ fullName: '', email: '', message: '' });
+                    Cookies.set('contactFormSubmitted', 'true', { expires: 1 })
                 }))
 
         } catch (error) {
-            console.error('Error sending message:', error);
-            alert('Failed to send message. Please try again later.');
+            toast.error('Failed to send message', error);
         }
+
+        setContactLoading(false);
     };
 
     const handleMouseMove = (e) => {
@@ -260,16 +261,6 @@ const Home = () => {
         }
     };
 
-    async function showProjectDeilas(id) {
-        const data = await client.fetch(`*[_type == "project" && _id == $id][0]`, {
-            id: id,
-        });
-
-
-        setProjectShown(true);
-
-    }
-
 
     useEffect(() => {
         const video = videoRef.current;
@@ -315,11 +306,21 @@ const Home = () => {
         if (playerInstance.current) {
             if (isPlaying) {
                 playerInstance.current.playVideo();
+                document.body.style.overflow = 'hidden';
             } else {
                 playerInstance.current.pauseVideo();
+                document.body.style.overflow = 'auto';
             }
         }
     }, [isPlaying]);
+
+    useEffect(() => {
+        if (currentProject !== null) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [currentProject])
 
     const toggleVideo = () => {
         setIsPlaying((prev) => !prev);
@@ -671,18 +672,30 @@ const Home = () => {
 
                             <div className="background_container_under_sections">
 
+                                <AnimatePresence>
+                                    {currentProject !== null ?
+                                        <motion.div
+                                            key="project-popup"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className='project_container'
+                                        >
+                                            <div className='project'>
+                                                <div className='exit' onClick={() => setCurrentProject(null)}><BiX /></div>
+                                                <div className='top'>
+                                                    <img src={imageUrlFor(currentProject?.mainImage)} alt="porject image" />
+                                                </div>
 
-                                {projectShown ? <div className='project_container'>
-                                    <div className='project'>
-                                        <div className='top'>
-                                            <img src="https://placehold.co/400x300" alt="porject image" />
-                                        </div>
-
-                                        <div className='bottom'>
-
-                                        </div>
-                                    </div>
-                                </div> : ''}
+                                                <div className='bottom'>
+                                                    <h3>{currentProject?.title}</h3>
+                                                    <p>{currentProject?.description}</p>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                        : ''}
+                                </AnimatePresence>
 
                                 <div className="recent_projects">
                                     <h2>RECENT <span>PROJECTS</span></h2>
@@ -708,7 +721,7 @@ const Home = () => {
 
                                                     <p>{item?.description?.length >= 80 ? item?.description?.split('').slice(0, 80).join('') + '...' : item?.description}</p>
 
-                                                    <button onClick={() => showProjectDeilas(item._id)}>
+                                                    <button onClick={() => setCurrentProject(item)}>
                                                         GO TO DETAILS
                                                     </button>
                                                 </div>
@@ -816,22 +829,26 @@ const Home = () => {
                                         <div className="top">
                                             <div className="input_cont">
                                                 <label htmlFor="full_name" >Full Name</label>
-                                                <input type="text" maxLength={30} name='full_name' value={formData.name} onChange={handleChange} required placeholder='Full Name' />
+                                                <input type="text" maxLength={30} name='full_name' value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} required placeholder='Full Name' />
                                             </div>
 
                                             <div className="input_cont">
                                                 <label htmlFor="full_name">Email Address</label>
-                                                <input type="email" maxLength={35} name='email_address' value={formData.name} onChange={handleChange} required placeholder='Email Address' />
+                                                <input type="email" maxLength={35} name='email_address' value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required placeholder='Email Address' />
                                             </div>
                                         </div>
 
                                         <div className="bottom">
                                             <label htmlFor="message">Message</label>
-                                            <textarea name="message" id="message" value={formData.name} onChange={handleChange} required placeholder='Enter your message' ></textarea>
+                                            <textarea name="message" id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} required placeholder='Enter your message' ></textarea>
 
-                                            <button onClick={handleSubmit}>
-                                                SEND MESSAGE
-                                            </button>
+                                            {!contactLoading ?
+                                                <button onClick={handleSubmit}>
+                                                    SEND MESSAGE
+                                                </button> :
+                                                <button>
+                                                    <FaSpinner />
+                                                </button>}
                                         </div>
 
                                     </div>
@@ -851,7 +868,7 @@ const Home = () => {
                     </div>
                 </div>
             </div >
-        </div>
+        </div >
     )
 }
 
@@ -930,7 +947,7 @@ const feedback = (testimonials) => {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
-                {testimonials.lenght > 0 && testimonials?.map((testimonial, index) =>
+                {testimonials?.map((testimonial, index) =>
                     <SwiperSlide key={index}>
                         <div className="container">
                             <div className='header'>
