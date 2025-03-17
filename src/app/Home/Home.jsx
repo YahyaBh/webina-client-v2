@@ -43,7 +43,7 @@ import './Home.scss';
 import './movingPhone.scss'
 
 import BackGroundContainer from '../../../public/assets/Home/Section1/ComputerSectionHome.svg';
-import Computer1 from '../../../public/assets/Home/Section1/computer.png';
+import Computer1 from '../../../public/assets/Home/Section1/computer.svg';
 import contentPHONE from '../../../public/assets/Home/Section 2/contentPHONE.svg';
 
 import DarkFloatingWave from '../../../public/assets/Home/Section 2/OrnamentHorizDark.png'
