@@ -1,4 +1,4 @@
-'use client'; // Ensure this runs only on the client side
+'use client';
 
 import { useEffect, useRef } from 'react';
 import './Cursor.scss'
@@ -38,11 +38,19 @@ const CustomCursor = () => {
         const hoverables = ['A', 'BUTTON', 'INPUT', 'TEXTAREA'];
 
         const mouseEnterHandler = () => {
-            cursorCircle.current?.classList.add('hover');
+            cursorDot.current.style.opacity = 0; // Hide the dot
+            cursorCircle.current.style.backgroundColor = 'black'; // Fill the circle
+            cursorCircle.current.style.borderColor = 'transparent'; // Remove the border
+            cursorCircle.current.style.width = '40px'; // Increase size
+            cursorCircle.current.style.height = '40px';
         };
 
         const mouseLeaveHandler = () => {
-            cursorCircle.current?.classList.remove('hover');
+            cursorDot.current.style.opacity = 1; // Show the dot
+            cursorCircle.current.style.backgroundColor = 'transparent'; // Make the circle hollow
+            cursorCircle.current.style.borderColor = 'black'; // Restore the border
+            cursorCircle.current.style.width = '30px'; // Restore size
+            cursorCircle.current.style.height = '30px';
         };
 
         // Add event listeners

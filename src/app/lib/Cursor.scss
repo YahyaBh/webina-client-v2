@@ -1,4 +1,4 @@
-
+/* Hide default cursor */
 html,
 * {
     cursor: none !important;
@@ -8,30 +8,31 @@ html,
 .cursor-dot {
     width: 6px;
     height: 6px;
-    background-color: #ffe662;
+    background-color: #fff;
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
     z-index: 9999;
-    transition: transform 0.1s ease-out;
+    transition: opacity 0.2s ease;
 }
 
 .cursor-circle {
     width: 30px;
     height: 30px;
-    border: 2px solid #fff;
+    border: 2px solid #ffe662;
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
     z-index: 9998;
     transition:
-        width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
-        height 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
-        border-color 0.2s ease;
-}
+        width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 0.3s ease,
+        border-color 0.3s ease;
 
-.cursor-circle.hover {
-    width: 40px;
-    height: 40px;
-    border-color: rgba(0, 0, 0, 0.3);
+    /* Hover fill color */
+    &.hover {
+        background-color: #ff0000; /* Red fill */
+        border-color: transparent;
+    }
 }
