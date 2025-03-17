@@ -100,8 +100,7 @@ h1, h2, h3, h4, h5, h6, p, svg, li, a {
 
 html,
 body {
-  overflow-x: visible !important;
-  overflow-y: hidden !important;
+  overflow-x: hidden !important;
 }
 
 /* Chrome, Edge and Safari */
