@@ -821,6 +821,9 @@ header {
 
                 @media screen and (max-width: 900px) {
                     padding: 20px 10px;
+                    box-sizing: border-box;
+                    min-width: unset;
+                    width: 100%;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;

@@ -1,5 +1,6 @@
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
+import CustomCursor from "./lib/Cursor";
 
 
 export const metadata = {
@@ -32,19 +33,25 @@ export default function RootLayout({ children }) {
         <meta property="og:type" content="website" />
 
       </head>
-        <body>{children}</body>
-      <Toaster
-        position="bottom-right"
-        toastOptions={{
-          duration: 5000,
-          style: {
-            background: '#fff',
-            color: '#000',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-            padding: '16px',
-            borderRadius: '8px',
-          },
-        }} />
+      <body>
+        <CustomCursor />
+        {children}
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            duration: 5000,
+            style: {
+              background: '#fff',
+              color: '#000',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+              padding: '16px',
+              borderRadius: '8px',
+            },
+          }} />
+      </body>
+
+
+
     </html>
   );
 }

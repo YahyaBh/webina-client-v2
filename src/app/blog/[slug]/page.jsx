@@ -1,16 +1,24 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from "next/image";
-import client from "@/app/lib/sanityClient";
+import client, { imageUrlFor } from "@/app/lib/sanityClient";
 import Navbar from "@/app/Layouts/Navbar/Navbar";
 import { PortableText } from "@portabletext/react";
 import "./page.scss";
+import Loading from '@/app/Loading/Loading';
+import Footer from '@/app/Layouts/Footer/Footer';
 
-export default async function BlogPostPage({ params }) {
-    const post = await getPostBySlug(params.slug);
+export default function BlogPostPage({ params }) {
+
+    const post = getPostBySlug(params.slug);
 
 
-    const [postData, setPostData] = useState();
+    const [postData, setPostData] = useState({});
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        getPostBySlug(params.slug);
+    }, [params.slug]);
 
     async function getPostBySlug(slug) {
         const data = await client.fetch(
@@ -25,6 +33,10 @@ export default async function BlogPostPage({ params }) {
             },
             publishedAt,
             body,
+            categories[]->{
+              _id,
+              title
+            },
             author->{
               name,
               image {
@@ -37,9 +49,10 @@ export default async function BlogPostPage({ params }) {
           }`,
             { slug }
         );
-
         setPostData(data);
+        setLoading(false);
     }
+
 
     if (!post) {
         return (
@@ -50,21 +63,24 @@ export default async function BlogPostPage({ params }) {
         );
     }
 
-    return (
+    return loading ? (
+        <Loading />
+    ) : (
+
         <>
             <Navbar />
             <main className="blogPostMain">
                 <div className="hero">
-                    <h1>{post.title}</h1>
-                    <p>By {post.author.name}</p>
+                    <h1>{postData.title}</h1>
+                    <p>By {postData.author?.name ?? "Unknown"}</p>
                 </div>
 
                 <section className="postContent">
                     {postData.mainImage && (
                         <div className="imageWrapper">
                             <Image
-                                src={post.mainImage.asset.url || "/placeholder.svg"}
-                                alt={post.title}
+                                src={imageUrlFor(postData.mainImage) || "/placeholder.svg"}
+                                alt={postData.title}
                                 width={800}
                                 height={400}
                                 className="image"
@@ -74,16 +90,24 @@ export default async function BlogPostPage({ params }) {
 
                     <div className="content">
                         <time className="date">
-                            {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                            {new Date(postData.publishedAt).toLocaleDateString("en-US", {
                                 month: "long",
                                 day: "numeric",
                                 year: "numeric",
                             })}
                         </time>
 
+                        <div className='tags'>
+                            {postData.categories?.map((tag) => (
+                                <span key={tag._id} className="tag">
+                                    {tag.title}
+                                </span>
+                            ))}
+                        </div>
+
                         <div className="body">
                             <PortableText
-                                value={post.body}
+                                value={postData.body}
                                 components={{
                                     block: {
                                         normal: ({ children }) => <p>{children}</p>,
@@ -106,7 +130,7 @@ export default async function BlogPostPage({ params }) {
                                         image: ({ value }) => (
                                             <div className="blockImage">
                                                 <Image
-                                                    src={value.asset.url}
+                                                    src={imageUrlFor(value) || "/placeholder.svg"}
                                                     alt={value.alt || "Image"}
                                                     width={800}
                                                     height={400}
@@ -123,20 +147,22 @@ export default async function BlogPostPage({ params }) {
                         </div>
 
                         <div className="author">
-                            {post.author.image && (
+                            {postData.author?.image && (
                                 <Image
-                                    src={post.author.image.asset.url || "/placeholder.svg"}
-                                    alt={post.author.name}
+                                    src={imageUrlFor(postData.author.image) || "/placeholder.svg"}
+                                    alt={postData.author?.name ?? postData.author.name}
                                     width={40}
                                     height={40}
                                     className="authorImage"
                                 />
                             )}
-                            <span>{post.author.name}</span>
+                            <span>{postData.author?.name ?? 'Unknown'}</span>
                         </div>
                     </div>
                 </section>
             </main>
+
+            <Footer />
         </>
     );
 }
