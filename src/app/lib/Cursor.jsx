@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import './Cursor.scss'
+import './Cursor.scss';
 
 const CustomCursor = () => {
     const cursorDot = useRef(null);
@@ -34,34 +34,28 @@ const CustomCursor = () => {
             mouseY = e.clientY;
         };
 
-        // Hover handlers
-        const hoverables = ['A', 'BUTTON', 'INPUT', 'TEXTAREA'];
+        const handleHover = (e) => {
+            const tagName = e.target.tagName;
+            const hoverables = ['A', 'BUTTON', 'INPUT', 'TEXTAREA'];
 
-        const mouseEnterHandler = () => {
-            cursorDot.current.style.opacity = 0; // Hide the dot
-            cursorCircle.current.style.backgroundColor = 'black'; // Fill the circle
-            cursorCircle.current.style.borderColor = 'transparent'; // Remove the border
-            cursorCircle.current.style.width = '40px'; // Increase size
-            cursorCircle.current.style.height = '40px';
-        };
-
-        const mouseLeaveHandler = () => {
-            cursorDot.current.style.opacity = 1; // Show the dot
-            cursorCircle.current.style.backgroundColor = 'transparent'; // Make the circle hollow
-            cursorCircle.current.style.borderColor = 'black'; // Restore the border
-            cursorCircle.current.style.width = '30px'; // Restore size
-            cursorCircle.current.style.height = '30px';
+            if (hoverables.includes(tagName)) {
+                cursorDot.current.style.opacity = 0; // Hide the dot
+                cursorCircle.current.style.backgroundColor = 'black'; // Fill the circle
+                cursorCircle.current.style.borderColor = 'transparent'; // Remove the border
+                cursorCircle.current.style.width = '40px'; // Increase size
+                cursorCircle.current.style.height = '40px';
+            } else {
+                cursorDot.current.style.opacity = 1; // Show the dot
+                cursorCircle.current.style.backgroundColor = 'transparent'; // Make the circle hollow
+                cursorCircle.current.style.borderColor = 'black'; // Restore the border
+                cursorCircle.current.style.width = '30px'; // Restore size
+                cursorCircle.current.style.height = '30px';
+            }
         };
 
         // Add event listeners
         document.addEventListener('mousemove', mouseMoveHandler);
-
-        hoverables.forEach(tag => {
-            document.querySelectorAll(tag).forEach(element => {
-                element.addEventListener('mouseenter', mouseEnterHandler);
-                element.addEventListener('mouseleave', mouseLeaveHandler);
-            });
-        });
+        document.addEventListener('mouseover', handleHover); // Delegated hover detection
 
         // Start animation
         requestRef.current = requestAnimationFrame(animate);
@@ -70,13 +64,7 @@ const CustomCursor = () => {
         return () => {
             cancelAnimationFrame(requestRef.current);
             document.removeEventListener('mousemove', mouseMoveHandler);
-
-            hoverables.forEach(tag => {
-                document.querySelectorAll(tag).forEach(element => {
-                    element.removeEventListener('mouseenter', mouseEnterHandler);
-                    element.removeEventListener('mouseleave', mouseLeaveHandler);
-                });
-            });
+            document.removeEventListener('mouseover', handleHover);
         };
     }, []);
 
