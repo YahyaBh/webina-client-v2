@@ -298,14 +298,20 @@ const Home = () => {
         };
     }, [isPlaying, videoId]);
 
+    const setBodyOverflow = (value) => {
+        if (typeof window !== 'undefined') {
+            document.body.style.overflow = value;
+        }
+    };
+
     useEffect(() => {
         if (playerInstance.current) {
             if (isPlaying) {
                 playerInstance.current.playVideo();
-                document?.body.style.overflow = 'hidden';
+                setBodyOverflow('hidden');
             } else {
                 playerInstance.current.pauseVideo();
-                document?.body.style.overflow = 'auto';
+                setBodyOverflow('auto');
             }
         }
     }, [isPlaying]);
