@@ -1,30 +1,37 @@
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
-import "./page.scss";
-import Navbar from "../Layouts/Navbar/Navbar";
-import { MdArrowDownward, MdDone } from "react-icons/md";
-import BlurText from "../lib/BlurText";
+import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link, Element, scroller } from "react-scroll";
-import Footer from "../Layouts/Footer/Footer";
-import StarLeft from "../../../public/assets/Home/Contact Section/star-l.svg";
-import StarRight from "../../../public/assets/Home/Contact Section/star-r.svg";
 import Image from "next/image";
+import Cookies from "js-cookie";
+import axios from "axios";
+import toast from "react-hot-toast";
 import isEmail from "validator/lib/isEmail";
 import isMobilePhone from "validator/lib/isMobilePhone";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+
+// Icons
+import { MdArrowDownward, MdDone } from "react-icons/md";
 import { BiCopy, BiPhone } from "react-icons/bi";
 import { FiSun, FiSunrise, FiSunset } from "react-icons/fi";
 import { BsCalendar2Date, BsCameraVideo, BsClock } from "react-icons/bs";
-import { toast } from "react-hot-toast";
-import axios from "axios";
+
+// Components
+import Navbar from "../Layouts/Navbar/Navbar";
+import BlurText from "../lib/BlurText";
+import Footer from "../Layouts/Footer/Footer";
 import Loading from "../Loading/Loading";
-import Cookies from "js-cookie";
+
+// Assets
+import StarLeft from "../../../public/assets/Home/Contact Section/star-l.svg";
+import StarRight from "../../../public/assets/Home/Contact Section/star-r.svg";
+
+// Utilities
 import client, { imageUrlFor } from "../lib/sanityClient";
-import { useSearchParams } from "next/navigation";
 
 const ReserveContent = () => {
     const searchParams = useSearchParams();
@@ -132,382 +139,411 @@ const ReserveContent = () => {
         setLoadingSend(false);
     }
 
+    const slideUpVariant = {
+        hidden: { y: '100%', opacity: 1 },
+        visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: 'easeInOut' } },
+        exit: { y: '-100%', opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } }
+    };
+
+    const homeContentVariant = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { duration: 0.5, delay: 0.3 } }
+    };
+
+
     return (
         <>
-            {loading ? <Loading /> : ""}
+            <AnimatePresence>
+                {loading && (
+                    <motion.div
+                        className="loading-screen"
+                        variants={slideUpVariant}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                    >
+                        <Loading />
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
-            <header>
-                <Navbar target={"reserve"} />
+            <motion.div
+                variants={homeContentVariant}
+                initial="hidden"
+                animate={loading ? 'hidden' : 'visible'}>
+                <header>
+                    <Navbar target={"reserve"} />
 
-                <div className="container">
-                    <h2>
-                        <BlurText
-                            text="Request everything you want to create and leave webina digital it on the application"
-                            delay={50}
-                            animateBy="words"
-                            direction="top"
-                        />
-                    </h2>
-
-                    <div className="bottom">
-                        <img className="left-img" src="/Images/Reserve/HeaderHand.svg" />
-
-                        <Link to="reserve" smooth={true} duration={200}>
-                            <motion.button
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 20 }}
-                                transition={{ duration: 0.3 }}
-                                className="btn-cons"
-                            >
-                                CONSULTE FOR FREE! <MdArrowDownward />
-                            </motion.button>
-                        </Link>
-                        <img className="right-img" src="/Images/Reserve/HeaderHand.svg" />
-                    </div>
-                </div>
-            </header>
-
-            <div className="res-cont">
-                <section className="whoare">
                     <div className="container">
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3 }}
-                            variants={{
-                                visible: { opacity: 1, scale: 1 },
-                                hidden: { opacity: 0, scale: 0.5 },
-                            }}
-                            className="left"
-                        >
-                            <img src="/Images/Reserve/LogoContainer.svg" />
+                        <h2>
+                            <BlurText
+                                text="Request everything you want to create and leave webina digital it on the application"
+                                delay={50}
+                                animateBy="words"
+                                direction="top"
+                            />
+                        </h2>
 
-                            <div className="card">
-                                <span>1</span>
-                                <p>
-                                    Search Engine Optimization (SEO), experts optimize and improve
-                                    its visibility in search engine results
-                                </p>
-                            </div>
+                        <div className="bottom">
+                            <img className="left-img" src="/assets/Reserve/HeaderHand.svg" />
 
-                            <div className="bottom">
-                                <h3>
-                                    <span>WEBSITE</span> UI / UX{" "}
-                                </h3>
-                                <img src="/Images/Reserve/ArrowCont.svg" />
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3 }}
-                            variants={{
-                                visible: { opacity: 1, scale: 1 },
-                                hidden: { opacity: 0, scale: 0.5 },
-                            }}
-                            className="right"
-                        >
-                            <img src="/Images/Reserve/PhoneCont.svg" />
-
-                            <div className="card">
-                                <span>2</span>
-                                <p>
-                                    Targeted Advertising, data-driven insights and advanced
-                                    targeting techniques to reach your ideal audience.
-                                </p>
-                            </div>
-
-                            <div className="bottom">
-                                <h3>
-                                    {" "}
-                                    <span>APPS</span> UI / UX{" "}
-                                </h3>
-
-                                <img src="/Images/About/ArrowAb.svg" />
-                            </div>
-                        </motion.div>
+                            <Link to="reserve" smooth={true} duration={200}>
+                                <motion.button
+                                    initial={{ opacity: 0, y: -20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 20 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="btn-cons"
+                                >
+                                    CONSULTE FOR FREE! <MdArrowDownward />
+                                </motion.button>
+                            </Link>
+                            <img className="right-img" src="/assets/Reserve/HeaderHand.svg" />
+                        </div>
                     </div>
-                    <img src="/Images/Reserve/LineWave.svg" alt="line-wave" />
-                </section>
+                </header>
 
-                <Element name="pricing" className="packs">
-                    <h2>
-                        Our Offers <span>Web</span> / <span>Mobile</span> Apps
-                    </h2>
-
-                    <section className="container">
-                        {packs.map((pack) => (
+                <div className="res-cont">
+                    <section className="whoare">
+                        <div className="container">
                             <motion.div
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.2 }}
+                                transition={{ duration: 0.3 }}
                                 variants={{
-                                    visible: { opacity: 1, y: 0 },
-                                    hidden: { opacity: 0, y: -20 },
+                                    visible: { opacity: 1, scale: 1 },
+                                    hidden: { opacity: 0, scale: 0.5 },
                                 }}
-                                key={pack._id}
-                                className="pack"
+                                className="left"
                             >
-                                <div className="top">
-                                    <h5>{pack.name}</h5>
-                                    <h3>{pack.price} DH</h3>
-                                    <h4>{pack.description}</h4>
+                                <img src="/assets/Reserve/LogoContainer.svg" />
+
+                                <div className="card">
+                                    <span>1</span>
+                                    <p>
+                                        Search Engine Optimization (SEO), experts optimize and improve
+                                        its visibility in search engine results
+                                    </p>
                                 </div>
 
                                 <div className="bottom">
-                                    <ul>
-                                        {pack.specs.map((spec) => (
-                                            <li>
-                                                <span>
-                                                    <MdDone />
-                                                </span>{" "}
-                                                <h3>{spec}</h3>
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    <Link to="reserve" smooth={true} duration={200}>
-                                        GET STARTED
-                                    </Link>
+                                    <h3>
+                                        <span>WEBSITE</span> UI / UX{" "}
+                                    </h3>
+                                    <img src="/assets/Reserve/ArrowCont.svg" />
                                 </div>
                             </motion.div>
-                        ))}
+                            <motion.div
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.3 }}
+                                variants={{
+                                    visible: { opacity: 1, scale: 1 },
+                                    hidden: { opacity: 0, scale: 0.5 },
+                                }}
+                                className="right"
+                            >
+                                <img src="/assets/Reserve/PhoneCont.svg" />
+
+                                <div className="card">
+                                    <span>2</span>
+                                    <p>
+                                        Targeted Advertising, data-driven insights and advanced
+                                        targeting techniques to reach your ideal audience.
+                                    </p>
+                                </div>
+
+                                <div className="bottom">
+                                    <h3>
+                                        {" "}
+                                        <span>APPS</span> UI / UX{" "}
+                                    </h3>
+
+                                    <img src="/Images/About/ArrowAb.svg" />
+                                </div>
+                            </motion.div>
+                        </div>
+                        <img src="/assets/Reserve/LineWave.svg" alt="line-wave" />
                     </section>
-                </Element>
 
-                <div className="taper_line">
-                    <h3>WEBINA DIGITAL</h3>
-                    <h3>WEBINA DIGITAL</h3>
-                    <h3>WEBINA DIGITAL</h3>
-                    <h3>WEBINA DIGITAL</h3>
-                    <h3>WEBINA DIGITAL</h3>
-                    <h3>WEBINA DIGITAL</h3>
-                    <h3>WEBINA DIGITAL</h3>
-                </div>
+                    <Element name="pricing" className="packs">
+                        <h2>
+                            Our Offers <span>Web</span> / <span>Mobile</span> Apps
+                        </h2>
 
-                <Element name="reserve" className="reserve">
-                    <Image className="star_left" src={StarLeft} alt="star left" />
-                    <Image className="star_right" src={StarRight} alt="star right" />
-
-                    {!formSent ? (
-                        !loadingSend ? (
-                            <div>
-                                <h2>
-                                    <span>CONTACT</span> US
-                                </h2>
-                                <div className="form_container">
+                        <section className="container">
+                            {packs.map((pack) => (
+                                <motion.div
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.2 }}
+                                    variants={{
+                                        visible: { opacity: 1, y: 0 },
+                                        hidden: { opacity: 0, y: -20 },
+                                    }}
+                                    key={pack._id}
+                                    className="pack"
+                                >
                                     <div className="top">
-                                        <div className="input_cont">
-                                            <label htmlFor="first_name">First Name</label>
-                                            <input
-                                                type="text"
-                                                maxLength={30}
-                                                name="first_name"
-                                                onChange={(e) =>
-                                                    setUser({ ...user, first_name: e.target.value })
-                                                }
-                                                required
-                                                placeholder="First Name"
-                                            />
-                                        </div>
-
-                                        <div className="input_cont">
-                                            <label htmlFor="last_name">Last Name</label>
-                                            <input
-                                                type="text"
-                                                maxLength={30}
-                                                name="last_name"
-                                                onChange={(e) =>
-                                                    setUser({ ...user, last_name: e.target.value })
-                                                }
-                                                required
-                                                placeholder="Last Name"
-                                            />
-                                        </div>
-
-                                        <div className="input_cont service_cont">
-                                            <label htmlFor="service_chose">Service :</label>
-                                            <div className="select">
-                                                <button
-                                                    id="dropdown-button"
-                                                    className="select-button"
-                                                    role="combobox"
-                                                    aria-label="select button"
-                                                    aria-haspopup="listbox"
-                                                    aria-expanded="false"
-                                                    aria-controls="select-dropdown"
-                                                    onClick={() => setOpenDropServie(!isOpenDropService)}
-                                                >
-                                                    <span className={`selected-value ` + user.service ? 'active' : ''}>
-                                                        {user.service ? user.service.title : "Choose a service"}
-                                                    </span>
-                                                    <span className="arrow"></span>
-                                                </button>
-                                                {isOpenDropService && (
-                                                    <motion.div
-                                                        initial={{ opacity: 0, y: 20 }}
-                                                        animate={{ opacity: 1, y: 0 }}
-                                                        exit={{ opacity: 0, y: -20 }}
-                                                        transition={{ duration: 0.1 }}
-                                                    >
-                                                        <ul
-                                                            className="select-dropdown"
-                                                            role="listbox"
-                                                            id="select-dropdown"
-                                                            aria-labelledby="dropdown-button"
-                                                        >
-                                                            {services.map((service) => (
-                                                                <li
-                                                                    role="option"
-                                                                    onClick={() =>
-                                                                        setUser({ ...user, service: service })
-                                                                    }
-                                                                >
-                                                                    <img
-                                                                        src={imageUrlFor(service.icon)}
-                                                                        alt={"icon_" + service.title}
-                                                                    />{" "}
-                                                                    {service.title}
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </motion.div>
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        <div className="input_cont">
-                                            <label htmlFor="phone_number">Phone Number</label>
-                                            <PhoneInput
-                                                country={"ma"}
-                                                value={user.phone}
-                                                onChange={(e) => setUser({ ...user, phone: e })}
-                                            />
-                                        </div>
-
-                                        <div className="input_cont db">
-                                            <label htmlFor="email">Email Address</label>
-                                            <input
-                                                type="email"
-                                                maxLength={40}
-                                                name="email"
-                                                onChange={(e) =>
-                                                    setUser({ ...user, email: e.target.value })
-                                                }
-                                                required
-                                                placeholder="Email Address"
-                                            />
-                                        </div>
+                                        <h5>{pack.name}</h5>
+                                        <h3>{pack.price} DH</h3>
+                                        <h4>{pack.description}</h4>
                                     </div>
 
                                     <div className="bottom">
-                                        <Image className="star_left" src={StarLeft} alt="star left" />
-                                        <Image className="star_right" src={StarRight} alt="star right" />
+                                        <ul>
+                                            {pack.specs.map((spec) => (
+                                                <li>
+                                                    <span>
+                                                        <MdDone />
+                                                    </span>{" "}
+                                                    <h3>{spec}</h3>
+                                                </li>
+                                            ))}
+                                        </ul>
 
-                                        <DatePage user={user} setUser={setUser} dates={dates} />
+                                        <Link to="reserve" smooth={true} duration={200}>
+                                            GET STARTED
+                                        </Link>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </section>
+                    </Element>
 
-                                        <AnimatePresence>
-                                            {user.name !== "" &&
-                                                user.email !== "" &&
-                                                user.phone !== "" &&
-                                                user.date !== "" &&
-                                                user.time !== "" &&
-                                                user.meeting &&
-                                                user.service !== "" ? (
-                                                <motion.button
-                                                    initial={{ opacity: 0, y: 20 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    exit={{ opacity: 0, y: -20 }}
-                                                    whileHover={{ scale: 1.1 }}
-                                                    whileTap={{ scale: 0.9 }}
-                                                    className="btn"
-                                                    onClick={() => handleClick()}
-                                                >
-                                                    RESERVE NOW
-                                                </motion.button>
-                                            ) : (
-                                                ""
-                                            )}
-                                        </AnimatePresence>
+                    <div className="taper_line">
+                        <h3>WEBINA DIGITAL</h3>
+                        <h3>WEBINA DIGITAL</h3>
+                        <h3>WEBINA DIGITAL</h3>
+                        <h3>WEBINA DIGITAL</h3>
+                        <h3>WEBINA DIGITAL</h3>
+                        <h3>WEBINA DIGITAL</h3>
+                        <h3>WEBINA DIGITAL</h3>
+                    </div>
+
+                    <Element name="reserve" className="reserve">
+                        <Image className="star_left" src={StarLeft} alt="star left" />
+                        <Image className="star_right" src={StarRight} alt="star right" />
+
+                        {!formSent ? (
+                            !loadingSend ? (
+                                <div>
+                                    <h2>
+                                        <span>CONTACT</span> US
+                                    </h2>
+                                    <div className="form_container">
+                                        <div className="top">
+                                            <div className="input_cont">
+                                                <label htmlFor="first_name">First Name</label>
+                                                <input
+                                                    type="text"
+                                                    maxLength={30}
+                                                    name="first_name"
+                                                    onChange={(e) =>
+                                                        setUser({ ...user, first_name: e.target.value })
+                                                    }
+                                                    required
+                                                    placeholder="First Name"
+                                                />
+                                            </div>
+
+                                            <div className="input_cont">
+                                                <label htmlFor="last_name">Last Name</label>
+                                                <input
+                                                    type="text"
+                                                    maxLength={30}
+                                                    name="last_name"
+                                                    onChange={(e) =>
+                                                        setUser({ ...user, last_name: e.target.value })
+                                                    }
+                                                    required
+                                                    placeholder="Last Name"
+                                                />
+                                            </div>
+
+                                            <div className="input_cont service_cont">
+                                                <label htmlFor="service_chose">Service :</label>
+                                                <div className="select">
+                                                    <button
+                                                        id="dropdown-button"
+                                                        className="select-button"
+                                                        role="combobox"
+                                                        aria-label="select button"
+                                                        aria-haspopup="listbox"
+                                                        aria-expanded="false"
+                                                        aria-controls="select-dropdown"
+                                                        onClick={() => setOpenDropServie(!isOpenDropService)}
+                                                    >
+                                                        <span className={`selected-value ` + user.service ? 'active' : ''}>
+                                                            {user.service ? user.service.title : "Choose a service"}
+                                                        </span>
+                                                        <span className="arrow"></span>
+                                                    </button>
+                                                    {isOpenDropService && (
+                                                        <motion.div
+                                                            initial={{ opacity: 0, y: 20 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            exit={{ opacity: 0, y: -20 }}
+                                                            transition={{ duration: 0.1 }}
+                                                        >
+                                                            <ul
+                                                                className="select-dropdown"
+                                                                role="listbox"
+                                                                id="select-dropdown"
+                                                                aria-labelledby="dropdown-button"
+                                                            >
+                                                                {services.map((service) => (
+                                                                    <li
+                                                                        role="option"
+                                                                        onClick={() =>
+                                                                            setUser({ ...user, service: service })
+                                                                        }
+                                                                    >
+                                                                        <img
+                                                                            src={imageUrlFor(service.icon)}
+                                                                            alt={"icon_" + service.title}
+                                                                        />{" "}
+                                                                        {service.title}
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </motion.div>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            <div className="input_cont">
+                                                <label htmlFor="phone_number">Phone Number</label>
+                                                <PhoneInput
+                                                    country={"ma"}
+                                                    value={user.phone}
+                                                    onChange={(e) => setUser({ ...user, phone: e })}
+                                                />
+                                            </div>
+
+                                            <div className="input_cont db">
+                                                <label htmlFor="email">Email Address</label>
+                                                <input
+                                                    type="email"
+                                                    maxLength={40}
+                                                    name="email"
+                                                    onChange={(e) =>
+                                                        setUser({ ...user, email: e.target.value })
+                                                    }
+                                                    required
+                                                    placeholder="Email Address"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="bottom">
+                                            <Image className="star_left" src={StarLeft} alt="star left" />
+                                            <Image className="star_right" src={StarRight} alt="star right" />
+
+                                            <DatePage user={user} setUser={setUser} dates={dates} />
+
+                                            <AnimatePresence>
+                                                {user.name !== "" &&
+                                                    user.email !== "" &&
+                                                    user.phone !== "" &&
+                                                    user.date !== "" &&
+                                                    user.time !== "" &&
+                                                    user.meeting &&
+                                                    user.service !== "" ? (
+                                                    <motion.button
+                                                        initial={{ opacity: 0, y: 20 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        exit={{ opacity: 0, y: -20 }}
+                                                        whileHover={{ scale: 1.1 }}
+                                                        whileTap={{ scale: 0.9 }}
+                                                        className="btn"
+                                                        onClick={() => handleClick()}
+                                                    >
+                                                        RESERVE NOW
+                                                    </motion.button>
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ) : (
-                            <div className="spinner"></div>
-                        )
-                    ) : (
-                        <div className="form_sent_container">
-                            {Cookies.get("form-sent") === "true" ? (
-                                <div>
-                                    <h2>We have sent you a verification email</h2>
-                                    <p>
-                                        The email will expire in 24 hours. If so, please re-send a new
-                                        form. Check your email spam.
-                                    </p>
-                                </div>
                             ) : (
-                                <h2>{Cookies.get("form-sent")?.toString()}</h2>
-                            )}
+                                <div className="spinner"></div>
+                            )
+                        ) : (
+                            <div className="form_sent_container">
+                                {Cookies.get("form-sent") === "true" ? (
+                                    <div>
+                                        <h2>We have sent you a verification email</h2>
+                                        <p>
+                                            The email will expire in 24 hours. If so, please re-send a new
+                                            form. Check your email spam.
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <h2>{Cookies.get("form-sent")?.toString()}</h2>
+                                )}
+                            </div>
+                        )}
+                    </Element>
+                </div>
+
+                <div className="contact_info">
+                    <h2>
+                        YOU NEED A CUSTOM SOFTWARE FOR <span>YOUR ENTERPRISE ?</span>
+                    </h2>
+
+                    <div className="back_info_bg"></div>
+                    <div className="back_info_bg"></div>
+
+                    <div className="contact_info_cards">
+                        <div className="card">
+                            <img src={"/assets/Reserve/email.png"} alt="email" />
+                            <div className="body">
+                                <h3>contact@webinadigital.com</h3>
+                                <BiCopy
+                                    onClick={() => {
+                                        navigator.clipboard.writeText("contact@webinadigital.com");
+                                        toast.success("Email copied to clipboard");
+                                    }}
+                                />
+                            </div>
                         </div>
-                    )}
-                </Element>
-            </div>
 
-            <div className="contact_info">
-                <h2>
-                    YOU NEED A CUSTOM SOFTWARE FOR <span>YOUR ENTERPRISE ?</span>
-                </h2>
-
-                <div className="back_info_bg"></div>
-                <div className="back_info_bg"></div>
-
-                <div className="contact_info_cards">
-                    <div className="card">
-                        <img src={"/Images/Reserve/email.png"} alt="email" />
-                        <div className="body">
-                            <h3>contact@webinadigital.com</h3>
-                            <BiCopy
-                                onClick={() => {
-                                    navigator.clipboard.writeText("contact@webinadigital.com");
-                                    toast.success("Email copied to clipboard");
-                                }}
-                            />
+                        <div className="card">
+                            <img src={"/assets/Reserve/what.png"} alt="whatsapp" />
+                            <div className="body">
+                                <h3>+212 620792331</h3>
+                                <BiCopy
+                                    onClick={() => {
+                                        navigator.clipboard.writeText("+212 620792331");
+                                        toast.success("Whatsapp number copied to clipboard");
+                                    }}
+                                />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="card">
-                        <img src={"/Images/Reserve/what.png"} alt="whatsapp" />
-                        <div className="body">
-                            <h3>+212 620792331</h3>
-                            <BiCopy
-                                onClick={() => {
-                                    navigator.clipboard.writeText("+212 620792331");
-                                    toast.success("Whatsapp number copied to clipboard");
-                                }}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <img src={"/Images/Reserve/phone.png"} alt="phone" />
-                        <div className="body">
-                            <h3>+212 620792331</h3>
-                            <BiCopy
-                                onClick={() => {
-                                    navigator.clipboard.writeText("+212 620792331");
-                                    toast.success("Phone number copied to clipboard");
-                                }}
-                            />
+                        <div className="card">
+                            <img src={"/assets/Reserve/phone.png"} alt="phone" />
+                            <div className="body">
+                                <h3>+212 620792331</h3>
+                                <BiCopy
+                                    onClick={() => {
+                                        navigator.clipboard.writeText("+212 620792331");
+                                        toast.success("Phone number copied to clipboard");
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <Footer />
+                <Footer />
+            </motion.div>
         </>
     );
 };

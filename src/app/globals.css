@@ -101,6 +101,7 @@ h1, h2, h3, h4, h5, h6, p, svg, li, a {
 html,
 body {
   overflow-x: hidden !important;
+  background-color: #121212;
 }
 
 /* Chrome, Edge and Safari */

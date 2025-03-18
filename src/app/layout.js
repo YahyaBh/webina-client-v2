@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
 
       </head>
       <body>
-        <CustomCursor ></CustomCursor>
+        {/* <CustomCursor /> */}
         {children}
         <Toaster
           position="bottom-right"

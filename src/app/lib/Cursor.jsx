@@ -39,17 +39,18 @@ const CustomCursor = () => {
             const hoverables = ['A', 'BUTTON', 'INPUT', 'TEXTAREA'];
 
             if (hoverables.includes(tagName)) {
-                cursorDot.current.style.opacity = 0; // Hide the dot
-                cursorCircle.current.style.backgroundColor = 'black'; // Fill the circle
-                cursorCircle.current.style.borderColor = 'transparent'; // Remove the border
-                cursorCircle.current.style.width = '40px'; // Increase size
-                cursorCircle.current.style.height = '40px';
+                cursorDot.current.style.opacity = 0;
+                cursorCircle.current.style.opacity = .6;
+                cursorCircle.current.style.backgroundColor = '#ffe662';
+                cursorCircle.current.style.borderColor = '#000';
+                cursorCircle.current.style.width = '35px';
+                cursorCircle.current.style.height = '35px';
             } else {
-                cursorDot.current.style.opacity = 1; // Show the dot
-                cursorCircle.current.style.backgroundColor = 'transparent'; // Make the circle hollow
-                cursorCircle.current.style.borderColor = 'black'; // Restore the border
-                cursorCircle.current.style.width = '30px'; // Restore size
-                cursorCircle.current.style.height = '30px';
+                cursorDot.current.style.opacity = 1;
+                cursorCircle.current.style.backgroundColor = 'transparent';
+                cursorCircle.current.style.borderColor = '#ffe662'; // Restore the border
+                cursorCircle.current.style.width = '25px'; // Restore size
+                cursorCircle.current.style.height = '25px';
             }
         };
 

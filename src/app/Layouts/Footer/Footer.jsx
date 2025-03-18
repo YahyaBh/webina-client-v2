@@ -2,6 +2,7 @@ import './Footer.scss'
 import Logo from '../../../../public/assets/Home/Navbar/WEBINA-Logo.png'
 import { FaFacebook, FaInstagram, FaTiktok, FaTwitter } from 'react-icons/fa'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Footer = () => {
 
@@ -41,8 +42,8 @@ const Footer = () => {
                     <Image src={Logo} alt="logo" />
 
                     <p>WEBINA DIGITAL , Get your business digitalized </p>
-                    <a href='/privacy-policy'>Privacy & Policy</a>
-                    <a href='/contact'>Contact Us</a>
+                    <Link href='/privacy-policy'>Privacy & Policy</Link>
+                    <Link href='/contact'>Contact Us</Link>
                 </ul>
             </div>
 
@@ -52,10 +53,10 @@ const Footer = () => {
                 </div>
 
                 <div>
-                    <a href='https://instagram.com/webina.digital' aria-label="Follow us on Instagram" target='_blank' rel="noreferrer"><FaInstagram /></a>
-                    <a href='https://facebook.com/webinadigital' aria-label="Follow us on Facebook" target='_blank' rel="noreferrer"><FaFacebook /></a>
-                    <a href='https://twitter.com/webina-digital' aria-label="Follow us on Twitter/X" target='_blank' rel="noreferrer"><FaTwitter /></a>
-                    <a href='https://tiktok.com/@webina.digital' aria-label="Follow us on TikokT" target='_blank' rel="noreferrer"><FaTiktok /></a>
+                    <Link href='https://instagram.com/webina.digital' aria-label="Follow us on Instagram" target='_blank' rel="noreferrer"><FaInstagram /></Link>
+                    <Link href='https://facebook.com/webinadigital' aria-label="Follow us on Facebook" target='_blank' rel="noreferrer"><FaFacebook /></Link>
+                    <Link href='https://twitter.com/webina-digital' aria-label="Follow us on Twitter/X" target='_blank' rel="noreferrer"><FaTwitter /></Link>
+                    <Link href='https://tiktok.com/@webina.digital' aria-label="Follow us on TikokT" target='_blank' rel="noreferrer"><FaTiktok /></Link>
                 </div>
             </div>
 

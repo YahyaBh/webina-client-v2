@@ -19,6 +19,9 @@ import 'swiper/css/navigation';
 
 import BlurText from "../lib/BlurText";
 import client, { imageUrlFor } from '../lib/sanityClient';
+import Link from 'next/link';
+import { AnimatePresence , motion } from 'framer-motion';
+import Loading from '../Loading/Loading';
 
 
 const About = () => {
@@ -40,260 +43,289 @@ const About = () => {
 
     };
 
+    const slideUpVariant = {
+        hidden: { y: '100%', opacity: 1 },
+        visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: 'easeInOut' } },
+        exit: { y: '-100%', opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } }
+    };
+
+    const homeContentVariant = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { duration: 0.5, delay: 0.3 } }
+    };
+
     return (
         <>
+            <AnimatePresence>
+                {loading && (
+                    <motion.div
+                        className="loading-screen"
+                        variants={slideUpVariant}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                    >
+                        <Loading />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <motion.div
+                variants={homeContentVariant}
+                initial="hidden"
+                animate={loading ? 'hidden' : 'visible'}>
+
+                <header>
+                    <Navbar target={"about"} />
 
 
-            <header>
-                <Navbar target={"about"} />
-
-
-                <div className='container'>
-                    <div className='glow-box'></div>
-                    <h2>
-                        <div className='left-li'>
-                            <div ></div>
-                            <div ></div>
-                            <div></div>
-                        </div>
-                        <BlurText
-                            text="ABOUT US"
-                            delay={150}
-                            animateBy="words"
-                            direction="top"
-                        />
-                        <div className='right-li'>
-                            <div ></div>
-                            <div ></div>
-                            <div></div>
-                        </div></h2>
-                    <h3 className='main-text'>WEBINA DIGITAL will help you with new digital solutions to make it easier for you and your customers</h3>
-
-
-
-                </div>
-
-            </header>
-
-            <section className='whoare'>
-                <div className='container'>
-                    <div className='left'>
-                        <h2>Who Are We ?</h2>
-
-                        <p>WEBINA DIGITAL is a forward-thinking company dedicated to empowering clients to elevate their businesses and careers. At its core, WEBINA DIGITAL focuses on helping individuals and organizations achieve balance by aligning their goals with the evolving demands of the modern era and the aspirations of future generations. Through innovative solutions and a client-centric approach, WEBINA DIGITAL strives to bridge the gap between traditional objectives and
-                            contemporary needs, fostering growth and success in an ever-changing landscape.</p>
-
-                        <img src='/Images/About/ArrowAb.svg' alt='arrow about' />
-                    </div>
-
-                    <div className='right' >
-                        <img src='/Images/About/LogoContainer.svg' alt='container' />
-                        <img src='/Images/About/Logo.svg' alt='logo' />
-                    </div>
-                </div>
-            </section>
-
-            <section className='missions'>
-                <div className='container'>
-                    <div className='left' >
-
-                        <div className='imgContainer'>
-                            <img src='/Images/About/ThrowingBoard.svg' alt='Board throw' />
-                        </div>
-
-                        <img className='arrow' src='/Images/About/ArrowThrow.svg' alt='arrow throwing' />
-                    </div>
-
-
-
-                    <div className='right'>
+                    <div className='container'>
                         <div className='glow-box'></div>
-                        <h2>Mission and Vision</h2>
+                        <h2>
+                            <div className='left-li'>
+                                <div ></div>
+                                <div ></div>
+                                <div></div>
+                            </div>
+                            <BlurText
+                                text="ABOUT US"
+                                delay={150}
+                                animateBy="words"
+                                direction="top"
+                            />
+                            <div className='right-li'>
+                                <div ></div>
+                                <div ></div>
+                                <div></div>
+                            </div></h2>
+                        <h3 className='main-text'>WEBINA DIGITAL will help you with new digital solutions to make it easier for you and your customers</h3>
 
-                        <p>Our mission is to guide organizations through the transformative journey of digitization, empowering them to unlock their full potential in a fast-paced, technology-driven world where digital transformation is essential for staying competitive and relevant. Our vision is to create a future where every organization seamlessly integrates digital solutions, fostering innovation, efficiency, and growth, as we strive to be the trusted partner that bridges traditional practices with cutting-edge technology,
-                            enabling businesses to not only adapt to change but also lead it in shaping a more connected and dynamic world.</p>
 
-                        <img src='/Images/About/Waves.svg' alt='waves about' />
-
-                    </div>
-                </div>
-            </section>
-
-            <section className='history'>
-                <div className='container'>
-
-
-                    <div className='left'>
-                        <div className='glow-box'></div>
-                        <h2>Our History</h2>
-
-                        <p>WEBINA DIGITAL was born out of a passion for helping businesses thrive in the digital age. Recognizing the challenges organizations face in adapting to rapid technological changes, we set out to create solutions that bridge the gap between traditional practices and modern innovation.</p>
-
-                        <button>Learn More <BiArrowFromLeft /></button>
 
                     </div>
 
-                    <div className='right' >
+                </header>
 
-                        <div className='imgContainer'>
-                            <img src='/Images/About/Books.svg' alt='Webina Book' />
+                <section className='whoare'>
+                    <div className='container'>
+                        <div className='left'>
+                            <h2>Who Are We ?</h2>
+
+                            <p>WEBINA DIGITAL is a forward-thinking company dedicated to empowering clients to elevate their businesses and careers. At its core, WEBINA DIGITAL focuses on helping individuals and organizations achieve balance by aligning their goals with the evolving demands of the modern era and the aspirations of future generations. Through innovative solutions and a client-centric approach, WEBINA DIGITAL strives to bridge the gap between traditional objectives and
+                                contemporary needs, fostering growth and success in an ever-changing landscape.</p>
+
+                            <img src='/assets/About/ArrowAb.svg' alt='arrow about' />
                         </div>
 
-                    </div>
-                </div>
-            </section>
-
-            <section className='products'>
-                <div className='container'>
-                    <div className='left' >
-
-                        <div className='imgContainer'>
-                            <img src='/Images/About/PhoneAbout.svg' alt='About Phone' />
-                        </div>
-
-                        <h2>Hello World</h2>
-
-                        <img className='arrow' src='/Images/About/ArrowPlanet.svg' alt='Planet Arrow' />
-                    </div>
-
-
-
-                    <div className='right'>
-                        <div className='glow-box'></div>
-                        <h2>What Sets Us Apart</h2>
-
-                        <p>Our tailored approach to digital transformation. We don’t believe in one-size-fits-all solutions; instead, we work closely with our clients to design strategies that align with their unique goals and challenges. Our team comprises seasoned professionals with years of experience in digital transformation, technology, and business strategy. We bring a wealth of knowledge and a proven track record of success to every project.</p>
-
-
-                        <div className='planet-container'>
-                            <img src='/Images/About/PlanetAbout.svg' alt='planet' />
+                        <div className='right' >
+                            <img src='/assets/About/LogoContainer.svg' alt='container' />
+                            <img src='/WEBINA.png' alt='logo' />
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section className='faq'>
-                <div className="accordion">
-                    <div className="accordion-item">
-                        <div className="left">
-                            <h2>01</h2>
+                <section className='missions'>
+                    <div className='container'>
+                        <div className='left' >
+
+                            <div className='imgContainer'>
+                                <img src='/assets/About/ThrowingBoard.svg' alt='Board throw' />
+                            </div>
+
+                            <img className='arrow' src='/assets/About/ArrowThrow.svg' alt='arrow throwing' />
                         </div>
+
+
 
                         <div className='right'>
-                            <div className='top'>
-                                <h2>What is the primary mission of your organization?</h2>
-                                <button>X</button>
+                            <div className='glow-box'></div>
+                            <h2>Mission and Vision</h2>
+
+                            <p>Our mission is to guide organizations through the transformative journey of digitization, empowering them to unlock their full potential in a fast-paced, technology-driven world where digital transformation is essential for staying competitive and relevant. Our vision is to create a future where every organization seamlessly integrates digital solutions, fostering innovation, efficiency, and growth, as we strive to be the trusted partner that bridges traditional practices with cutting-edge technology,
+                                enabling businesses to not only adapt to change but also lead it in shaping a more connected and dynamic world.</p>
+
+                            <img src='/assets/About/Waves.svg' alt='waves about' />
+
+                        </div>
+                    </div>
+                </section>
+
+                <section className='history'>
+                    <div className='container'>
+
+
+                        <div className='left'>
+                            <div className='glow-box'></div>
+                            <h2>Our History</h2>
+
+                            <p>WEBINA DIGITAL was born out of a passion for helping businesses thrive in the digital age. Recognizing the challenges organizations face in adapting to rapid technological changes, we set out to create solutions that bridge the gap between traditional practices and modern innovation.</p>
+
+                            <button>Learn More <BiArrowFromLeft /></button>
+
+                        </div>
+
+                        <div className='right' >
+
+                            <div className='imgContainer'>
+                                <img src='/assets/About/Books.svg' alt='Webina Book' />
                             </div>
-                            <div className='bottom'>
-                                <p>Our primary and unwavering mission is to guide you through the transformative journey of digitizing your organization. In today's fast-paced and tech-driven world, embracing digitalization is not merely a choice but a necessity for staying competitive and relevant. At the core of our mission lies the firm belief that
-                                    digitalization holds the key to unlocking your organization's full potential.</p>
+
+                        </div>
+                    </div>
+                </section>
+
+                <section className='products'>
+                    <div className='container'>
+                        <div className='left' >
+
+                            <div className='imgContainer'>
+                                <img src='/assets/About/PhoneAbout.svg' alt='About Phone' />
+                            </div>
+
+                            <h2>Hello World</h2>
+
+                            <img className='arrow' src='/assets/About/ArrowPlanet.svg' alt='Planet Arrow' />
+                        </div>
+
+
+
+                        <div className='right'>
+                            <div className='glow-box'></div>
+                            <h2>What Sets Us Apart</h2>
+
+                            <p>Our tailored approach to digital transformation. We don’t believe in one-size-fits-all solutions; instead, we work closely with our clients to design strategies that align with their unique goals and challenges. Our team comprises seasoned professionals with years of experience in digital transformation, technology, and business strategy. We bring a wealth of knowledge and a proven track record of success to every project.</p>
+
+
+                            <div className='planet-container'>
+                                <img src='/assets/About/PlanetAbout.svg' alt='planet' />
                             </div>
                         </div>
                     </div>
-                    <div className="accordion-item">
-                        <div className="left">
-                            <h2>01</h2>
+                </section>
+
+                <section className='faq'>
+                    <div className="accordion">
+                        <div className="accordion-item">
+                            <div className="left">
+                                <h2>01</h2>
+                            </div>
+
+                            <div className='right'>
+                                <div className='top'>
+                                    <h2>What is the primary mission of your organization?</h2>
+                                    <button>X</button>
+                                </div>
+                                <div className='bottom'>
+                                    <p>Our primary and unwavering mission is to guide you through the transformative journey of digitizing your organization. In today's fast-paced and tech-driven world, embracing digitalization is not merely a choice but a necessity for staying competitive and relevant. At the core of our mission lies the firm belief that
+                                        digitalization holds the key to unlocking your organization's full potential.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="accordion-item">
+                            <div className="left">
+                                <h2>01</h2>
+                            </div>
+
+                            <div className='right'>
+                                <div className='top'>
+                                    <h2>What is the primary mission of your organization?</h2>
+                                    <button>X</button>
+                                </div>
+                                <div className='bottom'>
+                                    <p>Our primary and unwavering mission is to guide you through the transformative journey of digitizing your organization. In today's fast-paced and tech-driven world, embracing digitalization is not merely a choice but a necessity for staying competitive and relevant. At the core of our mission lies the firm belief that
+                                        digitalization holds the key to unlocking your organization's full potential.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="accordion-item">
+                            <div className="left">
+                                <h2>01</h2>
+                            </div>
+
+                            <div className='right'>
+                                <div className='top'>
+                                    <h2>What is the primary mission of your organization?</h2>
+                                    <button>X</button>
+                                </div>
+                                <div className='bottom'>
+                                    <p>Our primary and unwavering mission is to guide you through the transformative journey of digitizing your organization. In today's fast-paced and tech-driven world, embracing digitalization is not merely a choice but a necessity for staying competitive and relevant. At the core of our mission lies the firm belief that
+                                        digitalization holds the key to unlocking your organization's full potential.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="accordion-item">
+                            <div className="left">
+                                <h2>01</h2>
+                            </div>
+
+                            <div className='right'>
+                                <div className='top'>
+                                    <h2>What is the primary mission of your organization?</h2>
+                                    <button>X</button>
+                                </div>
+                                <div className='bottom'>
+                                    <p>Our primary and unwavering mission is to guide you through the transformative journey of digitizing your organization. In today's fast-paced and tech-driven world, embracing digitalization is not merely a choice but a necessity for staying competitive and relevant. At the core of our mission lies the firm belief that
+                                        digitalization holds the key to unlocking your organization's full potential.</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div className='right'>
-                            <div className='top'>
-                                <h2>What is the primary mission of your organization?</h2>
-                                <button>X</button>
-                            </div>
-                            <div className='bottom'>
-                                <p>Our primary and unwavering mission is to guide you through the transformative journey of digitizing your organization. In today's fast-paced and tech-driven world, embracing digitalization is not merely a choice but a necessity for staying competitive and relevant. At the core of our mission lies the firm belief that
-                                    digitalization holds the key to unlocking your organization's full potential.</p>
-                            </div>
-                        </div>
                     </div>
-                    <div className="accordion-item">
-                        <div className="left">
-                            <h2>01</h2>
-                        </div>
+                </section >
 
-                        <div className='right'>
-                            <div className='top'>
-                                <h2>What is the primary mission of your organization?</h2>
-                                <button>X</button>
-                            </div>
-                            <div className='bottom'>
-                                <p>Our primary and unwavering mission is to guide you through the transformative journey of digitizing your organization. In today's fast-paced and tech-driven world, embracing digitalization is not merely a choice but a necessity for staying competitive and relevant. At the core of our mission lies the firm belief that
-                                    digitalization holds the key to unlocking your organization's full potential.</p>
-                            </div>
-                        </div>
+                <section className='location'>
+                    <div className="container">
+                        <h2>Location</h2>
+
+                        <div><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=71-75%20Shelton%20St,%20London%20WC2H%209JQ%D8%8C%20%D8%A7%D9%84%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D9%85%D8%AA%D8%AD%D8%AF%D8%A9+(Webina%20Digital)&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><Link href="https://www.gps.ie/">gps map</Link></iframe></div>
                     </div>
-                    <div className="accordion-item">
-                        <div className="left">
-                            <h2>01</h2>
+                </section>
+
+                <div className="feedback_container">
+                    {feedback(testimonials)}
+
+                    <div className="swiper-pag"></div>
+
+                </div>
+
+                <img className='contact_line' src={'/assets/Home/Contact Section/line.svg'} alt='contact line' />
+
+                <div className="contact_us">
+
+                    <img className='star_left' src={'/assets/Home/Contact Section/star-l.svg'} alt='star left' />
+                    <img className='star_right' src={'/assets/Home/Contact Section/star-r.svg'} alt='star right' />
+
+                    <h2><span>CONTACT</span> US</h2>
+
+
+                    <div className="form_container">
+                        <div className="top">
+                            <div className="input_cont">
+                                <label htmlFor="full_name" >Full Name</label>
+                                <input type="text" maxLength={30} name='full_name' required placeholder='Full Name' />
+                            </div>
+
+                            <div className="input_cont">
+                                <label htmlFor="full_name">Email Address</label>
+                                <input type="email" maxLength={35} name='email_address' required placeholder='Email Address' />
+                            </div>
                         </div>
 
-                        <div className='right'>
-                            <div className='top'>
-                                <h2>What is the primary mission of your organization?</h2>
-                                <button>X</button>
-                            </div>
-                            <div className='bottom'>
-                                <p>Our primary and unwavering mission is to guide you through the transformative journey of digitizing your organization. In today's fast-paced and tech-driven world, embracing digitalization is not merely a choice but a necessity for staying competitive and relevant. At the core of our mission lies the firm belief that
-                                    digitalization holds the key to unlocking your organization's full potential.</p>
-                            </div>
+                        <div className="bottom">
+                            <label htmlFor="message">Message</label>
+                            <textarea name="message" id="message" required placeholder='Enter your message' ></textarea>
+
+                            <button >
+                                SEND MESSAGE
+                            </button>
                         </div>
+
                     </div>
 
                 </div>
-            </section >
 
-            <section className='location'>
-                <div className="container">
-                    <h2>Location</h2>
-
-                    <div><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=71-75%20Shelton%20St,%20London%20WC2H%209JQ%D8%8C%20%D8%A7%D9%84%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D9%85%D8%AA%D8%AD%D8%AF%D8%A9+(Webina%20Digital)&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps map</a></iframe></div>
-                </div>
-            </section>
-
-            <div className="feedback_container">
-                {feedback(testimonials)}
-
-                <div className="swiper-pag"></div>
-
-            </div>
-
-            <img className='contact_line' src={'/assets/Home/Contact Section/line.svg'} alt='contact line' />
-
-            <div className="contact_us">
-
-                <img className='star_left' src={'/assets/Home/Contact Section/star-l.svg'} alt='star left' />
-                <img className='star_right' src={'/assets/Home/Contact Section/star-r.svg'} alt='star right' />
-
-                <h2><span>CONTACT</span> US</h2>
-
-
-                <div className="form_container">
-                    <div className="top">
-                        <div className="input_cont">
-                            <label htmlFor="full_name" >Full Name</label>
-                            <input type="text" maxLength={30} name='full_name' required placeholder='Full Name' />
-                        </div>
-
-                        <div className="input_cont">
-                            <label htmlFor="full_name">Email Address</label>
-                            <input type="email" maxLength={35} name='email_address' required placeholder='Email Address' />
-                        </div>
-                    </div>
-
-                    <div className="bottom">
-                        <label htmlFor="message">Message</label>
-                        <textarea name="message" id="message" required placeholder='Enter your message' ></textarea>
-
-                        <button >
-                            SEND MESSAGE
-                        </button>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <Footer />
+                <Footer />
+            </motion.div>
         </>
     )
 }

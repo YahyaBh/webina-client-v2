@@ -1,17 +1,18 @@
 "use client";
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
-import Logo from '/public/WEBINA-OG.png';
+import Logo from '/public/WEBINA-Logo.svg';
 
 import './Navbar.scss'
 
 
 import { FiArrowRight } from 'react-icons/fi'
 import { BsListNested, BsX } from 'react-icons/bs';
+import Link from 'next/link';
 
 
 
-const Navbar = ({ transparent}) => {
+const Navbar = ({ transparent }) => {
 
 
     const [scrolled, setScrolled] = useState(false);
@@ -61,15 +62,15 @@ const Navbar = ({ transparent}) => {
             <nav id='navbar' className={`${transparent ? `transparent` : ''} ${scrolled ? 'scrolled' : ''} dark-mode`}>
                 <div className='navbar'>
                     <div className='container'>
-                        <a href='/' className='logo'>
+                        <Link href='/' className='logo'>
                             <Image src={Logo} alt="logo" />
-                        </a>
+                        </Link>
 
                         <ul>
-                            <li><a href='/reserve?scr=pricing'>Pricing</a></li>
-                            <li><a href='/about'>About Us</a></li>
-                            <li><a href='/blogs'>Blogs</a></li>
-                            <li><a href='/contact'>Contact</a></li>
+                            <li><Link href='/reserve?scr=pricing'>Pricing</Link></li>
+                            <li><Link href='/about'>About Us</Link></li>
+                            <li><Link href='/blogs'>Blogs</Link></li>
+                            <li><Link href='/contact'>Contact</Link></li>
                         </ul>
 
                         <div className='right-container'>
@@ -100,12 +101,9 @@ const Navbar = ({ transparent}) => {
 
 
                             <div className='sign-buttons'>
-                                <button>
-                                    <a href='/reserve'>
-                                        <h3>GET STARTED</h3>
-                                        <FiArrowRight />
-                                    </a>
-                                </button>
+                                <Link href='/reserve'>
+                                    GET STARTED <FiArrowRight />
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -113,9 +111,9 @@ const Navbar = ({ transparent}) => {
             </nav>
 
             <nav id='responsive-navbar-s'>
-                <a href='/' className='logo'>
+                <Link href='/' className='logo'>
                     <Image src={Logo} alt="logo" />
-                </a>
+                </Link>
 
                 <div className='mode-res'>
                     <div className="aside-swit">
@@ -128,17 +126,17 @@ const Navbar = ({ transparent}) => {
                     <aside className={asideShow ? 'aside-active' : ''}>
 
                         <ul className='list'>
-                            <li><a href='/reserve?scr=pricing'>Pricing</a></li>
-                            <li><a href='/about'>About Us</a></li>
-                            <li><a href='/blogs'>Blogs</a></li>
-                            <li><a href='/contact'>Contact</a></li>
+                            <li><Link href='/reserve?scr=pricing'>Pricing</Link></li>
+                            <li><Link href='/about'>About Us</Link></li>
+                            <li><Link href='/blogs'>Blogs</Link></li>
+                            <li><Link href='/contact'>Contact</Link></li>
 
                             <div className='sign-buttons'>
                                 <button>
-                                    <a href='/register'>
+                                    <Link href='/register'>
                                         <FiArrowRight />
                                         <h3>GET STARTED</h3>
-                                    </a>
+                                    </Link>
                                 </button>
                             </div>
 

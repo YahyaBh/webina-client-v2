@@ -139,7 +139,7 @@ header {
 
         .left {
             flex-basis: 70%;
-            background: url(/Images/Reserve/BorderCont.svg);
+            background: url(/assets/Reserve/BorderCont.svg);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -218,7 +218,7 @@ header {
         .right {
             flex-basis: 30%;
             position: relative;
-            background: url(/Images/Reserve/BorderPhoneCont.svg);
+            background: url(/assets/Reserve/BorderPhoneCont.svg);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1233,7 +1233,7 @@ header {
     z-index: 5;
 
     .back_info_bg {
-        background: url(/Images/Reserve/FrameInfoCont.svg);
+        background: url(/assets/Reserve/FrameInfoCont.svg);
         background-position: left;
         background-repeat: no-repeat;
         background-size: cover;
