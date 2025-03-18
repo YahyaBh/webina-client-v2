@@ -1,3 +1,4 @@
+"use client";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import CustomCursor from "./lib/Cursor";
@@ -15,6 +16,24 @@ export const metadata = {
 
 
 export default function RootLayout({ children }) {
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const locoScroll = new LocomotiveScroll({
+        el: containerRef.current,
+        smooth: true,
+        multiplier: 1.5,
+        inertia: 0.8,
+        smartphone: { smooth: true },
+        tablet: { smooth: true },
+      });
+
+      return () => locoScroll.destroy();
+    }
+  }, []);
+
   return (
     <html lang="en">
       <head>
@@ -35,7 +54,9 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         {/* <CustomCursor /> */}
-        {children}
+        <div data-scroll-container ref={containerRef}>
+          {children}
+        </div>
         <Toaster
           position="bottom-right"
           toastOptions={{
