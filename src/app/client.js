@@ -1,20 +1,21 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CustomCursor from './lib/Cursor';
 
 const ClientWrapper = ({ children }) => {
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            document.body.style.overflow = 'hidden';
-        }
+        setIsClient(true);
+        // Add global client-side logic here
+        document.body.style.overflow = 'auto'; // Default overflow
     }, []);
 
-    return <div>
+    return isClient ? <div>
         <CustomCursor />
         {children}
-    </div>
+    </div> : null;
 }
 
 export default ClientWrapper;
