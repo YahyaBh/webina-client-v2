@@ -1,37 +1,27 @@
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
+import "./page.scss";
+import Navbar from "../Layouts/Navbar/Navbar";
+import { MdArrowDownward, MdDone } from "react-icons/md";
+import BlurText from "../lib/BlurText";
 import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link, Element, scroller } from "react-scroll";
+import Footer from "../Layouts/Footer/Footer";
+import StarLeft from "../../../public/assets/Home/Contact Section/star-l.svg";
+import StarRight from "../../../public/assets/Home/Contact Section/star-r.svg";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import axios from "axios";
-import toast from "react-hot-toast";
 import isEmail from "validator/lib/isEmail";
 import isMobilePhone from "validator/lib/isMobilePhone";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-
-// Icons
-import { MdArrowDownward, MdDone } from "react-icons/md";
-import { BiCopy, BiPhone } from "react-icons/bi";
-import { FiSun, FiSunrise, FiSunset } from "react-icons/fi";
-import { BsCalendar2Date, BsCameraVideo, BsClock } from "react-icons/bs";
-
-// Components
-import Navbar from "../Layouts/Navbar/Navbar";
-import BlurText from "../lib/BlurText";
-import Footer from "../Layouts/Footer/Footer";
 import Loading from "../Loading/Loading";
-
-// Assets
-import StarLeft from "../../../public/assets/Home/Contact Section/star-l.svg";
-import StarRight from "../../../public/assets/Home/Contact Section/star-r.svg";
-
-// Utilities
-import client, { imageUrlFor } from "../lib/sanityClient";
+import { BiCopy } from "react-icons/bi";
+import { BsClock } from "react-icons/bs";
 
 const ReserveContent = () => {
     const searchParams = useSearchParams();
@@ -125,7 +115,7 @@ const ReserveContent = () => {
 
         setLoadingSend(true);
         await axios
-            .post(`http://localhost:3000/api/sendEmail`, { user: user })
+            .post(`/api/sendEmail`, { user: user })
             .then((res) => {
                 Cookies.set("form-sent", true, { expires: 1 });
                 setFormSent(true);
@@ -171,6 +161,7 @@ const ReserveContent = () => {
                 variants={homeContentVariant}
                 initial="hidden"
                 animate={loading ? 'hidden' : 'visible'}>
+                    
                 <header>
                     <Navbar target={"reserve"} />
 

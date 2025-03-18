@@ -32,10 +32,6 @@ import { FiArrowRight } from 'react-icons/fi';
 
 import client, { imageUrlFor } from '../lib/sanityClient';
 
-
-import LocomotiveScroll from 'locomotive-scroll';
-import 'locomotive-scroll/dist/locomotive-scroll.css';
-
 import Navbar from '../Layouts/Navbar/Navbar';
 import Loading from '../Loading/Loading';
 import Footer from '../Layouts/Footer/Footer';
@@ -123,23 +119,6 @@ const Home = () => {
         fetchData();
         window.addEventListener('scroll', handleScroll);
 
-        if (typeof window !== 'undefined') {
-            const scrollContainer = document.querySelector('[data-scroll-container]');
-            const locoScroll = new LocomotiveScroll({
-                el: scrollContainer,
-                smooth: true,
-                multiplier: 1.5,      
-                inertia: 0.8,        
-                smartphone: { smooth: true },
-                tablet: { smooth: true },
-            })
-
-
-            return () => {
-                window.removeEventListener('scroll', handleScroll);
-                locoScroll.destroy();
-            }
-        }
     }, []);
 
 

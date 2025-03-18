@@ -1,7 +1,6 @@
-"use client";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
-import CustomCursor from "./lib/Cursor";
+import ClientWrapper from "./client";
 
 
 export const metadata = {
@@ -16,23 +15,6 @@ export const metadata = {
 
 
 export default function RootLayout({ children }) {
-
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    if (containerRef.current) {
-      const locoScroll = new LocomotiveScroll({
-        el: containerRef.current,
-        smooth: true,
-        multiplier: 1.5,
-        inertia: 0.8,
-        smartphone: { smooth: true },
-        tablet: { smooth: true },
-      });
-
-      return () => locoScroll.destroy();
-    }
-  }, []);
 
   return (
     <html lang="en">
@@ -53,22 +35,22 @@ export default function RootLayout({ children }) {
 
       </head>
       <body>
-        {/* <CustomCursor /> */}
-        <div data-scroll-container ref={containerRef}>
+        <ClientWrapper>
           {children}
-        </div>
-        <Toaster
-          position="bottom-right"
-          toastOptions={{
-            duration: 5000,
-            style: {
-              background: '#fff',
-              color: '#000',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-              padding: '16px',
-              borderRadius: '8px',
-            },
-          }} />
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              duration: 5000,
+              style: {
+                background: '#fff',
+                color: '#121212',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                padding: '16px',
+                borderRadius: '8px',
+              },
+            }} />
+        </ClientWrapper>
+
       </body>
 
 
