@@ -317,12 +317,8 @@ const Home = () => {
     }, [isPlaying]);
 
     useEffect(() => {
-        if (currentProject !== null) {
-            document?.body.style.overflow = 'hidden';
-        } else {
-            document?.body.style.overflow = 'auto';
-        }
-    }, [currentProject])
+        setBodyOverflow(currentProject !== null ? 'hidden' : 'auto');
+    }, [currentProject]);
 
     const toggleVideo = () => {
         setIsPlaying((prev) => !prev);
