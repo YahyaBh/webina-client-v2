@@ -8,8 +8,7 @@ const ClientWrapper = ({ children }) => {
 
     useEffect(() => {
         setIsClient(true);
-        // Add global client-side logic here
-        document.body.style.overflow = 'auto'; // Default overflow
+        document.body.style.overflow = 'auto';
     }, []);
 
     return isClient ? <div>

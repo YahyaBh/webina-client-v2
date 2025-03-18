@@ -8,6 +8,8 @@ import "./page.scss";
 import Loading from '@/app/Loading/Loading';
 import Footer from '@/app/Layouts/Footer/Footer';
 
+import { AnimatePresence , motion } from 'framer-motion';
+
 export default function BlogPostPage({ params }) {
 
     const post = getPostBySlug(params.slug);
