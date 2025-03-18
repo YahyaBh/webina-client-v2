@@ -39,14 +39,16 @@ const Navbar = ({ transparent }) => {
 
 
     const handleAsideShow = () => {
+        if (typeof window === 'undefined') return;
+        
         if (asideShow) {
-            setAsideShow(false)
-            window.document?.body.style.overflow = 'hidden !important';
+            setAsideShow(false);
+            document.body.style.overflow = 'hidden';
         } else {
             setAsideShow(true);
-            window.document?.body.style.overflow = 'visible !important';
+            document.body.style.overflow = 'visible';
         }
-    }
+    };
 
 
     const changeLang = (e) => {
