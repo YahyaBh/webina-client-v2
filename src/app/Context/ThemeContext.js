@@ -42,10 +42,10 @@
 //     //     };
 
 //     //     for (const [key, value] of Object.entries(themeVariables)) {
-//     //         document.documentElement.style.setProperty(key, value);
+//     //         document?.documentElement.style.setProperty(key, value);
 //     //     }
 
-//     //     document.documentElement.style.setProperty("transition", "all 0.3s ease");
+//     //     document?.documentElement.style.setProperty("transition", "all 0.3s ease");
 //     // }, [isDarkMode]);
 
 

@@ -57,25 +57,25 @@ const CustomCursor = () => {
             }
         };
 
-        document.addEventListener('mousemove', mouseMoveHandler);
-        document.addEventListener('mouseover', handleHover);
+        document?.addEventListener('mousemove', mouseMoveHandler);
+        document?.addEventListener('mouseover', handleHover);
 
         requestRef.current = requestAnimationFrame(animate);
 
         return () => {
             cancelAnimationFrame(requestRef.current);
-            document.removeEventListener('mousemove', mouseMoveHandler);
-            document.removeEventListener('mouseover', handleHover);
+            document?.removeEventListener('mousemove', mouseMoveHandler);
+            document?.removeEventListener('mouseover', handleHover);
         };
     }, []);
 
-    // Render cursor elements as a portal to document.body
+    // Render cursor elements as a portal to document?.body
     return ReactDOM.createPortal(
         <>
             <div ref={cursorDot} className="cursor-dot" />
             <div ref={cursorCircle} className="cursor-circle" />
         </>,
-        document.body
+        document?.body
     );
 };
 

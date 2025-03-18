@@ -302,19 +302,19 @@ const Home = () => {
         if (playerInstance.current) {
             if (isPlaying) {
                 playerInstance.current.playVideo();
-                document.body.style.overflow = 'hidden';
+                document?.body.style.overflow = 'hidden';
             } else {
                 playerInstance.current.pauseVideo();
-                document.body.style.overflow = 'auto';
+                document?.body.style.overflow = 'auto';
             }
         }
     }, [isPlaying]);
 
     useEffect(() => {
         if (currentProject !== null) {
-            document.body.style.overflow = 'hidden';
+            document?.body.style.overflow = 'hidden';
         } else {
-            document.body.style.overflow = 'auto';
+            document?.body.style.overflow = 'auto';
         }
     }, [currentProject])
 

@@ -41,10 +41,10 @@ const Navbar = ({ transparent }) => {
     const handleAsideShow = () => {
         if (asideShow) {
             setAsideShow(false)
-            window.document.body.style.overflow = 'hidden !important';
+            window.document?.body.style.overflow = 'hidden !important';
         } else {
             setAsideShow(true);
-            window.document.body.style.overflow = 'visible !important';
+            window.document?.body.style.overflow = 'visible !important';
         }
     }
 
