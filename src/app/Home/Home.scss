@@ -499,6 +499,16 @@ $shadows-big: multiple-box-shadow(100);
                 }
             }
         }
+
+        @media screen and (max-width: 1300px) {
+            h1 {
+                font-size: 3.5vw !important;
+            }
+
+            img {
+                width: 40dvw !important;
+            }
+        }
     }
 
     .active {
@@ -528,23 +538,23 @@ $shadows-big: multiple-box-shadow(100);
         flex-direction: column;
         position: relative;
 
+        &:hover {
+            height: 40px;
+
+            .scroll-downs {
+                height: 0;
+                opacity: 0;
+            }
+
+            h4 {
+                height: 0;
+                opacity: 0;
+            }
+        }
+
         .zipper-pull {
             @media screen and (max-width: 900px) {
                 display: none !important;
-            }
-
-            &:hover {
-                height: 40px;
-
-                .scroll-downs {
-                    height: 0;
-                    opacity: 0;
-                }
-
-                h4 {
-                    height: 0;
-                    opacity: 0;
-                }
             }
         }
 
