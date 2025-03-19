@@ -20,29 +20,29 @@ export default function BlogPostPage({ params }) {
                 setLoading(true);
                 const data = await client.fetch(
                     `*[_type == "post" && slug.current == $slug][0] {
-                        title,
-                        slug,
-                        mainImage {
-                          asset->{
-                            _id,
-                            url
-                          }
-                        },
-                        publishedAt,
-                        body,
-                        categories[]->{
-                          _id,
-                          title
-                        },
-                        author->{
-                          name,
-                          image {
+                            title,
+                            slug,
+                            mainImage {
                             asset->{
-                              _id,
-                              url
+                                _id,
+                                url
                             }
-                          }
-                        }
+                            },
+                            publishedAt,
+                            body,
+                            categories[]->{
+                            _id,
+                            title
+                            },
+                            author->{
+                            name,
+                            image {
+                                asset->{
+                                _id,
+                                url
+                                }
+                            }
+                            }
                     }`,
                     { slug: params.slug }
                 );
