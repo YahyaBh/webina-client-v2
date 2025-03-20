@@ -60,7 +60,7 @@ export default function BlogPostPage({ params }) {
         };
 
         fetchPost();
-    }, [params.slug]); // Add slug as dependency
+    }, [params.slug]);
 
     const slideUpVariant = {
         hidden: { y: '100%', opacity: 1 },
