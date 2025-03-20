@@ -2003,6 +2003,7 @@ $shadows-big: multiple-box-shadow(100);
                             -o-border-radius: 10px;
                             position: relative;
                             height: auto;
+                            max-height: 800px;
                             transition:
                                 transform 0.3s ease,
                                 box-shadow 0.3s ease; /* Smooth hover effect */
@@ -2020,7 +2021,6 @@ $shadows-big: multiple-box-shadow(100);
                             img {
                                 width: 100%;
                                 max-height: 300px;
-                                min-height: 40dvh;
                                 object-fit: cover;
                                 border-radius: 14px;
                                 -webkit-border-radius: 14px;
