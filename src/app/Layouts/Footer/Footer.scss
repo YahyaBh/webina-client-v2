@@ -87,8 +87,6 @@
         justify-content: space-around;
         align-items: center;
         flex-direction: row;
-        position: absolute; /* Change this to absolute */
-        bottom: 0; /* Stick to the bottom of the .footer */
 
         .data {
             display: flex;
