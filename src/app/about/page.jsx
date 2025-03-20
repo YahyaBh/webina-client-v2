@@ -9,25 +9,32 @@ import './About.scss'
 import Navbar from '../Layouts/Navbar/Navbar'
 import { BiArrowFromLeft } from 'react-icons/bi'
 import Footer from '../Layouts/Footer/Footer'
-import { IoIosArrowBack, IoIosArrowForward, IoMdStar, IoMdStarHalf, IoMdStarOutline } from 'react-icons/io'
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-
-import 'swiper/css';
-import 'swiper/css/navigation';
 
 import BlurText from "../lib/BlurText";
 import client, { imageUrlFor } from '../lib/sanityClient';
 import Link from 'next/link';
-import { AnimatePresence , motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Loading from '../Loading/Loading';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import Cookies from 'js-cookie';
+import Feedback from '../Layouts/Feedback/Feedback';
 
 
 const About = () => {
 
     const [testimonials, setTestimonials] = useState([]);
     const [loading, setLoading] = useState(true);
+
+        const [contactLoading, setContactLoading] = useState(false);
+    
+
+    const [formData, setFormData] = useState({
+            fullName: '',
+            email: '',
+            message: ''
+        });
 
     useEffect(() => {
         fetchData();
@@ -41,6 +48,37 @@ const About = () => {
 
         setLoading(false)
 
+    };
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!formData.fullName || !formData.email || !formData.message) {
+            toast.error('Please fill all the fields');
+            return;
+        }
+
+        if (Cookies.get('contactFormSubmitted')) {
+            toast.error('Please wait 24 hours before submitting again');
+            return;
+        }
+
+        setContactLoading(true);
+
+        try {
+            await axios.post('/api/sendMessage', formData)
+                .then((res => {
+                    toast.success('Message sent successfully!');
+                    setFormData({ fullName: '', email: '', message: '' });
+                    Cookies.set('contactFormSubmitted', 'true', { expires: 1 })
+                }))
+
+        } catch (error) {
+            toast.error('Failed to send message', error);
+        }
+
+        setContactLoading(false);
     };
 
     const slideUpVariant = {
@@ -282,7 +320,7 @@ const About = () => {
                 </section>
 
                 <div className="feedback_container">
-                    {feedback(testimonials)}
+                    {Feedback(testimonials)}
 
                     <div className="swiper-pag"></div>
 
@@ -302,26 +340,28 @@ const About = () => {
                         <div className="top">
                             <div className="input_cont">
                                 <label htmlFor="full_name" >Full Name</label>
-                                <input type="text" maxLength={30} name='full_name' required placeholder='Full Name' />
+                                <input type="text" maxLength={30} name='full_name' value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} required placeholder='Full Name' />
                             </div>
 
                             <div className="input_cont">
                                 <label htmlFor="full_name">Email Address</label>
-                                <input type="email" maxLength={35} name='email_address' required placeholder='Email Address' />
+                                <input type="email" maxLength={35} name='email_address' value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required placeholder='Email Address' />
                             </div>
                         </div>
 
                         <div className="bottom">
                             <label htmlFor="message">Message</label>
-                            <textarea name="message" id="message" required placeholder='Enter your message' ></textarea>
+                            <textarea name="message" id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} required placeholder='Enter your message' ></textarea>
 
-                            <button >
-                                SEND MESSAGE
-                            </button>
+                            {!contactLoading ?
+                                <button onClick={handleSubmit}>
+                                    SEND MESSAGE
+                                </button> :
+                                <button>
+                                    <FaSpinner />
+                                </button>}
                         </div>
-
                     </div>
-
                 </div>
 
                 <Footer />
@@ -333,98 +373,3 @@ const About = () => {
 export default About
 
 
-
-const feedback = (testimonials) => {
-
-    const RatingStars = ({ rating, maxRating }) => {
-        const filledStarsCount = Math.floor(rating); // Number of full stars (integer part)
-        const hasHalfStar = rating % 1 !== 0; // Check if there's a half star
-
-        const filledStars = Array.from({ length: filledStarsCount }, (_, index) => (
-            <IoMdStar key={index} />
-        ));
-
-        let halfStar = null;
-        if (hasHalfStar) {
-            halfStar = <IoMdStarHalf />; // Render half star if there's a fractional part
-        }
-
-        const emptyStarsCount = maxRating - filledStarsCount - (hasHalfStar ? 1 : 0);
-        const emptyStars = Array.from({ length: emptyStarsCount }, (_, index) => (
-            <IoMdStarOutline key={index} />
-        ));
-
-        return (
-            <div>
-                {filledStars}
-                {halfStar}
-                {emptyStars}
-            </div>
-        );
-    };
-
-    return (
-        <>
-            <div className='header-feed'>
-                <div>
-                    <h2>Our Customer <span>Feedback</span></h2>
-                    <p>Don’t take our word for it. Trust our customers</p>
-                </div>
-
-                <div className='swiper-buttons'>
-                    <div className='swiper-button-pre'><IoIosArrowBack /> PREVIOUS</div>
-                    <div className='swiper-button-nex'>NEXT <IoIosArrowForward /></div>
-                </div>
-            </div>
-
-
-            <Swiper
-                slidesPerView={3}
-                spaceBetween={30}
-                breakpoints={{
-                    320: {
-                        slidesPerView: 1,
-                        spaceBetween: 10,
-                    },
-                    480: {
-                        slidesPerView: 3,
-                        spaceBetween: 20,
-                    },
-                }}
-                pagination={{
-                    el: '.swiper-pag',
-                    clickable: true,
-                }}
-                navigation={{
-                    prevEl: '.swiper-button-pre',
-                    nextEl: '.swiper-button-nex',
-                }}
-                modules={[Pagination, Navigation]}
-                className="mySwiper"
-            >
-                {testimonials?.map((testimonial, index) =>
-                    <SwiperSlide key={index}>
-                        <div className="container">
-                            <div className='header'>
-                                <img src={imageUrlFor(testimonial.image) ? imageUrlFor(testimonial.image) : TestFeed} alt={testimonial.image.alt} />
-
-
-                                <div className='stars-feed'>
-                                    <RatingStars rating={testimonial.rating} maxRating={5} />
-                                </div>
-                            </div>
-
-                            <div className='body'>
-                                <h3>{testimonial.name}</h3>
-                                <p>{testimonial.message}</p>
-                            </div>
-                        </div>
-                    </SwiperSlide>
-                )}
-            </Swiper>
-
-
-
-        </>
-    )
-}
