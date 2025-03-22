@@ -48,15 +48,17 @@ const Footer = () => {
             </div>
 
             <div className='under-footer'>
-                <div className='data'>
-                    <h2>WEBINA DIGITAL LTD © 2023 All Rights Reserved</h2>
-                </div>
+                <div className='holder'>
+                    <div className='data'>
+                        <h2>WEBINA DIGITAL LTD © 2023 All Rights Reserved</h2>
+                    </div>
 
-                <div>
-                    <Link href='https://instagram.com/webina.digital' aria-label="Follow us on Instagram" target='_blank' rel="noreferrer"><FaInstagram /></Link>
-                    <Link href='https://facebook.com/webinadigital' aria-label="Follow us on Facebook" target='_blank' rel="noreferrer"><FaFacebook /></Link>
-                    <Link href='https://twitter.com/webina-digital' aria-label="Follow us on Twitter/X" target='_blank' rel="noreferrer"><FaTwitter /></Link>
-                    <Link href='https://tiktok.com/@webina.digital' aria-label="Follow us on TikokT" target='_blank' rel="noreferrer"><FaTiktok /></Link>
+                    <div>
+                        <Link href='https://instagram.com/webina.digital' aria-label="Follow us on Instagram" target='_blank' rel="noreferrer"><FaInstagram /></Link>
+                        <Link href='https://facebook.com/webinadigital' aria-label="Follow us on Facebook" target='_blank' rel="noreferrer"><FaFacebook /></Link>
+                        <Link href='https://twitter.com/webina-digital' aria-label="Follow us on Twitter/X" target='_blank' rel="noreferrer"><FaTwitter /></Link>
+                        <Link href='https://tiktok.com/@webina.digital' aria-label="Follow us on TikokT" target='_blank' rel="noreferrer"><FaTiktok /></Link>
+                    </div>
                 </div>
             </div>
 

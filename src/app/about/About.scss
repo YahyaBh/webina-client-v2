@@ -88,6 +88,18 @@ header {
             width: 50%;
             font-size: 1.2em;
         }
+
+
+        @media screen and (max-width:900px) {
+            h2 {
+                margin-top: 10dvh;
+            }
+
+            .main-text{
+                width: 80%;
+                font-size: 1.4em;
+            }
+        }
     }
 }
 

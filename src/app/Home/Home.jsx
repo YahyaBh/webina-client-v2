@@ -62,6 +62,7 @@ import CountUp from '../lib/CountUp';
 import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import Feedback from '../Layouts/Feedback/Feedback';
+import DecryptedText from '../lib/DecryptText';
 
 
 
@@ -80,7 +81,10 @@ const Home = () => {
     const [currentProject, setCurrentProject] = useState(null);
 
     const [homeTitle, setHomeTitle] = useState('ENHANCE YOUR');
+
+    const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
     const [highlitedTitles, setHighlitedTitles] = useState(['REACH', 'GROWTH', 'EMBLEM']);
+
     const [homeDescription, setHomeDescription] = useState('We are gonna create a well developed and designed website from your own choice and it will exactly as you desire and want The website you want will be created with high quality,our team which is formed with experienced programmers and designers will take of every corner.');
 
     const [services, setServices] = useState([]);
@@ -332,6 +336,14 @@ const Home = () => {
     };
 
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentTitleIndex((prev) => (prev + 1) % highlitedTitles.length);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <>
             <AnimatePresence>
@@ -357,53 +369,62 @@ const Home = () => {
                 <Navbar target={'home'} />
 
                 <div id='Home'>
-                    <header>
+                    <div className='header-placeholder'>
+                        <header>
 
-                        <div className="container-main">
-                            <div className="header-container">
-                                <div className="container">
-                                    <div className="left">
-                                        <div className="flip-container">
-                                            <h1>{homeTitle}
-                                                <div className="flip">
-                                                    <div className='special-flipper'><div>{highlitedTitles[0]}</div></div>
-                                                    <div><div>{highlitedTitles[1]}</div></div>
-                                                    <div><div>{highlitedTitles[2]}</div></div>
-                                                </div>
-                                            </h1>
+                            <div className="container-main">
+                                <div className="header-container">
+                                    <div className="container">
+                                        <div className="left">
+                                            <div className="flip-container">
+                                                <h1>{homeTitle}
+
+                                                    <span className='highlighted-title'>
+                                                        <DecryptedText
+                                                            text={highlitedTitles[currentTitleIndex]}
+                                                            speed={40}
+                                                            maxIterations={10}
+                                                            characters="ABCD1234!?#"
+                                                            animateOn="view"
+                                                            revealDirection="center"
+                                                        />
+                                                    </span>
+
+                                                </h1>
+                                            </div>
+
+                                            <p>{homeDescription}</p>
+
+                                            <Link href={'reserve'}>GET STARTED <FiArrowRight /></Link>
+
+                                            <div className='undertext'>
+                                                <BsArrowRight />
+                                                <h4>CHANGE YOUR <br /> IDEA TO A BUSINESS</h4>
+                                            </div>
                                         </div>
 
-                                        <p>{homeDescription}</p>
-
-                                        <Link href={'reserve'}>GET STARTED <FiArrowRight /></Link>
-
-                                        <div className='undertext'>
-                                            <BsArrowRight />
-                                            <h4>CHANGE YOUR <br /> IDEA TO A BUSINESS</h4>
+                                        <div className="right">
+                                            <div className='changing-image-container'
+                                                data-aos="fade-left"
+                                                onMouseMove={handleMouseMove}
+                                                onMouseLeave={handleMouseOut}
+                                                onMouseDown={handleMouseDown}
+                                                onMouseUp={handleMouseUp}>
+                                                <Image
+                                                    className={`over-top-image changing-image`}
+                                                    src={Computer1}
+                                                    ref={imageRef}
+                                                    alt="computer-science" />
+                                                <Image ref={tiltRef} src={BackGroundContainer} alt="container" />
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className="right">
-                                        <div className='changing-image-container'
-                                            data-aos="fade-left"
-                                            onMouseMove={handleMouseMove}
-                                            onMouseLeave={handleMouseOut}
-                                            onMouseDown={handleMouseDown}
-                                            onMouseUp={handleMouseUp}>
-                                            <Image
-                                                className={`over-top-image changing-image`}
-                                                src={Computer1}
-                                                ref={imageRef}
-                                                alt="computer-science" />
-                                            <Image ref={tiltRef} src={BackGroundContainer} alt="container" />
-                                        </div>
-                                    </div>
+
                                 </div>
-
-
                             </div>
-                        </div>
-                    </header>
+                        </header>
+                    </div >
 
                     <div className={scrolled ? 'scroll-section active' : 'scroll-section'} >
 
@@ -690,190 +711,190 @@ const Home = () => {
                                 </div> : ''}
 
                                 <div className="background_container_under_sections">
-
-                                    <AnimatePresence>
-                                        {currentProject !== null ?
-                                            <motion.div
-                                                key="project-popup"
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                exit={{ opacity: 0 }}
-                                                transition={{ duration: 0.3 }}
-                                                className='project_container'
-                                            >
-                                                <div className='project'>
-                                                    <div className='exit' onClick={() => setCurrentProject(null)}><BiX /></div>
-                                                    <div className='top'>
-                                                        <img src={imageUrlFor(currentProject?.mainImage)} alt="porject image" />
-                                                    </div>
-
-                                                    <div className='bottom'>
-                                                        <h3>{currentProject?.title}</h3>
-                                                        <p>{currentProject?.description}</p>
-                                                    </div>
-                                                </div>
-                                            </motion.div>
-                                            : ''}
-                                    </AnimatePresence>
-
-                                    <div className="recent_projects">
-                                        <h2>RECENT <span>PROJECTS</span></h2>
-
-                                        <div className="projects_container">
-
-                                            {projects?.map((item, index) => (
-                                                <div className="card" key={index + item.title}>
-                                                    <img src={imageUrlFor(item.mainImage)} alt={item.title} />
-
-
-                                                    <div className="bottom_container">
-                                                        <h4>{item.title}</h4>
-
-                                                        <div className="tags_container">
-                                                            {item?.tag?.map((tag, index) => (
-                                                                <div className="tag" key={index + tag}>
-                                                                    {tag}
-                                                                </div>
-
-                                                            ))}
+                                    <div className='container'>
+                                        <AnimatePresence>
+                                            {currentProject !== null ?
+                                                <motion.div
+                                                    key="project-popup"
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    exit={{ opacity: 0 }}
+                                                    transition={{ duration: 0.3 }}
+                                                    className='project_container'
+                                                >
+                                                    <div className='project'>
+                                                        <div className='exit' onClick={() => setCurrentProject(null)}><BiX /></div>
+                                                        <div className='top'>
+                                                            <img src={imageUrlFor(currentProject?.mainImage)} alt="porject image" />
                                                         </div>
 
-                                                        <p>{item?.description?.length >= 80 ? item?.description?.split('').slice(0, 80).join('') + '...' : item?.description}</p>
+                                                        <div className='bottom'>
+                                                            <h3>{currentProject?.title}</h3>
+                                                            <p>{currentProject?.description}</p>
+                                                        </div>
+                                                    </div>
+                                                </motion.div>
+                                                : ''}
+                                        </AnimatePresence>
 
-                                                        <button onClick={() => setCurrentProject(item)}>
-                                                            GO TO DETAILS
-                                                        </button>
+                                        <div className="recent_projects">
+                                            <h2>RECENT <span>PROJECTS</span></h2>
+
+                                            <div className="projects_container">
+
+                                                {projects?.map((item, index) => (
+                                                    <div className="card" key={index + item.title}>
+                                                        <img src={imageUrlFor(item.mainImage)} alt={item.title} />
+
+
+                                                        <div className="bottom_container">
+                                                            <h4>{item.title}</h4>
+
+                                                            <div className="tags_container">
+                                                                {item?.tag?.map((tag, index) => (
+                                                                    <div className="tag" key={index + tag}>
+                                                                        {tag}
+                                                                    </div>
+
+                                                                ))}
+                                                            </div>
+
+                                                            <p>{item?.description?.length >= 80 ? item?.description?.split('').slice(0, 80).join('') + '...' : item?.description}</p>
+
+                                                            <button onClick={() => setCurrentProject(item)}>
+                                                                GO TO DETAILS
+                                                            </button>
+                                                        </div>
+
+
+                                                    </div>
+                                                ))
+                                                }
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div className="seo_container">
+                                            <div className="left">
+                                                <h2>
+                                                    Get The First Position In <br />
+                                                    The Google <span>SEO</span>
+                                                </h2>
+
+                                                <p>
+                                                    We Will Help Your Client To Reach Your Website , Easily In The First Link In Google
+                                                </p>
+
+                                                <Link href={'reserve'}>GET STARTED</Link>
+                                            </div>
+
+                                            <div className="right">
+                                                <Image src={SEOPic} alt='seo_picture' />
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div className="here_for_you">
+
+
+                                            <h2>We’re here for you</h2>
+
+
+                                            <div className="cards_container">
+                                                <div className="card">
+                                                    <hr />
+
+                                                    <h3>24/7 Available</h3>
+
+                                                    <p>Watch tutorials and read detailed articles in the Webina Help Center.</p>
+
+                                                    <div className="link">
+                                                        <Link href="/contact">Contact Us Now</Link>
+                                                        <BsArrowRight />
+                                                    </div>
+                                                </div>
+
+                                                <div className="card">
+                                                    <hr />
+
+                                                    <h3>Get answers</h3>
+
+                                                    <p>Watch tutorials and read detailed articles in the Webina Help Center.</p>
+
+                                                    <div className="link">
+                                                        <Link href="/about">Go to FAQs</Link>
+                                                        <BsArrowRight />
+                                                    </div>
+                                                </div>
+
+                                                <div className="card">
+                                                    <hr />
+
+                                                    <h3>Get To Know Us</h3>
+
+                                                    <p>Watch tutorials and read detailed articles in the Webina Help Center.</p>
+
+                                                    <div className="link">
+                                                        <Link href="/about">Learn more now</Link>
+                                                        <BsArrowRight />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="feedback_container">
+                                            {Feedback(testimonials)}
+
+                                            <div className="swiper-pag"></div>
+
+                                        </div>
+
+                                        <Image className='contact_line' src={LineContact} alt='contact line' />
+
+                                        <div className="contact_us">
+
+                                            <Image className='star_left' src={StarLeft} alt='star left' />
+                                            <Image className='star_right' src={StarRight} alt='star right' />
+
+                                            <h2><span>CONTACT</span> US</h2>
+
+
+                                            <div className="form_container">
+                                                <div className="top">
+                                                    <div className="input_cont">
+                                                        <label htmlFor="full_name" >Full Name</label>
+                                                        <input type="text" maxLength={30} name='full_name' value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} required placeholder='Full Name' />
                                                     </div>
 
-
-                                                </div>
-                                            ))
-                                            }
-
-                                        </div>
-
-                                    </div>
-
-
-
-                                    <div className="seo_container">
-                                        <div className="left">
-                                            <h2>
-                                                Get The First Position In <br />
-                                                The Google <span>SEO</span>
-                                            </h2>
-
-                                            <p>
-                                                We Will Help Your Client To Reach Your Website , Easily In The First Link In Google
-                                            </p>
-
-                                            <Link href={'reserve'}>GET STARTED</Link>
-                                        </div>
-
-                                        <div className="right">
-                                            <Image src={SEOPic} alt='seo_picture' />
-                                        </div>
-                                    </div>
-
-
-
-
-
-                                    <div className="here_for_you">
-
-
-                                        <h2>We’re here for you</h2>
-
-
-                                        <div className="cards_container">
-                                            <div className="card">
-                                                <hr />
-
-                                                <h3>24/7 Available</h3>
-
-                                                <p>Watch tutorials and read detailed articles in the Webina Help Center.</p>
-
-                                                <div className="link">
-                                                    <Link href="/contact">Contact Us Now</Link>
-                                                    <BsArrowRight />
-                                                </div>
-                                            </div>
-
-                                            <div className="card">
-                                                <hr />
-
-                                                <h3>Get answers</h3>
-
-                                                <p>Watch tutorials and read detailed articles in the Webina Help Center.</p>
-
-                                                <div className="link">
-                                                    <Link href="/about">Go to FAQs</Link>
-                                                    <BsArrowRight />
-                                                </div>
-                                            </div>
-
-                                            <div className="card">
-                                                <hr />
-
-                                                <h3>Get To Know Us</h3>
-
-                                                <p>Watch tutorials and read detailed articles in the Webina Help Center.</p>
-
-                                                <div className="link">
-                                                    <Link href="/about">Learn more now</Link>
-                                                    <BsArrowRight />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="feedback_container">
-                                        {Feedback(testimonials)}
-
-                                        <div className="swiper-pag"></div>
-
-                                    </div>
-
-                                    <Image className='contact_line' src={LineContact} alt='contact line' />
-
-                                    <div className="contact_us">
-
-                                        <Image className='star_left' src={StarLeft} alt='star left' />
-                                        <Image className='star_right' src={StarRight} alt='star right' />
-
-                                        <h2><span>CONTACT</span> US</h2>
-
-
-                                        <div className="form_container">
-                                            <div className="top">
-                                                <div className="input_cont">
-                                                    <label htmlFor="full_name" >Full Name</label>
-                                                    <input type="text" maxLength={30} name='full_name' value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} required placeholder='Full Name' />
+                                                    <div className="input_cont">
+                                                        <label htmlFor="full_name">Email Address</label>
+                                                        <input type="email" maxLength={35} name='email_address' value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required placeholder='Email Address' />
+                                                    </div>
                                                 </div>
 
-                                                <div className="input_cont">
-                                                    <label htmlFor="full_name">Email Address</label>
-                                                    <input type="email" maxLength={35} name='email_address' value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required placeholder='Email Address' />
+                                                <div className="bottom">
+                                                    <label htmlFor="message">Message</label>
+                                                    <textarea name="message" id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} required placeholder='Enter your message' ></textarea>
+
+                                                    {!contactLoading ?
+                                                        <button onClick={handleSubmit}>
+                                                            SEND MESSAGE
+                                                        </button> :
+                                                        <button>
+                                                            <FaSpinner />
+                                                        </button>}
                                                 </div>
-                                            </div>
 
-                                            <div className="bottom">
-                                                <label htmlFor="message">Message</label>
-                                                <textarea name="message" id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} required placeholder='Enter your message' ></textarea>
-
-                                                {!contactLoading ?
-                                                    <button onClick={handleSubmit}>
-                                                        SEND MESSAGE
-                                                    </button> :
-                                                    <button>
-                                                        <FaSpinner />
-                                                    </button>}
                                             </div>
 
                                         </div>
-
                                     </div>
-
 
                                 </div>
 
@@ -887,7 +908,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div >
-            </motion.div>
+            </motion.div >
         </>
     )
 }
