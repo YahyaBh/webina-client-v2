@@ -118,7 +118,6 @@ const About = () => {
 
 
                     <div className='container'>
-                        <div className='glow-box'></div>
                         <h2>
                             <div className='left-li'>
                                 <div ></div>

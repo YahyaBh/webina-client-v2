@@ -89,16 +89,16 @@ header {
             font-size: 1.2em;
         }
 
-
-        @media screen and (max-width:900px) {
+        @media screen and (max-width: 900px) {
             h2 {
                 margin-top: 10dvh;
-                font-size: 3em;
+                font-size: 3em !important;
             }
 
-            .main-text{
+            .main-text {
                 width: 80%;
-                font-size: 1.4em;
+                font-size: 1.2em;
+                font-weight: 500;
             }
         }
     }
@@ -205,8 +205,13 @@ header {
 
             .left {
                 padding: 0;
+
+                h2 {
+                    font-size: 2.6em;
+                }
+
                 p {
-                    font-size: 2.4vw;
+                    font-size: 1em;
                 }
 
                 img {
@@ -311,8 +316,13 @@ header {
 
             .right {
                 padding: 0;
+
+                h2 {
+                    font-size: 2.6em;
+                }
+
                 p {
-                    font-size: 2.4vw;
+                    font-size: 1em;
                 }
 
                 img {
@@ -427,8 +437,13 @@ header {
 
             .left {
                 padding: 0;
+
+                h2 {
+                    font-size: 2.6em;
+                }
+
                 p {
-                    font-size: 2.4vw;
+                    font-size: 1em;
                 }
 
                 img {
@@ -553,8 +568,13 @@ header {
 
             .right {
                 padding: 0;
+
+                h2 {
+                    font-size: 2.6em;
+                }
+
                 p {
-                    font-size: 2.4vw;
+                    font-size: 1em;
                 }
 
                 img {
@@ -586,6 +606,7 @@ header {
             align-items: center;
             gap: 3em;
             width: 100%;
+            box-sizing: border-box;
 
             .left {
                 flex-basis: 5%;
@@ -637,6 +658,24 @@ header {
                     display: none;
                 }
             }
+
+            @media screen and (max-width: 900px) {
+                padding: 1em;
+
+                .left {
+                    h2 {
+                        font-size: 2em;
+                    }
+                }
+
+                .right {
+                    .top {
+                        h2 {
+                            font-size: 1.2em;
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -681,9 +720,19 @@ header {
                 border-radius: 70px;
             }
         }
+
+        @media screen and (max-width: 900px) {
+            h2 {
+                font-size: 2.6em;
+            }
+
+            div {
+                width: 100%;
+                padding: 10px;
+            }
+        }
     }
 }
-
 
 .contact_line {
     width: 100%;
@@ -706,6 +755,7 @@ header {
     width: 100%;
     position: relative;
     margin-top: 80px;
+    margin-bottom: 80px;
 
     .star_right {
         position: absolute;
@@ -735,7 +785,7 @@ header {
         align-items: center;
         flex-direction: column;
         gap: 30px;
-        width: 60%;
+        width: 50%;
 
         .top {
             display: flex;
@@ -856,6 +906,19 @@ header {
         .form_container {
             width: 100%;
             z-index: 5;
+
+            .top {
+                flex-direction: column;
+                width: 100%;
+
+                .input_cont {
+                    width: 100%;
+                    input {
+                        width: 100%;
+                        flex-basis: 100%;
+                    }
+                }
+            }
 
             .bottom {
                 button {
