@@ -19,6 +19,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
+        <link rel="preconnect" href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" />
+
         <title>WEBINA DIGITAL</title>
         <link rel="icon" href="faviconI.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

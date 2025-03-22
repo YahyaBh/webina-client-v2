@@ -63,34 +63,35 @@ import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import Feedback from '../Layouts/Feedback/Feedback';
 import DecryptedText from '../lib/DecryptText';
+import Script from 'next/script';
 
 
 
 
-const Home = () => {
+const Home = ({ data }) => {
 
 
     const [loading, setLoading] = useState(true);
     const [contactLoading, setContactLoading] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-
-    const [targetDate, setTargetDate] = useState('');
-    const [testimonials, setTestimonials] = useState([]);
-    const [projects, setProjects] = useState([]);
-    const [videoId, setVideoId] = useState();
     const [currentProject, setCurrentProject] = useState(null);
 
-    const [homeTitle, setHomeTitle] = useState('ENHANCE YOUR');
-
     const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-    const [highlitedTitles, setHighlitedTitles] = useState(['REACH', 'GROWTH', 'EMBLEM']);
-
-    const [homeDescription, setHomeDescription] = useState('We are gonna create a well developed and designed website from your own choice and it will exactly as you desire and want The website you want will be created with high quality,our team which is formed with experienced programmers and designers will take of every corner.');
-
-    const [services, setServices] = useState([]);
 
 
-    const [blogs, setBlogs] = useState([]);
+
+    const [pageData, setPageData] = useState({
+        homeTitle: 'ENHANCE YOUR',
+        highlitedTitles: ['REACH', 'GROWTH', 'EMBLEM'],
+        homeDescription: 'We are gonna create a well developed and designed website from your own choice and it will exactly as you desire and want The website you want will be created with high quality,our team which is formed with experienced programmers and designers will take of every corner.',
+        services: [],
+        projects: [],
+        blogs: [],
+        testimonials: [],
+        videoId: '',
+        targetDate: ''
+    });
+
     const [isPlaying, setIsPlaying] = useState(false);
 
     const [formData, setFormData] = useState({
@@ -99,7 +100,7 @@ const Home = () => {
         message: ''
     });
 
-    const [days, hours, minutes, seconds] = useCountdown(targetDate);
+    const [days, hours, minutes, seconds] = useCountdown(pageData?.targetDate);
 
     const tiltRef = useRef(null);
     const imageRef = useRef(null);
@@ -122,36 +123,31 @@ const Home = () => {
 
 
     const fetchData = async () => {
-        setLoading(true);
-        try {
-            const data = await client.fetch(`*[_type == "homePage"][0] { 
-            _id,
-                videoId,
-                homeTitle,
-                homeWords,
-                promoDate,
-                "servicesHighlits": servicesHighlits,
-                "featuredFeedbacks": featuredFeedbacks[] -> { _id, name, message, date, image, rating, slug },
-                "services": services[] -> { _id, title, description, icon, mainService },
-                "featuredPosts": featuredPosts[] -> { _id, title, slug, mainImage },
-                "projects": projects[] -> { _id, title, mainImage, tag, description } 
-            }`);
+        if (data) {
+            setPageData(prevState => ({
+                ...prevState,
+                homeTitle: data.homeTitle || prevState.homeTitle,
+                homeDescription: data.homeDescription || prevState.homeDescription,
+                targetDate: data.promoDate || prevState.targetDate,
+                services: data.services || prevState.services,
+                videoId: data.videoId || prevState.videoId,
+                blogs: data.featuredPosts || prevState.blogs,
+                projects: data.projects || prevState.projects,
+                testimonials: data.featuredFeedbacks || prevState.testimonials
+            }));
 
-            // Update state with fetched data
-            setHomeTitle(data.homeTitle || homeTitle);
-            setHighlitedTitles(data.homeWords || highlitedTitles);
-            setHomeDescription(data.homeDescription || homeDescription);
-            setTargetDate(data.promoDate);
-            setServices(data.services || services);
-            setVideoId(data.videoId || videoId);
-            setBlogs(data.featuredPosts || []);
-            setProjects(data.projects || []);
-            setTestimonials(data.featuredFeedbacks || []);
-        } catch (err) {
-            console.error("Error fetching data:", err);
-        } finally {
-            setLoading(false);
+            console.log("Data Fetched Successfully", data);
+
+
+        } else {
+            console.log("No data found");
+            toast.error('No data found');
+            setTimeout(() => {
+                window.history.back();
+            }, 6000);
         }
+
+        setLoading(false);
     };
 
 
@@ -279,7 +275,7 @@ const Home = () => {
     useEffect(() => {
         if (playerRef.current && isPlaying && !playerInstance.current) {
             playerInstance.current = YouTubePlayer(playerRef.current, {
-                videoId: videoId,
+                videoId: pageData?.videoId,
                 playerVars: {
                     autoplay: 1,
                 },
@@ -295,7 +291,7 @@ const Home = () => {
                 playerInstance.current.destroy();
             }
         };
-    }, [isPlaying, videoId]);
+    }, [isPlaying, pageData?.videoId]);
 
     const setBodyOverflow = (value) => {
         if (typeof window !== 'undefined') {
@@ -338,7 +334,7 @@ const Home = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentTitleIndex((prev) => (prev + 1) % highlitedTitles.length);
+            setCurrentTitleIndex((prev) => (prev + 1) % pageData?.highlitedTitles.length);
         }, 3000);
 
         return () => clearInterval(interval);
@@ -377,11 +373,11 @@ const Home = () => {
                                     <div className="container">
                                         <div className="left">
                                             <div className="flip-container">
-                                                <h1>{homeTitle}
+                                                <h1>{pageData?.homeTitle}
 
                                                     <span className='highlighted-title'>
                                                         <DecryptedText
-                                                            text={highlitedTitles[currentTitleIndex]}
+                                                            text={pageData?.highlitedTitles[currentTitleIndex]}
                                                             speed={40}
                                                             maxIterations={10}
                                                             characters="ABCD1234!?#"
@@ -393,7 +389,7 @@ const Home = () => {
                                                 </h1>
                                             </div>
 
-                                            <p>{homeDescription}</p>
+                                            <p>{pageData?.homeDescription}</p>
 
                                             <Link href={'reserve'}>GET STARTED <FiArrowRight /></Link>
 
@@ -542,7 +538,7 @@ const Home = () => {
                                     </div>
 
                                     <div className="cards_container">
-                                        {services.length > 0 ? services?.map((service, index) =>
+                                        {pageData?.services.length > 0 ? pageData?.services?.map((service, index) =>
                                             <div className="card" key={index}>
                                                 <div className="top">
                                                     <img src={service.icon ? imageUrlFor(service?.icon) : ''} alt={service.name} />
@@ -638,7 +634,7 @@ const Home = () => {
                                     <div className="right">
 
 
-                                        {blogs?.map(((item, index) => (
+                                        {pageData?.blogs?.map(((item, index) => (
                                             <Link href={`/blog/${item.slug.current}`} className="card" key={index}>
                                                 <img src={imageUrlFor(item.mainImage)} alt={'blog' + item.mainImage.alt} />
                                                 <h4>{(item.title).length >= 32 ? (item.title).split('').slice(0, 32).join('') + '...' : (item.title)}</h4>
@@ -742,7 +738,7 @@ const Home = () => {
 
                                             <div className="projects_container">
 
-                                                {projects?.map((item, index) => (
+                                                {pageData?.projects?.map((item, index) => (
                                                     <div className="card" key={index + item.title}>
                                                         <img src={imageUrlFor(item.mainImage)} alt={item.title} />
 
@@ -849,7 +845,7 @@ const Home = () => {
                                         </div>
 
                                         <div className="feedback_container">
-                                            {Feedback(testimonials)}
+                                            <Feedback testimonials={pageData?.testimonials} />
 
                                             <div className="swiper-pag"></div>
 
@@ -898,7 +894,7 @@ const Home = () => {
 
                                 </div>
 
-                                <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+                                <Script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></Script>
 
 
 

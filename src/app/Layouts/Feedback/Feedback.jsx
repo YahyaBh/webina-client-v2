@@ -11,7 +11,9 @@ import { imageUrlFor } from '../../lib/sanityClient';
 import { IoIosArrowForward, IoIosArrowBack, IoMdStar, IoMdStarOutline, IoMdStarHalf } from 'react-icons/io'
 
 
-const Feedback = (testimonials) => {
+const Feedback = ({ testimonials }) => {
+
+
 
     const RatingStars = ({ rating, maxRating }) => {
         const filledStarsCount = Math.floor(rating); // Number of full stars (integer part)

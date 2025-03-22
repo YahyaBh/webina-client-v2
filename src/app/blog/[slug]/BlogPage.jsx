@@ -1,66 +1,16 @@
-"use client"
-import { useEffect, useState } from 'react';
+// app/blog/[slug]/BlogPostPage.js (Client Component)
+"use client";
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from "next/image";
-import client, { imageUrlFor } from "@/app/lib/sanityClient";
-import Navbar from "@/app/Layouts/Navbar/Navbar";
 import { PortableText } from "@portabletext/react";
-import "./page.scss";
+import Navbar from "@/app/Layouts/Navbar/Navbar";
 import Loading from '@/app/Loading/Loading';
 import Footer from '@/app/Layouts/Footer/Footer';
-import { AnimatePresence, motion } from 'framer-motion';
+import { imageUrlFor } from "@/app/lib/sanityClient";
+import "./page.scss";
 
-export default function BlogPostPage({ params }) {
-    const [postData, setPostData] = useState(null);
+export default function BlogPostPage({ postData }) {
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const fetchPost = async () => {
-            try {
-                setLoading(true);
-                const data = await client.fetch(
-                    `*[_type == "post" && slug.current == $slug][0] {
-                            title,
-                            slug,
-                            mainImage {
-                            asset->{
-                                _id,
-                                url
-                            }
-                            },
-                            publishedAt,
-                            body,
-                            categories[]->{
-                            _id,
-                            title
-                            },
-                            author->{
-                            name,
-                            image {
-                                asset->{
-                                _id,
-                                url
-                                }
-                            }
-                            }
-                    }`,
-                    { slug: params.slug }
-                );
-
-                if (!data) {
-                    setError('Post not found');
-                } else {
-                    setPostData(data);
-                }
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchPost();
-    }, [params.slug]);
 
     const slideUpVariant = {
         hidden: { y: '100%', opacity: 1 },
@@ -73,26 +23,13 @@ export default function BlogPostPage({ params }) {
         visible: { opacity: 1, transition: { duration: 0.5, delay: 0.3 } }
     };
 
-    if (error) {
-        return (
-            <div className="not-found">
-                <h1>Error Loading Post</h1>
-                <p>{error}</p>
-            </div>
-        );
-    }
-
-    if (!postData && !loading) {
-        return (
-            <div className="not-found">
-                <h1>Post Not Found</h1>
-                <p>The blog post you are looking for does not exist.</p>
-            </div>
-        );
-    }
+    useEffect(() => {
+        if (postData) {
+            setLoading(false);
+        }
+    }, [postData]);
 
     return (
-
         <>
             <AnimatePresence>
                 {loading && (
