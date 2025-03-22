@@ -252,7 +252,7 @@ const ReserveContent = () => {
                                         <span>APPS</span> UI / UX{" "}
                                     </h3>
 
-                                    <img src="/Images/About/ArrowAb.svg" />
+                                    <img src="/assets/About/ArrowAb.svg" />
                                 </div>
                             </motion.div>
                         </div>
