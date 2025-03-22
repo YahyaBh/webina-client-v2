@@ -136,11 +136,9 @@ const Home = ({ data }) => {
                 testimonials: data.featuredFeedbacks || prevState.testimonials
             }));
 
-            console.log("Data Fetched Successfully", data);
 
 
         } else {
-            console.log("No data found");
             toast.error('No data found');
             setTimeout(() => {
                 window.history.back();
@@ -531,7 +529,7 @@ const Home = ({ data }) => {
                                                 <div className="right">
                                                     <h4>Website design & Development</h4>
                                                     <p>Our team with professional designers and web developers will present the best 100% costumed website for your business</p>
-                                                    <Link Link href={'reserve'}>GET STARTED</Link>
+                                                    <Link href={'reserve'}>GET STARTED</Link>
                                                 </div>
                                             </div>
                                         </div>

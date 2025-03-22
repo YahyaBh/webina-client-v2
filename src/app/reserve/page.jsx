@@ -122,7 +122,6 @@ const ReserveContent = () => {
                 toast.success("Email verification has been sent");
             })
             .catch((err) => {
-                console.log(err);
                 toast.error(err.response.data.message);
             });
 
@@ -563,7 +562,6 @@ const DatePage = ({ user, setUser, dates }) => {
         });
     }
 
-    console.log(removeTimeFromDates(dates));
 
     const tileDisabled = ({ date, view }) => {
         if (view !== "month") {

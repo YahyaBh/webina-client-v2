@@ -24,7 +24,6 @@ const EmailVerificationContent = () => {
             })
             .catch((err) => {
                 window.location.href = `${process.env.NEXT_PUBLIC_URL}/reserve`;
-                console.log(err);
                 toast.error('Email Is Not Verified');
             });
     }, [token]);

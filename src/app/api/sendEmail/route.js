@@ -8,7 +8,6 @@ const jwt = require('jsonwebtoken');
 export async function POST(request) {
     const { user } = await request.json();
 
-    console.log(user);
 
 
     if (!user.first_name || !user.last_name || !user.email || !user.phone || !user.service || !user.meeting || !user.date || !user.time) {
