@@ -89,7 +89,7 @@ const Home = ({ data }) => {
         blogs: [],
         testimonials: [],
         videoId: '',
-        targetDate: ''
+        targetDate: '2025-10-03'
     });
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -100,7 +100,9 @@ const Home = ({ data }) => {
         message: ''
     });
 
-    const [days, hours, minutes, seconds] = useCountdown(pageData?.targetDate);
+
+    const [days, hours, minutes, seconds] = pageData.targetDate ? useCountdown(pageData?.targetDate) : useCountdown('2025-10-03') ;
+
 
     const tiltRef = useRef(null);
     const imageRef = useRef(null);
