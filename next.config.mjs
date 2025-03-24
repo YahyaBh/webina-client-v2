@@ -2,7 +2,9 @@ import withBundleAnalyzer from '@next/bundle-analyzer';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // output: 'export',
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
     domains: ["cdn.sanity.io"],
   },

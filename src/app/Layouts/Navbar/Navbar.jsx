@@ -1,7 +1,7 @@
 "use client";
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
-import Logo from '/public/WEBINA-Logo.svg';
+import Logo from '/public/WEBINA-Logo.webp';
 
 import './Navbar.scss'
 
@@ -83,15 +83,15 @@ const Navbar = ({ transparent }) => {
                                     {language && (
                                         <div className="options">
                                             <div className="option" onClick={() => changeLang('en')}>
-                                                <img src='English' alt="English" />
+                                                <Image src='English' alt="English" />
                                                 <h3>English</h3>
                                             </div>
                                             <div className="option" onClick={() => changeLang('fr')}>
-                                                <img src='French' alt="French" />
+                                                <Image src='French' alt="French" />
                                                 <h3>Francais</h3>
                                             </div>
                                             <div className="option" onClick={() => changeLang('ar')}>
-                                                <img src='Morocco' alt="Arabic" />
+                                                <Image src='Morocco' alt="Arabic" />
                                                 <h3>العربية</h3>
                                             </div>
                                         </div>

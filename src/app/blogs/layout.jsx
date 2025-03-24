@@ -1,15 +1,16 @@
 "use client";
 import Image from "next/image";
 import "./page.scss";
-import client, { imageUrlFor } from "@/app/lib/sanityClient";
+import { imageUrlFor } from "@/app/lib/sanityClient";
 import Navbar from "../Layouts/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading";
 import Link from "next/link";
 import Footer from "../Layouts/Footer/Footer";
-import { AnimatePresence , motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import toast from "react-hot-toast";
 
-export default function BlogPage() {
+export default function BlogPage({ data }) {
 
     const [loading, setLoading] = useState(true);
     const [blogs, setBlogs] = useState([]);
@@ -19,30 +20,14 @@ export default function BlogPage() {
     }, []);
 
     async function getPosts() {
-        const data = await client.fetch(`*[_type == "post"] {
-            title,
-            slug,
-            mainImage {
-                asset->{
-                    _id,
-                    url
-                }
-            },
-            publishedAt,
-            excerpt,
-            body,
-            author->{
-                name,
-                image {
-                    asset->{
-                        _id,
-                        url
-                    }
-                }
-            }
-        }`);
 
-        setBlogs(data);
+        if (data) {
+            setBlogs(data);
+        } else {
+            toast.error("Something went wrong");
+            window.history.back();
+        }
+
         setLoading(false);
     }
 
@@ -130,7 +115,7 @@ export default function BlogPage() {
                     </section>
                 </main>
 
-                <Footer/>
+                <Footer />
             </motion.div>
         </>
     );

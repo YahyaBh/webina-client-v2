@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import LogoD from '../../../public/WEBINA-Logo.svg';
+import LogoD from '../../../public/WEBINA-Logo.webp';
 import Image from 'next/image';
 import './Loading.scss';
 

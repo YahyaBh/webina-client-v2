@@ -1,12 +1,15 @@
 @font-face {
   font-family: "unisect-black";
   src: url("/Fonts/Unisect_Black.ttf");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Elegant-Ar";
   src: url("/Fonts/Elegant-ar-bold.ttf");
+  font-display: swap  ;
 }
+
 
 body {
   -webkit-font-smoothing: antialiased;

@@ -19,21 +19,25 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
-        <link rel="preconnect" href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" />
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" />
 
         <title>WEBINA DIGITAL</title>
-        <link rel="icon" href="faviconI.svg" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Study Abroad Services , For Students Looking For International Opportunities" />
-        <meta name="keywords" content="Study Abroad, International Education, Study Abroad Services, Study Abroad Consultation, Study Abroad Opportunities, Study Abroad Programs, Study Abroad Admission, Study Abroad Visa, Study Abroad Scholarship, Study Abroad Financial Aid, Study Abroad Application, Study Abroad Documents, Study Abroad Visa Application, Study Abroad Scholarship Application, Study Abroad Financial Aid Application, Study Abroad Admission Application, Study Abroad Application Process, Study Abroad Application Process Steps, Study Abroad Application Process Step 1, Study Abroad Application Process Step 2, Study Abroad Application Process Step 3, Study Abroad Application Process Step 4, Study Abroad Application Process Step 5, Study Abroad Application Process Step 6, Study Abroad Application Process Step 7, Study Abroad Application Process Step 8, Study Abroad Application Process Step 9, Study Abroad Application Process Step 10" />
-        <meta name="author" content="Study Abroad Agency" />
+        <meta name="description" content="Make your business visible online with webina digital" />
+        <meta name="keywords" content="web development services, professional website design, custom web development, affordable website design, responsive web design, ecommerce website development, digital marketing services, SEO optimization, website redesign services, website maintenance, mobile app development, UI/UX design services, graphic design services" />
+        <meta name="author" content="Webina Digital" />
         <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
         <meta name="theme-color" content="#ffe662" />
 
-        <meta property="og:title" content="Study Abroad Services , For Students Looking For International Opportunities" />
-        <meta property="og:description" content="Study Abroad Services , For Students Looking For International Opportunities" />
-        <meta property="og:image" content="faviconI.svg" />
+        <meta property="og:title" content="Webina Digital , Digitalize your business and take the attention of new clients" />
+        <meta property="og:description" content="Make your business visible online with webina digital" />
+        <meta property="og:url" content="https://webinadigital.com/" />
+        <meta property="og:site_name" content="Webina Digital" />
+        <meta property="og:keywords" content="web development services, professional website design, custom web development, affordable website design, responsive web design, ecommerce website development, digital marketing services, SEO optimization, website redesign services, website maintenance, mobile app development, UI/UX design services, graphic design services" />
+        <meta property="og:image" content="/favicon.ico" type="image/x-icon" />
         <meta property="og:type" content="website" />
 
       </head>
@@ -46,7 +50,7 @@ export default function RootLayout({ children }) {
               duration: 5000,
               style: {
                 background: '#fff',
-                color: '#121212',
+                color: '#000',
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
                 padding: '16px',
                 borderRadius: '8px',

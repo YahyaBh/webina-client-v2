@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import "./page.scss";
 import Navbar from "../Layouts/Navbar/Navbar";
 import { MdArrowDownward, MdDone } from "react-icons/md";
@@ -22,6 +22,7 @@ import "react-calendar/dist/Calendar.css";
 import Loading from "../Loading/Loading";
 import { BiCopy } from "react-icons/bi";
 import { BsClock } from "react-icons/bs";
+import Head from "next/head";
 
 const ReserveContent = () => {
     const searchParams = useSearchParams();
@@ -142,6 +143,46 @@ const ReserveContent = () => {
 
     return (
         <>
+
+            <Head>
+                <title>Reserve Your Consultation | WEBINA DIGITAL</title>
+                <meta
+                    name="description"
+                    content="Reserve your consultation with WEBINA DIGITAL and explore our custom software solutions, mobile & web app development, and digital transformation services."
+                />
+                <meta
+                    name="keywords"
+                    content="Reserve, Consultation, WEBINA DIGITAL, Custom Software, Web App, Mobile App, Digital Transformation"
+                />
+                <meta name="robots" content="index, follow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="canonical" href="https://webinadigital.com/reserve" />
+
+                <meta property="og:title" content="Reserve Your Consultation | WEBINA DIGITAL" />
+                <meta
+                    property="og:description"
+                    content="Reserve your consultation with WEBINA DIGITAL and discover our tailored digital solutions for your enterprise."
+                />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://webinadigital.com/reserve" />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Reserve Your Consultation | WEBINA DIGITAL" />
+                <meta
+                    name="twitter:description"
+                    content="Reserve your consultation with WEBINA DIGITAL and explore custom software, web and mobile apps, and digital transformation services."
+                />
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "WebPage",
+                        "name": "Reserve Your Consultation | WEBINA DIGITAL",
+                        "url": "https://webinadigital.com/reserve",
+                        "description": "Reserve your consultation with WEBINA DIGITAL to explore our tailored digital solutions and software services.",
+                    })}
+                </script>
+            </Head>
+
             <AnimatePresence>
                 {loading && (
                     <motion.div
@@ -160,7 +201,7 @@ const ReserveContent = () => {
                 variants={homeContentVariant}
                 initial="hidden"
                 animate={loading ? 'hidden' : 'visible'}>
-                    
+
                 <header>
                     <Navbar target={"reserve"} />
 
@@ -175,7 +216,7 @@ const ReserveContent = () => {
                         </h2>
 
                         <div className="bottom">
-                            <img className="left-img" src="/assets/Reserve/HeaderHand.svg" />
+                            <Image className="left-img" src="/assets/Reserve/HeaderHand.webp" />
 
                             <Link to="reserve" smooth={true} duration={200}>
                                 <motion.button
@@ -188,7 +229,7 @@ const ReserveContent = () => {
                                     CONSULTE FOR FREE! <MdArrowDownward />
                                 </motion.button>
                             </Link>
-                            <img className="right-img" src="/assets/Reserve/HeaderHand.svg" />
+                            <Image className="right-img" src="/assets/Reserve/HeaderHand.webp" />
                         </div>
                     </div>
                 </header>
@@ -207,7 +248,7 @@ const ReserveContent = () => {
                                 }}
                                 className="left"
                             >
-                                <img src="/assets/Reserve/LogoContainer.svg" />
+                                <Image src="/assets/Reserve/LogoContainer.webp" />
 
                                 <div className="card">
                                     <span>1</span>
@@ -221,7 +262,7 @@ const ReserveContent = () => {
                                     <h3>
                                         <span>WEBSITE</span> UI / UX{" "}
                                     </h3>
-                                    <img src="/assets/Reserve/ArrowCont.svg" />
+                                    <Image src="/assets/Reserve/ArrowCont.webp" />
                                 </div>
                             </motion.div>
                             <motion.div
@@ -235,7 +276,7 @@ const ReserveContent = () => {
                                 }}
                                 className="right"
                             >
-                                <img src="/assets/Reserve/PhoneCont.svg" />
+                                <Image src="/assets/Reserve/PhoneCont.webp" />
 
                                 <div className="card">
                                     <span>2</span>
@@ -251,11 +292,11 @@ const ReserveContent = () => {
                                         <span>APPS</span> UI / UX{" "}
                                     </h3>
 
-                                    <img src="/assets/About/ArrowAb.svg" />
+                                    <Image src="/assets/About/ArrowAb.webp" />
                                 </div>
                             </motion.div>
                         </div>
-                        <img src="/assets/Reserve/LineWave.svg" alt="line-wave" />
+                        <Image src="/assets/Reserve/LineWave.webp" alt="line-wave" />
                     </section>
 
                     <Element name="pricing" className="packs">
@@ -392,7 +433,7 @@ const ReserveContent = () => {
                                                                             setUser({ ...user, service: service })
                                                                         }
                                                                     >
-                                                                        <img
+                                                                        <Image
                                                                             src={imageUrlFor(service.icon)}
                                                                             alt={"icon_" + service.title}
                                                                         />{" "}
@@ -492,7 +533,7 @@ const ReserveContent = () => {
 
                     <div className="contact_info_cards">
                         <div className="card">
-                            <img src={"/assets/Reserve/email.png"} alt="email" />
+                            <Image src={"/assets/Reserve/email.webp"} alt="email" />
                             <div className="body">
                                 <h3>contact@webinadigital.com</h3>
                                 <BiCopy
@@ -505,7 +546,7 @@ const ReserveContent = () => {
                         </div>
 
                         <div className="card">
-                            <img src={"/assets/Reserve/what.png"} alt="whatsapp" />
+                            <Image src={"/assets/Reserve/what.png"} alt="whatsapp" />
                             <div className="body">
                                 <h3>+212 620792331</h3>
                                 <BiCopy
@@ -518,7 +559,7 @@ const ReserveContent = () => {
                         </div>
 
                         <div className="card">
-                            <img src={"/assets/Reserve/phone.png"} alt="phone" />
+                            <Image src={"/assets/Reserve/phone.webp"} alt="phone" />
                             <div className="body">
                                 <h3>+212 620792331</h3>
                                 <BiCopy
@@ -557,8 +598,8 @@ const DatePage = ({ user, setUser, dates }) => {
 
     function removeTimeFromDates(dateArray) {
         return dateArray.map((item) => {
-            const dateString = item.date; // Extract the date string from the object
-            return dateString.split("T")[0]; // Remove the time part
+            const dateString = item.date;
+            return dateString.split("T")[0];
         });
     }
 
@@ -568,13 +609,13 @@ const DatePage = ({ user, setUser, dates }) => {
             return false;
         }
 
-        // Disable weekends (Sunday = 0, Saturday = 6)
+
         const isWeekend = date.getDay() === 0 || date.getDay() === 6;
 
-        // Convert the current date to a string in the same format as disabledDates
+
         const currentDateString = date.toISOString().split("T")[0];
 
-        // Disable specific dates
+
         const isDisabledDate = removeTimeFromDates(dates).some(
             (disabledDate) => currentDateString === disabledDate
         );

@@ -1,10 +1,6 @@
 'use client';
 
-import React, {
-    useEffect,
-    useRef,
-    useState,
-} from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Tooltip } from 'react-tooltip';
 
@@ -19,12 +15,12 @@ import { SiRubyonrails, SiAdobepremierepro, SiAdobeaftereffects, SiVisualstudio,
 import { DiRuby } from 'react-icons/di';
 import { FaPhp, FaBootstrap, FaSwift, FaFigma, FaDocker, FaPython, FaSketch, FaReact, FaPlay, FaSpinner } from 'react-icons/fa'
 import { BsArrowRight, BsWordpress } from 'react-icons/bs'
-import { IoLogoJavascript, IoLogoCss3, IoMdStar, IoMdStarOutline, IoMdStarHalf } from 'react-icons/io'
+import { IoLogoJavascript, IoLogoCss3 } from 'react-icons/io';
 import { BiX } from 'react-icons/bi';
 import { FiArrowRight } from 'react-icons/fi';
 
 
-import client, { imageUrlFor } from '../lib/sanityClient';
+import { imageUrlFor } from '../lib/sanityClient';
 
 import Navbar from '../Layouts/Navbar/Navbar';
 import Loading from '../Loading/Loading';
@@ -36,13 +32,13 @@ import { useCountdown } from '../Layouts/Timer/Timer';
 import './Home.scss';
 import './movingPhone.scss'
 
-import BackGroundContainer from '../../../public/assets/Home/Section1/ComputerSectionHome.svg';
-import Computer1 from '../../../public/assets/Home/Section1/computer.svg';
-import contentPHONE from '../../../public/assets/Home/Section 2/contentPHONE.svg';
+import BackGroundContainer from '../../../public/assets/Home/Section1/ComputerSectionHome.webp';
+import Computer1 from '../../../public/assets/Home/Section1/computer.webp';
+import contentPHONE from '../../../public/assets/Home/Section 2/contentPHONE.webp';
 
-import DarkFloatingWave from '../../../public/assets/Home/Section 2/OrnamentHorizDark.png'
-import DarkFloatingOrna from '../../../public/assets/Home/Section 2/OrnamentUpDark.png'
-import DarkFloatingHat from '../../../public/assets/Home/Section 2/FloatingRightHatDark.png'
+import DarkFloatingWave from '../../../public/assets/Home/Section 2/OrnamentHorizDark.webp'
+import DarkFloatingOrna from '../../../public/assets/Home/Section 2/OrnamentUpDark.webp'
+import DarkFloatingHat from '../../../public/assets/Home/Section 2/FloatingRightHatDark.webp'
 
 import WebsiteDevImage from '../../../public/assets/Home/Section 2/website.webm'
 
@@ -53,9 +49,8 @@ import VideoIntro from '../../../public/assets/Home/Perf-Section/NEWVIDEOFORPROM
 import SEOPic from '../../../public/assets/Home/SEO Section/seo.webp'
 
 
-import StarLeft from '../../../public/assets/Home/Contact Section/star-l.svg';
-import StarRight from '../../../public/assets/Home/Contact Section/star-r.svg';
 import LineContact from '../../../public/assets/Home/Contact Section/line.svg';
+
 import Link from 'next/link';
 import axios from 'axios';
 import CountUp from '../lib/CountUp';
@@ -101,7 +96,7 @@ const Home = ({ data }) => {
     });
 
 
-    const [days, hours, minutes, seconds] = pageData.targetDate ? useCountdown(pageData?.targetDate) : useCountdown('2025-10-03') ;
+    const [days, hours, minutes, seconds] = pageData.targetDate ? useCountdown(pageData?.targetDate) : useCountdown('2025-10-03');
 
 
     const tiltRef = useRef(null);
@@ -389,7 +384,7 @@ const Home = ({ data }) => {
                                                 </h1>
                                             </div>
 
-                                            <p>{pageData?.homeDescription}</p>
+                                            <h4 className='description'>{pageData?.homeDescription}</h4>
 
                                             <Link href={'reserve'}>GET STARTED <FiArrowRight /></Link>
 
@@ -406,12 +401,14 @@ const Home = ({ data }) => {
                                                 onMouseLeave={handleMouseOut}
                                                 onMouseDown={handleMouseDown}
                                                 onMouseUp={handleMouseUp}>
+
                                                 <Image
                                                     className={`over-top-image changing-image`}
                                                     src={Computer1}
                                                     ref={imageRef}
+                                                    fill
                                                     alt="computer-science" />
-                                                <Image ref={tiltRef} src={BackGroundContainer} alt="container" />
+                                                <Image fill ref={tiltRef} src={BackGroundContainer} alt="container" />
                                             </div>
                                         </div>
                                     </div>
@@ -437,9 +434,9 @@ const Home = ({ data }) => {
                         <div className="section-home">
                             <div className="container" id='section-home'>
                                 <div className="why_web">
-                                    <Image className='wave' src={DarkFloatingWave} alt='floatingwave' />
-                                    <Image className='orna' src={DarkFloatingOrna} alt='floatingorna' />
-                                    <Image className='hat' src={DarkFloatingHat} alt='floatinghat' />
+                                    <Image width={100} height={100} className='wave' src={DarkFloatingWave} alt='floatingwave' />
+                                    <Image width={100} height={100} className='orna' src={DarkFloatingOrna} alt='floatingorna' />
+                                    <Image width={100} height={100} className='hat' src={DarkFloatingHat} alt='floatinghat' />
 
 
                                     <div className="left">
@@ -447,7 +444,7 @@ const Home = ({ data }) => {
                                             <div className="object">
                                                 <div className="front-face">
                                                     <div className="content">
-                                                        <Image src={contentPHONE} alt="Placeholder Image" />
+                                                        <Image width={100} height={100} src={contentPHONE} alt="Placeholder Image" />
                                                     </div>
 
                                                     <div className="notch">
@@ -541,7 +538,7 @@ const Home = ({ data }) => {
                                         {pageData?.services.length > 0 ? pageData?.services?.map((service, index) =>
                                             <div className="card" key={index}>
                                                 <div className="top">
-                                                    <img src={service.icon ? imageUrlFor(service?.icon) : ''} alt={service.name} />
+                                                    <Image width={100} height={100} src={service.icon ? imageUrlFor(service?.icon) : ''} alt={service.name} />
                                                 </div>
 
                                                 <div className="bottom">
@@ -636,7 +633,7 @@ const Home = ({ data }) => {
 
                                         {pageData?.blogs?.map(((item, index) => (
                                             <Link href={`/blog/${item.slug.current}`} className="card" key={index}>
-                                                <img src={imageUrlFor(item.mainImage)} alt={'blog' + item.mainImage.alt} />
+                                                <Image width={100} height={100} src={imageUrlFor(item.mainImage)} alt={'blog' + item.mainImage.alt} />
                                                 <h4>{(item.title).length >= 32 ? (item.title).split('').slice(0, 32).join('') + '...' : (item.title)}</h4>
                                             </Link>
                                         )))}
@@ -721,7 +718,7 @@ const Home = ({ data }) => {
                                                     <div className='project'>
                                                         <div className='exit' onClick={() => setCurrentProject(null)}><BiX /></div>
                                                         <div className='top'>
-                                                            <img src={imageUrlFor(currentProject?.mainImage)} alt="porject image" />
+                                                            <Image width={100} height={100} src={imageUrlFor(currentProject?.mainImage)} alt="porject image" />
                                                         </div>
 
                                                         <div className='bottom'>
@@ -740,7 +737,7 @@ const Home = ({ data }) => {
 
                                                 {pageData?.projects?.map((item, index) => (
                                                     <div className="card" key={index + item.title}>
-                                                        <img src={imageUrlFor(item.mainImage)} alt={item.title} />
+                                                        <Image width={100} height={100} src={imageUrlFor(item.mainImage)} alt={item.title} />
 
 
                                                         <div className="bottom_container">
@@ -788,7 +785,7 @@ const Home = ({ data }) => {
                                             </div>
 
                                             <div className="right">
-                                                <Image src={SEOPic} alt='seo_picture' />
+                                                <Image fill src={SEOPic} alt='seo_picture' />
                                             </div>
                                         </div>
 
@@ -851,12 +848,14 @@ const Home = ({ data }) => {
 
                                         </div>
 
-                                        <Image className='contact_line' src={LineContact} alt='contact line' />
+                                        <div className='line-cont'>
+                                            <Image fill className='contact_line' src={LineContact} alt='contact line' />
+                                        </div>
 
                                         <div className="contact_us">
 
-                                            <Image className='star_left' src={StarLeft} alt='star left' />
-                                            <Image className='star_right' src={StarRight} alt='star right' />
+                                            <img className='star_left' src={'/assets/Home/Contact Section/star-l.svg'} alt='star left' />
+                                            <img className='star_right' src={'/assets/Home/Contact Section/star-r.svg'} alt='star right' />
 
                                             <h2><span>CONTACT</span> US</h2>
 

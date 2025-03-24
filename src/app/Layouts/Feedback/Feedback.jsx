@@ -9,6 +9,7 @@ import './Feedback.scss'
 import { imageUrlFor } from '../../lib/sanityClient';
 
 import { IoIosArrowForward, IoIosArrowBack, IoMdStar, IoMdStarOutline, IoMdStarHalf } from 'react-icons/io'
+import Image from 'next/image';
 
 
 const Feedback = ({ testimonials }) => {
@@ -16,8 +17,8 @@ const Feedback = ({ testimonials }) => {
 
 
     const RatingStars = ({ rating, maxRating }) => {
-        const filledStarsCount = Math.floor(rating); // Number of full stars (integer part)
-        const hasHalfStar = rating % 1 !== 0; // Check if there's a half star
+        const filledStarsCount = Math.floor(rating); 
+        const hasHalfStar = rating % 1 !== 0;
 
         const filledStars = Array.from({ length: filledStarsCount }, (_, index) => (
             <IoMdStar key={index} />
@@ -25,7 +26,7 @@ const Feedback = ({ testimonials }) => {
 
         let halfStar = null;
         if (hasHalfStar) {
-            halfStar = <IoMdStarHalf />; // Render half star if there's a fractional part
+            halfStar = <IoMdStarHalf />; 
         }
 
         const emptyStarsCount = maxRating - filledStarsCount - (hasHalfStar ? 1 : 0);
@@ -86,7 +87,7 @@ const Feedback = ({ testimonials }) => {
                     <SwiperSlide key={index}>
                         <div className="container">
                             <div className='header'>
-                                <img src={imageUrlFor(testimonial.image) ? imageUrlFor(testimonial.image) : TestFeed} alt={testimonial.image.alt} />
+                                <Image width={100} height={100} src={imageUrlFor(testimonial.image) ? imageUrlFor(testimonial.image) : TestFeed} alt={testimonial.image.alt} />
 
 
                                 <div className='stars-feed'>

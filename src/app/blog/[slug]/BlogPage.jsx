@@ -1,4 +1,3 @@
-// app/blog/[slug]/BlogPostPage.js (Client Component)
 "use client";
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from "next/image";

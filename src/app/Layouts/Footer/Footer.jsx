@@ -1,5 +1,5 @@
 import './Footer.scss'
-import Logo from '../../../../public/assets/Home/Navbar/WEBINA-Logo.png'
+import Logo from '../../../../public/WEBINA-Logo.webp'
 import { FaFacebook, FaInstagram, FaTiktok, FaTwitter } from 'react-icons/fa'
 import Image from 'next/image'
 import Link from 'next/link'
