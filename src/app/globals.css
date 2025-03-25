@@ -58,7 +58,7 @@ body {
 
 
 :root {
-  --primary-color-dark: #121212;
+  --primary-color-dark: #000000;
   --dark-color-primary: #FFE662;
 
   --primary-color-light: #FFE662;
@@ -68,7 +68,7 @@ body {
 
   --primary-color: #FFE662;
   --secondary-color: #1e1e1e;
-  --light-color: #121212;
+  --light-color: #000000;
   --black-color: #fff;
   --cards-color: #F9EA9B;
 
@@ -102,7 +102,7 @@ h1, h2, h3, h4, h5, h6, p, svg, li, a {
 html,
 body {
   overflow-x: hidden !important;
-  background-color: #121212;
+  background-color: #000000;
 }
 
 /* Chrome, Edge and Safari */

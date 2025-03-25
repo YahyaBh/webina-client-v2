@@ -119,6 +119,7 @@ $shadows-big: multiple-box-shadow(100);
 
                             h1 {
                                 font-size: 2.4em;
+                                text-wrap-mode: nowrap;
 
                                 .highlighted-title {
                                     color: #ffe662;
@@ -129,6 +130,7 @@ $shadows-big: multiple-box-shadow(100);
                             p {
                                 color: var(--black-color);
                                 font-size: 20px;
+                                font-weight: 500;
                                 opacity: 0.8;
                             }
 
@@ -405,7 +407,9 @@ $shadows-big: multiple-box-shadow(100);
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
-                                    height: 30dvh;
+                                    height: 25dvh;
+                                    width: 80dvw;
+                                    position: relative;
 
                                     .over-top-image {
                                         position: absolute;
@@ -415,7 +419,7 @@ $shadows-big: multiple-box-shadow(100);
                                     }
 
                                     img {
-                                        width: 100%;
+                                        width: 100% !important;
                                         transition: all 0.5s ease;
                                     }
                                 }
@@ -1051,7 +1055,7 @@ $shadows-big: multiple-box-shadow(100);
                                         gap: 10px;
                                         padding: 0;
 
-                                        h3 {
+                                        h4 {
                                             font-size: 1.2em;
                                         }
 
@@ -1059,10 +1063,10 @@ $shadows-big: multiple-box-shadow(100);
                                             font-size: 0.8em;
                                         }
 
-                                        button {
+                                        a {
                                             width: 100%;
                                             height: 3em;
-                                            font-size: 1em;
+                                            font-size: 14px;
                                             padding: 0;
                                         }
                                     }
@@ -1326,6 +1330,7 @@ $shadows-big: multiple-box-shadow(100);
 
                             h2 {
                                 text-align: center;
+                                text-wrap-mode: nowrap;
                                 font-size: 1.8em;
                             }
 
@@ -1477,7 +1482,7 @@ $shadows-big: multiple-box-shadow(100);
                         .left {
                             flex-basis: 100%;
                             width: 100%;
-                            padding: 80px 0;
+                            padding: 40px 0;
                             box-sizing: border-box;
 
                             h2 {
@@ -1864,7 +1869,7 @@ $shadows-big: multiple-box-shadow(100);
 
                         .right {
                             flex-basis: 100%;
-                            padding: 30px 10px;
+                            padding: 10dvh 10px;
                             height: 100%;
 
                             h3 {
@@ -2166,7 +2171,7 @@ $shadows-big: multiple-box-shadow(100);
                     justify-content: center;
                     align-items: center;
 
-                    .container {
+                    .container_sec {
                         max-width: 1400px !important;
                         display: flex;
                         flex-direction: column;
@@ -2541,6 +2546,16 @@ $shadows-big: multiple-box-shadow(100);
 
                                 @media screen and (max-width: 900px) {
                                     padding: 20px 10px;
+                                    width: 100%;
+                                    z-index: 5;
+
+                                    .bottom {
+                                        button {
+                                            width: max-content;
+                                            padding: 8px 20px;
+                                            border-radius: 50px;
+                                        }
+                                    }
 
                                     .star_right,
                                     .star_left {
@@ -2554,19 +2569,6 @@ $shadows-big: multiple-box-shadow(100);
 
                                     .star_left {
                                         top: -10%;
-                                    }
-
-                                    .form_container {
-                                        width: 100%;
-                                        z-index: 5;
-
-                                        .bottom {
-                                            button {
-                                                width: max-content;
-                                                padding: 8px 20px;
-                                                border-radius: 50px;
-                                            }
-                                        }
                                     }
                                 }
                             }

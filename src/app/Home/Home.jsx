@@ -704,7 +704,7 @@ const Home = ({ data }) => {
                                 </div> : ''}
 
                                 <div className="background_container_under_sections">
-                                    <div className='container'>
+                                    <div className='container_sec'>
                                         <AnimatePresence>
                                             {currentProject !== null ?
                                                 <motion.div
