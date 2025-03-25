@@ -8,9 +8,6 @@ import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link, Element, scroller } from "react-scroll";
 import Footer from "../Layouts/Footer/Footer";
-import StarLeft from "../../../public/assets/Home/Contact Section/star-l.svg";
-import StarRight from "../../../public/assets/Home/Contact Section/star-r.svg";
-import Image from "next/image";
 import Cookies from "js-cookie";
 import axios from "axios";
 import isEmail from "validator/lib/isEmail";
@@ -20,9 +17,11 @@ import "react-phone-input-2/lib/style.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Loading from "../Loading/Loading";
-import { BiCopy } from "react-icons/bi";
-import { BsClock } from "react-icons/bs";
+import { BiCopy, BiPhone } from "react-icons/bi";
+import { BsCalendar2Date, BsCameraVideo, BsClock } from "react-icons/bs";
 import Head from "next/head";
+import client, { imageUrlFor } from "../lib/sanityClient";
+import { FiSun, FiSunrise, FiSunset } from "react-icons/fi";
 
 const ReserveContent = () => {
     const searchParams = useSearchParams();
@@ -216,7 +215,7 @@ const ReserveContent = () => {
                         </h2>
 
                         <div className="bottom">
-                            <Image className="left-img" src="/assets/Reserve/HeaderHand.webp" />
+                            <img className="left-img" src="/assets/Reserve/HeaderHand.svg" alt="left hand" />
 
                             <Link to="reserve" smooth={true} duration={200}>
                                 <motion.button
@@ -229,7 +228,7 @@ const ReserveContent = () => {
                                     CONSULTE FOR FREE! <MdArrowDownward />
                                 </motion.button>
                             </Link>
-                            <Image className="right-img" src="/assets/Reserve/HeaderHand.webp" />
+                            <img className="right-img" src="/assets/Reserve/HeaderHand.svg" alt="right hand" />
                         </div>
                     </div>
                 </header>
@@ -248,7 +247,7 @@ const ReserveContent = () => {
                                 }}
                                 className="left"
                             >
-                                <Image src="/assets/Reserve/LogoContainer.webp" />
+                                <img src="/assets/Reserve/LogoContainer.svg" alt="Frame Web" />
 
                                 <div className="card">
                                     <span>1</span>
@@ -262,7 +261,7 @@ const ReserveContent = () => {
                                     <h3>
                                         <span>WEBSITE</span> UI / UX{" "}
                                     </h3>
-                                    <Image src="/assets/Reserve/ArrowCont.webp" />
+                                    <img src="/assets/Reserve/ArrowCont.svg" alt="arrow web" />
                                 </div>
                             </motion.div>
                             <motion.div
@@ -276,7 +275,7 @@ const ReserveContent = () => {
                                 }}
                                 className="right"
                             >
-                                <Image src="/assets/Reserve/PhoneCont.webp" />
+                                <img src="/assets/Reserve/PhoneCont.svg" alt="Phone Frame" />
 
                                 <div className="card">
                                     <span>2</span>
@@ -292,11 +291,11 @@ const ReserveContent = () => {
                                         <span>APPS</span> UI / UX{" "}
                                     </h3>
 
-                                    <Image src="/assets/About/ArrowAb.webp" />
+                                    <img src="/assets/About/ArrowAb.webp" alt="Arrow Phone" />
                                 </div>
                             </motion.div>
                         </div>
-                        <Image src="/assets/Reserve/LineWave.webp" alt="line-wave" />
+                        <img src="/assets/Reserve/LineWave.webp" alt="line-wave" />
                     </section>
 
                     <Element name="pricing" className="packs">
@@ -356,8 +355,8 @@ const ReserveContent = () => {
                     </div>
 
                     <Element name="reserve" className="reserve">
-                        <Image className="star_left" src={StarLeft} alt="star left" />
-                        <Image className="star_right" src={StarRight} alt="star right" />
+                        <img className="star_left" src={'/assets/Home/Contact Section/star-l.svg'} alt="star left" />
+                        <img className="star_right" src={'/assets/Home/Contact Section/star-r.svg'} alt="star right" />
 
                         {!formSent ? (
                             !loadingSend ? (
@@ -433,7 +432,7 @@ const ReserveContent = () => {
                                                                             setUser({ ...user, service: service })
                                                                         }
                                                                     >
-                                                                        <Image
+                                                                        <img
                                                                             src={imageUrlFor(service.icon)}
                                                                             alt={"icon_" + service.title}
                                                                         />{" "}
@@ -471,8 +470,8 @@ const ReserveContent = () => {
                                         </div>
 
                                         <div className="bottom">
-                                            <Image className="star_left" src={StarLeft} alt="star left" />
-                                            <Image className="star_right" src={StarRight} alt="star right" />
+                                            <img className="star_left" src={'/assets/Home/Contact Section/star-l.svg'} alt="star left" />
+                                            <img className="star_right" src={'/assets/Home/Contact Section/star-r.svg'} alt="star right" />
 
                                             <DatePage user={user} setUser={setUser} dates={dates} />
 
@@ -533,7 +532,7 @@ const ReserveContent = () => {
 
                     <div className="contact_info_cards">
                         <div className="card">
-                            <Image src={"/assets/Reserve/email.webp"} alt="email" />
+                            <img src={"/assets/Reserve/email.webp"} alt="email" />
                             <div className="body">
                                 <h3>contact@webinadigital.com</h3>
                                 <BiCopy
@@ -546,7 +545,7 @@ const ReserveContent = () => {
                         </div>
 
                         <div className="card">
-                            <Image src={"/assets/Reserve/what.png"} alt="whatsapp" />
+                            <img src={"/assets/Reserve/what.webp"} alt="whatsapp" />
                             <div className="body">
                                 <h3>+212 620792331</h3>
                                 <BiCopy
@@ -559,7 +558,7 @@ const ReserveContent = () => {
                         </div>
 
                         <div className="card">
-                            <Image src={"/assets/Reserve/phone.webp"} alt="phone" />
+                            <img src={"/assets/Reserve/phone.webp"} alt="phone" />
                             <div className="body">
                                 <h3>+212 620792331</h3>
                                 <BiCopy

@@ -109,7 +109,7 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: url(/Images/LineSplitAbout.webp);
+    background: url(/assets/About/LineSplitAbout.svg);
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -139,7 +139,7 @@ header {
 
         .left {
             flex-basis: 70%;
-            background: url(/assets/Reserve/BorderCont.webp);
+            background: url(/assets/Reserve/BorderCont.svg);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -218,7 +218,7 @@ header {
         .right {
             flex-basis: 30%;
             position: relative;
-            background: url(/assets/Reserve/BorderPhoneCont.webp);
+            background: url(/assets/Reserve/BorderPhoneCont.svg);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1233,7 +1233,7 @@ header {
     z-index: 5;
 
     .back_info_bg {
-        background: url(/assets/Reserve/FrameInfoCont.webp);
+        background: url(/assets/Reserve/FrameInfoCont.svg);
         background-position: left;
         background-repeat: no-repeat;
         background-size: cover;

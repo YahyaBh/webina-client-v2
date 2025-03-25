@@ -1,6 +1,11 @@
 import { Toaster } from "react-hot-toast";
+
 import "./globals.css";
+
+
 import ClientWrapper from "./client";
+import Head from "next/head";
+import GoogleAnalytics from "./lib/GoogleAnalyze";
 
 
 export const metadata = {
@@ -18,7 +23,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <head>
+      <Head>
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" />
 
@@ -40,7 +45,7 @@ export default function RootLayout({ children }) {
         <meta property="og:image" content="/favicon.ico" type="image/x-icon" />
         <meta property="og:type" content="website" />
 
-      </head>
+      </Head>
       <body>
         <ClientWrapper>
           {children}
@@ -58,6 +63,8 @@ export default function RootLayout({ children }) {
             }} />
         </ClientWrapper>
 
+
+        <GoogleAnalytics />
       </body>
 
 

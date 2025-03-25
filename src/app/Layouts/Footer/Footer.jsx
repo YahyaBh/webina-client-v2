@@ -11,7 +11,7 @@ const Footer = () => {
 
             <div className='container_footer'>
                 <ul>
-                    <h3>Get To Know Us</h3>
+                    <li className='main_title'>Get To Know Us</li>
 
                     <li>Cosnultation</li>
                     <li>News & Blogs</li>
@@ -20,7 +20,7 @@ const Footer = () => {
                 </ul>
 
                 <ul>
-                    <h3>Worth Visitng</h3>
+                    <li className='main_title'>Worth Visitng</li>
 
                     <li>What is webina ?</li>
                     <li>Latest AI News</li>
@@ -29,7 +29,7 @@ const Footer = () => {
                 </ul>
 
                 <ul>
-                    <h3>PRODUCTS</h3>
+                    <li className='main_title'>PRODUCTS</li>
 
                     <li>Costumed websites</li>
                     <li>Website Templates</li>

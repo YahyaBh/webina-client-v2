@@ -30,6 +30,11 @@
             padding: 0px 30px;
             box-sizing: border-box;
 
+            .main_title {
+                font-size: 22px;
+                font-weight: 600;
+            }
+
             &:nth-last-child(1) {
                 display: flex;
                 justify-content: center;

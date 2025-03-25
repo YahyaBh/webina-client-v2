@@ -78,7 +78,7 @@ const Home = ({ data }) => {
     const [pageData, setPageData] = useState({
         homeTitle: 'ENHANCE YOUR',
         highlitedTitles: ['REACH', 'GROWTH', 'EMBLEM'],
-        homeDescription: 'We are gonna create a well developed and designed website from your own choice and it will exactly as you desire and want The website you want will be created with high quality,our team which is formed with experienced programmers and designers will take of every corner.',
+        homeDescription: 'We are gonna create a well developed and designed website from your own choice and it will exactly as you desire.',
         services: [],
         projects: [],
         blogs: [],
@@ -407,7 +407,7 @@ const Home = ({ data }) => {
                                                     src={Computer1}
                                                     ref={imageRef}
                                                     fill
-                                                    alt="computer-science" />
+                                                    alt="Computer Image" />
                                                 <Image fill ref={tiltRef} src={BackGroundContainer} alt="container" />
                                             </div>
                                         </div>
@@ -538,7 +538,7 @@ const Home = ({ data }) => {
                                         {pageData?.services.length > 0 ? pageData?.services?.map((service, index) =>
                                             <div className="card" key={index}>
                                                 <div className="top">
-                                                    <Image width={100} height={100} src={service.icon ? imageUrlFor(service?.icon) : ''} alt={service.name} />
+                                                    <Image width={100} height={100} src={service.icon ? imageUrlFor(service?.icon) : ''} alt={service.name || index + 'image'} />
                                                 </div>
 
                                                 <div className="bottom">
@@ -640,7 +640,7 @@ const Home = ({ data }) => {
                                     </div>
                                 </div>
 
-                                <div className={isPlaying ? 'video_container active' : 'video_container'} onClick={toggleVideo}>
+                                <div className={isPlaying ? 'video_container active' : 'video_container'} onClick={toggleVideo} aria-expanded={isPlaying}>
                                     <div className="video" ref={playerRef}>
                                     </div>
                                 </div>
@@ -863,8 +863,17 @@ const Home = ({ data }) => {
                                             <div className="form_container">
                                                 <div className="top">
                                                     <div className="input_cont">
-                                                        <label htmlFor="full_name" >Full Name</label>
-                                                        <input type="text" maxLength={30} name='full_name' value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} required placeholder='Full Name' />
+                                                        <label htmlFor="full_name">Full Name</label>
+                                                        <input
+                                                            type="text"
+                                                            maxLength={30}
+                                                            id="full_name"
+                                                            name='full_name'
+                                                            value={formData.fullName}
+                                                            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                                                            required
+                                                            placeholder='Full Name'
+                                                        />
                                                     </div>
 
                                                     <div className="input_cont">

@@ -397,12 +397,15 @@ $shadows-big: multiple-box-shadow(100);
 
                             .right {
                                 flex-basis: 100%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
 
                                 .changing-image-container {
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
-                                    height: 20dvh;
+                                    height: 30dvh;
 
                                     .over-top-image {
                                         position: absolute;
@@ -413,7 +416,6 @@ $shadows-big: multiple-box-shadow(100);
 
                                     img {
                                         width: 100%;
-
                                         transition: all 0.5s ease;
                                     }
                                 }
@@ -934,7 +936,7 @@ $shadows-big: multiple-box-shadow(100);
                             box-sizing: border-box;
                             border-radius: 20px;
                             display: flex;
-                            justify-content: flex-start;
+                            justify-content: center;
                             align-items: center;
                             flex-direction: column;
                             text-align: center;
@@ -1073,7 +1075,7 @@ $shadows-big: multiple-box-shadow(100);
                                 flex-basis: 100%;
                                 gap: 10px;
                                 padding: 10px;
-                                align-items: flex-start;
+                                align-items: center;
                                 min-height: 22dvh;
 
                                 .top {

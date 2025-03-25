@@ -1,7 +1,13 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import CustomCursor from './lib/Cursor';
+import dynamic from 'next/dynamic';
+import { useEffect, useState , Suspense } from 'react';
+
+
+
+const CustomCursor = dynamic(() => import('./lib/Cursor'), {
+    ssr: false,
+});
 
 const ClientWrapper = ({ children }) => {
     const [isClient, setIsClient] = useState(false);
@@ -12,7 +18,9 @@ const ClientWrapper = ({ children }) => {
     }, []);
 
     return isClient ? <div>
-        <CustomCursor />
+        <Suspense fallback={null}>
+            <CustomCursor />
+        </Suspense>
         {children}
     </div> : null;
 }

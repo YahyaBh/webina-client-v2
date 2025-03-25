@@ -66,7 +66,7 @@ export async function POST(request) {
                                 <body>
                                 <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                     <div style="text-align: center; padding: 20px 0;">
-                                    <Image
+                                    <img
                                         src="https://webinadigital.com/WEBINA.webp"
                                         alt="Webina Digital Logo"
                                         style="max-width: 150px;"
