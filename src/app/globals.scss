@@ -7,9 +7,8 @@
 @font-face {
   font-family: "Elegant-Ar";
   src: url("/Fonts/Elegant-ar-bold.ttf");
-  font-display: swap  ;
+  font-display: swap;
 }
-
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -22,7 +21,6 @@ body {
   /* Internet Explorer/Edge */
   -webkit-user-select: none;
   /* Safari */
-
 
   background: url(/assets/Reserve/BG.svg);
   background-position: center center;
@@ -37,11 +35,12 @@ body {
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-display: swap;
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--dark-color-primary) var(--primary-color-dark);
+  cursor: none !important;
 }
 
 .swiper-pagination-bullet {
@@ -54,38 +53,33 @@ body {
   background: var(--primary-color);
 }
 
-
-
-
 :root {
   --primary-color-dark: #000000;
-  --dark-color-primary: #FFE662;
+  --dark-color-primary: #ffe662;
 
-  --primary-color-light: #FFE662;
-  --light-color-primary: #FFE662;
+  --primary-color-light: #ffe662;
+  --light-color-primary: #ffe662;
 
-  --light-color-grey: #FFFFFF;
+  --light-color-grey: #ffffff;
 
-  --primary-color: #FFE662;
+  --primary-color: #ffe662;
   --secondary-color: #1e1e1e;
   --light-color: #000000;
   --black-color: #fff;
-  --cards-color: #F9EA9B;
+  --cards-color: #f9ea9b;
 
-  --blog-card: #3C3C3C;
+  --blog-card: #3c3c3c;
 
   --settings-color: #131313;
 
   --grey-to-dark: #3b3b3b;
 
-  --ecd-to-black: #FFF;
+  --ecd-to-black: #fff;
   --ecd-to-grey: #3d3d3d;
 
-  --primary-to-grey: #3C3C3C;
+  --primary-to-grey: #3c3c3c;
   --golry-to-black: #1e1e1e;
-
 }
-
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -94,8 +88,16 @@ input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
-
-h1, h2, h3, h4, h5, h6, p, svg, li, a {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+svg,
+li,
+a {
   color: var(--black-color);
 }
 
@@ -109,8 +111,8 @@ body {
 *::-webkit-scrollbar {
   width: 10px;
   width: 10px;
-  -webkit-transition: all .3s ease;
-  transition: all .3s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 *::-webkit-scrollbar-track {
@@ -138,7 +140,6 @@ body {
   background-color: var(--dark-color-primary);
 }
 
-
 a {
   text-decoration: none;
 }
@@ -156,34 +157,38 @@ input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
-
 .loading-skeleton {
-  background:
-    linear-gradient(0.25turn, transparent, #fff, transparent),
-    linear-gradient(#eee, #eee),
-    radial-gradient(38px circle at 19px 19px, #eee 50%, transparent 51%),
-    linear-gradient(#eee, #eee);
+  background: linear-gradient(0.25turn, transparent, #fff, transparent), linear-gradient(#eee, #eee),
+    radial-gradient(38px circle at 19px 19px, #eee 50%, transparent 51%), linear-gradient(#eee, #eee);
   background-repeat: no-repeat;
-  background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px;
-  background-position: -315px 0, 0 0, 0px 190px, 50px 195px;
+  background-size:
+    315px 250px,
+    315px 180px,
+    100px 100px,
+    225px 30px;
+  background-position:
+    -315px 0,
+    0 0,
+    0px 190px,
+    50px 195px;
   animation: loading 1.5s infinite;
-
-
 }
 
 @keyframes loading {
   to {
-    background-position: 315px 0, 0 0, 0 190px, 50px 195px;
+    background-position:
+      315px 0,
+      0 0,
+      0 190px,
+      50px 195px;
   }
 }
-
 
 .aside-open {
   .container {
     margin-left: 260px !important;
   }
 }
-
 
 .back-button {
   padding: 10px 40px;
@@ -197,10 +202,8 @@ input:-webkit-autofill:active {
 
   @media screen and (max-width: 900px) {
     padding: 10px 10px;
-
   }
 }
-
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -212,4 +215,39 @@ input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: inset 0 0 20px 20px #23232329;
   -webkit-box-shadow: none !important;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #fff !important;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.2s ease;
+
+  @media screen and (max-width: 900px) {
+    display: none !important;
+  }
+}
+
+.cursor-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  border-width: 1px;
+  border-style: solid;
+  transition:
+    width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+
+  @media screen and (max-width: 900px) {
+    display: none !important;
+  }
 }

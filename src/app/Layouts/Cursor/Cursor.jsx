@@ -1,8 +1,6 @@
-'use client';
+"use client";
 
 import { useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
-import './Cursor.scss';
 
 const CustomCursor = () => {
     const cursorDot = useRef(null);
@@ -16,9 +14,7 @@ const CustomCursor = () => {
 
     const animate = () => {
         if (cursorDot.current && cursorCircle.current) {
-            // Update dot position with transform for smoother animation
             cursorDot.current.style.transform = `translate3d(${mouseX - 3}px, ${mouseY - 3}px, 0)`;
-            // Circle follows with a delay
             circleX += (mouseX - circleX) * 0.15;
             circleY += (mouseY - circleY) * 0.15;
             cursorCircle.current.style.transform = `translate3d(${circleX - 15}px, ${circleY - 15}px, 0)`;
@@ -36,7 +32,6 @@ const CustomCursor = () => {
             const tagName = e.target.tagName;
             const hoverables = ['A', 'BUTTON', 'INPUT', 'TEXTAREA'];
             if (hoverables.includes(tagName)) {
-                // Hover state: hide dot, change circle styles
                 if (cursorDot.current && cursorCircle.current) {
                     cursorDot.current.style.opacity = 0;
                     cursorCircle.current.style.opacity = 0.6;
@@ -46,7 +41,6 @@ const CustomCursor = () => {
                     cursorCircle.current.style.height = '35px';
                 }
             } else {
-                // Return to default state
                 if (cursorDot.current && cursorCircle.current) {
                     cursorDot.current.style.opacity = 1;
                     cursorCircle.current.style.backgroundColor = 'transparent';
@@ -69,13 +63,11 @@ const CustomCursor = () => {
         };
     }, []);
 
-    // Render cursor elements as a portal to document?.body
-    return ReactDOM.createPortal(
+    return (
         <>
             <div ref={cursorDot} className="cursor-dot" />
             <div ref={cursorCircle} className="cursor-circle" />
-        </>,
-        document?.body
+        </>
     );
 };
 

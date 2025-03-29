@@ -1,9 +1,58 @@
 {
-  "short_name": "WebIna Digital",
-  "name": "WebIna Digital , Make Your Dream Website",
-  "keywords": ["Web development, Mobile app development, UI/UX design, Social media video production, IT industry, Custom solutions, App development agency, Digital solutions, Web design agency, Mobile app design, UK-based company, Innovative solutions, Creative services, Technology consulting, Web and mobile solutions"],
+  "short_name": "Webina Digital",
+  "name": "Webina Digital - Agence Web Leader au Maroc",
+  "description": "Agence web numéro 1 au Maroc - Création de sites web, applications mobiles et solutions digitales sur mesure pour entreprises marocaines.",
+  "keywords": [
+    "agence web Maroc",
+    "création site web Maroc",
+    "développement web Maroc",
+    "référencement naturel Maroc",
+    "marketing digital Maroc",
+    "application mobile Maroc",
+    "e-commerce Maroc",
+    "design web Maroc",
+    "SEO Maroc",
+    "solution digitale Maroc"
+  ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#FFE662",
-  "background_color": "#1E1E1E"
+  "background_color": "#1E1E1E",
+  "icons": [
+    {
+      "src": "/images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "Reserve a Service",
+      "url": "/reserve",
+      "icons": [
+        {
+          "src": "/images/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Our Blogs",
+      "url": "/blogs",
+      "icons": [
+        {
+          "src": "/images/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
 }

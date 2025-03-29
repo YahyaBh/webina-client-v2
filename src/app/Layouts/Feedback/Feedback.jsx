@@ -87,7 +87,7 @@ const Feedback = ({ testimonials }) => {
                     <SwiperSlide key={index}>
                         <div className="container">
                             <div className='header'>
-                                <Image width={100} height={100} src={imageUrlFor(testimonial.image) ? imageUrlFor(testimonial.image) : TestFeed} alt={testimonial.image.alt} />
+                                <Image width={100} height={100} src={imageUrlFor(testimonial.image) ? imageUrlFor(testimonial.image) : TestFeed} alt={testimonial.rating + ' ' + testimonial.name} />
 
 
                                 <div className='stars-feed'>

@@ -22,6 +22,7 @@ import { BsCalendar2Date, BsCameraVideo, BsClock } from "react-icons/bs";
 import Head from "next/head";
 import client, { imageUrlFor } from "../lib/sanityClient";
 import { FiSun, FiSunrise, FiSunset } from "react-icons/fi";
+import toast from "react-hot-toast";
 
 const ReserveContent = () => {
     const searchParams = useSearchParams();
@@ -326,7 +327,7 @@ const ReserveContent = () => {
                                     <div className="bottom">
                                         <ul>
                                             {pack.specs.map((spec) => (
-                                                <li>
+                                                <li key={spec}>
                                                     <span>
                                                         <MdDone />
                                                     </span>{" "}

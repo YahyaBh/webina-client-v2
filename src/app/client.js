@@ -1,28 +1,47 @@
 "use client";
 
 import dynamic from 'next/dynamic';
-import { useEffect, useState , Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
+const CustomCursor = dynamic(() => import('./Layouts/Cursor/Cursor'), { ssr: false });
 
-
-const CustomCursor = dynamic(() => import('./lib/Cursor'), {
-    ssr: false,
-});
 
 const ClientWrapper = ({ children }) => {
-    const [isClient, setIsClient] = useState(false);
+    const [isClient, setIsClient] = useState(true);
 
     useEffect(() => {
         setIsClient(true);
+
+        (function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s);
+        })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', '1719904931896347');
+        fbq('track', 'PageView');
         document.body.style.overflow = 'auto';
     }, []);
 
-    return isClient ? <div>
-        <Suspense fallback={null}>
-            <CustomCursor />
-        </Suspense>
-        {children}
-    </div> : null;
-}
+    return isClient ? (
+        <>
+            <Suspense fallback={<div>Loading...</div>}>
+                <CustomCursor />
+            </Suspense>
+            {children}
+        </>
+    ) : null;
+};
 
 export default ClientWrapper;

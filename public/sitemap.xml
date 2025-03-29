@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://webinadigital.com/</loc>
+        <lastmod>2025-03-26</lastmod>
+        <priority>1.00</priority>
+    </url>
+
+    <url>
+        <loc>https://webinadigital.com/reserve</loc>
+        <lastmod>2025-03-26</lastmod>
+        <priority>0.80</priority>
+    </url>
+
+    <url>
+        <loc>https://webinadigital.com/about</loc>
+        <lastmod>2025-03-26</lastmod>
+        <priority>0.80</priority>
+    </url>
+
+    <url>
+        <loc>https://webinadigital.com/blogs</loc>
+        <lastmod>2025-03-26</lastmod>
+        <priority>0.70</priority>
+    </url>
+
+    <url>
+        <loc>https://webinadigital.com/contact</loc>
+        <lastmod>2025-03-26</lastmod>
+        <priority>0.80</priority>
+    </url>
+
+    <url>
+        <loc>https://webinadigital.com/privacy-policy</loc>
+        <lastmod>2025-03-26</lastmod>
+        <priority>0.60</priority>
+    </url>
+
+</urlset>

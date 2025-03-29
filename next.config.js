@@ -5,7 +5,7 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // output: 'export',
   reactStrictMode: true,
   swcMinify: true,
   productionBrowserSourceMaps: false,
@@ -46,6 +46,7 @@ const nextConfig = {
       },
     ];
   },
+
   webpack: (config, { isServer, dev }) => {
     if (!dev) {
       config.optimization.usedExports = true;
@@ -58,7 +59,6 @@ const nextConfig = {
         });
       }
     }
-
     config.module.rules.push({
       test: /\.(mp4|webm|ogg|swf|ogv)$/,
       use: {
