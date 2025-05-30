@@ -16,7 +16,6 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import Feedback from '../Layouts/Feedback/Feedback';
-import Image from 'next/image';
 
 const About = () => {
     const [testimonials, setTestimonials] = useState([]);
@@ -170,11 +169,11 @@ const About = () => {
                             <p>
                                 WEBINA DIGITAL is a forward-thinking company dedicated to empowering clients to elevate their businesses and careers. At its core, WEBINA DIGITAL focuses on helping individuals and organizations achieve balance by aligning their goals with the evolving demands of the modern era and the aspirations of future generations. Through innovative solutions and a client-centric approach, WEBINA DIGITAL strives to bridge the gap between traditional objectives and contemporary needs, fostering growth and success in an ever-changing landscape.
                             </p>
-                            <Image src='/assets/About/ArrowAb.webp' alt='Arrow pointing about' />
+                            <img src='/assets/About/ArrowAb.webp' alt='Arrow pointing about' />
                         </div>
                         <div className='right'>
-                            <Image src='/assets/About/LogoContainer.webp' alt='Logo container' />
-                            <Image src='/WEBINA.webp' alt='WEBINA DIGITAL logo' />
+                            <img src='/assets/About/LogoContainer.webp' alt='Logo container' />
+                            <img src='/WEBINA.webp' alt='WEBINA DIGITAL logo' />
                         </div>
                     </div>
                 </section>
@@ -183,9 +182,9 @@ const About = () => {
                     <div className='container'>
                         <div className='left'>
                             <div className='imgContainer'>
-                                <Image src='/assets/About/ThrowingBoard.webp' alt='Throwing board' />
+                                <img src='/assets/About/ThrowingBoard.webp' alt='Throwing board' />
                             </div>
-                            <Image className='arrow' src='/assets/About/ArrowThrow.webp' alt='Arrow indicating motion' />
+                            <img className='arrow' src='/assets/About/ArrowThrow.webp' alt='Arrow indicating motion' />
                         </div>
                         <div className='right'>
                             <div className='glow-box'></div>
@@ -193,7 +192,7 @@ const About = () => {
                             <p>
                                 Our mission is to guide organizations through the transformative journey of digitization, empowering them to unlock their full potential in a fast-paced, technology-driven world where digital transformation is essential for staying competitive and relevant. Our vision is to create a future where every organization seamlessly integrates digital solutions, fostering innovation, efficiency, and growth.
                             </p>
-                            <Image src='/assets/About/Waves.webp' alt='Decorative waves' />
+                            <img src='/assets/About/Waves.webp' alt='Decorative waves' />
                         </div>
                     </div>
                 </section>
@@ -212,7 +211,7 @@ const About = () => {
                         </div>
                         <div className='right'>
                             <div className='imgContainer'>
-                                <Image src='/assets/About/Books.webp' alt='Books representing history' />
+                                <img src='/assets/About/Books.webp' alt='Books representing history' />
                             </div>
                         </div>
                     </div>
@@ -222,10 +221,10 @@ const About = () => {
                     <div className='container'>
                         <div className='left'>
                             <div className='imgContainer'>
-                                <Image src='/assets/About/PhoneAbout.webp' alt='About Phone' />
+                                <img src='/assets/About/PhoneAbout.webp' alt='About Phone' />
                             </div>
                             <h2>Hello World</h2>
-                            <Image className='arrow' src='/assets/About/ArrowPlanet.webp' alt='Planet Arrow' />
+                            <img className='arrow' src='/assets/About/ArrowPlanet.webp' alt='Planet Arrow' />
                         </div>
                         <div className='right'>
                             <div className='glow-box'></div>
@@ -234,7 +233,7 @@ const About = () => {
                                 Our tailored approach to digital transformation means we don’t believe in one-size-fits-all solutions. We work closely with our clients to design strategies that align with their unique goals and challenges, backed by a team of seasoned professionals with years of experience in technology and business strategy.
                             </p>
                             <div className='planet-container'>
-                                <Image src='/assets/About/PlanetAbout.webp' alt='Decorative planet' />
+                                <img src='/assets/About/PlanetAbout.webp' alt='Decorative planet' />
                             </div>
                         </div>
                     </div>
@@ -287,11 +286,11 @@ const About = () => {
                     <div className="swiper-pag"></div>
                 </div>
 
-                <Image className='contact_line' src={'/assets/Home/Contact Section/line.svg'} alt='Decorative contact line' />
+                <img className='contact_line' src={'/assets/Home/Contact Section/line.svg'} alt='Decorative contact line' />
 
                 <div className="contact_us">
-                    <Image className='star_left' src={'/assets/Home/Contact Section/star-l.svg'} alt='Star left' />
-                    <Image className='star_right' src={'/assets/Home/Contact Section/star-r.svg'} alt='Star right' />
+                    <img className='star_left' src={'/assets/Home/Contact Section/star-l.svg'} alt='Star left' />
+                    <img className='star_right' src={'/assets/Home/Contact Section/star-r.svg'} alt='Star right' />
                     <h2>
                         <span>CONTACT</span> US
                     </h2>

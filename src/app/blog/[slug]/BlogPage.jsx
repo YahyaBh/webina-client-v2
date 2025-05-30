@@ -7,6 +7,7 @@ import Loading from '@/app/Loading/Loading';
 import Footer from '@/app/Layouts/Footer/Footer';
 import { imageUrlFor } from "@/app/lib/sanityClient";
 import "./page.scss";
+import { useEffect, useState } from 'react';
 
 export default function BlogPostPage({ postData }) {
     const [loading, setLoading] = useState(true);

@@ -11,25 +11,18 @@ import { AnimatePresence, motion } from 'framer-motion';
 import toast from "react-hot-toast";
 
 export default function BlogPage({ data }) {
-
-    const [loading, setLoading] = useState(true);
-    const [blogs, setBlogs] = useState([]);
+    
+    const [blogs, setBlogs] = useState(data || []);
+    const [loading, setLoading] = useState(!data); // if no data, show loading
 
     useEffect(() => {
-        getPosts();
-    }, []);
-
-    async function getPosts() {
-
-        if (data) {
-            setBlogs(data);
-        } else {
+        if (!data) {
             toast.error("Something went wrong");
-            window.history.back();
         }
-
         setLoading(false);
-    }
+    }, [data]);
+
+
 
     const slideUpVariant = {
         hidden: { y: '100%', opacity: 1 },

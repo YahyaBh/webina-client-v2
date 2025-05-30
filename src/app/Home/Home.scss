@@ -894,6 +894,10 @@ $shadows-big: multiple-box-shadow(100);
                                         padding: 10px 25px;
                                         outline: none;
                                         border: none;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        
 
                                         cursor: pointer;
                                         transition: all 0.3s ease;
@@ -1099,7 +1103,6 @@ $shadows-big: multiple-box-shadow(100);
                                     div {
                                         display: flex;
                                         justify-content: center;
-                                        align-items: flex-start;
                                         flex-direction: column;
                                         gap: 10px;
                                     }
