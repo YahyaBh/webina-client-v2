@@ -17,6 +17,42 @@ import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import Feedback from '../Layouts/Feedback/Feedback';
 
+
+// export const metadata = {
+//     title: "About Us | WEBINA DIGITAL",
+//     description:
+//         "Learn more about WEBINA DIGITAL – our mission, vision, history, and what sets us apart in delivering innovative digital solutions that empower businesses and individuals.",
+//     keywords: [
+//         "About",
+//         "WEBINA DIGITAL",
+//         "Digital Solutions",
+//         "Mission",
+//         "Vision",
+//         "History",
+//         "Innovation",
+//         "Technology",
+//     ],
+//     robots: "index, follow",
+//     alternates: {
+//         canonical: "https://webinadigital.com/about",
+//     },
+//     openGraph: {
+//         title: "About Us | WEBINA DIGITAL",
+//         description:
+//             "Learn more about WEBINA DIGITAL – our mission, vision, history, and innovative digital solutions that empower businesses and individuals.",
+//         url: "https://webinadigital.com/about",
+//         type: "website",
+//     },
+//     twitter: {
+//         card: "summary_large_image",
+//         title: "About Us | WEBINA DIGITAL",
+//         description:
+//             "Learn more about WEBINA DIGITAL – our mission, vision, history, and innovative digital solutions that empower businesses and individuals.",
+//     },
+//     viewport: "width=device-width, initial-scale=1",
+// };
+
+
 const About = () => {
     const [testimonials, setTestimonials] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -81,45 +117,19 @@ const About = () => {
 
     return (
         <>
-            <Head>
-                <title>About Us | WEBINA DIGITAL</title>
-                <meta
-                    name="description"
-                    content="Learn more about WEBINA DIGITAL – our mission, vision, history, and what sets us apart in delivering innovative digital solutions that empower businesses and individuals."
-                />
-                <meta
-                    name="keywords"
-                    content="About, WEBINA DIGITAL, Digital Solutions, Mission, Vision, History, Innovation, Technology"
-                />
-                <meta name="robots" content="index, follow" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="canonical" href="https://webinadigital.com/about" />
-
-                <meta property="og:title" content="About Us | WEBINA DIGITAL" />
-                <meta
-                    property="og:description"
-                    content="Learn more about WEBINA DIGITAL – our mission, vision, history, and innovative digital solutions that empower businesses and individuals."
-                />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://webinadigital.com/about" />
-
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="About Us | WEBINA DIGITAL" />
-                <meta
-                    name="twitter:description"
-                    content="Learn more about WEBINA DIGITAL – our mission, vision, history, and innovative digital solutions that empower businesses and individuals."
-                />
-
-                <script type="application/ld+json">
-                    {JSON.stringify({
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "AboutPage",
-                        "name": "About Us | WEBINA DIGITAL",
-                        "url": "https://webinadigital.com/about",
-                        "description": "Learn more about WEBINA DIGITAL – our mission, vision, history, and innovative digital solutions that empower businesses and individuals."
-                    })}
-                </script>
-            </Head>
+                        name: "About Us | WEBINA DIGITAL",
+                        url: "https://webinadigital.com/about",
+                        description:
+                            "Learn more about WEBINA DIGITAL – our mission, vision, history, and innovative digital solutions that empower businesses and individuals.",
+                    }),
+                }}
+            />
 
             <AnimatePresence>
                 {loading && (

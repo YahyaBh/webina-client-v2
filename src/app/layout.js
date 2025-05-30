@@ -55,7 +55,6 @@ export const metadata = {
     creator: "@webinadigital_ma",
   },
   metadataBase: new URL("https://webinadigital.com"),
-  themeColor: "#ffe662",
   manifest: "/manifest.json",
   alternates: {
     canonical: "https://webinadigital.com",
@@ -79,6 +78,10 @@ export const metadata = {
     yandex: "YANDEX_VERIFICATION_KEY",
     me: ["contact@webinadigital.com", "https://webinadigital.com/privacy-policy"],
   },
+};
+
+export const viewport = {
+  themeColor: "#FFE662",
 };
 
 
@@ -151,7 +154,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
 
-        <Script type="text/javascript" defer async src="https://consent.cookiefirst.com/sites/webinadigital.com-c3799191-e0c1-43c0-bff1-995e7ad13f08/consent.js"/>
+        <Script type="text/javascript" defer async src="https://consent.cookiefirst.com/sites/webinadigital.com-c3799191-e0c1-43c0-bff1-995e7ad13f08/consent.js" />
         <Script
           dangerouslySetInnerHTML={{
             __html: `

@@ -1,11 +1,9 @@
 // next.config.js
 'use strict';
 
-
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'export',
+  output: 'export',
   reactStrictMode: true,
   swcMinify: true,
   productionBrowserSourceMaps: false,
