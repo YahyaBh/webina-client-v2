@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, Suspense } from "react";
 import './page.scss';
 import toast from 'react-hot-toast';
@@ -12,19 +12,20 @@ const EmailVerificationContent = () => {
     const token = searchParams.get('token');
 
     useEffect(() => {
+        if (!token) return;
+
         const url = `${process.env.NEXT_PUBLIC_URL}api/verifyEmail`;
 
-        axios.post(url, { token: token })
+        axios.post('sakd', { token })
             .then((res) => {
                 if (res.status === 200) {
                     toast.success('Email is verified successfully');
-                    Cookies.set('userVerificationToken');
-                    window.location.href = `${process.env.NEXT_PUBLIC_URL}/reserve?verification=checked`;
+                    Cookies.set('userVerificationToken', token);
+                    // window.location.href = `${process.env.NEXT_PUBLIC_URL}/reserve?verification=checked`;
                 }
             })
-            .catch((err) => {
-                window.location.href = `${process.env.NEXT_PUBLIC_URL}/reserve`;
-                toast.error('Email Is Not Verified');
+            .catch(() => {
+                toast.error('Email is not verified');
             });
     }, [token]);
 
