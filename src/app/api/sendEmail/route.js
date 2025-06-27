@@ -39,8 +39,8 @@ export async function POST(request) {
                         _type: 'reference',
                         _ref: user.service._id,
                     },
-                    date: user.date,
-                    time: user.time,
+                    date: user.date.split('T')[0],
+                    time: [user.time],
                     meetings: Array.isArray(user.meeting) ? user.meeting : [user.meeting],
                 };
 

@@ -14,14 +14,12 @@ const EmailVerificationContent = () => {
     useEffect(() => {
         if (!token) return;
 
-        const url = `${process.env.NEXT_PUBLIC_URL}api/verifyEmail`;
-
-        axios.post('sakd', { token })
+        axios.post(process.env.NEXT_PUBLIC_URL + 'api/verifyEmail', { token })
             .then((res) => {
                 if (res.status === 200) {
                     toast.success('Email is verified successfully');
                     Cookies.set('userVerificationToken', token);
-                    // window.location.href = `${process.env.NEXT_PUBLIC_URL}/reserve?verification=checked`;
+                    window.location.href = `${process.env.NEXT_PUBLIC_URL}/reserve?verification=checked`;
                 }
             })
             .catch(() => {
